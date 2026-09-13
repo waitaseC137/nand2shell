@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tezgâh — Çekirdek İp Belleği</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<!-- Tema tercihi sitenin geri kalanıyla ortak (localStorage: ll_theme).
+     <head> içinde yüklenir ki sayfa yanlış temayla bir an parlamasın. -->
+<script src="../../assets/theme.js"></script>
+</head>
+<body>
+<div class="scene wide">
+
+  <header>
+    <div class="hdr-top">
+      <p class="eyebrow"><a class="geri" href="../../laboratuvar.html">← laboratuvar</a> · donanım vaka incelemesi</p>
+      <button class="theme-btn" id="themeBtn" title="Tema: açık / karanlık"><span class="sw"></span><span class="lbl">açık</span></button>
+    </div>
+    <h1>Tezgâh</h1>
+    <p>Bir AGC kelimesini kur, çevir, kırcala. Anlatı yok — burası denemek için. Bir şey anlamadıysan <a class="geri" href="ders.html">derse</a> dön.</p>
+    <nav class="tabs">
+      <a href="index.html">hikâye</a>
+      <a href="ders.html">ders</a>
+      <a href="tezgah.html" class="on">tezgâh</a>
+    </nav>
+  </header>
+
+  <div class="bench">
+
+    <!-- ---- sol sütun: giriş yüzeyi ------------------------------------- -->
+    <div class="bench-col">
+
+      <div class="bench-item">
+        <p class="section-label">Çekirdek düzlemi — tele dokun, bit döner</p>
+        <div class="legend">
+          <div class="legend-item">
+            <svg class="legend-swatch" viewBox="0 0 30 14"><line x1="2" y1="7" x2="28" y2="7" stroke="var(--wire-copper-bright)" stroke-width="3.2" stroke-linecap="round"/></svg>
+            delikten geçiyor → 1
+          </div>
+          <div class="legend-item">
+            <svg class="legend-swatch" viewBox="0 0 30 14"><path d="M5 13 L5 6 A5 5 0 0 1 15 6 L15 13" fill="none" stroke="var(--wire-copper)" stroke-width="2.8"/></svg>
+            etrafından dönüyor → 0
+          </div>
+        </div>
+        <div class="plane-wrap">
+          <svg id="rope" viewBox="0 0 580 580"></svg>
+        </div>
+        <p class="hint">Parite teli (<code>P</code>) tıklanmaz — onu donanım belirler.</p>
+        <button class="drive-btn" id="driveBtn">⚡ DARBE GÖNDER — belleği oku</button>
+      </div>
+
+      <div class="bench-item">
+        <p class="section-label">Hazır örnekler — Apollo 11 LM uçuş programından</p>
+        <div class="presets">
+          <button class="chip" data-preset="EXTEND">00006 — EXTEND</button>
+          <button class="chip" data-preset="ALARM">01202 — 1202 alarmı</button>
+          <button class="chip" data-preset="CAZERO">34755 — CA ZERO</button>
+          <button class="chip" data-preset="BZF">13247 — TCF/BZF</button>
+          <button class="chip" data-preset="NEG0">77777 — eksi sıfır</button>
+          <button class="chip" data-preset="ZERO">00000 — artı sıfır</button>
+          <button class="chip" data-preset="rand">rastgele</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ---- sağ sütun: okumalar ----------------------------------------- -->
+    <div class="bench-col">
+
+      <div class="bench-item">
+        <p class="section-label">Kelime — 15 veri biti + 1 parite</p>
+        <div class="readout">
+          <div class="bits" id="bitsOut">000 000 000 000 110</div>
+          <div class="meta">
+            <span>Oktal: <b id="octOut">00006</b></span>
+            <span>Ondalık: <b id="decOut">6</b></span>
+            <span>İşaretli: <b id="signOut">+6</b></span>
+            <span>Parite: <b id="parOut">1</b></span>
+          </div>
+        </div>
+        <p class="hint">İlk üçü aynı on beş telin üç ayrı okunuşu. Parite okunuş değil — on altıncı telin durumu.</p>
+      </div>
+
+      <div class="bench-item">
+        <p class="section-label">Komut olarak — aynı kelimenin iki okunuşu</p>
+        <div class="readout" style="display:block">
+          <div class="instr-row">
+            <span class="instr-when">temel küme</span>
+            <b class="instr-mn" id="disBasic">EXTEND</b>
+            <span class="instr-gloss" id="glossBasic"></span>
+          </div>
+          <div class="instr-row">
+            <span class="instr-when">EXTEND'den sonra</span>
+            <b class="instr-mn" id="disExtra">READ CH06</b>
+            <span class="instr-gloss" id="glossExtra"></span>
+          </div>
+        </div>
+        <p class="hint">Hangisinin geçerli olduğunu <b>bir önceki</b> kelime belirler. Her 15 bitlik dizi geçerli bir komuta çözülür — rastgele bir desen bile.</p>
+      </div>
+
+      <div class="bench-item">
+        <p class="section-label">Sense hatları — hepsi tek zaman ekseninde</p>
+        <div class="plane-wrap" style="padding:10px 6px">
+          <svg id="scope" viewBox="0 0 700 300"></svg>
+        </div>
+        <p class="hint">Darbe gönderince dikenler belirir. Hepsi <b>aynı dikey çizgide</b>: bir kelimeyi okumak tek bir olaydır, tarama değil.</p>
+      </div>
+
+      <div class="bench-item">
+        <p class="section-label">Darbe şekli</p>
+        <div class="phys-panel">
+          <div class="phys-control">
+            <label>Akı dönüş süresi — Δt: <b id="dtOut">200</b> ns</label>
+            <input type="range" id="dtSlider" min="50" max="1000" value="200" step="10">
+          </div>
+          <p class="hint" style="margin:0">Δt bir gerilim değil, darbenin <b>şeklini</b> sürüyor: hızlı dönüş, dar ve keskin darbe. Neden voltaj hesaplamadığımız <a class="geri" href="ders.html">derste</a> yazıyor.</p>
+        </div>
+      </div>
+
+      <div class="bench-item">
+        <p class="section-label">Adresleme — seçim, engellemeyle yapılır</p>
+        <div class="addr-bits" id="addrBits">
+          <span class="alab">adres:</span>
+        </div>
+        <div class="plane-wrap" style="padding:8px 4px">
+          <svg id="addr" viewBox="0 0 720 290"></svg>
+        </div>
+        <p class="hint">Kırmızı <b>×</b> engellenmiş çekirdek. Ayakta kalan tek yeşil çekirdek adreslenen kelimeyi taşıyor.</p>
+      </div>
+
+      <div class="bench-item">
+        <p class="section-label">Fazlalığın hesabı</p>
+        <div class="plane-wrap" style="padding:10px 8px">
+          <svg id="budget" viewBox="0 0 700 130" aria-hidden="true"></svg>
+        </div>
+        <p class="hint">192 telin 180'i özgür. Aradaki 12 bit hiçbir şey saklamıyor — diğer 180'in bir fonksiyonu.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>ŞALTERDEN BİLGİSAYARA · donanım galerisi · vaka: çekirdek ip belleği</footer>
+
+</div>
+
+<script src="assets/rope-core.js"></script>
+<script src="assets/rope-widgets.js"></script>
+<script src="assets/rope-boot.js"></script>
+</body>
+</html>
