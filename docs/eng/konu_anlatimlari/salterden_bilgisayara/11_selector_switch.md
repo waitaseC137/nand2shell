@@ -448,6 +448,6 @@ picks one.** Choosing is cheaper than waiting.
 ---
 
 **Previous topic:** [10_bayraklar.md](./10_bayraklar.md)
-**Next topic:** *(on the way — the ALU: every operation in one box)*
+**Next topic:** [12_logic_unit.md](./12_logic_unit.md) — The first circuit that takes orders
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

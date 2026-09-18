@@ -166,9 +166,15 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | 10 | [10_bayraklar](./10_bayraklar.md) | ZF ve SF: makinenin `eğer` demesi | Equal to Zero · Less than Zero |
 | 11 | [11_selector_switch](./11_selector_switch.md) | Kontrol teli; vana olarak AND; multiplexer | Selector · Switch |
 
+### 🧮 Ünite 4 — Hesap Çekirdeği (ALU)
+
+| # | Dosya | Ne öğretir | NandGame seviyesi |
+|:---:|---|---|---|
+| 12 | [12_logic_unit](./12_logic_unit.md) | Emir bir sayıdır; hepsi hesaplanır, biri seçilir | Logic Unit |
+
 ### 🔜 Yolda (oyun ilerledikçe yazılacak)
 
-Hesap çekirdeği (ALU) → hafıza (latch, register, RAM) → saat ve kontrol birimi
+Hesap çekirdeğinin geri kalanı (Arithmetic Unit, ALU, Condition) → hafıza (latch, register, RAM) → saat ve kontrol birimi
 → **komut işleyen işlemci.**
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,

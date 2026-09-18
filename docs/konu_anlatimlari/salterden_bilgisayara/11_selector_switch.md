@@ -444,6 +444,6 @@ seçer.** Seçmek, beklemekten ucuzdur.
 ---
 
 **Önceki konu:** [10_bayraklar.md](./10_bayraklar.md)
-**Sonraki konu:** *(yolda — ALU: bütün işlemler tek kutuda)*
+**Sonraki konu:** [12_logic_unit.md](./12_logic_unit.md) — Emri dinleyen ilk devre
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

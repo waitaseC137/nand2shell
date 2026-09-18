@@ -29,8 +29,8 @@ window.KONULAR = {
       id: "salterden_bilgisayara",
       label: "From Switches to a Computer (NAND to CPU)",
       accent: "var(--d-low)",
-      tag: "15 lessons · 🚧 routing complete",
-      blurb: "A course born from the NandGame journey — from switch/relay to NAND, from NAND to logic gates, from gates to the adder (half/full adder). Learn the processor not by asking 'what is it' but by building it from its parts yourself. The arithmetic and routing units are complete (00–11): adder, subtractor, flags and the multiplexer. ALU, memory and the CPU are next.",
+      tag: "16 lessons · 🚧 ALU started",
+      blurb: "A course born from the NandGame journey — from switch/relay to NAND, from NAND to logic gates, from gates to the adder (half/full adder). Learn the processor not by asking 'what is it' but by building it from its parts yourself. The arithmetic and routing units are complete (00–11): adder, subtractor, flags and the multiplexer. The ALU unit has started (12). The rest of the ALU, memory and the CPU are next.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Start Here",              h: "Course map; from switches to a CPU (🚧 in progress)" },
         { f: "salterden_bilgisayara/01_akim_salter_role.md",     n: "01",   t: "Current · Switch · Relay", h: "Electricity → switch → relay = the first logic" },
@@ -45,7 +45,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/08.5_sayac_basa_donunce.md", n: "08.5", t: "When the Counter Wraps", h: "Interlude: modular arithmetic · ℤ/2ⁿℤ · CWE-190" },
         { f: "salterden_bilgisayara/09_subtraction.md",          n: "09",   t: "Subtraction",             h: "Two's complement; making an adder subtract" },
         { f: "salterden_bilgisayara/10_bayraklar.md",            n: "10",   t: "Flags (ZF/SF)",           h: "Zero and sign; how a machine says 'if'" },
-        { f: "salterden_bilgisayara/11_selector_switch.md",     n: "11",   t: "Selector & Switch",       h: "The control wire · AND as a valve · the multiplexer" }
+        { f: "salterden_bilgisayara/11_selector_switch.md",     n: "11",   t: "Selector & Switch",       h: "The control wire · AND as a valve · the multiplexer" },
+        { f: "salterden_bilgisayara/12_logic_unit.md",          n: "12",   t: "Logic Unit",              h: "The order is a number · all computed, one chosen" }
       ]
     },
     {

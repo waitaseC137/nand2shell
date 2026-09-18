@@ -172,9 +172,15 @@ Read the files in this order. Each lesson leans on the previous one.
 | 10 | [10_bayraklar](./10_bayraklar.md) | ZF and SF: how a machine says `if` | Equal to Zero · Less than Zero |
 | 11 | [11_selector_switch](./11_selector_switch.md) | The control wire; AND as a valve; the multiplexer | Selector · Switch |
 
+### 🧮 Unit 4 — The Compute Core (ALU)
+
+| # | File | What it teaches | NandGame level |
+|:---:|---|---|---|
+| 12 | [12_logic_unit](./12_logic_unit.md) | The order is a number; everything is computed, one is chosen | Logic Unit |
+
 ### 🔜 On the way (to be written as the game advances)
 
-The compute core (ALU) → memory (latch, register, RAM) → clock and control unit →
+The rest of the compute core (Arithmetic Unit, ALU, Condition) → memory (latch, register, RAM) → clock and control unit →
 **a processor that executes instructions.**
 
 > 💡 Files whose number ends in `.5` are short **interludes**: on the side of the main road,

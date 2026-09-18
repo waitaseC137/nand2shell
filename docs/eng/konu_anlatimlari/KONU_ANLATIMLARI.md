@@ -95,6 +95,7 @@
 | [09_subtraction.md](./salterden_bilgisayara/09_subtraction.md) | Two's complement; making an adder subtract |
 | [10_bayraklar.md](./salterden_bilgisayara/10_bayraklar.md) | ZF and SF; how a machine says "if" — the circuit under `cmp` |
 | [11_selector_switch.md](./salterden_bilgisayara/11_selector_switch.md) | Selector & Switch; data vs control wire, the multiplexer |
+| [12_logic_unit.md](./salterden_bilgisayara/12_logic_unit.md) | Logic Unit; the order is a number, picking one of four operations |
 
 ---
 ## ⚙️ x86 Assembly (from scratch)
