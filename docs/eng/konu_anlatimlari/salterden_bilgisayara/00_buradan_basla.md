@@ -28,8 +28,12 @@
 
 ## What This Series Is NOT
 
-- **It's not an electronics course.** Voltage calculations, resistance, formulas — none of
-  that. All we need is electricity's single habit: it either flows or it doesn't.
+- **It's not an electronics course.** Building the circuits takes no voltage calculations,
+  resistance or Ohm's law; all we need is electricity's single habit: it either flows or it
+  doesn't. The interludes look at voltage and a formula or two (why a processor heats up, for
+  example), but no circuit depends on them.
+- **It's not a math course.** There is math, but it isn't placed at the door as "learn this
+  first"; it comes out of the circuit you're building, the moment you need it.
 - **It's not a memorization course.** I won't make you memorize any gate's table. You'll get
   to know each part *the very moment you need it*, recognizing it as "without this, that job
   can't be done."
@@ -162,7 +166,7 @@ Read the files in this order. Each lesson leans on the previous one.
 | # | File | What it teaches | NandGame level |
 |:---:|---|---|---|
 | 8 | [08_increment](./08_increment.md) | The 16-bit bundle; overflow and the wire nobody reads | Increment |
-| 8.5 | [08.5_sayac_basa_donunce](./08.5_sayac_basa_donunce.md) | *(interlude)* The mathematics of wrapping, and **CWE-190** | — |
+| 8.5 | [08.5_sayac_basa_donunce](./08.5_sayac_basa_donunce.md) | *(interlude)* The mathematics of wrapping: modular arithmetic, the failing set, the correct check | — |
 | 9 | [09_subtraction](./09_subtraction.md) | Two's complement; making an adder subtract | Subtraction |
 
 ### 🚩 Unit 3 — Making Decisions and Routing
