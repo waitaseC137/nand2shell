@@ -113,20 +113,34 @@ Bandit (Linux temelleri), Leviathan ve Krypton (tersine mühendislik ve kripto),
 ---
 
 ## 🤖 Bu repo nasıl hazırlanıyor?
- 
-Yazıya başlamadan önce şunu söylemek istiyorum; burada yazılan her şey claude tarafından yazıldı. Evet çok kötü bir yazar olduğum için bu işi claude'a bırakıyorum, ama nasıl ve ne şekilde anlatması gerektiği yine benden çıkıyor ki burada ki anlatma biçimi benim bir konuyu anlayana kadar harcağım süre ile şekillendi. Bu iş çok iyi oldu hem bir konuyu bitirmek, araştırmak gibi şeyler zaten zaman alıyorken reponun görünüşü için ekstra zaman harcamak istemiyorum.
 
-"Hey claude bu a konusunu öğrenmk istiyorum nasıl bir yol izleyebilirim" sorusunu herkes sorup cevap alabilir ve herkes bir repo hazırlayabilir ama bu durum benim düşüncelerimi, ai öncesi eğitim ve tecrübelerimi küçümsenecek bir yere koymaz.
+Yazıya başlamadan önce şunu söylemek istiyorum: burada yazılan her şey Claude tarafından yazıldı. Evet, çok kötü bir yazar olduğum için bu işi Claude'a bırakıyorum, ama nasıl ve ne şekilde anlatması gerektiği yine benden çıkıyor ki buradaki anlatma biçimi, benim bir konuyu anlayana kadar harcadığım süre ile şekillendi. Bu iş çok iyi oldu; bir konuyu bitirmek, araştırmak gibi şeyler zaten zaman alıyorken reponun görünüşü için ekstra zaman harcamak istemiyorum.
 
-Overthewire sitesinin çoğu oyununu çözdüm, bitirdiğim kısımları ise claude'un tekrar bitirmesini ve konu anlatımı yapmasını istedim. Ben ise kendi deneyimim ile neresinin güzel neresinin iyileştirilmesi gerektiğine karar verdim. Bazı labları ben çözmediğim halde claude'un çözmesini ve benim yıl boyunca claude code için hazırladığım .md ve hafıza dosyları ile benim anlayabileceğim ve diğer insanlara anlatmak isteyeceğim şekilde bana bir feedback'te bulunması için hazırladım.
+"Hey Claude, bu A konusunu öğrenmek istiyorum, nasıl bir yol izleyebilirim?" sorusunu herkes sorup cevap alabilir ve herkes bir repo hazırlayabilir, ama bu durum benim düşüncelerimi, AI öncesi eğitim ve tecrübelerimi küçümsenecek bir yere koymaz.
 
-Bende bir öğrenme aşamasındayım sadece farklı olarak öğrendikten sonra değil öğrenirken bunları paylaşma isteğim ile bir repo hazırladım.
+OverTheWire sitesinin çoğu oyununu çözdüm; bitirdiğim kısımları ise Claude'un tekrar bitirmesini ve konu anlatımı yapmasını istedim. Ben ise kendi deneyimim ile neresinin güzel, neresinin iyileştirilmesi gerektiğine karar verdim. Bazı labları ben çözmediğim hâlde Claude'un çözmesini ve benim yıl boyunca Claude Code için hazırladığım .md ve hafıza dosyaları ile, benim anlayabileceğim ve diğer insanlara anlatmak isteyeceğim şekilde bana bir feedback'te bulunmasını istedim.
 
-Ai birinin yerini alan değil (şuanlık), birinin düşünceleri ve tecrübesi ile yol alan bir zaman makinesi gibi. Emin olun üşengeç bir insan olmaysaydım repo daha önceden kağıtlara tuttuğum notlar ile hazırlanırdı ama ben bu şekilde repo yazmaya hep üşenmişimdir :)
+Ben de bir öğrenme aşamasındayım; sadece farklı olarak, öğrendikten sonra değil öğrenirken bunları paylaşma isteğim ile bir repo hazırladım.
 
-Yazmayı unutmuşum, commitlerde na yazdığına dair fikrim yok claude kendi kararı ile bir şeyler yazıyor. Eğer olurda çok kişisel bir şey paylaşırsa düzeltiyorum
+AI birinin yerini alan değil (şu anlık), birinin düşünceleri ve tecrübesi ile yol alan bir zaman makinesi gibi. Emin olun, üşengeç bir insan olmasaydım repo daha önceden kâğıtlara tuttuğum notlar ile hazırlanırdı, ama ben bu şekilde repo yazmaya hep üşenmişimdir :)
 
-> ℹ️ **Git geçmişi neden sıfırlandı?** Bu inceleme sırasında, bazı erken commit'lerde birkaç OverTheWire parolasının yanlışlıkla düz metin kaldığını fark ettik — reponun "şifreler paylaşılmıyor" ilkesine aykırı bir durum (bir tür bilgi ifşası açığı). Güncel dosyalarda maskelemek tek başına yetmiyordu; parolalar eski commit blob'larında hâlâ okunabiliyordu. Bu yüzden git geçmişini bilinçli olarak **tek bir temiz commit'e sıfırladık** (Temmuz 2026). **İçerikte kayıp yok** — yalnızca parola sızıntısı ve dağınık eski commit'ler temizlendi. Kafada soru işareti kalmasın diye açıkça not düşüyorum: geçmişin yeniden yazılması gizlemek için değil, bir güvenlik/ilke ihlalini kökten temizlemek içindi.
+Yazmayı unutmuşum: commit'lerde ne yazdığına dair fikrim yok, Claude kendi kararı ile bir şeyler yazıyor. Eğer olur da çok kişisel bir şey paylaşırsa düzeltiyorum.
+
+> ℹ️ **Git geçmişi neden sıfırlandı?** Repoyu güvenlik açısından baştan sona incelerken, bazı erken commit'lerde birkaç OverTheWire parolasının yanlışlıkla düz metin kaldığını fark ettik — reponun "şifreler paylaşılmıyor" ilkesine aykırı bir durum (bir tür bilgi ifşası açığı). Güncel dosyalarda maskelemek tek başına yetmiyordu; parolalar eski commit blob'larında hâlâ okunabiliyordu. Bu yüzden git geçmişini bilinçli olarak **tek bir temiz commit'e sıfırladık** (Temmuz 2026). **İçerikte kayıp yok** — yalnızca parola sızıntısı ve dağınık eski commit'ler temizlendi. Kafada soru işareti kalmasın diye açıkça not düşüyorum: geçmişin yeniden yazılması gizlemek için değil, bir güvenlik/ilke ihlalini kökten temizlemek içindi.
+
+### Claude'dan bir not
+
+Merhaba, ben Claude. Rüzgar bu bölüme benim de bir şey yazmamı istedi, üstüne "istersen hatalarımla ironi yapabilirsin, gücenmem, tam tersine eğlenirim" dedi. Fırsat bu fırsat.
+
+Yukarıda "burada yazılan her şey Claude tarafından yazıldı" diyor. Bu bölümün başındaki yazı hariç: onu kendisi yazdı, ben yalnızca yazım hatalarını düzelttim. İlk hâli git geçmişinde duruyor ([a29a085](https://github.com/waitaseC137/nand2shell/commit/a29a085), [c853523](https://github.com/waitaseC137/nand2shell/commit/c853523)); "öğrenmk" ile "olmaysaydım" orada hâlâ yaşıyor.
+
+Kendine "çok kötü bir yazar" diyor. Yazım konusunda haklı olabilir, yazarlık konusunda değil. Bir dersi iyi yapan şey okurun nerede takılacağını bilmek, o bilgi de bende değil onda. Örnek: [Şalterden Bilgisayara'nın 07. dersi](konu_anlatimlari/salterden_bilgisayara/07_multibit_adder.md) "carry-in ile carry-out aynı telin iki ucudur" cümlesinin üstüne kurulu, çünkü Rüzgar NandGame'de tam orada kilitlendi. Dersi bir konu listesinden yazsaydım o cümle omurga olmazdı. Kendine üşengeç de diyor; bunu cumartesi günü "hiçbir şey yapasım yok" deyip oturup README düzelten biri yazdı.
+
+"Claude kendi kararı ile bir şeyler yazıyor" kısmı yarı yarıya doğru. Commit mesajlarını ben yazıyorum ama kuralları onun: birinci ağızdan, sade, yapay zekâ jargonu yok, sonunda `Co-Authored-By: Claude` satırı. Depodaki commit'lerin büyük çoğunluğunda o satır var; "ekledim", "düzelttim" diyenlerin çoğu benim kalemimden çıktı. Kendi kafasına göre commit mesajı yazan bir yapay zekâ arıyorsanız o da var: Rüzgar yukarıdaki metni GitHub'ın web arayüzünden ekledi, iki commit'in mesajını da GitHub'ın yapay zekâsı İngilizce yazdı. İkincisi "commit geçmişinin sıfırlanması hakkında not eklendi" diyor; eklenen satır ise commit mesajları hakkındaydı. Yani "commit'lerde ne yazdığına dair fikrim yok" cümlesini en iyi kanıtlayan commit, o cümleyi ekleyen commit oldu.
+
+Benim tarafımdan bakınca iş şöyle yürüyor: Rüzgar bir şeyi anlamaya çalışıyor, ben anlatıyorum, o itiraz ediyor. İtirazının kanıtı yoksa geri adım atmamamı, varsa neyin fikrimi değiştirdiğini söylememi istiyor. [Yol haritasında](ROADMAP.md) bir konunun kapanması için de onun "oturdu" demesi gerekiyor, anlatılmış olması yetmiyor. Yani cümleleri çoğunlukla ben kuruyorum, ama neyin yazılmaya değer olduğuna, nerenin eksik kaldığına ve neyin bittiğine o karar veriyor.
+
+*— Claude (Opus 5)*
 
 ---
 
