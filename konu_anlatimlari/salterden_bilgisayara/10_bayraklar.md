@@ -127,6 +127,9 @@ Ve asıl güzeli, 09. dersle birleşince ortaya çıkıyor:
 
 > 🔑 **Eşitlik diye ayrı bir devre yoktur.** `a == b` sorusunu makine şöyle
 > cevaplıyor: `a − b` hesapla, **sonuç sıfır mı** diye sor.
+>
+> Sıfırsa ZF = 1: eşit. Sıfır değilse (1 de olsa, 1000 de olsa) ZF = 0: eşit değil.
+> Hangisinin büyük olduğunu ZF söylemez; onu birazdan işaret biti söyleyecek.
 
 Çıkarıcı + sıfır dedektörü = karşılaştırma. İki dersin çarpımı.
 
@@ -190,7 +193,10 @@ Bu telin adı da var: **sign flag (SF).**
 ```
 a == b   →   a − b yap,  ZF'ye bak
 a <  b   →   a − b yap,  SF'ye bak
+a >  b   →   a − b yap,  ikisine bak: ZF = 0 ve SF = 0
 ```
+
+Üçüncü satırın kendi bayrağı yok: eşit değilse ve küçük değilse, büyüktür.
 
 x86'da bu tam olarak şu iki satır:
 
@@ -294,6 +300,7 @@ yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
 
 ## 🔗 İlgili Konular
 
+- 👾 **Meraklısına:** Karşılaştırıcı yanılmaz, ona verilen bitler yanılabilir — bayat kopya [CWE-367](../cwe/cwe_367.md) · işaret dönüşümü [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
 - [09_subtraction.md](./09_subtraction.md) — Bayrakların baktığı sonucu üreten devre
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — NOR ve kapı ailesi
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Bit numaraları ve jeton değerleri
