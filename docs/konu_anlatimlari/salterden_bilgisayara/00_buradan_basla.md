@@ -27,8 +27,12 @@
 
 ## Bu Seri Ne DEĞİLDİR
 
-- **Elektronik kursu değil.** Voltaj hesabı, direnç, formül — yok. Bize elektriğin tek
-  huyu lazım: ya akar, ya akmaz.
+- **Elektronik kursu değil.** Devre kurmak için voltaj hesabı, direnç, Ohm yasası
+  gerekmiyor; bize elektriğin tek huyu lazım: ya akar, ya akmaz. Ara derslerde gerilime
+  ve bir iki bağıntıya bakacağız (işlemci neden ısınıyor gibi), ama hiçbir devre onlara
+  dayanmıyor.
+- **Matematik kursu değil.** Matematik var, ama "önce şunu öğren" diye kapıya
+  konmuyor; gerektiği an, kurduğun devrenin içinden çıkıyor.
 - **Ezber kursu değil.** Hiçbir kapının tablosunu ezberletmeyeceğim. Her parçayı, ona
   *ihtiyaç duyduğun an*, "bu olmadan şu iş yapılamıyor" diye tanıyacaksın.
 - **Seyirlik değil.** Her parçayı **sen kuracaksın.** Okuyup geçilen devre unutulur;
@@ -156,7 +160,7 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | # | Dosya | Ne öğretir | NandGame seviyesi |
 |:---:|---|---|---|
 | 8 | [08_increment](./08_increment.md) | 16 bitlik demet; taşma ve kimsenin bakmadığı tel | Increment |
-| 8.5 | [08.5_sayac_basa_donunce](./08.5_sayac_basa_donunce.md) | *(ara ders)* Sarmanın matematiği: `ℤ/2ⁿℤ`, hata kümesi, doğru kontrol | — |
+| 8.5 | [08.5_sayac_basa_donunce](./08.5_sayac_basa_donunce.md) | *(ara ders)* Sarmanın matematiği: modüler aritmetik, hata kümesi, doğru kontrol | — |
 | 9 | [09_subtraction](./09_subtraction.md) | İkinin tümleyeni; toplayıcıya çıkarma yaptırmak | Subtraction |
 
 ### 🚩 Ünite 3 — Karar Vermek ve Yönlendirmek
