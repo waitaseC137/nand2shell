@@ -16,7 +16,7 @@
 > Bir üst madde ancak **altındaki bütün maddeler** kapandığında `[x]` olur; biri
 > açıksa üst madde 🚧 kalır. Böylece "neredeyse bitti" ile "bitti" karışmaz.
 >
-> **"Bitti"yi Claude değil Poyraz söyler.** Bir konu anlatıldığı için değil,
+> **"Bitti"yi Claude değil Rüzgar söyler.** Bir konu anlatıldığı için değil,
 > "oturdu" dendiği için kapanır — bu kural yukarıdaki *Yöntem* bölümünde de var.
 
 > 🗺️ **Bu dosya HARİTA, ders defteri değil.** Adım adım "şunu yap / şu komut"
