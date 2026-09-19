@@ -131,6 +131,9 @@ And the best part surfaces when you combine it with lesson 09:
 
 > 🔑 **There is no separate circuit for equality.** The machine answers the question
 > `a == b` like this: compute `a − b`, then ask **is the result zero?**
+>
+> If it is, ZF = 1: equal. If it isn't (whether it's 1 or 1000), ZF = 0: not equal.
+> ZF doesn't say which one is bigger; the sign bit will tell you that in a moment.
 
 Subtractor + zero detector = comparison. The product of two lessons.
 
@@ -196,7 +199,10 @@ Combine the two flags with the subtractor:
 ```
 a == b   →   do a − b,  look at ZF
 a <  b   →   do a − b,  look at SF
+a >  b   →   do a − b,  look at both: ZF = 0 and SF = 0
 ```
+
+The third line has no flag of its own: not equal and not less means greater.
 
 On x86 this is exactly these two lines:
 
@@ -300,6 +306,7 @@ something outside choose "which one to do" — that is, the **ALU.** That's the 
 
 ## 🔗 Related Topics
 
+- 👾 **For the curious:** the comparator never errs, the bits you hand it can — a stale copy [CWE-367](../cwe/cwe_367.md) · sign conversion [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
 - [09_subtraction.md](./09_subtraction.md) — The circuit that produces the result the flags look at
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — NOR and the family of gates
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Bit numbers and token values
