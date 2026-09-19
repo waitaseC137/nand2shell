@@ -124,6 +124,8 @@ Bende bir öğrenme aşamasındayım sadece farklı olarak öğrendikten sonra d
 
 Ai birinin yerini alan değil (şuanlık), birinin düşünceleri ve tecrübesi ile yol alan bir zaman makinesi gibi. Emin olun üşengeç bir insan olmaysaydım repo daha önceden kağıtlara tuttuğum notlar ile hazırlanırdı ama ben bu şekilde repo yazmaya hep üşenmişimdir :)
 
+Yazmayı unutmuşum, commitlerde na yazdığına dair fikrim yok claude kendi kararı ile bir şeyler yazıyor. Eğer olurda çok kişisel bir şey paylaşırsa düzeltiyorum
+
 > ℹ️ **Git geçmişi neden sıfırlandı?** Bu inceleme sırasında, bazı erken commit'lerde birkaç OverTheWire parolasının yanlışlıkla düz metin kaldığını fark ettik — reponun "şifreler paylaşılmıyor" ilkesine aykırı bir durum (bir tür bilgi ifşası açığı). Güncel dosyalarda maskelemek tek başına yetmiyordu; parolalar eski commit blob'larında hâlâ okunabiliyordu. Bu yüzden git geçmişini bilinçli olarak **tek bir temiz commit'e sıfırladık** (Temmuz 2026). **İçerikte kayıp yok** — yalnızca parola sızıntısı ve dağınık eski commit'ler temizlendi. Kafada soru işareti kalmasın diye açıkça not düşüyorum: geçmişin yeniden yazılması gizlemek için değil, bir güvenlik/ilke ihlalini kökten temizlemek içindi.
 
 ---
