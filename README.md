@@ -113,41 +113,16 @@ Bandit (Linux temelleri), Leviathan ve Krypton (tersine mühendislik ve kripto),
 ---
 
 ## 🤖 Bu repo nasıl hazırlanıyor?
+ 
+Yazıya başlamadan önce şunu söylemek istiyorum; burada yazılan her şey claude tarafından yazıldı. Evet çok kötü bir yazar olduğum için bu işi claude'a bırakıyorum, ama nasıl ve ne şekilde anlatması gerektiği yine benden çıkıyor ki burada ki anlatma biçimi benim bir konuyu anlayana kadar harcağım süre ile şekillendi. Bu iş çok iyi oldu hem bir konuyu bitirmek, araştırmak gibi şeyler zaten zaman alıyorken reponun görünüşü için ekstra zaman harcamak istemiyorum.
 
-Açık olayım: bu repodaki içeriği (konu anlatımları, wargame çözümleri ve site) hazırlarken yapay zekâdan — özellikle **Claude Code**'dan — bir yardımcı asistan olarak faydalanıyorum. AI işi hızlandırıyor; taslak çıkarıyor, tekrarlayan kısımları ve sıkıcı düzenlemeleri üstleniyor.
+"Hey claude bu a konusunu öğrenmk istiyorum nasıl bir yol izleyebilirim" sorusunu herkes sorup cevap alabilir ve herkes bir repo hazırlayabilir ama bu durum benim düşüncelerimi, ai öncesi eğitim ve tecrübelerimi küçümsenecek bir yere koymaz.
 
-Ama içerik benim **bilgi birikimim ve deneyimimle** şekilleniyor:
+Overthewire sitesinin çoğu oyununu çözdüm, bitirdiğim kısımları ise claude'un tekrar bitirmesini ve konu anlatımı yapmasını istedim. Ben ise kendi deneyimim ile neresinin güzel neresinin iyileştirilmesi gerektiğine karar verdim. Bazı labları ben çözmediğim halde claude'un çözmesini ve benim yıl boyunca claude code için hazırladığım .md ve hafıza dosyları ile benim anlayabileceğim ve diğer insanlara anlatmak isteyeceğim şekilde bana bir feedback'te bulunması için hazırladım.
 
-- Üretilen her çıktıyı **ben okuyup test ediyorum**; eksik veya hatalı yerleri düzeltiyorum.
-- Wargame çözümlerini ve komutları düzenli olarak açıp **kendim deniyorum** — "bir sıkıntı var mı?" diye kontrol ediyorum.
-- Yayınlanan son hâli **repo sahibi olarak ben onaylıyorum** ve arkasında duruyorum.
+Bende bir öğrenme aşamasındayım sadece farklı olarak öğrendikten sonra değil öğrenirken bunları paylaşma isteğim ile bir repo hazırladım.
 
-Yani evet, burada AI destekli bir akış var; ama bu repo "körlemesine üretip bırakılmış" bir yer değil — öğrenirken tuttuğum, her gün açıp gözden geçirdiğim **canlı bir defter**. Claude Code işi hızlandıran bir asistan; karar veren, doğrulayan ve sorumluluğu taşıyan benim.
-
-**Somut bir örnek (Temmuz 2026):** Repoyu baştan sona bir güvenlik ve doğruluk incelemesinden geçirdim — bu turu **Claude Code** (Fable 5) ile birlikte yürüttük. Sızmış birkaç wargame parolasını maskeledik, sitedeki eksik/tutarsız yerleri (ana sayfada eksik kalan Maze wargame'i, birbirini tutmayan sayaçlar) düzelttik ve `docs/` aynasını kaynaktan otomatik üreten bir senkron sistemi (`scripts/sync-docs.sh` + CI kontrolü) kurduk. Bulguları Claude Code çıkardı ve düzeltmeleri uyguladı; ben her adımı inceleyip onayladım. Buradaki emek ortak — hız ve kapsam AI'dan, karar ve sorumluluk benden.
-
-**Somut bir örnek (Eylül 2026):** Bir gecede beş ders yazıldı — "Şalterden Bilgisayara" serisinin aritmetik ünitesi (07, 08, 08.5, 09, 10). Ama bunlar "şu konuyu anlat" denilerek yazdırılmadı. Yöntem şuydu: ben NandGame'de seviyeleri çözerken **nerede takıldığım, neyi yanlış anladığım, hangi kelimeyi hangi kelimeyle karıştırdığım** kayıt altına alındı; dersler o kayıtların üstüne kuruldu.
-
-Somut olarak: "carry-in ile carry-out aynı teldir" cümlesinin 07. dersin omurgası olmasının sebebi, benim tam orada kilitlenmiş olmam. 06'daki "üç ayrı OR" uyarısı, üçünü birbirine karıştırmam üzerine yazıldı. 04'e kapasite tablosunun eklenmesi, "`10` neden 2 ediyor" diye iki kez sormamdan çıktı. Full Adder'daki alternatif çözüm ise kitaptaki değil, benim kurduğum devre.
-
-Yani içeriğin sırasını ve vurgularını bir konu başlığı listesi değil, **gerçek bir öğrenme oturumu** belirledi. Taslağı Claude Code yazdı; nerede zorlanılacağını ben gösterdim. Hepsini okudum; sonradan bulduğum yerleri ayrı commit'lerle düzeltiyorum.
-
-**Matematik önkoşul değil, işin içinden çıkıyor.** Bu serinin bir kuralı var: matematik "önce şunu öğren" diye kapıya konmuyor, uğraşılan işin içinden çıkıyor. Aritmetik ünitesinde bunun en net örneği taşma konusu oldu. 08.5'i konuşurken şöyle bir cümle kurdum:
-
-> *"matematikte de olduğu gibi işin içine bölme girince ortalık karışıyor, kararlar yeniden dağıtılıyor gibi"*
-
-Bu bir kafa karışıklığı itirafı gibi duruyordu; aslında doğru teşhisti. Taşma zaten bir bölme işlemidir — `(a + b) mod 2ⁿ`, yani **kalan**. Ders bu cümlenin üstüne yeniden kuruldu: "taşma" ile "bölmeden kalan" aynı şeyin iki adı olarak anlatıldı. Takıldığım yer atlanacak bir engel değil, dersin omurgası oldu.
-
-Aynı konuda C'nin klasik taşma kontrolü `if (sonuc < a)` **ezberletilmedi, türetildi**: taşarken `2ⁿ` kaybediyorsun ama en fazla `2ⁿ − 1` ekliyorsun, dolayısıyla sonuç küçülmek *zorunda*. Yanındaki `if (sonuc > MAX)` kontrolünün neden **her koşulda yanlış** olduğu (ve derleyicinin bunu ölü kod diye sildiği) aynı akıl yürütmeden çıktı. Doğru kontrolün `a > MAX - b` olması da öyle — verilen bir formül değil, varılan bir sonuç.
-
-**Ve oradan CWE'lere.** NandGame'de 16 bitlik toplayıcıyı kurarken 17. bitin gidecek yeri olmadığını görmek, oyunun bir kısıtlaması değil — **CWE-190**'ın (Integer Overflow or Wraparound) tanımının kendisi. Bu bağ kurulduktan sonra seri kendi kendine büyüdü:
-
-- Gerçek vakalar geldi: BEC Token'ın 2018'de `2 × 2²⁵⁵ mod 2²⁵⁶ = 0` ile sıfırlanması (CVE-2018-10299), Boeing 787'nin jeneratör yazılımının 248 günde bir yeniden başlatılması gerekmesi, Y2038, Pac-Man'in 256. bölümü. Aynı aritmetik, dört ayrı sektörde aynı sonucu veriyor.
-- Ardından **CWE-680** ve **CWE-787** geldi. 680 kolay oturmadı, birkaç deneme sürdü — çünkü 680 bir *olay* değil, bir *zincir etiketi* (`190 → 787`). Anlatım "fren patladı" ile "duvara çarptı" ayrımına oturunca yerine geçti.
-- Dahası, o dersin şeması kendi metniyle çelişiyordu: 680'i iki ok arasında duran bir düğüm gibi çiziyordu, oysa metin onun bir *ok* olduğunu söylüyordu. Bunu yayından sonra ben fark ettim; şema iki kutulu hâliyle yeniden çizildi.
-- **Eylül 2026'da yapı değişti:** ara dersler yalnızca matematik ve ek bilgi taşıyacak, CWE'ler ayrı bir klasöre çıkacak. Gerçek vakalar `konu_anlatimlari/cwe/` altına, her zayıflık için ayrı sayfaya taşındı; derslerden oraya 👾 bağlantılarıyla gidiliyor.
-
-Yani zafiyet listeleri dışarıdan yapıştırılmadı. Toplayıcıyı kendi ellerinle kurunca CWE-190 zaten karşına çıkıyor; ders sadece o karşılaşmaya isim veriyor.
+Ai birinin yerini alan değil (şuanlık), birinin düşünceleri ve tecrübesi ile yol alan bir zaman makinesi gibi. Emin olun üşengeç bir insan olmaysaydım repo daha önceden kağıtlara tuttuğum notlar ile hazırlanırdı ama ben bu şekilde repo yazmaya hep üşenmişimdir :)
 
 > ℹ️ **Git geçmişi neden sıfırlandı?** Bu inceleme sırasında, bazı erken commit'lerde birkaç OverTheWire parolasının yanlışlıkla düz metin kaldığını fark ettik — reponun "şifreler paylaşılmıyor" ilkesine aykırı bir durum (bir tür bilgi ifşası açığı). Güncel dosyalarda maskelemek tek başına yetmiyordu; parolalar eski commit blob'larında hâlâ okunabiliyordu. Bu yüzden git geçmişini bilinçli olarak **tek bir temiz commit'e sıfırladık** (Temmuz 2026). **İçerikte kayıp yok** — yalnızca parola sızıntısı ve dağınık eski commit'ler temizlendi. Kafada soru işareti kalmasın diye açıkça not düşüyorum: geçmişin yeniden yazılması gizlemek için değil, bir güvenlik/ilke ihlalini kökten temizlemek içindi.
 
