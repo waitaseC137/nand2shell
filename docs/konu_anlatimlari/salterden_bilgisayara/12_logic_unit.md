@@ -393,6 +393,6 @@ gelecek.
 ---
 
 **Önceki konu:** [11_selector_switch.md](./11_selector_switch.md)
-**Sonraki konu:** *(yolda — Arithmetic Unit)*
+**Sonraki konu:** [13_arithmetic_unit.md](./13_arithmetic_unit.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

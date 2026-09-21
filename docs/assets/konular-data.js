@@ -94,7 +94,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/09_subtraction.md",          n: "09",   t: "Subtraction",          h: "İkinin tümleyeni; toplayıcıya çıkarma yaptırmak" },
         { f: "salterden_bilgisayara/10_bayraklar.md",            n: "10",   t: "Bayraklar (ZF/SF)",    h: "Sıfır ve işaret; makinenin 'eğer' demesi" },
         { f: "salterden_bilgisayara/11_selector_switch.md",     n: "11",   t: "Selector & Switch",    h: "Kontrol teli · vana olarak AND · multiplexer" },
-        { f: "salterden_bilgisayara/12_logic_unit.md",          n: "12",   t: "Logic Unit",           h: "Emir bir sayıdır · hepsi hesaplanır, biri seçilir" }
+        { f: "salterden_bilgisayara/12_logic_unit.md",          n: "12",   t: "Logic Unit",           h: "Emir bir sayıdır · hepsi hesaplanır, biri seçilir" },
+        { f: "salterden_bilgisayara/13_arithmetic_unit.md",     n: "13",   t: "Arithmetic Unit",      h: "Seçiciyi girişe taşımak · 16 bitlik sabiti imal etmek" }
       ]
     },
     {

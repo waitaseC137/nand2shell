@@ -96,6 +96,7 @@
 | [10_bayraklar.md](./salterden_bilgisayara/10_bayraklar.md) | ZF ve SF; makinenin "eğer" demesi — `cmp`'in altındaki devre |
 | [11_selector_switch.md](./salterden_bilgisayara/11_selector_switch.md) | Selector & Switch; veri/kontrol teli ayrımı, multiplexer |
 | [12_logic_unit.md](./salterden_bilgisayara/12_logic_unit.md) | Logic Unit; emir bir sayıdır, dört işlemden birini seçmek |
+| [13_arithmetic_unit.md](./salterden_bilgisayara/13_arithmetic_unit.md) | Arithmetic Unit; seçiciyi girişe taşımak, sabiti imal etmek |
 
 ---
 
