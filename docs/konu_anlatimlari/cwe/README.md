@@ -126,6 +126,14 @@ sözleşmeyle okunuyor: değişkene girerken [196](./cwe_196.md), kontrolde
 [839](./cwe_839.md), kullanımda [195](./cwe_195.md). Her birinin kendi sayfasında
 mekanizması, gerçek vakaları ve nasıl önlendiği var.
 
+**Bir eksen henüz açılmadı.** Yukarıdaki [196](./cwe_196.md) ile [195](./cwe_195.md),
+aynı bitlerin **yorumu** değişince ne olduğunu anlatıyor — genişlik hep sabit kalıyor.
+Genişliğin kendisi değişirse iki CWE daha çıkar: dar → geniş giderken **CWE-194**
+(işaret uzatma), geniş → dar giderken **CWE-197** (kırpma). İkisi de henüz sayfa değil.
+Sebebi de öğretici: genişlik konusu müfredata ancak
+[13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir)'te
+bundler'la girdi. Katalog yanlış değildi, o günkü kapsamın dürüst aynasıydı.
+
 **🔗 Exploit tarafı:** Aynı ailenin gerçek seviyelerde nasıl istismar edildiği →
 [binary_exploitation/11 · Integer Bug'ları](../binary_exploitation/11_integer_bug_truncation_signedness.md)
 (truncation, signed/unsigned bypass, `×4` wraparound · Utumno 4/6, Maze 7)
@@ -143,6 +151,8 @@ Condition seviyesinde gelecek; karşılaştırma hataları da onunla birlikte.
 |---|---|---|---|
 | Logic Unit | **CWE-480** | Use of Incorrect Operator | Bit maskesi yerine mantık işlemi: `&` yerine `&&` |
 | Arithmetic Unit | **CWE-193** | Off-by-one Error | Bir artırma/azaltma ve sınırlar: `<` mi, `<=` mi |
+| Bellek ünitesi | **CWE-194** | Unexpected Sign Extension | Dar → geniş: üst bitler işaret bitiyle dolunca `0xFF` 255 değil **−1** olur |
+| Bellek ünitesi | **CWE-197** | Numeric Truncation Error | Geniş → dar: üst bitler atılır. Exploit tarafı zaten yazılı → [binary_exploitation/11](../binary_exploitation/11_integer_bug_truncation_signedness.md) |
 | ALU | **CWE-1242** | Inclusion of Undocumented Features or Chicken Bits | Kimsenin tanımlamadığı kontrol biti kombinasyonları |
 | Condition | **CWE-697** | Incorrect Comparison | Karşılaştırma = çıkarma + işarete bakma; taşma işareti yanıltır |
 | Bellek ünitesinden sonra | **CWE-416** | Use After Free | Geri verilmiş belleği kullanmaya devam etmek |
