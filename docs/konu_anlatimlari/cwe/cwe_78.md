@@ -7,7 +7,7 @@
 | | |
 |---|---|
 | **Resmî ad** | Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') |
-| **Üst sınıf** | CWE-77 — Command Injection (genel, işletim sistemiyle sınırlı değil) |
+| **Üst sınıf** | [CWE-77](./cwe_77.md) — Command Injection (genel, işletim sistemiyle sınırlı değil) |
 | **Akrabası** | CWE-88 — Argument Injection |
 | **Nerede karşına çıkar** | [Leviathan · Ders 3](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-3--komut--argüman-enjeksiyonu-system) · [web_guvenligi/07](../web_guvenligi/07_command_injection.md) |
 

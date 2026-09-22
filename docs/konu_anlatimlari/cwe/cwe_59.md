@@ -7,7 +7,7 @@
 | | |
 |---|---|
 | **Resmî ad** | Improper Link Resolution Before File Access ('Link Following') |
-| **Üst sınıf** | CWE-706 — Use of Incorrectly-Resolved Name or Reference |
+| **Üst sınıf** | [CWE-706](./cwe_706.md) — Use of Incorrectly-Resolved Name or Reference |
 | **Alt türleri** | CWE-61 (UNIX sembolik bağ) · CWE-62 (sabit bağ) · CWE-64/65 (Windows kısayol ve sabit bağ) · CWE-1386 (Windows junction) |
 | **Nerede karşına çıkar** | [Leviathan · Ders 5](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-5--sembolik-link-saldırısı--güvensiz-tmp) · [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md) |
 

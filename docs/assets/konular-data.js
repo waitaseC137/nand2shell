@@ -203,7 +203,12 @@ window.KONULAR = {
         { f: "cwe/cwe_197.md", n: "197", t: "Kırpma", h: "geniş → dar · üst bitler sessizce gider · Y2K" },
         { f: "cwe/cwe_682.md", n: "682", t: "Hatalı Hesap (sütun)", h: "190/191/193'ün çatısı · Pillar → Class → Base → Variant" },
         { f: "cwe/cwe_1384.md", n: "1384", t: "Fiziksel Koşullar (sınıf)", h: "1247 + 1261'in çatısı · kasıtlı sıçrama vs parçacık" },
-        { f: "cwe/cwe_704.md", n: "704", t: "Tip Dönüşümü (sınıf)", h: "681'in üstü · Type Confusion dalı" }
+        { f: "cwe/cwe_704.md", n: "704", t: "Tip Dönüşümü (sınıf)", h: "681'in üstü · Type Confusion dalı" },
+        { f: "cwe/cwe_706.md", n: "706", t: "Ad Çözümlemesi (sınıf)", h: "59'un üstü · ../ · eşdeğer yazılış · harf büyüklüğü" },
+        { f: "cwe/cwe_362.md", n: "362", t: "Yarış Koşulu (sınıf)", h: "367'nin üstü · yazılım ve donanımın buluştuğu çatı" },
+        { f: "cwe/cwe_1023.md", n: "1023", t: "Eksik Karşılaştırma (sınıf)", h: "839'un üstü · kontrol var ama kapsamı eksik" },
+        { f: "cwe/cwe_670.md", n: "670", t: "Hatalı Akış (sınıf)", h: "480'in üstü · niyet ile kodun ayrışması" },
+        { f: "cwe/cwe_77.md", n: "77", t: "Komut Enjeksiyonu (sınıf)", h: "78'in üstü · 88 argüman · 1427 LLM istemi" }
       ]
     }
   ]

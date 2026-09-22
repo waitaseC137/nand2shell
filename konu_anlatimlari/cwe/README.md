@@ -142,6 +142,7 @@ yapmazlar. Bu seviyedeki CWE'ler tam da o varsayımın bozulduğu yerde durur.
 | [**CWE-704**](./cwe_704.md) | Incorrect Type Conversion or Cast | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/704.html) |
 | [**CWE-681**](./cwe_681.md) | Incorrect Conversion between Numeric Types | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/681.html) |
 | [**CWE-196**](./cwe_196.md) | Unsigned to Signed Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/196.html) |
+| [**CWE-1023**](./cwe_1023.md) | Incomplete Comparison with Missing Factors | [10 · Bayraklar](../salterden_bilgisayara/10_bayraklar.md) | [📄](https://cwe.mitre.org/data/definitions/1023.html) |
 | [**CWE-839**](./cwe_839.md) | Numeric Range Comparison Without Minimum Check | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/839.html) |
 | [**CWE-195**](./cwe_195.md) | Signed to Unsigned Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/195.html) |
 | [**CWE-194**](./cwe_194.md) | Unexpected Sign Extension | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | [📄](https://cwe.mitre.org/data/definitions/194.html) |
@@ -179,6 +180,7 @@ Condition seviyesinde gelecek; karşılaştırma hataları da onunla birlikte.
 
 | CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
+| [**CWE-670**](./cwe_670.md) | Always-Incorrect Control Flow Implementation | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/670.html) |
 | [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/480.html) |
 | [**CWE-193**](./cwe_193.md) | Off-by-one Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/193.html) |
 
@@ -210,6 +212,9 @@ ortak dersi şu: **devre doğru çalışıyor olabilir; yanlış olan, ona ne so
 
 | CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
+| [**CWE-77**](./cwe_77.md) | Improper Neutralization of Special Elements used in a Command | [Leviathan'ın Dersleri · Ders 3](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-3--komut--argüman-enjeksiyonu-system) | [📄](https://cwe.mitre.org/data/definitions/77.html) |
+| [**CWE-706**](./cwe_706.md) | Use of Incorrectly-Resolved Name or Reference | [Leviathan'ın Dersleri · Ders 5](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-5--sembolik-link-saldırısı--güvensiz-tmp) | [📄](https://cwe.mitre.org/data/definitions/706.html) |
+| [**CWE-362**](./cwe_362.md) | Concurrent Execution using Shared Resource with Improper Synchronization | [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md#toctou-açığı-nedir) | [📄](https://cwe.mitre.org/data/definitions/362.html) |
 | [**CWE-78**](./cwe_78.md) | Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') | [Leviathan'ın Dersleri · Ders 3](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-3--komut--argüman-enjeksiyonu-system) | [📄](https://cwe.mitre.org/data/definitions/78.html) |
 | [**CWE-59**](./cwe_59.md) | Improper Link Resolution Before File Access ('Link Following') | [Leviathan'ın Dersleri · Ders 5](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-5--sembolik-link-saldırısı--güvensiz-tmp) | [📄](https://cwe.mitre.org/data/definitions/59.html) |
 | [**CWE-367**](./cwe_367.md) | Time-of-check Time-of-use (TOCTOU) Race Condition | Aynı ders + [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md#toctou-açığı-nedir) | [📄](https://cwe.mitre.org/data/definitions/367.html) |
