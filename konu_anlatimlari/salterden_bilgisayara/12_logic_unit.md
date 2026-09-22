@@ -382,7 +382,7 @@ gelecek.
 
 ## 🔗 İlgili Konular
 
-- 👾 **Meraklısına:** [CWE Haritası — ALU ünitesi](../cwe/README.md#yolda--alu-ünitesi-ve-sonrası) — işleçleri karıştırmak: bit bit çalışan `&` yerine mantık işleci `&&` (CWE-480, yolda)
+- 👾 **Meraklısına:** [CWE-480 — Yanlış işleç kullanımı](../cwe/cwe_480.md) — bu derste kurduğun bit bit `&` ile mantıksal `&&`'i karıştırmak; 2003'te Linux çekirdeğine sokulmak istenen iki karakter
 - [11_selector_switch.md](./11_selector_switch.md) — Seçicinin kendisi; "hepsini yapar, birini seçer"
 - [06_full_adder.md](./06_full_adder.md) — Katlara ayırma numarası
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` tel → `2ⁿ` desen

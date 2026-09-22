@@ -445,7 +445,8 @@ kutuda birleştirecek. Ardından **Condition**'da `10`'da söz verilen taşma ba
 
 ## 🔗 İlgili Konular
 
-- 👾 **Meraklısına:** [CWE Haritası — ALU ünitesi](../cwe/README.md#yolda--alu-ünitesi-ve-sonrası) — bir artırma ve sınırlar: `<` mi `<=` mi (CWE-193, yolda) · genişlik değişince anlamın kayması (CWE-194 / CWE-197, yolda)
+- 👾 **Meraklısına:** [CWE-193 — Off-by-one](../cwe/cwe_193.md) — bu dersteki `X + 1`'in bir birim yanlış yere düşmesi: `<` mi `<=` mi
+- 👾 **Genişlik ekseni:** [CWE-194 — İşaret uzatması](../cwe/cwe_194.md) (dar → geniş) ve [CWE-197 — Kırpma](../cwe/cwe_197.md) (geniş → dar) — bundler bölümünün güvenlik karşılığı
 - [12_logic_unit.md](./12_logic_unit.md) — Aynı fikrin mantık işlemleriyle hâli; emir, seçim, "hepsi çalışır biri seçilir"
 - [11_selector_switch.md](./11_selector_switch.md) — Seçicinin kendisi ve fan-out
 - [09_subtraction.md](./09_subtraction.md) — `sub 16`'nın içindeki devre

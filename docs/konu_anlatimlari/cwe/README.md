@@ -120,19 +120,27 @@ yapmazlar. Bu seviyedeki CWE'ler tam da o varsayımın bozulduğu yerde durur.
 | [**CWE-196**](./cwe_196.md) | Unsigned to Signed Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | 📄 |
 | [**CWE-839**](./cwe_839.md) | Numeric Range Comparison Without Minimum Check | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | 📄 |
 | [**CWE-195**](./cwe_195.md) | Signed to Unsigned Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | 📄 |
+| [**CWE-194**](./cwe_194.md) | Unexpected Sign Extension | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | 📄 |
+| [**CWE-197**](./cwe_197.md) | Numeric Truncation Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | 📄 |
 
 **Üçü bir zincir.** 09'un Güvenlik Köprüsü'ndeki örnekte aynı sayı üç kez farklı
 sözleşmeyle okunuyor: değişkene girerken [196](./cwe_196.md), kontrolde
 [839](./cwe_839.md), kullanımda [195](./cwe_195.md). Her birinin kendi sayfasında
 mekanizması, gerçek vakaları ve nasıl önlendiği var.
 
-**Bir eksen henüz açılmadı.** Yukarıdaki [196](./cwe_196.md) ile [195](./cwe_195.md),
-aynı bitlerin **yorumu** değişince ne olduğunu anlatıyor — genişlik hep sabit kalıyor.
-Genişliğin kendisi değişirse iki CWE daha çıkar: dar → geniş giderken **CWE-194**
-(işaret uzatma), geniş → dar giderken **CWE-197** (kırpma). İkisi de henüz sayfa değil.
-Sebebi de öğretici: genişlik konusu müfredata ancak
-[13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir)'te
-bundler'la girdi. Katalog yanlış değildi, o günkü kapsamın dürüst aynasıydı.
+**İki eksen var, ikisi de açık.** [196](./cwe_196.md) ile [195](./cwe_195.md) aynı
+bitlerin **yorumu** değişince ne olduğunu anlatıyor — genişlik sabit kalıyor.
+[194](./cwe_194.md) ile [197](./cwe_197.md) ise **genişliğin kendisi** değişince:
+dar → geniş giderken işaret uzatması, geniş → dar giderken kırpma.
+
+| | genişlik | yorum |
+|---|---|---|
+| [196](./cwe_196.md) · [195](./cwe_195.md) | sabit | değişir |
+| [194](./cwe_194.md) · [197](./cwe_197.md) | değişir | sabit kalmaya çalışır |
+
+Genişlik ekseni kataloğa sonradan girdi, ve sebebi öğretici: bu konu müfredata
+ancak [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir)'te
+bundler'la geldi. Katalog yanlış değildi — o günkü kapsamın dürüst aynasıydı.
 
 **🔗 Exploit tarafı:** Aynı ailenin gerçek seviyelerde nasıl istismar edildiği →
 [binary_exploitation/11 · Integer Bug'ları](../binary_exploitation/11_integer_bug_truncation_signedness.md)
@@ -143,16 +151,23 @@ bundler'la girdi. Katalog yanlış değildi, o günkü kapsamın dürüst aynas�
 10 ve 11'de henüz doğrudan bir CWE yok. 10'da söz verilen taşma bayrağı (OF)
 Condition seviyesinde gelecek; karşılaştırma hataları da onunla birlikte.
 
-### Yolda — ALU Ünitesi ve Sonrası
+### 🧮 Ünite 4 — Hesap Çekirdeği (ALU)
+
+| CWE | Resmî adı | Nerede doğdu | |
+|---|---|---|---|
+| [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | 📄 |
+| [**CWE-193**](./cwe_193.md) | Off-by-one Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | 📄 |
+
+**İkisi de "tek karakter" hataları.** 480'de `&` ile `&&` karışır, 193'te `<` ile
+`<=`. Derleyici ikisinde de susar, çünkü yazılan şey geçerli koddur. Bu ünitenin
+ortak dersi şu: **devre doğru çalışıyor olabilir; yanlış olan, ona ne sorduğundur.**
+
+### Yolda — Sonraki Üniteler
 
 🔜 Bunlar plan. Dersler yazıldıkça kesinleşecek, gerekirse değişecek.
 
 | Nerede | CWE | Resmî adı | Neden orada |
 |---|---|---|---|
-| Logic Unit | **CWE-480** | Use of Incorrect Operator | Bit maskesi yerine mantık işlemi: `&` yerine `&&` |
-| Arithmetic Unit | **CWE-193** | Off-by-one Error | Bir artırma/azaltma ve sınırlar: `<` mi, `<=` mi |
-| Bellek ünitesi | **CWE-194** | Unexpected Sign Extension | Dar → geniş: üst bitler işaret bitiyle dolunca `0xFF` 255 değil **−1** olur |
-| Bellek ünitesi | **CWE-197** | Numeric Truncation Error | Geniş → dar: üst bitler atılır. Exploit tarafı zaten yazılı → [binary_exploitation/11](../binary_exploitation/11_integer_bug_truncation_signedness.md) |
 | ALU | **CWE-1242** | Inclusion of Undocumented Features or Chicken Bits | Kimsenin tanımlamadığı kontrol biti kombinasyonları |
 | Condition | **CWE-697** | Incorrect Comparison | Karşılaştırma = çıkarma + işarete bakma; taşma işareti yanıltır |
 | Bellek ünitesinden sonra | **CWE-416** | Use After Free | Geri verilmiş belleği kullanmaya devam etmek |

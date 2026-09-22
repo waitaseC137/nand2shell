@@ -196,7 +196,11 @@ window.KONULAR = {
         { f: "cwe/cwe_367.md", n: "367", t: "TOCTOU Yarışı", h: "kontrol bir fotoğraftır · aralığı daraltmak çözüm değil" },
         { f: "cwe/cwe_1300.md", n: "1300", t: "Fiziksel Yan Kanal", h: "akım · elektromanyetik dalga · ses" },
         { f: "cwe/cwe_1247.md", n: "1247", t: "Voltaj ve Saat Sıçraması", h: "fault attack · Xbox 360 reset glitch" },
-        { f: "cwe/cwe_1261.md", n: "1261", t: "Tek Olay Bozulması", h: "bit dönmesi · Belçika 4096 · Mario 64" }
+        { f: "cwe/cwe_1261.md", n: "1261", t: "Tek Olay Bozulması", h: "bit dönmesi · Belçika 4096 · Mario 64" },
+        { f: "cwe/cwe_480.md", n: "480", t: "Yanlış İşleç", h: "& ile && · 2003 çekirdek girişimi · = ile ==" },
+        { f: "cwe/cwe_193.md", n: "193", t: "Off-by-one", h: "çit direği · 10 aralık 11 direk · tek bayt yeter" },
+        { f: "cwe/cwe_194.md", n: "194", t: "İşaret Uzatması", h: "dar → geniş · 0xFF neden −1 olur" },
+        { f: "cwe/cwe_197.md", n: "197", t: "Kırpma", h: "geniş → dar · üst bitler sessizce gider · Y2K" }
       ]
     }
   ]
