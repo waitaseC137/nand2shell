@@ -111,45 +111,39 @@ bellek boyutu olarak kullanıldığı an. İki kutu modeliyle ayrıntısı →
 
 Her derste bir CWE yok. Devreyle gerçek bir bağ yoksa o ders burada listelenmez.
 
-📄 kendi sayfası var · 📖 derste anlatılıyor · 👾 kısa anlatımı bu sayfada · 🔜 yolda
+**CWE numarası** kendi sayfasına götürür · **📄** MITRE'deki resmî tanıma
 
 ### Ünite 0 — Tuğlalar: Şalterden Kapılara
 
 NandGame kapıları **mükemmel** varsayar: enerji harcamazlar, gecikmezler, hata
 yapmazlar. Bu seviyedeki CWE'ler tam da o varsayımın bozulduğu yerde durur.
 
-| Ders | CWE | Resmî adı | |
+| Ders | CWE | Resmî adı | link |
 |---|---|---|---|
-| [01 · Akım, Şalter, Röle](../salterden_bilgisayara/01_akim_salter_role.md) | [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | 📄 |
-| [02 · NAND'dan Kapılar](../salterden_bilgisayara/02_nanddan_kapilar.md) | [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | 📄 |
-
-**📄 CWE-1300 — Fiziksel yan kanal.** Bir kapı durum değiştirirken enerji harcar; çekilen akım, yayılan dalga ve çıkan ses işlenen veriyle ilişkilidir. Kod kusursuz olsa bile sızıntı fizikten gelir → [sayfası](./cwe_1300.md)
-
-**📄 CWE-1247 — Voltaj ve saat sıçraması.** Bir kapının doğru çalışması beslemesine ve saatine bağlıdır. Biri bir anlığına bozulursa devre yanlış bir sonuç üretir — ve o sonuç bir güvenlik kararıysa "hayır" "evet"e döner → [sayfası](./cwe_1247.md)
+| [01 · Akım, Şalter, Röle](../salterden_bilgisayara/01_akim_salter_role.md) | [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | [📄](https://cwe.mitre.org/data/definitions/1300.html) |
+| [02 · NAND'dan Kapılar](../salterden_bilgisayara/02_nanddan_kapilar.md) | [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | [📄](https://cwe.mitre.org/data/definitions/1247.html) |
 
 ### Ünite 1 — Saymak ve Toplamak
 
-| Ders | CWE | Resmî adı | |
+| Ders | CWE | Resmî adı | link |
 |---|---|---|---|
-| [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [**CWE-1261**](./cwe_1261.md) | Improper Handling of Single Event Upsets | 📄 |
-
-**📄 CWE-1261 — Tek olay bozulması.** Yüklü bir parçacık bir bellek hücresindeki değeri devirebilir. 04'teki `n tel → 2ⁿ desen` kuralı bunun izini sürmeni sağlar: bir sayıya tam olarak 2'nin bir kuvveti eklenmişse tek bir bit dönmüştür → [sayfası](./cwe_1261.md)
+| [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [**CWE-1261**](./cwe_1261.md) | Improper Handling of Single Event Upsets | [📄](https://cwe.mitre.org/data/definitions/1261.html) |
 
 ### Ünite 2 — Sayının Sınırı ve Eksi Sayılar
 
-| CWE | Resmî adı | Nerede doğdu | |
+| CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
-| [**CWE-682**](./cwe_682.md) | Incorrect Calculation — **sütun**, bu ünitenin çatısı | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | 📄 |
-| [**CWE-190**](./cwe_190.md) | Integer Overflow or Wraparound | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | 📄 |
-| [**CWE-191**](./cwe_191.md) | Integer Underflow (Wrap or Wraparound) | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | 📄 |
-| [**CWE-680**](./cwe_680.md) | Integer Overflow to Buffer Overflow | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | 📄 |
-| [**CWE-787**](./cwe_787.md) | Out-of-bounds Write | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | 📄 |
-| [**CWE-681**](./cwe_681.md) | Incorrect Conversion between Numeric Types | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | 📄 |
-| [**CWE-196**](./cwe_196.md) | Unsigned to Signed Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | 📄 |
-| [**CWE-839**](./cwe_839.md) | Numeric Range Comparison Without Minimum Check | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | 📄 |
-| [**CWE-195**](./cwe_195.md) | Signed to Unsigned Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | 📄 |
-| [**CWE-194**](./cwe_194.md) | Unexpected Sign Extension | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | 📄 |
-| [**CWE-197**](./cwe_197.md) | Numeric Truncation Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | 📄 |
+| [**CWE-682**](./cwe_682.md) | Incorrect Calculation — **sütun**, bu ünitenin çatısı | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/682.html) |
+| [**CWE-190**](./cwe_190.md) | Integer Overflow or Wraparound | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | [📄](https://cwe.mitre.org/data/definitions/190.html) |
+| [**CWE-191**](./cwe_191.md) | Integer Underflow (Wrap or Wraparound) | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | [📄](https://cwe.mitre.org/data/definitions/191.html) |
+| [**CWE-680**](./cwe_680.md) | Integer Overflow to Buffer Overflow | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/680.html) |
+| [**CWE-787**](./cwe_787.md) | Out-of-bounds Write | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/787.html) |
+| [**CWE-681**](./cwe_681.md) | Incorrect Conversion between Numeric Types | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/681.html) |
+| [**CWE-196**](./cwe_196.md) | Unsigned to Signed Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/196.html) |
+| [**CWE-839**](./cwe_839.md) | Numeric Range Comparison Without Minimum Check | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/839.html) |
+| [**CWE-195**](./cwe_195.md) | Signed to Unsigned Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/195.html) |
+| [**CWE-194**](./cwe_194.md) | Unexpected Sign Extension | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | [📄](https://cwe.mitre.org/data/definitions/194.html) |
+| [**CWE-197**](./cwe_197.md) | Numeric Truncation Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | [📄](https://cwe.mitre.org/data/definitions/197.html) |
 
 **Üçü bir zincir.** 09'un Güvenlik Köprüsü'ndeki örnekte aynı sayı üç kez farklı
 sözleşmeyle okunuyor: değişkene girerken [196](./cwe_196.md), kontrolde
@@ -181,10 +175,10 @@ Condition seviyesinde gelecek; karşılaştırma hataları da onunla birlikte.
 
 ### 🧮 Ünite 4 — Hesap Çekirdeği (ALU)
 
-| CWE | Resmî adı | Nerede doğdu | |
+| CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
-| [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | 📄 |
-| [**CWE-193**](./cwe_193.md) | Off-by-one Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | 📄 |
+| [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/480.html) |
+| [**CWE-193**](./cwe_193.md) | Off-by-one Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/193.html) |
 
 **İkisi de "tek karakter" hataları.** 480'de `&` ile `&&` karışır, 193'te `<` ile
 `<=`. Derleyici ikisinde de susar, çünkü yazılan şey geçerli koddur. Bu ünitenin
@@ -205,11 +199,11 @@ ortak dersi şu: **devre doğru çalışıyor olabilir; yanlış olan, ona ne so
 
 ## Binary Analizi & RE (Leviathan)
 
-| Ders | CWE | Resmî adı | |
+| Ders | CWE | Resmî adı | link |
 |---|---|---|---|
-| [Leviathan'ın Dersleri · Ders 3](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-3--komut--argüman-enjeksiyonu-system) | [**CWE-78**](./cwe_78.md) | Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') | 📄 |
-| [Leviathan'ın Dersleri · Ders 5](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-5--sembolik-link-saldırısı--güvensiz-tmp) | [**CWE-59**](./cwe_59.md) | Improper Link Resolution Before File Access ('Link Following') | 📄 |
-| Aynı ders + [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md#toctou-açığı-nedir) | [**CWE-367**](./cwe_367.md) | Time-of-check Time-of-use (TOCTOU) Race Condition | 📄 |
+| [Leviathan'ın Dersleri · Ders 3](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-3--komut--argüman-enjeksiyonu-system) | [**CWE-78**](./cwe_78.md) | Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') | [📄](https://cwe.mitre.org/data/definitions/78.html) |
+| [Leviathan'ın Dersleri · Ders 5](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-5--sembolik-link-saldırısı--güvensiz-tmp) | [**CWE-59**](./cwe_59.md) | Improper Link Resolution Before File Access ('Link Following') | [📄](https://cwe.mitre.org/data/definitions/59.html) |
+| Aynı ders + [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md#toctou-açığı-nedir) | [**CWE-367**](./cwe_367.md) | Time-of-check Time-of-use (TOCTOU) Race Condition | [📄](https://cwe.mitre.org/data/definitions/367.html) |
 
 > 🔑 **Üçü aynı derste ama üçü ayrı şey.** 78'in kökü "veri ile komut aynı kanaldan
 > gidiyor"; 59 ve 367 ise "ad, kimlik değildir" ailesinden. 59 ile 367 arasındaki
