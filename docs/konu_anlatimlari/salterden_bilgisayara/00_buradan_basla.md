@@ -175,10 +175,11 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | # | Dosya | Ne öğretir | NandGame seviyesi |
 |:---:|---|---|---|
 | 12 | [12_logic_unit](./12_logic_unit.md) | Emir bir sayıdır; hepsi hesaplanır, biri seçilir | Logic Unit |
+| 13 | [13_arithmetic_unit](./13_arithmetic_unit.md) | Seçiciyi girişe taşımak; 16 bitlik sabiti imal etmek | Arithmetic Unit |
 
 ### 🔜 Yolda (oyun ilerledikçe yazılacak)
 
-Hesap çekirdeğinin geri kalanı (Arithmetic Unit, ALU, Condition) → hafıza (latch, register, RAM) → saat ve kontrol birimi
+Hesap çekirdeğinin geri kalanı (ALU, Condition) → hafıza (latch, register, RAM) → saat ve kontrol birimi
 → **komut işleyen işlemci.**
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
