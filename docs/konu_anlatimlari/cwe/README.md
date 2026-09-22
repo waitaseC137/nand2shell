@@ -120,6 +120,7 @@ yapmazlar. Bu seviyedeki CWE'ler tam da o varsayımın bozulduğu yerde durur.
 
 | CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
+| [**CWE-1384**](./cwe_1384.md) | Improper Handling of Physical or Environmental Conditions | [02 · NAND'dan Kapılar](../salterden_bilgisayara/02_nanddan_kapilar.md) · [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/1384.html) |
 | [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | [01 · Akım, Şalter, Röle](../salterden_bilgisayara/01_akim_salter_role.md) | [📄](https://cwe.mitre.org/data/definitions/1300.html) |
 | [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | [02 · NAND'dan Kapılar](../salterden_bilgisayara/02_nanddan_kapilar.md) | [📄](https://cwe.mitre.org/data/definitions/1247.html) |
 
@@ -138,6 +139,7 @@ yapmazlar. Bu seviyedeki CWE'ler tam da o varsayımın bozulduğu yerde durur.
 | [**CWE-191**](./cwe_191.md) | Integer Underflow (Wrap or Wraparound) | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | [📄](https://cwe.mitre.org/data/definitions/191.html) |
 | [**CWE-680**](./cwe_680.md) | Integer Overflow to Buffer Overflow | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/680.html) |
 | [**CWE-787**](./cwe_787.md) | Out-of-bounds Write | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/787.html) |
+| [**CWE-704**](./cwe_704.md) | Incorrect Type Conversion or Cast | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/704.html) |
 | [**CWE-681**](./cwe_681.md) | Incorrect Conversion between Numeric Types | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/681.html) |
 | [**CWE-196**](./cwe_196.md) | Unsigned to Signed Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/196.html) |
 | [**CWE-839**](./cwe_839.md) | Numeric Range Comparison Without Minimum Check | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/839.html) |

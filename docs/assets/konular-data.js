@@ -201,7 +201,9 @@ window.KONULAR = {
         { f: "cwe/cwe_193.md", n: "193", t: "Off-by-one", h: "çit direği · 10 aralık 11 direk · tek bayt yeter" },
         { f: "cwe/cwe_194.md", n: "194", t: "İşaret Uzatması", h: "dar → geniş · 0xFF neden −1 olur" },
         { f: "cwe/cwe_197.md", n: "197", t: "Kırpma", h: "geniş → dar · üst bitler sessizce gider · Y2K" },
-        { f: "cwe/cwe_682.md", n: "682", t: "Hatalı Hesap (sütun)", h: "190/191/193'ün çatısı · Pillar → Class → Base → Variant" }
+        { f: "cwe/cwe_682.md", n: "682", t: "Hatalı Hesap (sütun)", h: "190/191/193'ün çatısı · Pillar → Class → Base → Variant" },
+        { f: "cwe/cwe_1384.md", n: "1384", t: "Fiziksel Koşullar (sınıf)", h: "1247 + 1261'in çatısı · kasıtlı sıçrama vs parçacık" },
+        { f: "cwe/cwe_704.md", n: "704", t: "Tip Dönüşümü (sınıf)", h: "681'in üstü · Type Confusion dalı" }
       ]
     }
   ]
