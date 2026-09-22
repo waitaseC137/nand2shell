@@ -118,22 +118,22 @@ Her derste bir CWE yok. Devreyle gerçek bir bağ yoksa o ders burada listelenme
 NandGame kapıları **mükemmel** varsayar: enerji harcamazlar, gecikmezler, hata
 yapmazlar. Bu seviyedeki CWE'ler tam da o varsayımın bozulduğu yerde durur.
 
-| Ders | CWE | Resmî adı | link |
+| CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
-| [01 · Akım, Şalter, Röle](../salterden_bilgisayara/01_akim_salter_role.md) | [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | [📄](https://cwe.mitre.org/data/definitions/1300.html) |
-| [02 · NAND'dan Kapılar](../salterden_bilgisayara/02_nanddan_kapilar.md) | [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | [📄](https://cwe.mitre.org/data/definitions/1247.html) |
+| [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | [01 · Akım, Şalter, Röle](../salterden_bilgisayara/01_akim_salter_role.md) | [📄](https://cwe.mitre.org/data/definitions/1300.html) |
+| [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | [02 · NAND'dan Kapılar](../salterden_bilgisayara/02_nanddan_kapilar.md) | [📄](https://cwe.mitre.org/data/definitions/1247.html) |
 
 ### Ünite 1 — Saymak ve Toplamak
 
-| Ders | CWE | Resmî adı | link |
+| CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
-| [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [**CWE-1261**](./cwe_1261.md) | Improper Handling of Single Event Upsets | [📄](https://cwe.mitre.org/data/definitions/1261.html) |
+| [**CWE-1261**](./cwe_1261.md) | Improper Handling of Single Event Upsets | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/1261.html) |
 
 ### Ünite 2 — Sayının Sınırı ve Eksi Sayılar
 
 | CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
-| [**CWE-682**](./cwe_682.md) | Incorrect Calculation — **sütun**, bu ünitenin çatısı | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/682.html) |
+| [**CWE-682**](./cwe_682.md) | Incorrect Calculation | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/682.html) |
 | [**CWE-190**](./cwe_190.md) | Integer Overflow or Wraparound | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | [📄](https://cwe.mitre.org/data/definitions/190.html) |
 | [**CWE-191**](./cwe_191.md) | Integer Underflow (Wrap or Wraparound) | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | [📄](https://cwe.mitre.org/data/definitions/191.html) |
 | [**CWE-680**](./cwe_680.md) | Integer Overflow to Buffer Overflow | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/680.html) |
@@ -199,11 +199,11 @@ ortak dersi şu: **devre doğru çalışıyor olabilir; yanlış olan, ona ne so
 
 ## Binary Analizi & RE (Leviathan)
 
-| Ders | CWE | Resmî adı | link |
+| CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
-| [Leviathan'ın Dersleri · Ders 3](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-3--komut--argüman-enjeksiyonu-system) | [**CWE-78**](./cwe_78.md) | Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') | [📄](https://cwe.mitre.org/data/definitions/78.html) |
-| [Leviathan'ın Dersleri · Ders 5](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-5--sembolik-link-saldırısı--güvensiz-tmp) | [**CWE-59**](./cwe_59.md) | Improper Link Resolution Before File Access ('Link Following') | [📄](https://cwe.mitre.org/data/definitions/59.html) |
-| Aynı ders + [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md#toctou-açığı-nedir) | [**CWE-367**](./cwe_367.md) | Time-of-check Time-of-use (TOCTOU) Race Condition | [📄](https://cwe.mitre.org/data/definitions/367.html) |
+| [**CWE-78**](./cwe_78.md) | Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') | [Leviathan'ın Dersleri · Ders 3](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-3--komut--argüman-enjeksiyonu-system) | [📄](https://cwe.mitre.org/data/definitions/78.html) |
+| [**CWE-59**](./cwe_59.md) | Improper Link Resolution Before File Access ('Link Following') | [Leviathan'ın Dersleri · Ders 5](../leviathan_komutlari/leviathan_ne_ogretiyor.md#ders-5--sembolik-link-saldırısı--güvensiz-tmp) | [📄](https://cwe.mitre.org/data/definitions/59.html) |
+| [**CWE-367**](./cwe_367.md) | Time-of-check Time-of-use (TOCTOU) Race Condition | Aynı ders + [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md#toctou-açığı-nedir) | [📄](https://cwe.mitre.org/data/definitions/367.html) |
 
 > 🔑 **Üçü aynı derste ama üçü ayrı şey.** 78'in kökü "veri ile komut aynı kanaldan
 > gidiyor"; 59 ve 367 ise "ad, kimlik değildir" ailesinden. 59 ile 367 arasındaki
