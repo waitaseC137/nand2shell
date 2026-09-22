@@ -200,7 +200,8 @@ window.KONULAR = {
         { f: "cwe/cwe_480.md", n: "480", t: "Yanlış İşleç", h: "& ile && · 2003 çekirdek girişimi · = ile ==" },
         { f: "cwe/cwe_193.md", n: "193", t: "Off-by-one", h: "çit direği · 10 aralık 11 direk · tek bayt yeter" },
         { f: "cwe/cwe_194.md", n: "194", t: "İşaret Uzatması", h: "dar → geniş · 0xFF neden −1 olur" },
-        { f: "cwe/cwe_197.md", n: "197", t: "Kırpma", h: "geniş → dar · üst bitler sessizce gider · Y2K" }
+        { f: "cwe/cwe_197.md", n: "197", t: "Kırpma", h: "geniş → dar · üst bitler sessizce gider · Y2K" },
+        { f: "cwe/cwe_682.md", n: "682", t: "Hatalı Hesap (sütun)", h: "190/191/193'ün çatısı · Pillar → Class → Base → Variant" }
       ]
     }
   ]

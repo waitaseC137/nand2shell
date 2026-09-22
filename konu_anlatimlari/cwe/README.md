@@ -15,6 +15,7 @@
 - [CWE Nedir?](#cwe-nedir)
 - [CVE Nedir?](#cve-nedir)
 - [CWE ile CVE Farkı](#cwe-ile-cve-farkı)
+- [CWE'ler Arasındaki Hiyerarşi](#cweler-arasındaki-hiyerarşi)
 - [Zincirler: Hatalar Arasındaki Tel](#zincirler-hatalar-arasındaki-tel)
 - [Şalterden Bilgisayara](#şalterden-bilgisayara)
 - [Binary Analizi & RE (Leviathan)](#binary-analizi--re-leviathan)
@@ -60,6 +61,32 @@ toplayıcının 17. bitinin gidecek yeri olmadığını gördün. O hatanın tü
 
 > 🔑 Bir CWE'nin altında çok sayıda CVE toplanabilir. CVE'ler olmuş olanı kaydeder;
 > CWE'yi tanımak ise bir sonraki hatayı daha CVE olmadan bulmanı sağlar.
+
+---
+
+## CWE'ler Arasındaki Hiyerarşi
+
+Sayfalarda sık sık **Üst sınıf** diye bir satır göreceksin. Çünkü CWE listesi düz
+bir liste değil, **dört kademeli bir ağaç:**
+
+```
+Sütun (Pillar)       en soyut  ·  bir temayı adlandırır       ·  ör. CWE-682
+   └─ Sınıf (Class)            ·  teknolojiden bağımsız tür   ·  ör. CWE-119
+        └─ Temel (Base)        ·  tespit/önleme yöntemi verilebilecek kadar somut  ·  ör. CWE-190
+             └─ Türev (Variant)  ·  belirli bir dile/teknolojiye özgü
+```
+
+Bu sayfadaki sayfaların çoğu **Temel** seviyededir — o kademede "şuna dikkat et,
+şöyle önle" denebilir.
+
+> 🔑 **Gerçek bir açığa numara verirken mümkün olan en SOMUT kademe seçilir.**
+> Sütunlar ve sınıflar etiketlemek için değil, **yönelmek** içindir: yeni bir hata
+> gördüğünde hangi aileye düştüğünü, ve aynı savunmanın başka neleri birden
+> kapattığını onlar söyler.
+
+Ayrıca **Bileşik** (*Compound*) diye bir kategori var: tek bir zayıflık değil,
+birbirine bağlı birkaç zayıflığın oluşturduğu kalıp. [CWE-680](./cwe_680.md) böyle
+bir **zincirdir** — aşağıda anlatılıyor.
 
 ---
 
@@ -112,6 +139,7 @@ yapmazlar. Bu seviyedeki CWE'ler tam da o varsayımın bozulduğu yerde durur.
 
 | CWE | Resmî adı | Nerede doğdu | |
 |---|---|---|---|
+| [**CWE-682**](./cwe_682.md) | Incorrect Calculation — **sütun**, bu ünitenin çatısı | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | 📄 |
 | [**CWE-190**](./cwe_190.md) | Integer Overflow or Wraparound | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | 📄 |
 | [**CWE-191**](./cwe_191.md) | Integer Underflow (Wrap or Wraparound) | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | 📄 |
 | [**CWE-680**](./cwe_680.md) | Integer Overflow to Buffer Overflow | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | 📄 |
