@@ -194,6 +194,13 @@ ortak dersi şu: **devre doğru çalışıyor olabilir; yanlış olan, ona ne so
 | Condition | **CWE-697** | Incorrect Comparison | Karşılaştırma = çıkarma + işarete bakma; taşma işareti yanıltır |
 | Bellek ünitesinden sonra | **CWE-416** | Use After Free | Geri verilmiş belleği kullanmaya devam etmek |
 | Saat (clock) | **CWE-1298** | Hardware Logic Contains Race Conditions | Sinyallerin farklı hızda ilerlemesi |
+| Boru hattı / spekülasyon | **CWE-208** | Observable Timing Discrepancy | Zamanlama farkının kendisi bir kanal; ölçülebilen her şey sızabilir |
+| SMT / paylaşılan birimler | **CWE-1303** | Non-Transparent Sharing of Microarchitectural Resources | Paylaşılan tahminci/önbellek, paylaşıldığı için sızdırır — özelliğin kendisi |
+| Yukarıdaki ikisi yazılınca | **CWE-203** | Observable Discrepancy | Çatı: 1300 (fiziksel) · 208 (zamanlama) · 1303 (mikromimari) aynı üst sınıfta buluşur |
+
+> 🔑 **203'ü şimdi yazmıyoruz, bilerek.** Şu an tek çocuğu var ([1300](./cwe_1300.md)) ve
+> onun sayfası zaten çatının işini görüyor. 208 ile 1303 geldiğinde 203 üç ayrı aileyi
+> birden toplayacak — o zaman gerçek bir çatı olur. Katalog müfredatın önüne geçmez.
 
 ---
 
