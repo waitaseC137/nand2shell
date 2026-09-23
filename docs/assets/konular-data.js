@@ -210,7 +210,10 @@ window.KONULAR = {
         { f: "cwe/cwe_362.md", n: "362", t: "Yarış Koşulu (sınıf)", h: "367'nin üstü · yazılım ve donanımın buluştuğu çatı" },
         { f: "cwe/cwe_1023.md", n: "1023", t: "Eksik Karşılaştırma (sınıf)", h: "839'un üstü · kontrol var ama kapsamı eksik" },
         { f: "cwe/cwe_670.md", n: "670", t: "Hatalı Akış (sınıf)", h: "480'in üstü · niyet ile kodun ayrışması" },
-        { f: "cwe/cwe_77.md", n: "77", t: "Komut Enjeksiyonu (sınıf)", h: "78'in üstü · 88 argüman · 1427 LLM istemi" }
+        { f: "cwe/cwe_77.md", n: "77", t: "Komut Enjeksiyonu (sınıf)", h: "78'in üstü · 88 argüman · 1427 LLM istemi" },
+        { f: "cwe/cwe_697.md", n: "697", t: "Hatalı Karşılaştırma (sütun)", h: "682'nin kardeşi · neyi · yeterince mi · nasıl" },
+        { f: "cwe/cwe_1242.md", n: "1242", t: "Chicken Bits", h: "belgelenen uzay ⊂ gerçek uzay · vazgeçme biti" },
+        { f: "cwe/cwe_1254.md", n: "1254", t: "Karşılaştırma Tanecikliği", h: "erken çıkış süreyi sızdırır · sabit zamanlı kıyas" }
       ]
     }
   ]

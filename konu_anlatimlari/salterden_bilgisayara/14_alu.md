@@ -466,8 +466,8 @@ girebilir. Belge bunlardan yalnız bir kısmını tarif ediyorsa, geri kalanı y
 olmaz — **tarif edilmemiş olarak var olur.** İçlerinden biri bir güvenlik
 özelliğini kapatıyorsa, ona **chicken bit** denir.
 
-MITRE bunu ayrı bir zayıflık olarak katalogluyor: **CWE-1242 — Inclusion of
-Undocumented Features or Chicken Bits**. Tipik örneği, hata ayıklama için
+MITRE bunu ayrı bir zayıflık olarak katalogluyor: **[CWE-1242](../cwe/cwe_1242.md) —
+Inclusion of Undocumented Features or Chicken Bits**. Tipik örneği, hata ayıklama için
 bırakılmış ve üretime kadar temizlenmemiş kontrol bitleri.
 
 Buradan çıkan çalışma kuralı:
@@ -479,9 +479,9 @@ saydığı durumlarla, sözcüğün izin verdiği durumları yan yana koymak ve 
 farkı denemek. Bugün NandGame'de yaptığın sayma işlemi — 32 kombinasyon, 8
 belgelenmiş satır — o işin en küçük hâli.
 
-> 📄 CWE-1242'nin kendi sayfası henüz yazılmadı; katalogda *Yolda* listesinde
-> duruyor. MITRE'deki tanımı:
-> [cwe.mitre.org/data/definitions/1242.html](https://cwe.mitre.org/data/definitions/1242.html)
+> 📄 Ayrıntısı kendi sayfasında: [CWE-1242](../cwe/cwe_1242.md) — chicken bit'in
+> ne olduğu, neden bırakıldığı, ve belgelenmemiş olmanın neden bir koruma
+> sayılmadığı.
 
 ### Sırada
 
@@ -522,7 +522,7 @@ Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 
 - 👾 **Anlam okuyanda:** [CWE-681 — Hatalı sayısal dönüşüm](../cwe/cwe_681.md) — aynı desenin iki farklı sözleşmeyle okunması
 - 👾 **Atılan sonucun izi:** [CWE-1300 — Fiziksel yan kanal](../cwe/cwe_1300.md) — hesaplanan ama kullanılmayan şeyin ölçülebilir kalması
-- 👾 **Meraklısına:** CWE-1242 — belgelenmemiş kontrol bitleri ([MITRE](https://cwe.mitre.org/data/definitions/1242.html)); sayfası Condition dersiyle birlikte gelecek
+- 👾 **Belgelenmemiş uzay:** [CWE-1242 — Chicken Bits](../cwe/cwe_1242.md) — 32 durum, 8 belgelenmiş satır: aradaki fark
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — Seçiciyi girişe taşımak; `op1`/`op0`'ın aritmetik sözleşmesi
 - [12_logic_unit.md](./12_logic_unit.md) — Emri dinleyen ilk devre; "dördü de hep çalışır"
 - [11_selector_switch.md](./11_selector_switch.md) — `select 16`'nın kendisi ve fan-out

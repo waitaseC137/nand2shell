@@ -130,7 +130,7 @@ NandGame ALU ünitesi
 | CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
 | [**CWE-682**](./cwe_682.md) | Incorrect Calculation — **sütun** | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/682.html) |
-| **CWE-697** | Incorrect Comparison — **sütun** | Condition seviyesi | 🔜 *yolda* |
+| [**CWE-697**](./cwe_697.md) | Incorrect Comparison — **sütun** | [15 · Condition](../salterden_bilgisayara/15_condition.md) | [📄](https://cwe.mitre.org/data/definitions/697.html) |
 
 Kataloğun geri kalanı bu iki sütunun etrafına diziliyor. Aşağıdaki üç kademenin
 ölçütü tek soru: **NandGame'i anlamak için ne kadar gerekli?**
@@ -200,7 +200,13 @@ bundler'la geldi. Katalog yanlış değildi — o günkü kapsamın dürüst ayn
 | [**CWE-1384**](./cwe_1384.md) | Improper Handling of Physical or Environmental Conditions — **çatı** | 01 · 02 · 04 | [📄](https://cwe.mitre.org/data/definitions/1384.html) |
 | [**CWE-704**](./cwe_704.md) | Incorrect Type Conversion or Cast — **çatı** | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/704.html) |
 | [**CWE-670**](./cwe_670.md) | Always-Incorrect Control Flow Implementation — **çatı** | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/670.html) |
-| **CWE-1242** | Inclusion of Undocumented Features or Chicken Bits | ALU seviyesi | 🔜 *yolda* |
+| [**CWE-1242**](./cwe_1242.md) | Inclusion of Undocumented Features or Chicken Bits | [14 · ALU](../salterden_bilgisayara/14_alu.md) | [📄](https://cwe.mitre.org/data/definitions/1242.html) |
+| [**CWE-1254**](./cwe_1254.md) | Incorrect Comparison Logic Granularity | [15 · Condition](../salterden_bilgisayara/15_condition.md) | [📄](https://cwe.mitre.org/data/definitions/1254.html) |
+
+**1254 bir ilk:** kataloğundaki tek **çift üstlü** CWE. MITRE onu hem
+[697](./cwe_697.md)'nin (karşılaştırma yanlış biçimde kuruldu) hem de **208**'in
+(süre farkı dışarıdan gözlenebiliyor) altına koymuş. Tam kavşakta durduğu için,
+208 yazıldığında bu sayfa iki taraftan da erişilebilir olacak.
 
 **1242 neden bu kademede ama önemli?** ALU seviyesinin kontrol sözcüğü 5 bit,
 yani **32 durum** — ama belge 8 işlem tanımlıyor. Aradaki fark NandGame'de
@@ -217,9 +223,6 @@ yaptığı iş tam olarak budur.
 
 | Nerede | CWE | Resmî adı |
 |---|---|---|
-| ALU seviyesi | **1242** | Inclusion of Undocumented Features or Chicken Bits |
-| Condition seviyesi | **697** | Incorrect Comparison (sütun) |
-| Condition seviyesi | **1254** | Incorrect Comparison Logic Granularity |
 | Bellek ünitesi | **416** | Use After Free |
 | Saat (clock) | **1298** | Hardware Logic Contains Race Conditions |
 | Boru hattı / spekülasyon | **208** | Observable Timing Discrepancy |
@@ -227,9 +230,11 @@ yaptığı iş tam olarak budur.
 | Yukarıdaki ikisinden sonra | **203** | Observable Discrepancy (çatı) |
 | Microcode / ayrıcalıklı kontroller | **1256** | Improper Restriction of Software Interfaces to Hardware Features |
 
-> 🔑 **203'ü ve 697'yi şimdi yazmıyoruz, bilerek.** Dersi olmayan konunun CWE'si
-> olmaz. 697 Condition seviyesiyle, 203 ise 208 ile 1303 yazıldığında anlamlı hâle
-> gelir.
+> 🔑 **203'ü şimdi yazmıyoruz, bilerek.** Dersi olmayan konunun CWE'si olmaz.
+> 203, ancak 208 ile 1303 yazıldığında anlamlı hâle gelir — iki çocuğu birden
+> olmadan çatı kurmak, haritayı müfredatın önüne geçirmek olur.
+>
+> 697 ve 1242 bu listede duruyordu; dersleri yazıldığı için ağaca taşındılar.
 
 ---
 

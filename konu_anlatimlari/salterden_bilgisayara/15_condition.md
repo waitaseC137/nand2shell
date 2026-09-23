@@ -652,6 +652,8 @@ bir şeyi *hatırlamasını* sağlamak.
 
 ## 🔗 İlgili Konular
 
+- 👾 **Bu dersin sütunu:** [CWE-697 — Incorrect Comparison](../cwe/cwe_697.md) — karşılaştırmanın kendi üst kademesi; 682'nin kardeşi
+- 👾 **Atomik olanın zıttı:** [CWE-1254 — Karşılaştırma tanecikliği](../cwe/cwe_1254.md) — `is zero` on altı bite aynı anda bakar; parça parça bakan devre süre sızdırır
 - 👾 **Sessiz genişletme:** [CWE-194 — İşaret uzatması](../cwe/cwe_194.md) ve [CWE-197 — Kırpma](../cwe/cwe_197.md) — 1 bitlik bayrağı 16 bitlik bacağa bağladığında olan şey
 - 👾 **Eksik karşılaştırma:** [CWE-1023](../cwe/cwe_1023.md) — bayrakların yarısına bakmak; OF'suz işaretli karşılaştırma
 - 👾 **Yanlış işleç:** [CWE-480](../cwe/cwe_480.md) — De Morgan'ı yarım uygulamak, `&&` ile `||` karıştırmak
