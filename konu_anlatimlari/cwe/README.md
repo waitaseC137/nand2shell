@@ -223,6 +223,7 @@ yaptığı iş tam olarak budur.
 
 | Nerede | CWE | Resmî adı |
 |---|---|---|
+| Bellek ünitesi · adresleme | **125** | Out-of-bounds Read |
 | Bellek ünitesi | **416** | Use After Free |
 | Saat (clock) | **1298** | Hardware Logic Contains Race Conditions |
 | Boru hattı / spekülasyon | **208** | Observable Timing Discrepancy |
@@ -230,6 +231,11 @@ yaptığı iş tam olarak budur.
 | Yukarıdaki ikisinden sonra | **203** | Observable Discrepancy (çatı) |
 | Microcode / ayrıcalıklı kontroller | **1256** | Improper Restriction of Software Interfaces to Hardware Features |
 
+> 📌 **Buradaki "nerede" sütunu bir tahmindir, söz değildir.** Ders yazıldıkça
+> keskinleşir. `125` için bilinen tek kesin şart şu: sınır dışına okumak için
+> önce bir **adres** gerekir — *"kaçıncı gözü okuyayım?"* sorusu ortaya çıkmadan
+> o zayıflık doğamaz. Hangi seviyede doğacağını o seviyeye gelince yazarız.
+>
 > 🔑 **203'ü şimdi yazmıyoruz, bilerek.** Dersi olmayan konunun CWE'si olmaz.
 > 203, ancak 208 ile 1303 yazıldığında anlamlı hâle gelir — iki çocuğu birden
 > olmadan çatı kurmak, haritayı müfredatın önüne geçirmek olur.
