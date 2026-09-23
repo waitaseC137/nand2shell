@@ -202,6 +202,7 @@ bundler'la geldi. Katalog yanlış değildi — o günkü kapsamın dürüst ayn
 | [**CWE-670**](./cwe_670.md) | Always-Incorrect Control Flow Implementation — **çatı** | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/670.html) |
 | [**CWE-1242**](./cwe_1242.md) | Inclusion of Undocumented Features or Chicken Bits | [14 · ALU](../salterden_bilgisayara/14_alu.md) | [📄](https://cwe.mitre.org/data/definitions/1242.html) |
 | [**CWE-1254**](./cwe_1254.md) | Incorrect Comparison Logic Granularity | [15 · Condition](../salterden_bilgisayara/15_condition.md) | [📄](https://cwe.mitre.org/data/definitions/1254.html) |
+| [**CWE-119**](./cwe_119.md) | Improper Restriction of Operations within the Bounds of a Memory Buffer — **çatı** | [08 · Increment](../salterden_bilgisayara/08_increment.md) | [📄](https://cwe.mitre.org/data/definitions/119.html) |
 
 **1254 bir ilk:** kataloğundaki tek **çift üstlü** CWE. MITRE onu hem
 [697](./cwe_697.md)'nin (karşılaştırma yanlış biçimde kuruldu) hem de **208**'in

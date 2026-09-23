@@ -213,7 +213,8 @@ window.KONULAR = {
         { f: "cwe/cwe_77.md", n: "77", t: "Komut Enjeksiyonu (sınıf)", h: "78'in üstü · 88 argüman · 1427 LLM istemi" },
         { f: "cwe/cwe_697.md", n: "697", t: "Hatalı Karşılaştırma (sütun)", h: "682'nin kardeşi · neyi · yeterince mi · nasıl" },
         { f: "cwe/cwe_1242.md", n: "1242", t: "Chicken Bits", h: "belgelenen uzay ⊂ gerçek uzay · vazgeçme biti" },
-        { f: "cwe/cwe_1254.md", n: "1254", t: "Karşılaştırma Tanecikliği", h: "erken çıkış süreyi sızdırır · sabit zamanlı kıyas" }
+        { f: "cwe/cwe_1254.md", n: "1254", t: "Karşılaştırma Tanecikliği", h: "erken çıkış süreyi sızdırır · sabit zamanlı kıyas" },
+        { f: "cwe/cwe_119.md", n: "119", t: "Tampon Sınırları (sınıf)", h: "787'nin üstü · dört köşe: oku/yaz × önce/sonra" }
       ]
     }
   ]
