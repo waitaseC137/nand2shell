@@ -408,6 +408,6 @@ promised in `10`.
 ---
 
 **Previous topic:** [11_selector_switch.md](./11_selector_switch.md)
-**Next topic:** *(on the way — Arithmetic Unit)*
+**Next topic:** [13_arithmetic_unit.md](./13_arithmetic_unit.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

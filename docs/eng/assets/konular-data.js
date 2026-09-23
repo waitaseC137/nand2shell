@@ -46,7 +46,10 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/09_subtraction.md",          n: "09",   t: "Subtraction",             h: "Two's complement; making an adder subtract" },
         { f: "salterden_bilgisayara/10_bayraklar.md",            n: "10",   t: "Flags (ZF/SF)",           h: "Zero and sign; how a machine says 'if'" },
         { f: "salterden_bilgisayara/11_selector_switch.md",     n: "11",   t: "Selector & Switch",       h: "The control wire · AND as a valve · the multiplexer" },
-        { f: "salterden_bilgisayara/12_logic_unit.md",          n: "12",   t: "Logic Unit",              h: "The order is a number · all computed, one chosen" }
+        { f: "salterden_bilgisayara/12_logic_unit.md",          n: "12",   t: "Logic Unit",              h: "The order is a number · all computed, one chosen" },
+        { f: "salterden_bilgisayara/13_arithmetic_unit.md",     n: "13",   t: "Arithmetic Unit",         h: "Moving the selector to the input · manufacturing a 16-bit constant" },
+        { f: "salterden_bilgisayara/14_alu.md",                 n: "14",   t: "ALU",                     h: "The control word · changing the material, not the operation" },
+        { f: "salterden_bilgisayara/15_condition.md",           n: "15",   t: "Condition",               h: "AND as a valve · trichotomy · N XOR OF" }
       ]
     },
     {
