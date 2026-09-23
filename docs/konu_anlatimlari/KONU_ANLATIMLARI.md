@@ -97,6 +97,8 @@
 | [11_selector_switch.md](./salterden_bilgisayara/11_selector_switch.md) | Selector & Switch; veri/kontrol teli ayrımı, multiplexer |
 | [12_logic_unit.md](./salterden_bilgisayara/12_logic_unit.md) | Logic Unit; emir bir sayıdır, dört işlemden birini seçmek |
 | [13_arithmetic_unit.md](./salterden_bilgisayara/13_arithmetic_unit.md) | Arithmetic Unit; seçiciyi girişe taşımak, sabiti imal etmek |
+| [14_alu.md](./salterden_bilgisayara/14_alu.md) | ALU; kontrol sözcüğü, bayrakların operandı değiştirmesi |
+| [15_condition.md](./salterden_bilgisayara/15_condition.md) | Condition; vana olarak AND, üçlem ve OF borcunun kapanması |
 
 ---
 
