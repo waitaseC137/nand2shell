@@ -109,8 +109,8 @@ bellek boyutu olarak kullanıldığı an. İki kutu modeliyle ayrıntısı →
 
 ## NandGame Ağacı
 
-Bu harita **NandGame'in başından ALU ünitesinin sonuna kadar** olan konuları
-kapsıyor. Kural basit: **işlenmemiş konunun CWE'si burada olmaz.** Katalog
+Bu harita **NandGame'in başından Memory ünitesinin ilk seviyesine (SR Latch)
+kadar** olan konuları kapsıyor. Kural basit: **işlenmemiş konunun CWE'si burada olmaz.** Katalog
 müfredatın aynasıdır, önüne geçmez.
 
 ### Ünitenin İki Yarısı
@@ -148,9 +148,15 @@ Kataloğun geri kalanı bu iki sütunun etrafına diziliyor. Aşağıdaki üç k
 | [**CWE-193**](./cwe_193.md) | Off-by-one Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/193.html) |
 | [**CWE-681**](./cwe_681.md) | Incorrect Conversion between Numeric Types | [04 · Teller Sayı Olunca](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/681.html) |
 | [**CWE-787**](./cwe_787.md) | Out-of-bounds Write | [08 · Increment](../salterden_bilgisayara/08_increment.md#-güvenlik-köprüsü) | [📄](https://cwe.mitre.org/data/definitions/787.html) |
+| [**CWE-1245**](./cwe_1245.md) | Improper Finite State Machines (FSMs) in Hardware Logic | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#kullanılmayan-satır) | [📄](https://cwe.mitre.org/data/definitions/1245.html) |
 
 **787 neden burada?** Taşmanın kendisi bir şey bozmaz. Sonuç bu olmasaydı 190 bir
 merak konusu olarak kalırdı — Top-25'in birinci sırasında olmasının sebebi bu.
+
+**1245 neden burada?** Memory ünitesinin ilk CWE'si. SR Latch var olabilecek en
+küçük **durum makinesi**, ve tablosundaki `0 0 → kullanılmıyor` satırı onun
+tanımlanmamış geçişi. Bir sonraki seviye olan D Latch'in neden var olduğunu
+anlamak, bu zayıflığı anlamaktan geçiyor.
 
 ---
 
@@ -168,6 +174,7 @@ merak konusu olarak kalırdı — Top-25'in birinci sırasında olmasının sebe
 | [**CWE-194**](./cwe_194.md) | Unexpected Sign Extension | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | [📄](https://cwe.mitre.org/data/definitions/194.html) |
 | [**CWE-197**](./cwe_197.md) | Numeric Truncation Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | [📄](https://cwe.mitre.org/data/definitions/197.html) |
 | [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/480.html) |
+| [**CWE-1271**](./cwe_1271.md) | Uninitialized Value on Reset for Registers Holding Security Settings | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#kimse-seçmeden-uyanmak) | [📄](https://cwe.mitre.org/data/definitions/1271.html) |
 
 **Üçü bir zincir.** 09'un Güvenlik Köprüsü'ndeki örnekte aynı sayı üç kez farklı
 sözleşmeyle okunuyor: değişkene girerken [196](./cwe_196.md), kontrolde
@@ -226,7 +233,7 @@ yaptığı iş tam olarak budur.
 |---|---|---|
 | Bellek ünitesi · adresleme | **125** | Out-of-bounds Read |
 | Bellek ünitesi | **416** | Use After Free |
-| Saat (clock) | **1298** | Hardware Logic Contains Race Conditions |
+| Saat (clock) · tohumu [16](../salterden_bilgisayara/16_sr_latch.md#kullanılmayan-satır)'da | **1298** | Hardware Logic Contains Race Conditions |
 | Boru hattı / spekülasyon | **208** | Observable Timing Discrepancy |
 | SMT / paylaşılan birimler | **1303** | Non-Transparent Sharing of Microarchitectural Resources |
 | Yukarıdaki ikisinden sonra | **203** | Observable Discrepancy (çatı) |

@@ -474,7 +474,14 @@ NandGame'de bunu kendin görebilirsin. `0 0`'dan `1 1`'e geçmek için iki anaht
 > yapabildikleri, tarif edilenlerle aynı şey değildir.** Kullanılmaması gereken
 > bir durumun güvenli olması, onu gerçekten kimsenin kullanmamasına bağlı.
 >
-> 👾 Donanımda sinyallerin yarışmasından doğan zayıflığın adı **CWE-1298** —
+> 👾 Bu satırın zayıflık kataloğundaki adı
+> [CWE-1245](../cwe/cwe_1245.md) — *Improper Finite State Machines (FSMs) in
+> Hardware Logic*. Kurduğun latch, var olabilecek en küçük **durum makinesi**, ve
+> `0 0` satırı onun tanımlanmamış geçişi. MITRE'nin tarifi bu satırı birebir
+> anlatıyor: *"undefined states (left as don't cares) … drive the system into an
+> unstable state."* Tasarımcının umursamadığı satırı saldırgan umursar.
+>
+> Donanımda sinyallerin yarışmasından doğan zayıflığın adı **CWE-1298** —
 > *Hardware Logic Contains Race Conditions*. [CWE-362](../cwe/cwe_362.md)
 > sayfasında saat ünitesinin yanında "yolda" diye bekliyordu. İlk tohumu burada.
 
@@ -498,10 +505,11 @@ gibi bir kilidi.
 olması gereken kapı **açık** başlar.
 
 > 👾 Bunun zayıflık kataloğundaki adı
-> [CWE-1271](https://cwe.mitre.org/data/definitions/1271.html) — *Uninitialized
-> Value on Reset for Registers Holding Security Settings*. Çözüm basit ama
-> unutulması kolay: güvenlikle ilgili her biti açılışta **bilinen** bir değere
-> zorla. Tanımsız bırakma.
+> [CWE-1271](../cwe/cwe_1271.md) — *Uninitialized Value on Reset for Registers
+> Holding Security Settings*. MITRE'nin örneğinde saldırgan cihazı **tekrar tekrar
+> resetliyor** ve kilidin açık uyandığı bir açılışa denk gelmeyi bekliyor. Çözüm
+> basit ama unutulması kolay: güvenlikle ilgili her biti açılışta **bilinen** bir
+> değere zorla. Tanımsız bırakma.
 >
 > Yazılımda karşılığı çok daha tanıdık: ilk değer verilmemiş bir değişkeni
 > kullanmak. Bellekte ne kaldıysa onu okursun.
@@ -542,6 +550,7 @@ kötü satır da böylece hiç oluşamaz hâle geliyor.
 ☐ 👾 Yazılımda yarış koşulu CWE-362, TOCTOU CWE-367. Bu devre onların donanımdaki atası.
 ☐ "Kullanılmıyor" satırı (0-0) yine bir şey yapar: iki çıkış da 1, kural bozuk.
 ☐ 0-0'dan 1-1'e çıkarken sonucu iki sinyalin YARIŞI belirler. NandGame'de anahtarlara basma sıran belirler.
+☐ 👾 Latch en küçük DURUM MAKİNESİ; 0-0 onun tanımsız geçişi: CWE-1245. Tasarımcının umursamadığı satırı saldırgan umursar.
 ☐ 👾 Donanımda sinyal yarışı: CWE-1298. Belge "kullanılmıyor" der, devre yine bir şey yapar.
 ☐ Açılışta latch tanımsız: iki kararlı durum eşit, hangisine düşeceğini HİÇBİR ŞEY seçmez.
 ☐ 👾 O bit bir güvenlik kilidiyse bazı açılışlarda kapı açık başlar: CWE-1271. Güvenlik bitini açılışta bilinen değere zorla.
@@ -553,7 +562,8 @@ kötü satır da böylece hiç oluşamaz hâle geliyor.
 
 - 👾 **Yarışın kendisi:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — aynı kaynağa senkronize olmadan uzanan iki iş; donanım çocuğu CWE-1298 burada tohumlandı
 - 👾 **Yazılımdaki torun:** [CWE-367 — TOCTOU](../cwe/cwe_367.md) — kontrol ile kullanım arasındaki aralık
-- 👾 **Tanımsız uyanış:** [CWE-1271](https://cwe.mitre.org/data/definitions/1271.html) — açılışta değeri belirlenmemiş güvenlik biti
+- 👾 **Bu dersin ana CWE'si:** [CWE-1245 — Hatalı durum makinesi](../cwe/cwe_1245.md) — "kullanılmıyor" diye bırakılan satır; D Latch'in neden var olduğu
+- 👾 **Tanımsız uyanış:** [CWE-1271](../cwe/cwe_1271.md) — açılışta değeri belirlenmemiş güvenlik biti; tekrar tekrar reset saldırısı
 - [15_condition.md](./15_condition.md) — Bir devrenin yapabildikleri ile tarif edilenler arasındaki fark
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: saklanacak yeri olmayan sayaç
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand`; burada aynı sonuca bir ayağı `1`'e sabitleyerek varılıyor
