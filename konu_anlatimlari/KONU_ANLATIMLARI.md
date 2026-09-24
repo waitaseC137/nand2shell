@@ -99,6 +99,7 @@
 | [13_arithmetic_unit.md](./salterden_bilgisayara/13_arithmetic_unit.md) | Arithmetic Unit; seçiciyi girişe taşımak, sabiti imal etmek |
 | [14_alu.md](./salterden_bilgisayara/14_alu.md) | ALU; kontrol sözcüğü, bayrakların operandı değiştirmesi |
 | [15_condition.md](./salterden_bilgisayara/15_condition.md) | Condition; vana olarak AND, üçlem ve OF borcunun kapanması |
+| [16_sr_latch.md](./salterden_bilgisayara/16_sr_latch.md) | SR Latch; geri besleme, ters çevirme sayısı: hafıza mı salınım mı |
 
 ---
 

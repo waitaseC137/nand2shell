@@ -671,4 +671,4 @@ bir şeyi *hatırlamasını* sağlamak.
 ---
 
 **Önceki konu:** [14_alu.md](./14_alu.md)
-**Sonraki konu:** *(yolda — SR Latch)*
+**Sonraki konu:** [16_sr_latch.md](./16_sr_latch.md)

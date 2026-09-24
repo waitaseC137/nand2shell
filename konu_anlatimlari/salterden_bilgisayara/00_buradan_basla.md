@@ -176,10 +176,18 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 |:---:|---|---|---|
 | 12 | [12_logic_unit](./12_logic_unit.md) | Emir bir sayıdır; hepsi hesaplanır, biri seçilir | Logic Unit |
 | 13 | [13_arithmetic_unit](./13_arithmetic_unit.md) | Seçiciyi girişe taşımak; 16 bitlik sabiti imal etmek | Arithmetic Unit |
+| 14 | [14_alu](./14_alu.md) | Kontrol sözcüğü; işlemi değil malzemeyi değiştirmek | ALU |
+| 15 | [15_condition](./15_condition.md) | Vana olarak AND; üçlem; N XOR OF | Condition |
+
+### 💾 Ünite 5 — Hafıza
+
+| # | Dosya | Ne öğretir | NandGame seviyesi |
+|:---:|---|---|---|
+| 16 | [16_sr_latch](./16_sr_latch.md) | Geri besleme; çift ters hafıza, tek ters salınım | SR Latch |
 
 ### 🔜 Yolda (oyun ilerledikçe yazılacak)
 
-Hesap çekirdeğinin geri kalanı (ALU, Condition) → hafıza (latch, register, RAM) → saat ve kontrol birimi
+Hafızanın geri kalanı (D Latch, flip-flop, register, sayaç, RAM) → saat ve kontrol birimi
 → **komut işleyen işlemci.**
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
