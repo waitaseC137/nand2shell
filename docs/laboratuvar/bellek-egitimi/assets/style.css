@@ -3,46 +3,48 @@
    ../../assets/theme.js localStorage'daki 'll_theme' anahtarını okuyup <html>'e
    data-theme="dark" koyar. Buradaki :root açık temadır (sitenin varsayılanı).
 
-   Koyuda anlamı parlaklık taşır (zemin devre kartı, sinyal ışıklı); açıkta
+   Koyuda anlamı parlaklık taşır (zemin karanlık, sinyal ışıklı); açıkta
    kağıt parlamaz, aynı ayrımı mürekkep yoğunluğu taşır. Bu yüzden
    --accent-bright açık temada --accent'ten daha KOYUdur.
 
-   Kontrast ölçülerek seçildi, en kötü zemin --panel-2:
+   Renkler sitenin kum/haki (NieR) paletinden: zemin ve metin styles.css ile
+   ve çekirdek ip belleği laboratuvarıyla aynı.
+   Kontrast ölçülerek seçildi, en kötü zemin (açıkta --panel-2, koyuda --panel):
    text-1 ≥ 7 · text-2 ≥ 4.5 · text-3 ve vurgu renkleri ≥ 4.                 */
 :root {
-  --bg: #c9cfbf;
-  --panel: #c1c8b5;
-  --panel-2: #b9c1ac;
-  --grid-line: #a3ac95;
-  --text-1: #172016;
-  --text-2: #323b2b;
-  --text-3: #3d4535;
+  --bg: #c4bda3;
+  --panel: #bcb499;
+  --panel-2: #b4ac8f;
+  --grid-line: #a49c81;
+  --text-1: #23221b;
+  --text-2: #434133;
+  --text-3: #4b4838;
   --accent: #5e4413;
   --accent-bright: #4a3309;
-  --signal: #1d4a2b;
-  --pass: #1f5429;
-  --fail: #8a2a1f;
-  --trace: rgba(29, 74, 43, 0.20);
-  --btn-ink: #eef2e6;
+  --signal: #33462e;
+  --pass: #1b4a24;
+  --fail: #7c261b;
+  --trace: rgba(51, 70, 46, 0.20);
+  --btn-ink: #f4eed9;
   --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
   --sans: 'IBM Plex Sans', -apple-system, sans-serif;
 }
 
 html[data-theme="dark"] {
-  --bg: #0f1712;
-  --panel: #16211a;
-  --panel-2: #132017;
-  --grid-line: #22342a;
-  --text-1: #d2dcc9;
-  --text-2: #a0ae96;
-  --text-3: #8a9a80;
+  --bg: #1e1d16;
+  --panel: #2b291f;
+  --panel-2: #24221a;
+  --grid-line: #332f23;
+  --text-1: #cfc8ad;
+  --text-2: #9d9678;
+  --text-3: #8f8970;
   --accent: #b28b3c;
   --accent-bright: #d9ae52;
-  --signal: #8fd19e;
-  --pass: #6fc27f;
-  --fail: #e0705f;
-  --trace: rgba(143, 209, 158, 0.16);
-  --btn-ink: #0f1712;
+  --signal: #b9c48c;
+  --pass: #a3bd72;
+  --fail: #d26a52;
+  --trace: rgba(183, 176, 131, 0.16);
+  --btn-ink: #1e1d16;
 }
 
 * { box-sizing: border-box; }
@@ -55,7 +57,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Devre kartı ızgarası: çekirdek ip belleğindeki milimetrik kağıdın kardeşi. */
+/* Izgara: çekirdek ip belleğindeki milimetrik kağıdın kardeşi. */
 body {
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
