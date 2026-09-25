@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ders — Bellek Eğitimi</title>
+<meta name="description" content="Bit penceresi, göz diyagramı, PSP ve bir dizüstünün bellek eğitimi kuralını dışarıdan çözen saat deneyi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script src="../../assets/theme.js"></script>
+</head>
+<body>
+<div class="scene">
+
+  <header>
+    <div class="hdr-top">
+      <p class="eyebrow"><a class="geri" href="../../laboratuvar.html">← laboratuvar</a> · bellek eğitimi · ders</p>
+      <button class="theme-btn" id="themeBtn" title="Tema: açık / karanlık"><span class="sw"></span><span class="lbl">açık</span></button>
+    </div>
+    <h1>Bir Dakikalık Kara Ekran</h1>
+    <p>Önce evrensel kısım: bellek neden eğitilir, eğitim neyi arar, neden her seferinde biraz farklı sonuç verir. Sonra vaka: bir dizüstünün firmware'i "ne zaman baştan eğiteyim" sorusuna ne cevap veriyor, ve bu cevap kasa açmadan, yalnız saati oynatarak nasıl bulundu.</p>
+    <nav class="tabs">
+      <a href="index.html">hikâye</a>
+      <a href="ders.html" class="on">ders</a>
+      <a href="tezgah.html">tezgâh</a>
+    </nav>
+  </header>
+
+  <!-- ================= 1 ================= -->
+  <section>
+    <p class="section-label">1 · Bir bit ne kadar yaşar</p>
+    <div class="prose">
+      <p>Vakadaki makinenin belleği saniyede 5200 milyon kez veri aktarıyor. Tek bir bitin telde kalma süresi bunun tersi: 1 / 5 200 000 000 saniye, yani <b>yaklaşık 192 pikosaniye</b>.</p>
+      <p>Bunu bir mesafeye çevirelim. Işık 192 pikosaniyede 6 santimetre kadar gider. Bir devre kartının üstündeki sinyal ışıktan kabaca iki kat yavaştır, yani bir bit kartta <b>3 santimetre kadar</b> yol alırken ömrünü doldurur.</p>
+      <p>Bellek modülüyle işlemci arasında onlarca paralel hat var. Hepsi aynı anda yola çıkan bitleri taşıyor, ama hiçbiri tam aynı uzunlukta değil. Birkaç milimetrelik fark, pencerenin azımsanmayacak bir kısmını yer. Üstüne her çip biraz farklı hızda, her transistör sıcaklıkla biraz yavaşlıyor.</p>
+      <p>Soru şu: alıcı, her hat için biti <b>tam ne zaman</b> okumalı?</p>
+    </div>
+  </section>
+
+  <!-- ================= 2 ================= -->
+  <section>
+    <p class="section-label">2 · Göz</p>
+    <div class="prose">
+      <p>Tek bir hattan geçen binlerce biti üst üste çizersen şöyle bir resim çıkar: bitler 0'dan 1'e, 1'den 0'a geçerken çizgiler iki kenarda çaprazlanır, ortada ise boş bir alan kalır. O boşluk, bitin "kesin" olduğu bölge. Şekli bir göze benzediği için adı <b>göz diyagramı</b> (İngilizce <i>eye diagram</i>).</p>
+      <p>Alıcının iki ayarı var. Biri <b>ne zaman</b> okuduğu: saat kenarına eklenen küçük gecikme adımları, adı <b>tap</b>. Öbürü <b>hangi eşikle</b> okuduğu: "bu gerilimin üstü 1" dediği çizgi, adı <b>Vref</b> (İngilizce <i>reference voltage</i> — "karşılaştırma gerilimi"). Doğru ayar gözün tam ortası: iki kenara da, üste de alta da en uzak nokta.</p>
+      <p>Eğitim bu ortayı bulmaktır. Aşağıdaki tezgâhta dene: <b>tara ve eğit</b>e bas. Her (tap, Vref) noktası kısa bir denemeden geçer, hatasız okunanlar boyanır, göz ortaya çıkar ve eğitim ortasına bir işaret koyar. Sonra <b>yeniden eğit</b>e birkaç kez bas ve işaretin nereye düştüğüne bak.</p>
+    </div>
+    <div data-goz="mini" style="margin-top:12px"></div>
+    <p class="hint">Bu bir <b>model</b>, ölçüm değil: bir veri hattının basitleştirilmiş taklidi. Gürültü ve sıcaklık katsayıları temsilî. Yön ve biçim gerçek davranışla aynı.</p>
+    <div class="prose" style="margin-top:12px">
+      <p>İşaret her seferinde bir iki adım oynuyor. Hat aynı, koşul aynı, ama sonuç farklı. Çünkü tarama bir <b>ölçüm</b>, ve her ölçüm gibi gürültülü: kenardaki bir nokta bir taramada şans eseri geçer, öbüründe kalır. Merkez de ona göre kayar.</p>
+      <p>Bu, vakada gerçek eğitimlerde de görüldü. Aynı bellek yedi kez eğitildiğinde ayarların ezici çoğunluğu her seferinde aynı çıktı, oynayanlar ise bir iki adım oynadı. Rakamlar 8. bölümde.</p>
+    </div>
+  </section>
+
+  <!-- ================= 3 ================= -->
+  <section>
+    <p class="section-label">3 · Kim ölçüyor</p>
+    <div class="prose">
+      <p>İşin tuhaf yanı: bu ölçüm yapılırken bildiğin işlemci, yani programları çalıştıran x86 çekirdekleri, <b>daha uyanmamış</b> oluyor. Belleği eğitilmemiş bir işlemci program çalıştıramaz; programı koyacak güvenilir bir yeri yok.</p>
+      <p>AMD işlemcilerde eğitimi, yonganın içindeki ayrı ve küçük bir çekirdek yönetiyor. Adı <b>PSP</b> (İngilizce <i>Platform Security Processor</i>). x86 değil, bir ARM çekirdeği. Güç gelince ilk o uyanır, BIOS çipinden kendi yazılımını okur, imzasını denetler, belleği eğitir ve ancak ondan sonra x86 çekirdeklerini serbest bırakır.</p>
+      <p>Bellek hatlarını fiilen tarayan şey ise bellek denetleyicisinin fiziksel katmanındaki bir başka küçük işlemci. Yani tek bir yongada, sen hiç görmeden, birkaç ayrı işlemci sırayla çalışıyor.</p>
+    </div>
+    <details class="merak">
+      <summary>açılış zinciri, güç düğmesinden ilk x86 talimatına</summary>
+      <p>Kabaca sıra şöyle (AMD platformları için açık kaynak belgelerle uyumlu, ayrıntı nesilden nesile değişir):</p>
+      <ol class="chain">
+        <li>Güç gelir; <b>PSP</b> kendi silikonuna gömülü, değiştirilemeyen küçük ROM'dan çalışmaya başlar.</li>
+        <li>ROM, BIOS çipinde PSP'nin yazılım dizinini bulur. Her parçanın imzası AMD'nin anahtarıyla denetlenir; anahtarın özeti işlemcinin içine kalıcı olarak yazılmıştır.</li>
+        <li>PSP'nin kendi önyükleyicisi ve küçük işletim sistemi çalışır.</li>
+        <li>Bellek eğitimini yöneten kod ve DDR5 fiziksel katmanının eğitim yazılımı yüklenir. <b>Eğitim burada olur</b> ya da kayıttan geri yüklenir.</li>
+        <li>Güç yönetimi işlemcisi gibi diğer iç işlemcilerin yazılımları da bu aşamalarda yüklenir; hangisinin eğitimden önce, hangisinin sonra geldiği nesle göre değişir.</li>
+        <li>PSP, BIOS'un ilk bölümünü artık çalışan belleğe yerleştirir ve x86 çekirdeklerini serbest bırakır. <b>x86'nın ilk talimatı</b> ancak şimdi çalışır.</li>
+      </ol>
+      <p>Yani kara ekranın sürdüğü o bir dakikada ekranı çizecek olan x86 henüz hiç çalışmamış oluyor. Ekran bu yüzden kara.</p>
+    </details>
+  </section>
+
+  <!-- ================= 4 ================= -->
+  <section>
+    <p class="section-label">4 · Kayıt ve güven</p>
+    <div class="prose">
+      <p>Tam bir eğitim onlarca saniye sürüyor, çünkü her hat için yüzlerce (tap, Vref) noktası denenmeli. Her açılışta bunu yapmak kimsenin istemeyeceği bir şey. Bu yüzden eğitimin sonucu, hat başına seçilmiş ayarlardan oluşan bir tablo, BIOS çipine <b>kaydedilir</b>. Sonraki açılışlar ölçmez, tabloyu yükler. Vakadaki makinede fark: tam eğitimle yaklaşık <b>57 saniye</b>, kayıttan yaklaşık <b>7 saniye</b> firmware süresi.</p>
+      <p>Ama kayıt bir fotoğraf: çekildiği anın koşullarını gösterir. RAM değiştirilmişse, işlemci başkasıysa, sıcaklık çok farklıysa, yazılım güncellendiyse, o fotoğraf artık bugünü göstermeyebilir. Bayat bir ayarla açılmak rastgele bellek hataları demek.</p>
+      <p>Firmware her açılışta bir karar veriyor: <b>kayda güveneyim mi, baştan mı ölçeyim?</b> Hızla güvenlik arasında bir denge. Bu kararın kuralı ise genellikle hiçbir yerde yazmıyor.</p>
+    </div>
+    <p class="hint">Bu kararı kendin vermeyi denemek istersen: tezgâhtaki <a href="tezgah.html#politika">politika oyunu</a>. Sekiz olay kartı, her birinde "güven mi, eğit mi".</p>
+  </section>
+
+  <!-- ================= 5 ================= -->
+  <section>
+    <p class="section-label">5 · Vaka: kaydın içi</p>
+    <div class="prose">
+      <p>Vakadaki makinede bir gün açılış iki kez üst üste bir dakika sürdü, sonra normale döndü. Sebebini bulmak için kaydın kendisine bakıldı. Makinenin firmware'i, kendi üzerinde ve salt okunarak incelendi; hiçbir şey yazılmadı, değiştirilmedi. (Bu sayfa inceleme yöntemini anlatmıyor, yalnız bulunanları.)</p>
+      <p>AMD bu kayda <b>APOB</b> diyor (İngilizce <i>AGESA PSP Output Buffer</i> — "PSP'nin çıktı tamponu"). Eğitimden sonra PSP bu tamponu belleğe yazar, bir kopyasını da BIOS çipinde saklar. Açılışta geri yüklenen şey o kopya.</p>
+      <p>Tamponun yapısı AMD'nin açık kaynak başlatma projesi <b>openSIL</b>'in başlık dosyalarında tanımlı. Vakadaki kopya bu tanımlara birebir oturdu: <code>APOB</code> imzası, 62 KB, 25 giriş. Her giriş bir grup ve tür numarası taşıyor: bellek, çekirdekler, genel ayarlar, olay günlüğü…</p>
+    </div>
+    <details class="merak">
+      <summary>her girişin bir imzası var</summary>
+      <p>openSIL tanımına göre her girişin başlığında 32 baytlık bir <b>HMAC</b> var: yalnız anahtarı bilenin üretebileceği bir özet. PSP, bir sonraki açılışta kaydın kendi yazdığı kayıt olduğunu buradan denetleyebilir. Vakada da içeriği değişen her girişin HMAC'i değişti, içeriği aynı kalanların aynı kaldı.</p>
+      <p>Yani kayıt okunabiliyor, ama anahtarı bilmeyen birinin yazdığı <b>sahte bir kaydın kabul edilmemesi</b> amaçlanıyor: imza okumayı değil, sahteciliği engellemek için.</p>
+    </details>
+    <div class="prose" style="margin-top:12px">
+      <h3>İlk kanıt: bellek modülünün kimliği</h3>
+      <p>Bellek modülünün üstünde, kimliğini ve hız değerlerini taşıyan küçük bir bilgi çipi var: <b>SPD</b> (İngilizce <i>Serial Presence Detect</i>). Linux bu çipi <code>spd5118</code> sürücüsüyle okuyabiliyor: DDR5'te 1024 bayt.</p>
+      <p>Kayıttaki "DIMM SPD verisi" girişi ile modülün kendi çipinden okunan 1024 bayt karşılaştırıldı: <b>1024 baytın 1024'ü aynı.</b> x86 daha uyanmadan PSP modülün kimliğini okumuş ve kaydına koymuş. Tanımların doğru okunduğunun da ilk kanıtı bu oldu.</p>
+      <p>Bir ayrıntı: modül 5600 MT/s için yapılmış, ama makine onu <b>5200</b>'de çalıştırıyor. Hızı modül değil, eğitimi yapan platform belirliyor.</p>
+      <h3>Kayıttaki tarih</h3>
+      <p>"Açılış bilgisi" girişinde AMD'nin tanımında adı <code>LastPmuTrainTime</code> olan bir alan var: son eğitimin zamanı. Değeri <code>0x00260924</code>. Onaltılık okuyunca anlamsız bir sayı, ama iki haneli gruplar halinde okununca: <b>26 · 09 · 24</b>, yani 24 Eylül 2026. Kayıt alındığı gün.</p>
+      <p>Firmware son eğitimin <b>tarihini</b> tutuyor. Saatini değil, yalnız gününü.</p>
+    </div>
+    <details class="merak">
+      <summary>neden onaltılık okunuş "26-09-24" veriyor</summary>
+      <p>Bu kodlamanın adı <b>BCD</b> (İngilizce <i>binary-coded decimal</i> — "ikilikle kodlanmış onluk"): her 4 bit tek bir onluk rakam tutar. <code>0x26</code> onaltılıkta 38 eder, ama BCD'de "2 ve 6" demek. Bilgisayarların gerçek zaman saati tarihleri tarihsel olarak böyle tutar; kayıt da saatten okuduğunu aynen yazmış.</p>
+    </details>
+  </section>
+
+  <!-- ================= 6 ================= -->
+  <section>
+    <p class="section-label">6 · Hipotez</p>
+    <div class="prose">
+      <p>Makinenin açılış süreleri sistem günlüğünde duruyordu. O günkü iki uzun açılışın öncesinde bilgisayarın saati bozulmuştu: bir tanı aracı, çalışırken saatin içine veri yazan bir yöntem kullanmış ve tarihi 2024'e atmıştı. Günlük şunu gösteriyordu:</p>
+      <ul>
+        <li>Saat 2024'e düştükten sonraki açılış: <b>57 s</b>. Tarih, son eğitim tarihinden <b>geride</b>.</li>
+        <li>Saat ağdan düzeltildikten sonraki açılış: <b>57 s</b>. Tarih, 2024'teki o yeni kayda göre yaklaşık 22 ay <b>ileride</b>.</li>
+        <li>Aynı gün içindeki öbür açılışlar: <b>7 s</b>.</li>
+      </ul>
+      <p>Hipotez: <b>tarih son eğitimden geriye giderse ya da çok ileri sıçrarsa firmware kayda güvenmiyor.</b> Ama her gün yeni bir tarih ve açılışlar her gün 7 saniye, yani "tarih değişti" tek başına sebep değil. "Çok ileri" ne kadar?</p>
+    </div>
+  </section>
+
+  <!-- ================= 7 ================= -->
+  <section>
+    <p class="section-label">7 · Deney: saati oynatmak</p>
+    <div class="prose">
+      <p>Deney basit: bilgisayarın donanım saatini (RTC) belli bir tarihe al, yeniden başlat, iki şeye bak. Biri firmware süresi (57 s mi, 7 s mi). Öbürü kaydın içindeki tarih: eğitim olduysa yeni tarih yazılmış olmalı. İki bağımsız kanıt, aynı soru.</p>
+      <p>Saat oynatılırken ağ saati geçici olarak kapatıldı ve her deneyin sonunda geri açıldı. Saatin ileri atladığı açılışlarda zamanlanmış görevlerin bir şey silmediği ayrıca denetlendi. Her adım bir öncekinin sonucuna göre seçildi:</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>deney</th><th>saat, son eğitime göre</th><th>firmware</th><th>eğitim</th></tr>
+        <tr><td>E1</td><td>1 gün <b>geri</b></td><td class="num">57,6 s</td><td><span class="yes">var</span></td></tr>
+        <tr><td>E2</td><td>1 gün ileri, aynı ay</td><td class="num">7,0 s</td><td><span class="no">yok</span> · kayda dokunulmadı bile</td></tr>
+        <tr><td>E3</td><td>9 gün ileri, <b>ay değişti</b></td><td class="num">57,6 s</td><td><span class="yes">var</span></td></tr>
+        <tr><td>E3 dönüşü</td><td>8 gün geri</td><td class="num">57,6 s</td><td><span class="yes">var</span></td></tr>
+        <tr><td>E4</td><td>6 gün ileri, aynı ay</td><td class="num">7,0 s</td><td><span class="no">yok</span></td></tr>
+        <tr><td>E4 dönüşü</td><td>önceki açılışa göre geri, ama son eğitimle <b>aynı gün</b></td><td class="num">7,0 s</td><td><span class="no">yok</span></td></tr>
+        <tr><td>E5a</td><td>37 gün ileri (ayın son günü)</td><td class="num">57,6 s</td><td><span class="yes">var</span></td></tr>
+        <tr><td><b>E5b</b></td><td><b>1 gün ileri, ama ay değişti</b></td><td class="num">57,6 s</td><td><span class="yes">var</span></td></tr>
+        <tr><td>E5 dönüşü</td><td>geri</td><td class="num">57,6 s</td><td><span class="yes">var</span></td></tr>
+      </table></div>
+      <p>İki sonuç kilit. <b>E4 dönüşü</b>: saat bir önceki açılışa göre geri gitti ama eğitim olmadı, çünkü son eğitimin tarihiyle aynı gündü. Yani firmware bir önceki açılışla değil, <b>kayıttaki tarihle</b> karşılaştırıyor.</p>
+      <p><b>E5b</b>: yalnız bir gün ileri gidildi, ama ay değişti ve eğitim oldu. E2'de de bir gün ileri gidilmişti, ay aynıydı, eğitim olmamıştı. İkisi arasındaki tek fark ay.</p>
+      <h3>Kural</h3>
+      <p><b>Saat, son eğitimin tarihinden gerideyse ya da ay (veya yıl) farklıysa: baştan eğit. Aynı ay içinde ileriyse: kayda güven.</b></p>
+      <p>Pratik anlamı: bu makinede <b>her ayın ilk açılışı yaklaşık bir dakika</b> sürüyor. O günkü gizemin cevabı da buydu: saat önce geriye, sonra yirmi iki ay ileriye gitmişti.</p>
+    </div>
+    <p class="hint">Yalnız yılın değişip ayın aynı kaldığı durum (örneğin bir Eylül'den ertesi Eylül'e) denenmedi; kural "ay ya da yıl" diye yazıldı ama o parça çıkarım.</p>
+  </section>
+
+  <!-- ================= 8 ================= -->
+  <section>
+    <p class="section-label">8 · Gürültü: aynı bellek, yedi eğitim</p>
+    <div class="prose">
+      <p>Deney bir yan ürün bıraktı: aynı belleğin <b>yedi ayrı eğitim kaydı</b>. Eğitim sonuçlarının durduğu 16 384 baytlık giriş yedi kayıtta karşılaştırıldı:</p>
+      <ul>
+        <li><b>%96,6'sı hiç oynamadı.</b> 16 384 baytın 15 832'si yedi eğitimde de aynı çıktı.</li>
+        <li>Oynayan 552 baytın <b>dörtte üçü en fazla 2 adım</b> oynadı. Tezgâhtaki işaretin bir iki adım kaymasının gerçek hali.</li>
+        <li>Hiçbir eğitim ötekilerden ayrışmadı: "kötü bir eğitim" yok, gürültü her birinde benzer.</li>
+      </ul>
+      <p>En ilginç olanı <b>iki durumlu</b> bir alan: yedi eğitimde ya <code>0x55</code> ya <code>0x44</code> çıktı, arası hiç çıkmadı; biri dört, öbürü üç kez. Sürekli bir değer olsaydı arada bir yerler de görülürdü. Görülmedi. Eğitim burada iki aday arasında kalıyor ve ikisi neredeyse eşit iyi olduğu için bazen birini, bazen öbürünü seçiyor. En iyi nokta sivri bir tepe değil, bir düzlük.</p>
+    </div>
+    <p class="hint">Hangi baytın hangi hatta, hangi ayara karşılık geldiği bulunamadı: o yerleşim fiziksel katmanın üreticisine ait ve açık bir kaynakta bulunamadı. Buradaki sayılar yalnız "ne kadar oynuyor" sorusunu cevaplıyor.</p>
+  </section>
+
+  <!-- ================= 9 ================= -->
+  <section>
+    <p class="section-label">9 · Neyi bilmiyoruz</p>
+    <div class="prose">
+      <ul>
+        <li><b>Tek makine.</b> Kural bu dizüstünün firmware'ine ait. Başka AMD makinelerinde, başka firmware sürümlerinde farklı olabilir. AMD'nin gelişmiş ayarlarında bu davranışın bir adı var (<i>Memory Context Restore</i>) ve bu makinede gizli bir menüde "Auto" durumunda.</li>
+        <li><b>Takvim kuralının yıl kısmı</b> ayrı denenmedi.</li>
+        <li><b>RAM ya da işlemci değişince</b> ne olduğu denenmedi. Kayıtta modülün kimliği ve bir işlemci seri alanı var; değişince baştan eğitmesi beklenir ama ölçülmedi.</li>
+        <li><b>Sıcaklık.</b> Bütün deneyler oda sıcaklığında yapıldı; kuralın sıcaklığı sorup sormadığı bilinmiyor. Sormuyorsa, aynı ay içinde soğuk ya da sıcak her açılışta kayda güvenir. Tezgâhtaki model bunun neden risk olabileceğini gösteriyor; gerçek bellekte kenar payı ne kadar, ölçülmedi.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Neden hazır betik yok</p>
+    <div class="prose">
+      <p>Bu sayfa ne yapıldığını ve ne bulunduğunu anlatıyor, kopyalanıp çalıştırılacak komutlar vermiyor. Bilerek. Saati geri almak dosya zamanlarını, yedekleme araçlarını ve zamanlanmış görevleri şaşırtabilir; firmware'le ilgili her işlem makineden makineye değişir. Merak edip kendi makinende bakmak istersen, önce ne yaptığını anlaman gerekiyor. Anlayan biri için bu sayfadaki anlatım yeterli.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Repoda nereye bağlanıyor</p>
+    <ul class="refs">
+      <li>
+        <a href="../../konular.html#salterden_bilgisayara/01.5_yasak_bolge.md">01.5 · Yasak Bölge</a>
+        <span class="r-why">0 ile 1 arasında bir bant var. Eğitimin aradığı eşik (Vref) o bandın içindeki en güvenli nokta.</span>
+      </li>
+      <li>
+        <a href="../../konular.html#salterden_bilgisayara/08.5_sayac_basa_donunce.md">08.5 · Sayaç Başa Dönünce</a>
+        <span class="r-why">Saat de bir sayaç. Geriye giden bir sayaç firmware için "burada bir şey oldu" demek.</span>
+      </li>
+      <li>
+        <a href="../../konular.html#cwe/cwe_1384.md">👾 CWE-1384 · Fiziksel koşullar</a>
+        <span class="r-why">Sıcaklık gözü kaydırır. Tezgâhtaki sıcaklık düğmesinin güvenlik tarafı.</span>
+      </li>
+      <li>
+        <a href="../../konular.html#cwe/cwe_1023.md">👾 CWE-1023 · Eksik karşılaştırma</a>
+        <span class="r-why">Kural tarihe bakıyor; sıcaklığı sorup sormadığı denenmedi. Sormuyorsa, karşılaştırmanın atladığı bir etken.</span>
+      </li>
+      <li>
+        <a href="../../konular.html#cwe/cwe_1261.md">👾 CWE-1261 · Tek olay bozulması</a>
+        <span class="r-why">Bayat bir ayarla okunan bir bit, kozmik ışının çevirdiği bit kadar sessiz bozulur.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="section-label">Kaynaklar</p>
+    <ul class="refs">
+      <li><a href="https://github.com/openSIL/openSIL" target="_blank" rel="noopener">openSIL</a><span class="r-why">AMD'nin açık kaynak başlatma projesi. APOB grup, tür ve başlık tanımları <code>xUSL/Include/ApobCmn.h</code> içinde.</span></li>
+      <li><a href="https://doc.coreboot.org/soc/amd/psp_integration.html" target="_blank" rel="noopener">coreboot · PSP entegrasyon kılavuzu</a><span class="r-why">PSP dizini, APOB ve kaydın BIOS çipindeki kopyası.</span></li>
+      <li><a href="https://github.com/PSPReverse/PSPTool" target="_blank" rel="noopener">PSPTool</a><span class="r-why">PSP dizinlerini listeleyen ve imzaları denetleyen açık kaynak araç.</span></li>
+      <li><a href="https://docs.kernel.org/hwmon/spd5118.html" target="_blank" rel="noopener">Linux · spd5118 sürücüsü</a><span class="r-why">DDR5 modüllerinin SPD çipini okuyan sürücü.</span></li>
+    </ul>
+  </section>
+
+  <footer>ŞALTERDEN BİLGİSAYARA · donanım galerisi · vaka: bellek eğitimi</footer>
+
+</div>
+<script src="assets/goz.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bellek Eğitimi — Bilgisayar Neden Bazen Bir Dakika Bekler</title>
+<meta name="description" content="DDR5 bellek eğitimi: göz diyagramı, PSP ve bir dizüstünün firmware'inden dışarıdan çözülen yeniden eğitim kuralı.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<!-- Tema tercihi sitenin geri kalanıyla ortak (localStorage: ll_theme). -->
+<script src="../../assets/theme.js"></script>
+</head>
+<body>
+<div class="scene">
+
+  <header>
+    <div class="hdr-top">
+      <p class="eyebrow"><a class="geri" href="../../laboratuvar.html">← laboratuvar</a> · donanım vaka incelemesi</p>
+      <button class="theme-btn" id="themeBtn" title="Tema: açık / karanlık"><span class="sw"></span><span class="lbl">açık</span></button>
+    </div>
+    <h1>Bellek Eğitimi<br>(DDR Memory Training)</h1>
+    <p>Bilgisayarı her gün açıyorsun, birkaç saniyede masaüstü geliyor. Sonra bir sabah ekran bir dakika kara kalıyor. Fanlar dönüyor, ışıklar yanıyor, ama hiçbir şey olmuyor. Sonra her şey normale dönüyor ve ertesi gün yine birkaç saniye.</p>
+    <p>O bir dakikada makine bozulmuyor. Bir şey ölçüyor. Soru şu: neyi ölçüyor, ve neden her gün değil de bazen?</p>
+    <nav class="tabs">
+      <a href="index.html" class="on">hikâye</a>
+      <a href="ders.html">ders</a>
+      <a href="tezgah.html">tezgâh</a>
+    </nav>
+  </header>
+
+  <section>
+    <p class="section-label">Ölçülen şey</p>
+    <div class="prose">
+      <p>İşlemci bellekten saniyede milyarlarca bit okur. Her bit telin üstünde birkaç yüz pikosaniye durur, sonra yerini bir sonrakine bırakır. Alıcının işi her biti <b>doğru anda</b> ve <b>doğru eşikle</b> okumak: "şu anda gerilim şu değerin üstündeyse 1".</p>
+      <p>Sorun şu ki o doğru an her tel için başka. Kartın üstündeki yollar milimetre milimetre farklı uzunlukta, her çip biraz farklı hızda. Fabrikada bir kez ayarlanıp unutulamaz, çünkü her makine, her modül, her sıcaklık başka.</p>
+      <p>Bu yüzden makine açılırken kendi hatlarını tek tek dener: her hat için en güvenli okuma anını ve eşiği arar. Buna <b>bellek eğitimi</b> (İngilizce <i>memory training</i>) denir. Tam bir eğitim onlarca saniye sürer.</p>
+    </div>
+    <p class="hint">Sonuç bir tabloya yazılır ve saklanır. Sonraki açılışlar ölçmez, tabloyu geri yükler. Kara ekranın sırrı burada: firmware bazen o tabloya <b>güvenmemeye</b> karar veriyor.</p>
+  </section>
+
+  <section>
+    <p class="section-label">Bu laboratuvarda</p>
+    <div class="prose">
+      <p>Evrensel kısmı her DDR bellek için geçerli: tek bir hattın <b>göz diyagramını</b> kendin tarayacaksın, eğitimin neden her seferinde biraz farklı sonuç verdiğini ve sıcaklığın kayıtlı ayarı nasıl bayatlattığını göreceksin.</p>
+      <p>Vaka kısmı tek bir makineden: Ryzen 9 8940HX'li bir dizüstü. Firmware'in "ne zaman baştan eğiteyim" kuralı hiçbir yerde yazmıyor. Kasa açmadan, yalnız saati oynatıp dokuz açılışla <b>dışarıdan</b> çözüldü. Firmware'in kaydı salt okunarak incelendi; inceleme yöntemi bu sayfalarda yok.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">İki kapı</p>
+    <div class="gates">
+      <a class="gate" href="ders.html">
+        <div class="g-nm">→ Ders</div>
+        <div class="g-ds">Bit penceresinden göz diyagramına, PSP'den kayda ve kuralı bulan deneye kadar sırayla. İçinde bir küçük göz tezgâhı var. Ön bilgi istemez; derin ayrıntılar "meraklısına" kutularında.</div>
+      </a>
+      <a class="gate" href="tezgah.html">
+        <div class="g-nm">→ Tezgâh</div>
+        <div class="g-ds">Anlatı yok, iki alet. Göz diyagramı: sıcaklığı ve gürültüyü değiştir, eğit, kayıtla çalıştır. Politika oyunu: firmware sensin, her açılışta "güven mi, eğit mi" kararını sen ver.</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Repoda nereye bağlanıyor</p>
+    <ul class="refs">
+      <li>
+        <a href="../../konular.html#salterden_bilgisayara/01.5_yasak_bolge.md">01.5 · Yasak Bölge</a>
+        <span class="r-why">"0 ile 1 arasında bir bant var" fikri. Eğitimin aradığı eşik (Vref) tam o bandın içinde bir nokta.</span>
+      </li>
+      <li>
+        <a href="../../konular.html#salterden_bilgisayara/16_sr_latch.md">16 · SR Latch</a>
+        <span class="r-why">Hafızanın ilk kapısı. Buradaki bellek başka bir fizik (kondansatör), ama "bir biti tutmak" sorusu aynı.</span>
+      </li>
+      <li>
+        <a href="../../konular.html#cwe/cwe_1384.md">👾 CWE-1384 · Fiziksel koşullar</a>
+        <span class="r-why">Sıcaklık gözü kaydırıyor. Devrenin sözleşmesi fiziksel dünyaya bağlı; tezgâhtaki sıcaklık düğmesinin güvenlik tarafı.</span>
+      </li>
+      <li>
+        <a href="../../konular.html#cwe/cwe_1023.md">👾 CWE-1023 · Eksik karşılaştırma</a>
+        <span class="r-why">Vakadaki kural tarihe bakıyor; sıcaklığı sorup sormadığı denenmedi. Sormuyorsa, karşılaştırmanın atladığı bir etken.</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>ŞALTERDEN BİLGİSAYARA · donanım galerisi · vaka: bellek eğitimi</footer>
+
+</div>
+</body>
+</html>

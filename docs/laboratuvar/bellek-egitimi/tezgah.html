@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tezgâh — Bellek Eğitimi</title>
+<meta name="description" content="Göz diyagramı tezgâhı ve bellek eğitimi politika oyunu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script src="../../assets/theme.js"></script>
+</head>
+<body>
+<div class="scene wide">
+
+  <header>
+    <div class="hdr-top">
+      <p class="eyebrow"><a class="geri" href="../../laboratuvar.html">← laboratuvar</a> · bellek eğitimi · tezgâh</p>
+      <button class="theme-btn" id="themeBtn" title="Tema: açık / karanlık"><span class="sw"></span><span class="lbl">açık</span></button>
+    </div>
+    <h1>Tezgâh</h1>
+    <p>Anlatı yok, iki alet. İkisi de evrensel: her DDR bellek için geçerli bir modelin ve her firmware'in önündeki bir kararın oyuncağı. Bir vakanın ölçümleri değil.</p>
+    <nav class="tabs">
+      <a href="index.html">hikâye</a>
+      <a href="ders.html">ders</a>
+      <a href="tezgah.html" class="on">tezgâh</a>
+    </nav>
+  </header>
+
+  <div class="bench">
+    <div class="bench-col">
+      <section id="goz">
+        <p class="section-label">Göz diyagramı</p>
+        <div data-goz="tam"></div>
+        <p class="hint">Dene: <b>eğit ve kaydet</b> (45 °C), sonra sıcaklığı 85 °C'ye çek ve <b>kayıtla çalıştır</b>. Göz kaydı, kayıtlı ayar kenarda kaldı. Şimdi aynı sıcaklıkta yeniden eğit: yeni ayar yeni gözün ortasına oturur. Gürültüyü artırınca göz daralır; ızgaraya tıklayınca tek bir noktayı yoklarsın.</p>
+        <p class="hint">Model temsilîdir: sıcaklığın etkisi görünsün diye bilerek abartıldı. Gerçek kayma daha küçük, yönü aynı.</p>
+      </section>
+    </div>
+    <div class="bench-col">
+      <section id="politika">
+        <p class="section-label">Politika oyunu · firmware sensin</p>
+        <div data-politika></div>
+        <p class="hint">Her açılışta: kayda güvenip hızlı mı açılırsın, yoksa baştan eğitip yaklaşık 50 saniye fazladan mı bekletirsin? Riskler temsilîdir, bir sıralama verir. Oyunun sonunda gerçek bir makinenin ölçülen davranışı açılır.</p>
+      </section>
+    </div>
+  </div>
+
+  <footer>ŞALTERDEN BİLGİSAYARA · donanım galerisi · vaka: bellek eğitimi · tezgâh</footer>
+
+</div>
+<script src="assets/goz.js"></script>
+<script src="assets/politika.js"></script>
+</body>
+</html>
