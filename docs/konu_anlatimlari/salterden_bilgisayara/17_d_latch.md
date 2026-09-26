@@ -398,9 +398,45 @@ Toplam: 4 bileşen, 6 `nand` (`sr latch` içinde 2, `inv` içinde 1).
 Bu devre seviyeyi geçiyor, ama NandGame şunu da söylüyor: *"daha az bileşenle
 çözmek mümkün."*
 
-Bu ders yazılırken o yol denenmedi, o yüzden burada cevabı yok. Bir ipucu var:
-**yeni bir parça eklemen gerekmiyor.** Kurduğun devrede, `inv`'in yaptığı işi
-zaten yapan bir tel var.
+Önce kendin dene. Bir ipucu var: **yeni bir parça eklemen gerekmiyor.** Kurduğun
+devrede, `inv`'in yaptığı işi zaten yapan bir tel var.
+
+Bu yol, ders ilk yazıldığında denenmemişti. Sonradan denendi ve çalıştı.
+
+<details>
+<summary>🔑 Cevap — inv'siz devre</summary>
+
+Aranan tel **`r`**. `d` ile beslenen nand zaten doğal olarak ters d üretiyor, ama
+yalnızca `st=1` iken:
+
+```
+st = 1   →   r = nand(1, d) = ters d        (bir ayağı 1 olan nand = inv)
+st = 0   →   r = nand(0, d) = 1
+```
+
+Yani `s`'ye giden nand'ın öbür ayağına `inv` yerine `r`'yi verebilirsin:
+
+```
+nand2:     a ← st    b ← d               →  sr latch.r
+nand1:     a ← st    b ← nand2 çıkışı    →  sr latch.s
+sr latch:  çıkış  →  Output
+```
+
+Üç durumu da dolaş:
+
+```
+st=1 d=1  →  r = nand(1,1) = 0   s = nand(1,0) = 1   →  1 yaz  ✓
+st=1 d=0  →  r = nand(1,0) = 1   s = nand(1,1) = 0   →  0 yaz  ✓
+st=0      →  r = 1               s = nand(0,1) = 1   →  tut    ✓
+```
+
+`st=0` iken `r`'nin 1 olması sorun çıkarmıyor, çünkü `nand1`'in `st` ayağı 0 ve
+bir ayağı 0 olan nand öbür ayağını dinlemiyor.
+
+Toplam: 3 bileşen, 5 `nand`. Aynı tel iki iş yapıyor: `sr latch`'e komut,
+`nand1`'e ters d.
+
+</details>
 
 ---
 
@@ -478,7 +514,7 @@ anlamı, açılışta bir kez `st=1` yapıp bilinen bir `d` yazmak.
 ☐ inv olmasa: st=1 d=1'de s ve r ikisi de 0 → yasak satır. inv iki iş yapar.
 ☐ 🔑 d ile ters d asla ikisi birden 1 olamaz → s ve r asla ikisi birden 0 olamaz → YASAK SATIR İMKÂNSIZ.
 ☐ 👾 CWE-1245'e cevap: tanımsız satırı "kullanma" diye rica etmek yerine ulaşılamaz kılmak.
-☐ Çözüm: 4 bileşen, 6 nand. NandGame daha azı mümkün diyor; ipucu: inv'in işini zaten yapan bir tel var.
+☐ Çözüm: 4 bileşen, 6 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 5 nand.
 ☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli.
 ☐ st=1 iken çıkış d'yi ANINDA izler: ŞEFFAF latch. PC ← PC + 1 bununla kurulursa sayı durmadan artar.
 ☐ İhtiyaç "kapı açıkken" değil "tam şu anda, bir kez" → Data Flip-Flop ve saat.
