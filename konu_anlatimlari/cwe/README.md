@@ -109,7 +109,7 @@ bellek boyutu olarak kullanıldığı an. İki kutu modeliyle ayrıntısı →
 
 ## NandGame Ağacı
 
-Bu harita **NandGame'in başından Memory ünitesinin ilk seviyesine (SR Latch)
+Bu harita **NandGame'in başından Memory ünitesinin ikinci seviyesine (D Latch)
 kadar** olan konuları kapsıyor. Kural basit: **işlenmemiş konunun CWE'si burada olmaz.** Katalog
 müfredatın aynasıdır, önüne geçmez.
 
@@ -156,7 +156,8 @@ merak konusu olarak kalırdı — Top-25'in birinci sırasında olmasının sebe
 **1245 neden burada?** Memory ünitesinin ilk CWE'si. SR Latch var olabilecek en
 küçük **durum makinesi**, ve tablosundaki `0 0 → kullanılmıyor` satırı onun
 tanımlanmamış geçişi. Bir sonraki seviye olan D Latch'in neden var olduğunu
-anlamak, bu zayıflığı anlamaktan geçiyor.
+anlamak, bu zayıflığı anlamaktan geçiyor: D Latch o satırı yapı gereği oluşamaz
+kılıyor ([17](../salterden_bilgisayara/17_d_latch.md#yasak-satır-artık-yok)).
 
 ---
 

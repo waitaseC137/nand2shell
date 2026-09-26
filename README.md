@@ -28,7 +28,7 @@ Komutların ve kavramların wargame bağımsız, referans olarak tutulduğu dosy
 
 → **[Tüm konu anlatımlarına buradan ulaşabilirsin](./konu_anlatimlari/KONU_ANLATIMLARI.md)**
 
-> 🔌 **En alttan mı başlamak istiyorsun?** NAND kapısından toplayıcıya, çıkarıcıya ve bayraklara: **[Şalterden Bilgisayara](./konu_anlatimlari/salterden_bilgisayara/00_buradan_basla.md)** — aritmetik ünitesi tamam (00–10), seçici/switch (11) eklendi, ALU yolda.
+> 🔌 **En alttan mı başlamak istiyorsun?** NAND kapısından toplayıcıya, ALU'ya ve hafızaya: **[Şalterden Bilgisayara](./konu_anlatimlari/salterden_bilgisayara/00_buradan_basla.md)** — aritmetik ve ALU üniteleri tamam (00–15), hafıza ünitesi yazılıyor (16 SR Latch · 17 D Latch).
 
 > 💥 **Binary exploitation'a sıfırdan mı başlıyorsun?** Assembly bilmeden de takip edebileceğin giriş rehberi: **[00_buradan_basla.md](./konu_anlatimlari/binary_exploitation/00_buradan_basla.md)**
 
