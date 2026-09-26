@@ -203,7 +203,25 @@ window.KONULAR = {
         { f: "cwe/cwe_367.md", n: "367", t: "TOCTOU Race", h: "a check is a photograph \u00b7 narrowing the gap is no fix" },
         { f: "cwe/cwe_1300.md", n: "1300", t: "Physical Side Channel", h: "current · electromagnetic waves · sound" },
         { f: "cwe/cwe_1247.md", n: "1247", t: "Voltage & Clock Glitches", h: "fault attack · Xbox 360 reset glitch" },
-        { f: "cwe/cwe_1261.md", n: "1261", t: "Single Event Upset", h: "bit flip · Belgium's 4096 · Mario 64" }
+        { f: "cwe/cwe_1261.md", n: "1261", t: "Single Event Upset", h: "bit flip · Belgium's 4096 · Mario 64" },
+        { f: "cwe/cwe_480.md", n: "480", t: "Incorrect Operator", h: "& vs && · the 2003 kernel attempt · = vs ==" },
+        { f: "cwe/cwe_193.md", n: "193", t: "Off-by-one", h: "fencepost · 10 gaps, 11 posts · one byte is enough" },
+        { f: "cwe/cwe_194.md", n: "194", t: "Sign Extension", h: "narrow → wide · why 0xFF becomes −1" },
+        { f: "cwe/cwe_197.md", n: "197", t: "Truncation", h: "wide → narrow · the upper bits vanish silently · Y2K" },
+        { f: "cwe/cwe_682.md", n: "682", t: "Incorrect Calculation (pillar)", h: "the umbrella of 190/191/193 · Pillar → Class → Base → Variant" },
+        { f: "cwe/cwe_1384.md", n: "1384", t: "Physical Conditions (class)", h: "the umbrella of 1247 + 1261 · deliberate glitch vs particle" },
+        { f: "cwe/cwe_704.md", n: "704", t: "Type Conversion (class)", h: "above 681 · the Type Confusion branch" },
+        { f: "cwe/cwe_706.md", n: "706", t: "Name Resolution (class)", h: "above 59 · ../ · equivalent spellings · letter case" },
+        { f: "cwe/cwe_362.md", n: "362", t: "Race Condition (class)", h: "above 367 · where software and hardware meet" },
+        { f: "cwe/cwe_1023.md", n: "1023", t: "Incomplete Comparison (class)", h: "above 839 · a check exists but its scope is incomplete" },
+        { f: "cwe/cwe_670.md", n: "670", t: "Incorrect Control Flow (class)", h: "above 480 · the intent and the code drifting apart" },
+        { f: "cwe/cwe_77.md", n: "77", t: "Command Injection (class)", h: "above 78 · 88 arguments · 1427 LLM prompts" },
+        { f: "cwe/cwe_697.md", n: "697", t: "Incorrect Comparison (pillar)", h: "682's sibling · what · enough · how" },
+        { f: "cwe/cwe_1242.md", n: "1242", t: "Chicken Bits", h: "documented space ⊂ real space · the back-down bit" },
+        { f: "cwe/cwe_1254.md", n: "1254", t: "Comparison Granularity", h: "an early exit leaks the time · constant-time comparison" },
+        { f: "cwe/cwe_119.md", n: "119", t: "Buffer Bounds (class)", h: "above 787 · four corners: read/write × before/after" },
+        { f: "cwe/cwe_1245.md", n: "1245", t: "Improper State Machine", h: "the smallest state machine · the don't-care row · default" },
+        { f: "cwe/cwe_1271.md", n: "1271", t: "Undefined Lock on Reset", h: "waking up without anyone choosing · reset over and over" }
       ]
     }
   ]

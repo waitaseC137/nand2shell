@@ -397,7 +397,7 @@ promised in `10`.
 
 ## 🔗 Related Topics
 
-- 👾 **For the curious:** [CWE Map — the ALU unit](../cwe/README.md#on-the-way--the-alu-unit-and-beyond) — mixing up operators: the logical `&&` where the bitwise `&` was meant (CWE-480, on the way)
+- 👾 **For the curious:** [CWE-480 — Use of incorrect operator](../cwe/cwe_480.md) — mixing up the bitwise `&` you built in this lesson with the logical `&&`; the two characters someone tried to slip into the Linux kernel in 2003
 - [11_selector_switch.md](./11_selector_switch.md) — The selector itself; "it does them all, then picks one"
 - [06_full_adder.md](./06_full_adder.md) — The floors trick
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` wires → `2ⁿ` patterns

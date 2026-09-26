@@ -454,8 +454,7 @@ there.
 > them. To find them you have to test the order.
 
 In software this is called a **race condition**:
-[CWE-362](https://cwe.mitre.org/data/definitions/362.html) *(English page on the
-way)*. The TOCTOU you met in Leviathan ([CWE-367](../cwe/cwe_367.md)), the case of
+[CWE-362](../cwe/cwe_362.md). The TOCTOU you met in Leviathan ([CWE-367](../cwe/cwe_367.md)), the case of
 "the file you checked changed before you opened it", is the software member of
 this family. The circuit in this level is its hardware ancestor.
 
@@ -495,8 +494,8 @@ switches decides the result.
 > should not be used is only safe as long as nobody actually uses it.
 >
 > 👾 The weakness catalogue's name for this row is
-> [CWE-1245](https://cwe.mitre.org/data/definitions/1245.html) *(English page on
-> the way)* — *Improper Finite State Machines (FSMs) in Hardware Logic*. The
+> [CWE-1245](../cwe/cwe_1245.md) —
+> *Improper Finite State Machines (FSMs) in Hardware Logic*. The
 > latch you built is the smallest possible **state machine**, and the `0 0` row
 > is its undefined transition. MITRE's description describes this row word for
 > word: *"undefined states (left as don't cares) … drive the system into an
@@ -505,7 +504,7 @@ switches decides the result.
 >
 > The weakness born from signals racing in hardware is called **CWE-1298** —
 > *Hardware Logic Contains Race Conditions*. On the
-> [CWE-362](https://cwe.mitre.org/data/definitions/362.html) page it was waiting
+> [CWE-362](../cwe/cwe_362.md) page it was waiting
 > next to the clock unit, marked "on the way". Its first seed is here.
 
 ---
@@ -528,8 +527,8 @@ If that lock wakes up with a random value every time the chip powers on, then on
 some boots the door that should be closed starts **open**.
 
 > 👾 The weakness catalogue's name for this is
-> [CWE-1271](https://cwe.mitre.org/data/definitions/1271.html) *(English page on
-> the way)* — *Uninitialized Value on Reset for Registers Holding Security
+> [CWE-1271](../cwe/cwe_1271.md) —
+> *Uninitialized Value on Reset for Registers Holding Security
 > Settings*. In MITRE's example the attacker **resets the device over and over**
 > and waits to land on a boot where the lock wakes up open. The fix is simple but
 > easy to forget: force every security-related bit to a **known** value at power
@@ -584,10 +583,10 @@ bad row can no longer occur at all.
 
 ## 🔗 Related Topics
 
-- 👾 **The race itself:** [CWE-362 — Race Condition](https://cwe.mitre.org/data/definitions/362.html) *(English page on the way)* — two jobs reaching for the same resource without synchronisation; its hardware child CWE-1298 was seeded here
+- 👾 **The race itself:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — two jobs reaching for the same resource without synchronisation; its hardware child CWE-1298 was seeded here
 - 👾 **The grandchild in software:** [CWE-367 — TOCTOU](../cwe/cwe_367.md) — the gap between the check and the use
-- 👾 **This lesson's main CWE:** [CWE-1245 — Improper state machine](https://cwe.mitre.org/data/definitions/1245.html) *(English page on the way)* — the row left as "not used"; why the D Latch exists
-- 👾 **Undefined wake-up:** [CWE-1271](https://cwe.mitre.org/data/definitions/1271.html) *(English page on the way)* — a security bit with no defined value at power-on; the repeated reset attack
+- 👾 **This lesson's main CWE:** [CWE-1245 — Improper state machine](../cwe/cwe_1245.md) — the row left as "not used"; why the D Latch exists
+- 👾 **Undefined wake-up:** [CWE-1271](../cwe/cwe_1271.md) — a security bit with no defined value at power-on; the repeated reset attack
 - [15_condition.md](./15_condition.md) — The difference between what a circuit can do and what is described
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: a counter with nowhere to be stored
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand`; here the same result is reached by fixing one leg to `1`

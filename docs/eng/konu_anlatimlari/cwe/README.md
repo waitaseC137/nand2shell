@@ -15,10 +15,11 @@
 - [What Is a CWE?](#what-is-a-cwe)
 - [What Is a CVE?](#what-is-a-cve)
 - [CWE vs CVE](#cwe-vs-cve)
+- [The Hierarchy Between CWEs](#the-hierarchy-between-cwes)
 - [Chains: The Wire Between Two Bugs](#chains-the-wire-between-two-bugs)
-- [From Switches to a Computer](#from-switches-to-a-computer)
-- [Binary Analysis & RE (Leviathan)](#binary-analysis--re-leviathan)
-- [Not Yet Mapped](#not-yet-mapped)
+- [The NandGame Tree](#the-nandgame-tree)
+- [On the Way](#on-the-way)
+- [On Hold — OverTheWire](#on-hold--overthewire)
 
 ---
 
@@ -64,6 +65,32 @@ through. The kind of this vulnerability: **CWE-190.**
 
 ---
 
+## The Hierarchy Between CWEs
+
+On the pages you will often see a row called **Parent**. That is because the CWE
+list is not a flat list but **a tree with four tiers:**
+
+```
+Pillar             most abstract  ·  names a theme                     ·  e.g. CWE-682
+   └─ Class                        ·  a kind independent of technology  ·  e.g. CWE-119
+        └─ Base                    ·  concrete enough to give detection/prevention methods  ·  e.g. CWE-190
+             └─ Variant            ·  specific to a particular language/technology
+```
+
+Most of the pages here are at the **Base** level — at that tier you can say "watch
+out for this, prevent it like that".
+
+> 🔑 **When a real vulnerability is given a number, the most CONCRETE tier possible
+> is chosen.** Pillars and classes are not for labelling but for **orientation**:
+> when you see a new bug they tell you which family it falls into, and what else
+> the same defence closes at once.
+
+There is also a category called **Compound**: not a single weakness but a pattern
+formed by several weaknesses linked together. [CWE-680](./cwe_680.md) is such a
+**chain** — explained below.
+
+---
+
 ## Chains: The Wire Between Two Bugs
 
 Some CWE numbers do not name a single mistake — they name how one mistake gives
@@ -81,103 +108,170 @@ moment the wrapped number is used as a memory size. The two-box model explains i
 
 ---
 
-## From Switches to a Computer
+## The NandGame Tree
 
-Not every lesson has a CWE. If there is no real connection to the circuit, the
-lesson is not listed here.
+This map covers the topics **from the start of NandGame up to the second level of
+the Memory unit (D Latch)**. The rule is simple: **a topic that has not been
+taught gets no CWE here.** The catalogue mirrors the curriculum; it does not run
+ahead of it.
 
-📄 has its own page · 📖 taught inside the lesson · 👾 short write-up on this page · 🔜 on the way
+### The Two Halves of the Unit
 
-### Unit 0 — Bricks: From Switches to Gates
+The ALU unit does two jobs, and both have a counterpart in MITRE's top tier:
 
-NandGame assumes its gates are **perfect**: they burn no energy, they never lag,
-they never get it wrong. The CWEs at this level stand exactly where that assumption
-breaks.
+```
+NandGame ALU unit
+   │
+   ├─ CALCULATES        →  CWE-682  Incorrect Calculation   (pillar)
+   │                          └─ 190 · 191 · 193
+   │
+   └─ COMPARES          →  CWE-697  Incorrect Comparison    (pillar)
+                              └─ 1023 · 1254
+```
 
-| Lesson | CWE | Official name | |
+| CWE | Official name | Where it is born | link |
 |---|---|---|---|
-| [01 · Current, the Switch, and NAND](../salterden_bilgisayara/01_akim_salter_role.md) | [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | 📄 |
-| [02 · All the Gates from One Brick](../salterden_bilgisayara/02_nanddan_kapilar.md) | [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | 📄 |
+| [**CWE-682**](./cwe_682.md) | Incorrect Calculation — **pillar** | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/682.html) |
+| [**CWE-697**](./cwe_697.md) | Incorrect Comparison — **pillar** | [15 · Condition](../salterden_bilgisayara/15_condition.md) | [📄](https://cwe.mitre.org/data/definitions/697.html) |
 
-**📄 CWE-1300 — Physical side channel.** A gate spends energy when it changes state; the current it draws, the waves it radiates and the sound it makes are all related to the data being processed. Even with flawless code, the leak comes from physics → [its page](./cwe_1300.md)
+The rest of the catalogue is arranged around these two pillars. The three tiers
+below are measured by a single question: **how necessary is it for understanding
+NandGame?**
 
-**📄 CWE-1247 — Voltage and clock glitching.** A gate only works correctly as long as its supply and its clock hold. Break either one for an instant and the circuit produces a wrong result — and if that result was a security decision, "no" turns into "yes" → [its page](./cwe_1247.md)
+---
 
-### Unit 1 — Counting and Adding
+### 🔴 Tier 1 — Must Know
 
-| Lesson | CWE | Official name | |
+> The circuit you built is this weakness. If you do not know it, you built the
+> circuit without knowing what you did.
+
+| CWE | Official name | Where it is born | link |
 |---|---|---|---|
-| [04 · When Wires Become Numbers](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [**CWE-1261**](./cwe_1261.md) | Improper Handling of Single Event Upsets | 📄 |
+| [**CWE-190**](./cwe_190.md) | Integer Overflow or Wraparound | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | [📄](https://cwe.mitre.org/data/definitions/190.html) |
+| [**CWE-191**](./cwe_191.md) | Integer Underflow (Wrap or Wraparound) | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | [📄](https://cwe.mitre.org/data/definitions/191.html) |
+| [**CWE-193**](./cwe_193.md) | Off-by-one Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/193.html) |
+| [**CWE-681**](./cwe_681.md) | Incorrect Conversion between Numeric Types | [04 · When Wires Become Numbers](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/681.html) |
+| [**CWE-787**](./cwe_787.md) | Out-of-bounds Write | [08 · Increment](../salterden_bilgisayara/08_increment.md#-the-security-bridge) | [📄](https://cwe.mitre.org/data/definitions/787.html) |
+| [**CWE-1245**](./cwe_1245.md) | Improper Finite State Machines (FSMs) in Hardware Logic | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#the-unused-row) | [📄](https://cwe.mitre.org/data/definitions/1245.html) |
 
-**📄 CWE-1261 — Single event upset.** A charged particle can flip the value held in a memory cell. The `n wires → 2ⁿ patterns` rule from lesson 04 is what lets you track it down: if exactly a power of two was added to a number, a single bit flipped → [its page](./cwe_1261.md)
+**Why is 787 here?** The overflow itself breaks nothing. Without this outcome 190
+would remain a curiosity — this is why it sits at number one in the Top 25.
 
-### Unit 2 — The Limit of a Number, and Negative Numbers
+**Why is 1245 here?** The first CWE of the Memory unit. The SR Latch is the smallest
+possible **state machine**, and the `0 0 → not used` row in its table is its
+undefined transition. Understanding why the next level, the D Latch, exists goes
+through understanding this weakness: the D Latch makes that row impossible by
+construction ([17](../salterden_bilgisayara/17_d_latch.md#the-forbidden-row-is-gone)).
 
-| CWE | Official name | Where it is born | |
+---
+
+### 🟡 Tier 2 — Reinforcing Understanding
+
+> Not required to build the circuit. The answer to "why does this matter" is here.
+
+| CWE | Official name | Where it is born | link |
 |---|---|---|---|
-| [**CWE-190**](./cwe_190.md) | Integer Overflow or Wraparound | [08 · Increment](../salterden_bilgisayara/08_increment.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | 📄 |
-| [**CWE-191**](./cwe_191.md) | Integer Underflow (Wrap or Wraparound) | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md) · [08.5](../salterden_bilgisayara/08.5_sayac_basa_donunce.md) | 📄 |
-| [**CWE-680**](./cwe_680.md) | Integer Overflow to Buffer Overflow | [08 · Increment](../salterden_bilgisayara/08_increment.md#-the-security-bridge) | 📄 |
-| [**CWE-787**](./cwe_787.md) | Out-of-bounds Write | [08 · Increment](../salterden_bilgisayara/08_increment.md#-the-security-bridge) | 📄 |
-| [**CWE-681**](./cwe_681.md) | Incorrect Conversion between Numeric Types | [04 · When Wires Become Numbers](../salterden_bilgisayara/04_teller_sayi_olunca.md) | 📄 |
-| [**CWE-196**](./cwe_196.md) | Unsigned to Signed Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-the-security-bridge) | 📄 |
-| [**CWE-839**](./cwe_839.md) | Numeric Range Comparison Without Minimum Check | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-the-security-bridge) | 📄 |
-| [**CWE-195**](./cwe_195.md) | Signed to Unsigned Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-the-security-bridge) | 📄 |
+| [**CWE-680**](./cwe_680.md) | Integer Overflow to Buffer Overflow | [08 · Increment](../salterden_bilgisayara/08_increment.md#-the-security-bridge) | [📄](https://cwe.mitre.org/data/definitions/680.html) |
+| [**CWE-196**](./cwe_196.md) | Unsigned to Signed Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-the-security-bridge) | [📄](https://cwe.mitre.org/data/definitions/196.html) |
+| [**CWE-839**](./cwe_839.md) | Numeric Range Comparison Without Minimum Check | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-the-security-bridge) | [📄](https://cwe.mitre.org/data/definitions/839.html) |
+| [**CWE-195**](./cwe_195.md) | Signed to Unsigned Conversion Error | [09 · Subtraction](../salterden_bilgisayara/09_subtraction.md#-the-security-bridge) | [📄](https://cwe.mitre.org/data/definitions/195.html) |
+| [**CWE-1023**](./cwe_1023.md) | Incomplete Comparison with Missing Factors | [10 · Flags](../salterden_bilgisayara/10_bayraklar.md) | [📄](https://cwe.mitre.org/data/definitions/1023.html) |
+| [**CWE-194**](./cwe_194.md) | Unexpected Sign Extension | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#a-16-bit-1-is-not-one-wire) | [📄](https://cwe.mitre.org/data/definitions/194.html) |
+| [**CWE-197**](./cwe_197.md) | Numeric Truncation Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#a-16-bit-1-is-not-one-wire) | [📄](https://cwe.mitre.org/data/definitions/197.html) |
+| [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/480.html) |
+| [**CWE-1271**](./cwe_1271.md) | Uninitialized Value on Reset for Registers Holding Security Settings | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#waking-up-without-anyone-choosing) | [📄](https://cwe.mitre.org/data/definitions/1271.html) |
 
 **The three are a chain.** In the Security Bridge example in lesson 09 the same
 number is read three times under three different contracts: [196](./cwe_196.md) as
 it enters the variable, [839](./cwe_839.md) at the check, [195](./cwe_195.md) at the
-point of use. Each page carries its own mechanism, real cases and prevention.
+point of use.
 
-**🔗 The exploitation side:** how this same family is actually abused on real levels →
-[binary_exploitation/11 · Integer Bugs](../binary_exploitation/11_integer_bug_truncation_signedness.md)
-(truncation, signed/unsigned bypass, `×4` wraparound · Utumno 4/6, Maze 7)
+**Two axes.** [196](./cwe_196.md) and [195](./cwe_195.md) describe what happens when
+the **interpretation** of the same bits changes — the width stays fixed.
+[194](./cwe_194.md) and [197](./cwe_197.md) describe what happens when **the width
+itself** changes.
 
-### Unit 3 — Making Decisions and Routing
+| | width | interpretation |
+|---|---|---|
+| [196](./cwe_196.md) · [195](./cwe_195.md) | fixed | changes |
+| [194](./cwe_194.md) · [197](./cwe_197.md) | changes | tries to stay fixed |
 
-Lessons 10 and 11 have no direct CWE yet. The overflow flag (OF) promised in 10
-arrives at the Condition level, and the comparison bugs come with it.
-
-### On the Way — The ALU Unit and Beyond
-
-🔜 These are plans. They get fixed as the lessons are written, and they may change.
-
-| Where | CWE | Official name | Why there |
-|---|---|---|---|
-| Logic Unit | **CWE-480** | Use of Incorrect Operator | A logical operation where a bitmask was meant: `&&` instead of `&` |
-| Arithmetic Unit | **CWE-193** | Off-by-one Error | One increment or decrement and the bounds: is it `<` or `<=` |
-| ALU | **CWE-1242** | Inclusion of Undocumented Features or Chicken Bits | Control-bit combinations nobody ever documented |
-| Condition | **CWE-697** | Incorrect Comparison | Comparison = subtraction + looking at the sign; overflow makes the sign lie |
-| After the memory unit | **CWE-416** | Use After Free | Carrying on using memory that has already been handed back |
-| Clock | **CWE-1298** | Hardware Logic Contains Race Conditions | Signals travelling at different speeds |
+The width axis entered the catalogue later, and the reason is instructive: this
+topic only reached the curriculum with the bundler in
+[13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#a-16-bit-1-is-not-one-wire).
+The catalogue was not wrong — it was an honest mirror of the scope at the time.
 
 ---
 
-## Binary Analysis & RE (Leviathan)
+### 🟢 Tier 3 — Useful Later
 
-| Lesson | CWE | Official name | |
+> Not needed to understand NandGame. You will meet these in assembly and reverse
+> engineering.
+
+| CWE | Official name | Where it is born | link |
 |---|---|---|---|
-| [What Leviathan Teaches · Lesson 3](../leviathan_komutlari/what_leviathan_teaches.md#lesson-3--command--argument-injection-system) | [**CWE-78**](./cwe_78.md) | Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') | 📄 |
-| [What Leviathan Teaches · Lesson 5](../leviathan_komutlari/what_leviathan_teaches.md#lesson-5--symbolic-link-attack--insecure-tmp) | [**CWE-59**](./cwe_59.md) | Improper Link Resolution Before File Access ('Link Following') | 📄 |
-| Same lesson + [binary_exploitation/07](../binary_exploitation/07_sembolik_link.md#what-is-a-toctou-vulnerability) | [**CWE-367**](./cwe_367.md) | Time-of-check Time-of-use (TOCTOU) Race Condition | 📄 |
+| [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | [01 · Current, the Switch, and NAND](../salterden_bilgisayara/01_akim_salter_role.md) | [📄](https://cwe.mitre.org/data/definitions/1300.html) |
+| [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | [02 · All the Gates from One Brick](../salterden_bilgisayara/02_nanddan_kapilar.md) | [📄](https://cwe.mitre.org/data/definitions/1247.html) |
+| [**CWE-1261**](./cwe_1261.md) | Improper Handling of Single Event Upsets | [04 · When Wires Become Numbers](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/1261.html) |
+| [**CWE-1384**](./cwe_1384.md) | Improper Handling of Physical or Environmental Conditions — **umbrella** | 01 · 02 · 04 | [📄](https://cwe.mitre.org/data/definitions/1384.html) |
+| [**CWE-704**](./cwe_704.md) | Incorrect Type Conversion or Cast — **umbrella** | [04 · When Wires Become Numbers](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/704.html) |
+| [**CWE-670**](./cwe_670.md) | Always-Incorrect Control Flow Implementation — **umbrella** | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/670.html) |
+| [**CWE-1242**](./cwe_1242.md) | Inclusion of Undocumented Features or Chicken Bits | [14 · ALU](../salterden_bilgisayara/14_alu.md) | [📄](https://cwe.mitre.org/data/definitions/1242.html) |
+| [**CWE-1254**](./cwe_1254.md) | Incorrect Comparison Logic Granularity | [15 · Condition](../salterden_bilgisayara/15_condition.md) | [📄](https://cwe.mitre.org/data/definitions/1254.html) |
+| [**CWE-119**](./cwe_119.md) | Improper Restriction of Operations within the Bounds of a Memory Buffer — **umbrella** | [08 · Increment](../salterden_bilgisayara/08_increment.md) | [📄](https://cwe.mitre.org/data/definitions/119.html) |
 
-> 🔑 **Three in the same lesson, but three different things.** The root of 78 is
-> "data and command travel down the same channel"; 59 and 367 belong to the "a name
-> is not an identity" family. The distinction between 59 and 367 matters: in **59
-> there is no check at all**, in **367 there is a check but the race is lost**. Where
-> the two meet has its own number in MITRE: CWE-363.
+**1254 is a first:** the only CWE in your catalogue with **two parents**. MITRE put
+it under both [697](./cwe_697.md) (the comparison was built in the wrong manner)
+and **208** (the time difference is observable from outside). Because it stands
+right at the crossroads, once 208 is written this page will be reachable from both
+sides.
+
+**Why is 1242 in this tier but still important?** The ALU level's control word is
+5 bits, that is **32 states** — but the documentation defines 8 operations. The
+difference is harmless in NandGame. On a real chip, if an undocumented control bit
+switches off a security feature, its name is **chicken bit**. The rule: *every
+control word wider than its documented state space is a place to look.* That is
+exactly the job reverse engineering does.
 
 ---
 
-## Not Yet Mapped
+## On the Way
 
-The lessons in the **Web Security** and **Binary Exploitation** series map onto CWEs
-just as directly: SQL injection, format string, path traversal and so on. That
-mapping has not been done yet; it will be added to this page as it is.
+🔜 These arrive as the lessons are written. The order follows the curriculum.
 
-The first bridge is built, though: the [CWE-78](./cwe_78.md) page connects both to
-Leviathan Lesson 3 and to
-[web_guvenligi/07](../web_guvenligi/07_command_injection.md).
+| Where | CWE | Official name |
+|---|---|---|
+| Memory unit · addressing | **125** | Out-of-bounds Read |
+| Memory unit | **416** | Use After Free |
+| Clock · seeded in [16](../salterden_bilgisayara/16_sr_latch.md#the-unused-row) | **1298** | Hardware Logic Contains Race Conditions |
+| Pipeline / speculation | **208** | Observable Timing Discrepancy |
+| SMT / shared units | **1303** | Non-Transparent Sharing of Microarchitectural Resources |
+| After the two above | **203** | Observable Discrepancy (umbrella) |
+| Microcode / privileged controls | **1256** | Improper Restriction of Software Interfaces to Hardware Features |
+
+> 📌 **The "where" column here is an estimate, not a promise.** It sharpens as the
+> lessons are written. The only firm condition known for `125` is this: reading out
+> of bounds first needs an **address** — that weakness cannot be born before the
+> question *"which slot shall I read?"* appears. We will write down which level it is
+> born in once we reach that level.
+>
+> 🔑 **We are not writing 203 now, on purpose.** A topic with no lesson gets no CWE.
+> 203 only becomes meaningful once 208 and 1303 are written — building an umbrella
+> without both of its children would put the map ahead of the curriculum.
+>
+> 697 and 1242 used to be on this list; they moved into the tree once their lessons
+> were written.
+
+---
+
+## On Hold — OverTheWire
+
+OverTheWire is not being solved right now, so these pages were **taken off the
+map.** The pages remain and can be reached from their own lessons; they will come
+back here when those series are picked up again.
+
+[78](./cwe_78.md) · [59](./cwe_59.md) · [367](./cwe_367.md) ·
+[77](./cwe_77.md) · [706](./cwe_706.md) · [362](./cwe_362.md)
 
 ---
 
@@ -189,4 +283,4 @@ Leviathan Lesson 3 and to
 
 ---
 
-*Numbers and official names are taken from MITRE's CWE list: [cwe.mitre.org](https://cwe.mitre.org).*
+*Numbers, official names and abstraction levels are taken from MITRE's CWE list: [cwe.mitre.org](https://cwe.mitre.org).*

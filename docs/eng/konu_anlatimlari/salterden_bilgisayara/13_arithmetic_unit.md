@@ -466,8 +466,8 @@ overflow flag (OF) that was promised back in `10`.
 
 ## 🔗 Related Topics
 
-- 👾 **For the curious:** [CWE-193 — Off-by-one](https://cwe.mitre.org/data/definitions/193.html) *(English page on the way)* — this lesson's `X + 1` landing one unit off: is it `<` or `<=`
-- 👾 **The width axis:** [CWE-194 — Sign extension](https://cwe.mitre.org/data/definitions/194.html) (narrow → wide) and [CWE-197 — Truncation](https://cwe.mitre.org/data/definitions/197.html) (wide → narrow) *(English pages on the way)* — the security counterpart of the bundler section
+- 👾 **For the curious:** [CWE-193 — Off-by-one](../cwe/cwe_193.md) — this lesson's `X + 1` landing one unit off: is it `<` or `<=`
+- 👾 **The width axis:** [CWE-194 — Sign extension](../cwe/cwe_194.md) (narrow → wide) and [CWE-197 — Truncation](../cwe/cwe_197.md) (wide → narrow) — the security counterpart of the bundler section
 - [12_logic_unit.md](./12_logic_unit.md) — The same idea with logic operations; the order, the choice, "they all run, one gets picked"
 - [11_selector_switch.md](./11_selector_switch.md) — The selector itself and fan-out
 - [09_subtraction.md](./09_subtraction.md) — The circuit inside `sub 16`

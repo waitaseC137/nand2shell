@@ -361,8 +361,8 @@ at the same time.** So `s` and `r` can never both drop to 0 at the same time.
 > opposing orders cannot arrive at once.
 
 In the previous lesson that row got its name,
-[CWE-1245](https://cwe.mitre.org/data/definitions/1245.html) *(English page on
-the way)*: leaving an undefined transition as "not used" and trusting that nobody
+[CWE-1245](../cwe/cwe_1245.md):
+leaving an undefined transition as "not used" and trusting that nobody
 will use it. The D Latch gives a different answer to the same problem: **instead
 of asking people not to use the undefined row, it builds a structure that cannot
 reach it.** It does not leave the rule to the user; it bakes it into the shape of
@@ -473,8 +473,8 @@ The translator can only step in when a command arrives, and at the moment of
 power-on no command has arrived yet.
 
 The previous lesson gave this its name:
-[CWE-1271](https://cwe.mitre.org/data/definitions/1271.html) *(English page on
-the way)*, a security bit with no defined value at power-on. The D Latch does
+[CWE-1271](../cwe/cwe_1271.md),
+a security bit with no defined value at power-on. The D Latch does
 not solve it. The fix is still the same: force every security-related bit to a
 **known** value at power-on. Here that means setting `st=1` once at power-on and
 writing a known `d`.
@@ -516,9 +516,9 @@ writing a known `d`.
 ## 🔗 Related Topics
 
 - [16_sr_latch.md](./16_sr_latch.md) — The memory behind the gatekeeper; the command is 0, resting is 1-1, the number of inversions
-- 👾 **The CWE this lesson answers:** [CWE-1245 — Improper state machine](https://cwe.mitre.org/data/definitions/1245.html) *(English page on the way)* — making the undefined row structurally unreachable
-- 👾 **Left unsolved:** [CWE-1271](https://cwe.mitre.org/data/definitions/1271.html) *(English page on the way)* — a security bit with no defined value at power-on
-- 👾 **A race while the gate is open:** [CWE-362 — Race Condition](https://cwe.mitre.org/data/definitions/362.html) *(English page on the way)* — a counter built on a transparent latch races instead of taking one step
+- 👾 **The CWE this lesson answers:** [CWE-1245 — Improper state machine](../cwe/cwe_1245.md) — making the undefined row structurally unreachable
+- 👾 **Left unsolved:** [CWE-1271](../cwe/cwe_1271.md) — a security bit with no defined value at power-on
+- 👾 **A race while the gate is open:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — a counter built on a transparent latch races instead of taking one step
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: why it cannot be built with a transparent latch
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Boxing up what you built and climbing on top; the SR Latch is now a single part
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand`; why a `nand` with one leg at 1 behaves like an `inv`

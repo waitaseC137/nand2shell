@@ -495,8 +495,8 @@ states the documentation counts next to the states the word allows, and try the
 difference. The counting you did today in NandGame — 32 combinations, 8
 documented rows — is the smallest version of that job.
 
-> 📄 Details on its own page: [CWE-1242](https://cwe.mitre.org/data/definitions/1242.html)
-> *(English page on the way)* — what a chicken bit is, why it gets left in, and
+> 📄 Details on its own page: [CWE-1242](../cwe/cwe_1242.md) —
+> what a chicken bit is, why it gets left in, and
 > why being undocumented does not count as a protection.
 
 ### Next up
@@ -539,7 +539,7 @@ there.
 
 - 👾 **Meaning is in the reader:** [CWE-681 — Incorrect conversion between numeric types](../cwe/cwe_681.md) — the same pattern read under two contracts
 - 👾 **The trace of what was thrown away:** [CWE-1300 — Physical side channel](../cwe/cwe_1300.md) — what is computed but unused staying measurable
-- 👾 **Undocumented space:** [CWE-1242 — Chicken Bits](https://cwe.mitre.org/data/definitions/1242.html) *(English page on the way)* — 32 states, 8 documented rows: the gap between them
+- 👾 **Undocumented space:** [CWE-1242 — Chicken Bits](../cwe/cwe_1242.md) — 32 states, 8 documented rows: the gap between them
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — Moving the selector to the input; the arithmetic contract of `op1`/`op0`
 - [12_logic_unit.md](./12_logic_unit.md) — The first circuit that takes an order; "all four always run"
 - [11_selector_switch.md](./11_selector_switch.md) — `select 16` itself, and fan-out

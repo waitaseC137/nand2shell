@@ -285,8 +285,8 @@ the same, you will think the same logic is two different things.
 > ⚠️ Note the trap too: `!(a || b)` and `!a || !b` are **not the same.** In De
 > Morgan the gate changes as well — `and` ↔ `or`. Distributing the "not"s while
 > leaving the gate alone is one of the quietest logic bugs in software.
-> Its catalogue entry: [CWE-480](https://cwe.mitre.org/data/definitions/480.html)
-> *(English page on the way)* — use of an incorrect operator.
+> Its catalogue entry: [CWE-480](../cwe/cwe_480.md) —
+> use of an incorrect operator.
 
 ---
 
@@ -361,9 +361,9 @@ asked "is the eq flag zero" when it should have asked "is X zero".
 > The only way to catch it is **to look at what you wired.**
 >
 > 👾 The software counterpart of that silence:
-> [CWE-194](https://cwe.mitre.org/data/definitions/194.html) (sign extension) and
-> [CWE-197](https://cwe.mitre.org/data/definitions/197.html) (truncation)
-> *(English pages on the way)*. What they share is this: the conversion
+> [CWE-194](../cwe/cwe_194.md) (sign extension) and
+> [CWE-197](../cwe/cwe_197.md) (truncation).
+> What they share is this: the conversion
 > **succeeds.** No warning, no exception, and the result is a valid number. What
 > is wrong is not the number but its **meaning.**
 
@@ -628,8 +628,7 @@ the meaning is the reader's decision.
 > against zero — with no subtraction step in between, the sign bit is always
 > right. But in a real processor `cmp` is a subtraction and it can overflow. That
 > is why "look at the sign bit" on its own is an **incomplete comparison**:
-> [CWE-1023](https://cwe.mitre.org/data/definitions/1023.html)
-> *(English page on the way)*.
+> [CWE-1023](../cwe/cwe_1023.md).
 
 ### Next up
 
@@ -679,11 +678,11 @@ itself** and making a circuit *remember* something.
 
 ## 🔗 Related Topics
 
-- 👾 **This lesson's pillar:** [CWE-697 — Incorrect Comparison](https://cwe.mitre.org/data/definitions/697.html) *(English page on the way)* — comparison's own top tier; the sibling of 682
-- 👾 **The opposite of atomic:** [CWE-1254 — Comparison logic granularity](https://cwe.mitre.org/data/definitions/1254.html) *(English page on the way)* — `is zero` looks at all sixteen bits at once; a circuit that looks piece by piece leaks timing
-- 👾 **Silent widening:** [CWE-194 — Sign extension](https://cwe.mitre.org/data/definitions/194.html) and [CWE-197 — Truncation](https://cwe.mitre.org/data/definitions/197.html) *(English pages on the way)* — what happens when a 1-bit flag meets a 16-bit leg
-- 👾 **Incomplete comparison:** [CWE-1023](https://cwe.mitre.org/data/definitions/1023.html) *(English page on the way)* — looking at half the flags; a signed comparison without OF
-- 👾 **Incorrect operator:** [CWE-480](https://cwe.mitre.org/data/definitions/480.html) *(English page on the way)* — half-applying De Morgan, mixing `&&` with `||`
+- 👾 **This lesson's pillar:** [CWE-697 — Incorrect Comparison](../cwe/cwe_697.md) — comparison's own top tier; the sibling of 682
+- 👾 **The opposite of atomic:** [CWE-1254 — Comparison logic granularity](../cwe/cwe_1254.md) — `is zero` looks at all sixteen bits at once; a circuit that looks piece by piece leaks timing
+- 👾 **Silent widening:** [CWE-194 — Sign extension](../cwe/cwe_194.md) and [CWE-197 — Truncation](../cwe/cwe_197.md) — what happens when a 1-bit flag meets a 16-bit leg
+- 👾 **Incomplete comparison:** [CWE-1023](../cwe/cwe_1023.md) — looking at half the flags; a signed comparison without OF
+- 👾 **Incorrect operator:** [CWE-480](../cwe/cwe_480.md) — half-applying De Morgan, mixing `&&` with `||`
 - 👾 **Meaning is in the reader:** [CWE-681](../cwe/cwe_681.md) — the same bit pattern read as signed or unsigned
 - 👾 **Overflow itself:** [CWE-190](../cwe/cwe_190.md) · [CWE-191](../cwe/cwe_191.md) — where OF is born
 - [14_alu.md](./14_alu.md) — The part that produces the result this circuit reads
