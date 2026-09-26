@@ -698,6 +698,6 @@ itself** and making a circuit *remember* something.
 ---
 
 **Previous topic:** [14_alu.md](./14_alu.md)
-**Next topic:** *(on the way — SR Latch)*
+**Next topic:** [16_sr_latch.md](./16_sr_latch.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

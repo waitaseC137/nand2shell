@@ -96,6 +96,11 @@
 | [10_bayraklar.md](./salterden_bilgisayara/10_bayraklar.md) | ZF and SF; how a machine says "if" — the circuit under `cmp` |
 | [11_selector_switch.md](./salterden_bilgisayara/11_selector_switch.md) | Selector & Switch; data vs control wire, the multiplexer |
 | [12_logic_unit.md](./salterden_bilgisayara/12_logic_unit.md) | Logic Unit; the order is a number, picking one of four operations |
+| [13_arithmetic_unit.md](./salterden_bilgisayara/13_arithmetic_unit.md) | Arithmetic Unit; moving the selector to the input, manufacturing the constant |
+| [14_alu.md](./salterden_bilgisayara/14_alu.md) | ALU; the control word, flags changing the operand |
+| [15_condition.md](./salterden_bilgisayara/15_condition.md) | Condition; AND as a valve, trichotomy and closing the OF debt |
+| [16_sr_latch.md](./salterden_bilgisayara/16_sr_latch.md) | SR Latch; feedback, the number of inversions: memory or oscillation |
+| [17_d_latch.md](./salterden_bilgisayara/17_d_latch.md) | D Latch; a translator in front of the SR Latch, the forbidden row made impossible |
 
 ---
 ## ⚙️ x86 Assembly (from scratch)

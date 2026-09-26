@@ -181,10 +181,20 @@ Read the files in this order. Each lesson leans on the previous one.
 | # | File | What it teaches | NandGame level |
 |:---:|---|---|---|
 | 12 | [12_logic_unit](./12_logic_unit.md) | The order is a number; everything is computed, one is chosen | Logic Unit |
+| 13 | [13_arithmetic_unit](./13_arithmetic_unit.md) | Moving the selector to the input; manufacturing a 16-bit constant | Arithmetic Unit |
+| 14 | [14_alu](./14_alu.md) | The control word; changing the material, not the operation | ALU |
+| 15 | [15_condition](./15_condition.md) | AND as a valve; trichotomy; N XOR OF | Condition |
+
+### 💾 Unit 5 — Memory
+
+| # | File | What it teaches | NandGame level |
+|:---:|---|---|---|
+| 16 | [16_sr_latch](./16_sr_latch.md) | Feedback; even inversions remember, odd inversions oscillate | SR Latch |
+| 17 | [17_d_latch](./17_d_latch.md) | The gatekeeper of memory; making the forbidden row unreachable, the transparent latch | D Latch |
 
 ### 🔜 On the way (to be written as the game advances)
 
-The rest of the compute core (Arithmetic Unit, ALU, Condition) → memory (latch, register, RAM) → clock and control unit →
+The rest of memory (flip-flop, register, counter, RAM) → clock and control unit →
 **a processor that executes instructions.**
 
 > 💡 Files whose number ends in `.5` are short **interludes**: on the side of the main road,
