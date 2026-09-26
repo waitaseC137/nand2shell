@@ -59,8 +59,10 @@ and eax, ebx
    ⑤  the result is written back into eax
 ```
 
-`21 D8` is the real x86 encoding of that line (checked by assembling it with
-`nasm`). NandGame's machine will use its own bit layout, but the skeleton is the
+The **assembler** in step ① is the program that turns human-readable lines such
+as `and eax, ebx` into the bits the processor reads. `21 D8` is the real x86
+encoding of that line (checked by assembling it with `nasm`, which is an
+assembler). NandGame's machine will use its own bit layout, but the skeleton is the
 same. ② comes with the control unit, ③ and ⑤ with the memory unit. Real x86
 puts more layers in between, but this is the skeleton.
 

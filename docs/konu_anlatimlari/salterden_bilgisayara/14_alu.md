@@ -46,6 +46,9 @@ zx, sw        2 bit         operandlara ne olacak
 
 Çıkış tek: 16 bit sonuç.
 
+Tabloda geçen **operand**, bir işleme giren sayı demek: `X − Y`'de X de Y de birer
+operand. `13`'te buna "ikinci sayı" diyorduk.
+
 Belgedeki ilk tablo sekiz satır:
 
 | `u` | `op1` | `op0` | sonuç |
@@ -327,7 +330,7 @@ Parça listesi: **4 × `select 16`**, **1 × `0`**, **1 × `logic unit`**,
 **1 × `arithmetic unit`**. `nand`, `and 16`, `add 16`, `inv 16` hiç girmiyor —
 hepsi ünitelerin içinde zaten var.
 
-Sırayla git, canvas karışmasın:
+Sırayla git, tuval karışmasın:
 
 1. **Sağ operandı üret.** Tek seçici, `s = sw`. Bittiğinde `X=5, Y=3` yazıp
    `sw`'yi gezdir: `3` ve `5` görmelisin.

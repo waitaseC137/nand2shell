@@ -97,7 +97,7 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/12_logic_unit.md",          n: "12",   t: "Logic Unit",           h: "Emir bir sayıdır · hepsi hesaplanır, biri seçilir" },
         { f: "salterden_bilgisayara/13_arithmetic_unit.md",     n: "13",   t: "Arithmetic Unit",      h: "Seçiciyi girişe taşımak · 16 bitlik sabiti imal etmek" },
         { f: "salterden_bilgisayara/14_alu.md",                 n: "14",   t: "ALU",                  h: "Kontrol sözcüğü · işlemi değil malzemeyi değiştirmek" },
-        { f: "salterden_bilgisayara/15_condition.md",           n: "15",   t: "Condition",            h: "Vana olarak AND · üçlem · N XOR OF" },
+        { f: "salterden_bilgisayara/15_condition.md",           n: "15",   t: "Condition",            h: "Vana olarak AND · trikotomi · N XOR OF" },
         { f: "salterden_bilgisayara/16_sr_latch.md",            n: "16",   t: "SR Latch",             h: "Geri besleme · çift ters hafıza, tek ters salınım" },
         { f: "salterden_bilgisayara/17_d_latch.md",             n: "17",   t: "D Latch",              h: "Hafızanın kapıcısı · yasak satır imkânsız · şeffaf latch" }
       ]

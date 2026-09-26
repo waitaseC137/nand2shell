@@ -46,6 +46,9 @@ zx, sw        2 bits         what happens to the operands
 
 One output: a 16-bit result.
 
+The **operand** in the table means a number that goes into an operation: in
+`X − Y`, both X and Y are operands. In `13` we called it "the second number".
+
 The first table in the documentation has eight rows:
 
 | `u` | `op1` | `op0` | result |

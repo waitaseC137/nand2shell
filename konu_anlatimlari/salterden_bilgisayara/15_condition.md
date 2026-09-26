@@ -92,7 +92,7 @@ küçük    eşit    büyük
 ```
 
 Dördüncüsü yok. Bir sayı ya küçüktür, ya eşittir, ya büyüktür — üçünden biri, ve
-sadece biri. Bu üçlüye matematikte **üçlem** (*trichotomy*) deniyor.
+sadece biri. Bu kurala matematikte **trikotomi** (*trichotomy*, üç hâl kuralı) deniyor.
 
 `lt`, `eq`, `gt` "hangi karşılaştırmayı yap" demiyor. Şunu diyor:
 
@@ -680,7 +680,7 @@ bir şeyi *hatırlamasını* sağlamak.
 ```
 ☐ lt / eq / gt = less than · equal · greater than. lt'deki ilk harf küçük L, büyük I değil.
 ☐ Bu üç bit bir SAYI DEĞİL. "Hangi karşılaştırma" demiyorlar, "hangi sonuçlar başarı sayılsın" diyorlar.
-☐ Karşılaştırmanın sonucu tam üç tanedir: küçük · eşit · büyük. Dördüncüsü yok (üçlem).
+☐ Karşılaştırmanın sonucu tam üç tanedir: küçük · eşit · büyük. Dördüncüsü yok (trikotomi).
 ☐ 8 satır = üç sonucun alt kümeleri (2³). Never = boş küme, Always = hepsi.
 ☐ ≥ diye bir kapı kurmuyorsun: eq ve gt izinlerini birlikte açıyorsun, ≥ oradan doğuyor.
 ☐ Her şey sıfıra göre çünkü KARŞILAŞTIRMA ZATEN ÇIKARMADIR: a ? b → X = a − b → X'in sıfıra göre yeri.

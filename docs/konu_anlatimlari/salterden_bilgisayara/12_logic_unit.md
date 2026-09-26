@@ -57,7 +57,9 @@ and eax, ebx
    ⑤  sonuç eax'a geri yazılır
 ```
 
-`21 D8`, bu satırın gerçek x86 kodlaması (`nasm` ile derleyip bakıldı).
+① adımındaki **assembler**, `and eax, ebx` gibi insanın okuyabileceği satırları
+işlemcinin okuduğu bitlere çeviren programdır. `21 D8`, bu satırın gerçek x86
+kodlaması (bir assembler olan `nasm` ile derleyip bakıldı).
 NandGame'in makinesi kendi bit düzenini kullanacak, ama iskelet aynı. ② kontrol
 biriminde, ③ ile ⑤ bellek ünitesinde gelecek. Gerçek x86'da araya daha fazla
 katman giriyor, ama iskelet bu.
@@ -100,7 +102,8 @@ Son satırda Y hiç kullanılmıyor. Ters çevirme tek sayı üstünde çalış�
 
 ## Dördü de Hep Çalışır
 
-Bir deney yap. Tuvale sadece `and 16` koy, X'i ve Y'yi ona bağla. Emri **or**'a
+Bir deney yap. Tuvale (devreyi kurduğun alan, oyundaki adıyla *canvas*) sadece
+`and 16` koy, X'i ve Y'yi ona bağla. Emri **or**'a
 ayarla (op1 = 0, op0 = 1). Sonra X'e hex `00FF`, Y'ye hex `0F0F` yaz.
 
 > 💡 **Hex ne?** 16 bitlik bir sayıyı 0 ve 1 olarak yazmak uzun sürer:
