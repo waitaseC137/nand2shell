@@ -184,10 +184,11 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | # | Dosya | Ne öğretir | NandGame seviyesi |
 |:---:|---|---|---|
 | 16 | [16_sr_latch](./16_sr_latch.md) | Geri besleme; çift ters hafıza, tek ters salınım | SR Latch |
+| 17 | [17_d_latch](./17_d_latch.md) | Hafızanın kapıcısı; yasak satırı ulaşılamaz kılmak, şeffaf latch | D Latch |
 
 ### 🔜 Yolda (oyun ilerledikçe yazılacak)
 
-Hafızanın geri kalanı (D Latch, flip-flop, register, sayaç, RAM) → saat ve kontrol birimi
+Hafızanın geri kalanı (flip-flop, register, sayaç, RAM) → saat ve kontrol birimi
 → **komut işleyen işlemci.**
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,

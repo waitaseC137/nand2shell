@@ -572,4 +572,4 @@ kötü satır da böylece hiç oluşamaz hâle geliyor.
 ---
 
 **Önceki konu:** [15_condition.md](./15_condition.md)
-**Sonraki konu:** *(yolda — D Latch)*
+**Sonraki konu:** [17_d_latch.md](./17_d_latch.md)
