@@ -5,7 +5,8 @@
 > "dur bir bakalım" diyecek.
 >
 > Ve dersteki yanlış denemeler uydurma değil. Gerçekten bu sırayla yapıldı: önce
-> doğru mantık yanlış kapıya verildi, sonra doğru parça yanlış tele bağlandı,
+> doğru cümle devreye çevrilirken iki "değil" düştü, sonra doğru parça yanlış tele
+> bağlandı,
 > sonra "çalışıyor ama yanlış sebeple çalışıyor" durumuna girildi. Üçü de
 > düzeltildi — ve her biri, düz anlatımın öğretemeyeceği bir şey öğretti.
 >
@@ -210,12 +211,13 @@ verilen:             is zero        ve   is neg
 `nand` sütunu üç satırda da `1`. Ters çevirince üçü de `0`. Yani devre ya **hep
 1** ya **hep 0** diyor — hiçbir şey ayırt etmiyor.
 
-Sebebi şu: `is zero` ile `is neg` **asla aynı anda 1 olamaz.** Bir sayı hem sıfır
-hem negatif olamaz. `and` kapısına birbirini dışlayan iki şey verirsen çıkış
-sonsuza kadar `0` kalır.
+Asıl sebep, yukarıda yazdığımız iki "değil"in devreye hiç girmemiş olması.
+Ekranda gördüğün ise onun belirtisi: `is zero` ile `is neg` **asla aynı anda 1
+olamaz.** Bir sayı hem sıfır hem negatif olamaz. `and` kapısına birbirini
+dışlayan iki şey verirsen çıkış sonsuza kadar `0` kalır.
 
-> ⚠️ Burada öğrenilecek şey kapı seçimi değil. **Mantık doğru, bağlantı yanlış**
-> olabiliyor — ve ikisi dışarıdan aynı görünüyor. Devre kurulmuş, teller bağlı,
+> ⚠️ Burada öğrenilecek şey kapı seçimi değil. **Cümle doğru, devreye çevirisi
+> eksik** olabiliyor — ve ikisi dışarıdan aynı görünüyor. Devre kurulmuş, teller bağlı,
 > ekran bir sayı gösteriyor. Yanlış olduğunu ancak üç satırı yazınca görüyorsun.
 
 ---
@@ -271,7 +273,7 @@ görmüştün:
 
 İkisi aynı devre. Hangisini kuracağın elindeki parçalara bağlı — ama ikisinin
 **aynı şey olduğunu bilmek** şart. Çünkü kod okurken `!a && !b` ile `!(a || b)`
-karşına ikisi de çıkacak, ve aynı olduklarını göremezsen aynı mantığı iki farklı
+karşına ikisi de çıkacak (kodda `!` "değil", `&&` "ve", `||` "veya" demek), ve aynı olduklarını göremezsen aynı mantığı iki farklı
 şey sanırsın.
 
 > ⚠️ Tuzağı da not et: `!(a || b)` ile `!a || !b` **aynı değil.** De Morgan'da
@@ -316,6 +318,14 @@ bir gün bozulursa — mesela bu iki sinyal başka bir yerden beslenmeye başlar
 
 Hata o gün doğmaz. Hata, `xor` yazıldığı gün doğar; sadece yıllar sonra ortaya
 çıkar.
+
+> 💡 [06](./06_full_adder.md)'da bunun tersi söylenmişti: orada `or` yerine `xor`
+> kullanan çözüm "ispatı kullanan çözüm" diye övülmüştü. İki ders çelişmiyor, fark
+> **kazançta.** 06'da iki eldenin aynı anda 1 olamayacağı aynı devrenin içinde
+> kanıtlanmıştı, ve `xor` zaten elindeki half adder'ın çıkışıydı: devreyi `or`
+> kapısı olmadan kurmayı sağlıyordu. Burada `or` kutuda hazır; `xor` hiçbir şey
+> kazandırmıyor, sadece bir varsayım taşıyor. Varsayıma yaslanmanın bir bedeli
+> var. O bedel, karşılığında bir şey kazanıyorsan ödenir.
 
 ---
 
@@ -398,14 +408,21 @@ izin = 1   →   and tespiti aynen geçirir
 
 Bir **vana**. Açıksa akıtır, kapalıysa tutar. Kendi başına bir şeye karar vermez.
 
-> 🔑 `11`'de seçiciyi kurmuştun ve o **soruyordu**: "hangisini vereyim?" Vana
-> hiçbir şey sormaz. Yanındakilerden habersizdir, sadece kendi iznine bakar.
+> 🔑 `11`'de seçiciyi kurmuştun. İçine bakarsan o da vanalardan yapılmıştı: iki
+> `and` ve bir `or`. Fark **izinlerde.** Seçicide iki izin tek bir telden
+> türüyordu: `s` ve `s`'nin tersi. Biri açıkken öbürü mutlaka kapalıydı; seçici bu
+> yüzden tek bir soru soruyordu: "hangisini vereyim?"
 >
-> Seçici merkezî bir karardır — tek yerden, her şeyi bilerek. Vana dağıtık bir
-> karardır: üç ayrı yerde, üç ayrı izin, birbirinden habersiz.
+> Burada üç izin **birbirinden bağımsız.** İstersen üçünü birden açarsın, istersen
+> hiçbirini. Her vana yanındakilerden habersizdir, sadece kendi iznine bakar.
+> Seçici merkezî bir karardır; bağımsız vanalar dağıtık bir karardır.
 
-Kutuda seçici olmamasının sebebi bu. Bu seviye seçicinin **alternatifini**
-öğretmek için tasarlanmış.
+Kutuda seçici olmaması da bu yüzden anlamlı: üç bağımsız izin, bir seçicinin
+sorduğu tek soruya sığmıyor.
+
+> 💡 Aynı fikir [17](./17_d_latch.md)'de tersinden karşına çıkacak: iki komutu tek
+> bir telden (`d` ve `d`'nin tersi) türetirsen, ikisinin aynı anda gelmesi
+> imkânsız olur.
 
 ---
 
@@ -581,7 +598,7 @@ Okunabilir olsun diye 4 bitle bakalım (aralık: `−8` … `+7`):
            = 1001
 
   1001  →  işaret biti 1  →  "negatif"
-  1001  →  ikiye tümleyen olarak okunursa  −7
+  1001  →  ikinin tümleyeni olarak okunursa  −7
 ```
 
 Gerçek sonuç `+9`, devrenin verdiği sonuç `−7`. `9`, 4 bitlik aralığa sığmıyor;
@@ -599,7 +616,7 @@ Gerçek işlemciler bu yüzden iki bayrağı birlikte kullanır:
 ```
 işaretli "küçüktür"  =  N XOR OF
 
-N  = sonucun işaret biti (negatif mi görünüyor)
+N  = sonucun işaret biti (negatif mi görünüyor) — 10'da buna SF demiştik
 OF = taşma oldu mu (işaret biti yalan söylüyor mu)
 ```
 
@@ -608,6 +625,27 @@ Taşma yoksa (`OF = 0`) sonuç `N`'in kendisidir. Taşma varsa (`OF = 1`) `N` te
 
 `5 − (−4)` örneğinde: `N = 1` (negatif görünüyor), `OF = 1` (taştı),
 `1 XOR 1 = 0` → "küçük değil" → **doğru cevap.**
+
+### OF nereden biliyor?
+
+OF'un kendisi de tek bir kurala dayanıyor. `a − b` için:
+
+```
+OF = 1   ⟺   a ile b'nin işaretleri FARKLI   ve   sonucun işareti a'nınkinden FARKLI
+```
+
+Sebebi şu: aynı işaretli iki sayı aralığın aynı yarısında durur, aralarındaki
+fark da o yarıdan büyük olamaz; sonuç hep sığar. Taşma ancak zıt işaretlilerde
+olur, ve olduğunda sonuç yanlış tarafa, `a`'nın tersi işarete düşer.
+
+`5 − (−4)` ile kontrol et:
+
+```
+a = 0101   işaret 0
+b = 1100   işaret 1        →  işaretler farklı          ✓
+sonuç 1001 işaret 1        →  a'nınkinden (0) farklı    ✓
+                                         OF = 1
+```
 
 x86'da bu yüzden iki ayrı komut ailesi var:
 
@@ -648,8 +686,8 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ Her şey sıfıra göre çünkü KARŞILAŞTIRMA ZATEN ÇIKARMADIR: a ? b → X = a − b → X'in sıfıra göre yeri.
 ☐ x86'da cmp a,b tam olarak a−b yapar ve SONUCU ATAR, sadece bayrakları tutar.
 ☐ Kutuda "is pos" yok: negatif DEĞİL ve sıfır DEĞİL → pozitif. Üç sonuç birbirini dışlar.
-☐ ⚠️ Mantık doğru, bağlantı yanlış olabilir. is zero ile is neg'i and'e verirsen çıkış SONSUZA KADAR 0.
-☐ Sebebi: birbirini dışlayan iki şey asla aynı anda 1 olmaz. and onları hiç birleştiremez.
+☐ ⚠️ Cümle doğru, çeviri eksik olabilir: iki "değil" düşünce is zero ile is neg and'e girer, çıkış SONSUZA KADAR 0.
+☐ Belirtisi: birbirini dışlayan iki şey asla aynı anda 1 olmaz. and onları hiç birleştiremez.
 ☐ "Değil"ler cümlede parantezin İÇİNDE → inv de birleştirmeden ÖNCE gelir. Değili girişe taşı.
 ☐ De Morgan: (A değil) VE (B değil) ≡ (A VEYA B) değil. inv+inv+and = or+inv. Üç parça yerine iki.
 ☐ ⚠️ !(a || b) ile !a || !b AYNI DEĞİL — De Morgan'da kapı da değişir (and ↔ or).
@@ -660,7 +698,7 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ 👾 Sayı geçerli, anlam yanlış. Yazılımdaki karşılığı örtük tip dönüşümü, CWE-704: dönüşüm BAŞARILI olur, uyarı çıkmaz.
 ☐ Oyun sıfırla genişletir (0000…0001). İşaret bitini kopyalasaydı adı CWE-194 (işaret uzatması) olurdu.
 ☐ and burada hesap yapmaz, VANA olur: izin 0 ise dal ölü, izin 1 ise tespit aynen geçer.
-☐ 🔑 Seçici SORAR ("hangisini vereyim"), vana SORMAZ. Seçici merkezî karar, vana dağıtık karar.
+☐ 🔑 Seçici de içeride vanalardan yapılı. Farkı izinlerde: seçicide iki izin TEK telden (s, s değil) türer, burada üç izin BAĞIMSIZ.
 ☐ Üç şeyi iki bacaklı kapılarla birleştirmek = zincirleme (06'daki numara). Her yeni giriş bir kapı ekler.
 ☐ Fan-out: is zero ve is neg'in çıkışları İKİŞER yere gider. is zero'nun ikinci kopyası bütçeyi şişirir (is neg bedava).
 ☐ Test: her vanayı TEK BAŞINA aç (100 · 010 · 001), üç X ile. Bileşik satırlar bunların or'u, onlar da tutar.
@@ -669,7 +707,8 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ Bir devrenin yapabildikleri, tarif edilenlerle aynı şey değildir. Belgeye değil devreye bak.
 ☐ OF borcu: is neg işaret bitine bakar. X bir çıkarmadan geldiyse ve TAŞTIYSA işaret biti YALAN söyler.
 ☐ 4 bitte 5 − (−4) = 9 sığmaz → 1001 → "−7" görünür. Gerçek sonuç pozitif, işaret biti negatif diyor.
-☐ 🔑 İşaretli "küçüktür" = N XOR OF. Taşma yoksa N'in kendisi, taşma varsa N'in tersi.
+☐ 🔑 İşaretli "küçüktür" = N XOR OF. Taşma yoksa N'in kendisi, taşma varsa N'in tersi. (N = 10'daki SF.)
+☐ OF (a − b) = 1 ⟺ a ile b'nin işareti FARKLI ve sonucun işareti a'nınkinden FARKLI. Aynı işaretliler taşmaz.
 ☐ x86: jl/jge işaretli (SF ile OF'a bakar), jb/jae işaretsiz (CF'ye bakar). Aynı çıkarma, iki farklı doğru cevap.
 ☐ ⚠️ Bu seviyede OF yok: X bir çıkarmadan gelip TAŞTIYSA devre yanlış cevabı fark edemez.
 ☐ 👾 Tek başına işaret bitine bakmak EKSİK bir karşılaştırmadır: CWE-1023.

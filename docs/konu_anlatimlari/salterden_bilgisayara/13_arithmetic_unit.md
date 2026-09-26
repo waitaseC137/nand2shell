@@ -28,8 +28,8 @@
 
 ## Bu Parça Ne Yapıyor?
 
-x86 serisinin [9. dersinde](../x86_assembly/09_aritmetik.md) şu satırları
-yazmıştın:
+x86 serisinin [9. dersinde](../x86_assembly/09_aritmetik.md) şu satırlar
+geçiyor. O seriyi okuduysan bunları kendin yazmıştın; okumadıysan da sorun değil:
 
 ```nasm
 add eax, ebx
@@ -116,15 +116,22 @@ geliyor:
 > 🔑 `op1` **hangi işlem** olduğunu, `op0` **ikinci sayının ne olduğunu** seçiyor.
 > İkisi birbirine karışmıyor; iki ayrı soruya iki ayrı cevap.
 
-Bu, `12`'dekinden **farklı bir yapı.** Orada iki bayrak bir hiyerarşi kuruyordu:
-`op1` grubu, `op0` grubun içindeki işlemi seçiyordu — onluk/birlik gibi. Burada
-hiyerarşi yok, **iki bağımsız eksen** var.
+Bu, `12`'dekinden **farklı bir yapı.** Orada bitlerin tek başına bir anlamı
+yoktu: `op0 = 1` bir grupta "or", öbür grupta "invert" demekti; `op1` de iki
+satırda aynı şeyi yapmıyordu (and → xor, or → invert). Bu yüzden iki biti
+birlikte okuyup dört işlemden birini seçmek zorundaydın: `op1` grubu, `op0`
+grubun içindeki işlemi seçiyordu — onluk/birlik gibi.
+
+Burada her bitin **kendi başına bir anlamı var:** `op1` her satırda "çıkar",
+`op0` her satırda "ikinci sayı 1" diyor. **İki bağımsız eksen.** Seçiciyi girişe
+taşıyabilmenin sebebi de bu.
 
 Ve üçüncü bir gözlem: X dört satırın dördünde de solda, hep aynı yerde. X hiçbir
 seçime girmiyor.
 
-> ⚠️ "X bazı durumlarda sabit kalıyor" diye okumak yanlış olur. X **hiçbir
-> durumda** değişmiyor. Değişen, onunla işleme giren ikinci sayı.
+> ⚠️ "X bazı satırlarda seçime giriyor" diye okuma. X **hiçbir satırda** seçime
+> girmiyor, dördünde de aynı yerde duruyor. Seçime giren tek şey, onunla işleme
+> giren ikinci sayı.
 
 ---
 
@@ -492,7 +499,7 @@ kutuda birleştirecek. Ardından **Condition**'da `10`'da söz verilen taşma ba
 ```
 ☐ Tabloyu satır satır değil SÜTUN sütun oku: her bayrak ayrı bir soru sorar.
 ☐ op1 = hangi işlem (toplama/çıkarma) · op0 = ikinci sayı ne (Y / sabit 1).
-☐ 12'den farkı: orada hiyerarşi vardı (grup + eleman), burada İKİ BAĞIMSIZ EKSEN var.
+☐ 12'den farkı: orada bitlerin tek başına anlamı yoktu (grup + eleman), burada HER BİTİN KENDİ ANLAMI var: iki bağımsız eksen.
 ☐ X hiçbir seçime girmez — dört satırda da solda, hep aynı yerde.
 ☐ Seçici çıkışta durmak zorunda DEĞİL. Girişte seçersen arkasındakini bir kere kurarsın.
 ☐ Kaba yol 4 aritmetik birim + 3 seçici · bu yol 2 + 2. Aynı tablo, yarı parça.

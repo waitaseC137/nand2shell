@@ -28,8 +28,8 @@
 
 ## Bu Parça Ne Yapıyor?
 
-x86 serisinin [13. dersinde](../x86_assembly/13_bit_islemleri.md) şu komutları
-yazmıştın:
+x86 serisinin [13. dersinde](../x86_assembly/13_bit_islemleri.md) şu komutlar
+geçiyor. O seriyi okuduysan bunları kendin yazmıştın; okumadıysan da sorun değil:
 
 ```nasm
 and eax, ebx
@@ -101,17 +101,17 @@ Son satırda Y hiç kullanılmıyor. Ters çevirme tek sayı üstünde çalış�
 ## Dördü de Hep Çalışır
 
 Bir deney yap. Tuvale sadece `and 16` koy, X'i ve Y'yi ona bağla. Emri **or**'a
-ayarla (op1 = 0, op0 = 1). Sonra X'e ve Y'ye aynı sayıyı yaz, mesela hex `6553`.
+ayarla (op1 = 0, op0 = 1). Sonra X'e hex `00FF`, Y'ye hex `0F0F` yaz.
 
 > 💡 **Hex ne?** 16 bitlik bir sayıyı 0 ve 1 olarak yazmak uzun sürer:
-> `0110010101010011`. Bu yüzden bitler dörder dörder gruplanır ve her grup tek bir
+> `0000000011111111`. Bu yüzden bitler dörder dörder gruplanır ve her grup tek bir
 > karakterle yazılır: `0`–`9`, ardından `a` = 10, `b` = 11 … `f` = 15. Buna
 > **onaltılık** (*hexadecimal*, kısaca **hex**) deniyor. Dört bit bir hex hanesi
-> eder, 16 bit dört hane: `0110 0101 0101 0011` = `6553`. Aynı kuralla `ffff`, on
+> eder, 16 bit dört hane: `0000 0000 1111 1111` = `00FF`. Aynı kuralla `ffff`, on
 > altı bitin hepsinin 1 olduğu sayıdır.
 
-`and 16` ne gösteriyor? **6553.** X AND X yine X eder. Emir "or" dediği hâlde AND
-hesaplamaya devam ediyor.
+`and 16` ne gösteriyor? **`000F`.** Emir "or" olsaydı `0FFF` görürdün. Emir "or"
+dediği hâlde AND hesaplamaya devam ediyor.
 
 Neden? `and 16`'ya bak: op1'den de op0'dan da ona **hiçbir tel gelmiyor.** Kutu
 emrin varlığından habersiz. Ona sadece X ve Y geliyor, o da onları durmadan
@@ -120,6 +120,10 @@ AND'liyor.
 > 💡 Deneyi X = Y = 0 ile yapsaydın ekranda 0 görürdün. Ama bu kutunun durduğunu
 > göstermezdi, çünkü 0 AND 0 zaten 0 eder. Bir şeyin çalışıp çalışmadığını görmek
 > için, çalışıyorsa **sıfırdan farklı** bir sonuç verecek bir giriş seç.
+>
+> Daha iyisi, **dört işlemin dördünün de farklı sonuç verdiği** bir giriş seçmek.
+> `00FF` ile `0F0F` tam böyle: and `000F`, or `0FFF`, xor `0FF0`, invert X `FF00`.
+> Ekranda hangi sayıyı görürsen gör, onu hangi işlemin ürettiğini bilirsin.
 
 Dört işlemi de tuvale koyarsan dördü **aynı anda ve sürekli** hesaplar. `08`'deki
 cümle burada da geçerli: bilgi kaybolmuyor, **kimse bakmıyor.** `11`'in sonunda
@@ -293,7 +297,9 @@ Bu satır sadece "yanlış" demiyor, ipucu da veriyor:
 2. Gelen **ffff.** 0 ile ffff'ten ffff çıkaran işlemler: **or**, **xor** ve
    **invert X** (0'ın tersi ffff).
 3. Demek ki emir and iken or, xor ya da invert geçiyor. Sorun kolların bağlandığı tellerde
-   değil, işlemlerin takıldığı **bacaklarda.**
+   değil, işlemlerin takıldığı **bacaklarda.** Çünkü emir 0 0 iken iki emir teli de
+   0: kollar hangi tele bağlı olursa olsun hepsi 0'da, üç seçici de D0'ı
+   geçiriyor. Çıkışa ancak bir D0 bacağındaki değer ulaşabilir.
 
 Sonra o satırı elle kur (op1 = 0, op0 = 0, X = 0, Y = ffff) ve yanlış değeri
 **geriye doğru izle.** Her kutunun üstünde o anki çıkışı yazıyor. C'nin

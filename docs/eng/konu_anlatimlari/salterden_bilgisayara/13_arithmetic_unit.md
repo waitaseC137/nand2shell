@@ -30,8 +30,8 @@
 
 ## What Does This Part Do?
 
-In [lesson 9](../x86_assembly/09_aritmetik.md) of the x86 series you wrote these
-lines:
+These lines appear in [lesson 9](../x86_assembly/09_aritmetik.md) of the x86
+series. If you read that series, you wrote them yourself; if not, that is fine:
 
 ```nasm
 add eax, ebx
@@ -119,17 +119,23 @@ visible:
 > 🔑 `op1` picks **which operation** it is, `op0` picks **what the second number
 > is.** The two never mix; two separate questions with two separate answers.
 
-This is a **different structure** from `12`. There the two flags formed a
-hierarchy: `op1` chose the group, `op0` chose the operation inside the group —
-like tens and ones. Here there is no hierarchy; there are **two independent
-axes.**
+This is a **different structure** from `12`. There the bits had no meaning on
+their own: `op0 = 1` meant "or" in one group and "invert" in the other, and `op1`
+did not do the same thing in both rows either (and → xor, or → invert). So you
+had to read the two bits together and pick one of four operations: `op1` chose
+the group, `op0` chose the operation inside the group — like tens and ones.
+
+Here each bit **has a meaning of its own:** `op1` says "subtract" in every row,
+`op0` says "the second number is 1" in every row. **Two independent axes.** That
+is also why the selector can be moved to the input.
 
 And a third observation: X sits on the left in all four rows, always in the same
 place. X never enters any choice.
 
-> ⚠️ Reading it as "X stays fixed in some cases" would be wrong. X does **not
-> change in any case.** What changes is the second number that goes into the
-> operation with it.
+> ⚠️ Do not read it as "X takes part in the choice in some rows". X takes part
+> in the choice **in no row**; it sits in the same place in all four. The only
+> thing that is chosen is the second number that goes into the operation with
+> it.
 
 ---
 
@@ -514,7 +520,7 @@ overflow flag (OF) that was promised back in `10`.
 ```
 ☐ Read the table COLUMN by column, not row by row: each flag asks its own question.
 ☐ op1 = which operation (add/sub) · op0 = what the second number is (Y / constant 1).
-☐ Difference from 12: there it was a hierarchy (group + member), here there are TWO INDEPENDENT AXES.
+☐ Difference from 12: there the bits had no meaning on their own (group + member), here EACH BIT HAS ITS OWN MEANING: two independent axes.
 ☐ X enters no choice at all — it is on the left in all four rows, always the same place.
 ☐ The selector does NOT have to sit at the output. Choose at the input and you build what is behind it once.
 ☐ Brute force: 4 arithmetic units + 3 selectors · this way: 2 + 2. Same table, half the parts.

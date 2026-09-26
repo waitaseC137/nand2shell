@@ -5,8 +5,8 @@
 > say "hold on, let's look at this" when you wire something wrong.
 >
 > And the wrong attempts in this lesson are not invented. They really happened,
-> in this order: first the right logic was handed to the wrong gate, then the
-> right part was wired to the wrong signal, then the circuit entered the state of
+> in this order: first two "not"s fell out while the right sentence was being
+> turned into a circuit, then the right part was wired to the wrong signal, then the circuit entered the state of
 > "it works, but for the wrong reason". All three were corrected — and each one
 > taught something that a straight explanation could not.
 >
@@ -219,12 +219,14 @@ The `nand` column is `1` in all three rows. Invert it and all three become `0`.
 So the circuit says either **always 1** or **always 0** — it distinguishes
 nothing.
 
-The reason: `is zero` and `is neg` **can never be 1 at the same time.** A number
-cannot be both zero and negative. Feed an AND gate two mutually exclusive things
-and its output stays `0` forever.
+The real cause is that the two "not"s we wrote above never made it into the
+circuit. What you see on the screen is its symptom: `is zero` and `is neg` **can
+never be 1 at the same time.** A number cannot be both zero and negative. Feed an
+AND gate two mutually exclusive things and its output stays `0` forever.
 
-> ⚠️ What you learn here is not about picking a gate. **The logic can be right
-> while the wiring is wrong** — and from the outside the two look identical. The
+> ⚠️ What you learn here is not about picking a gate. **The sentence can be right
+> while its translation into a circuit is incomplete** — and from the outside the
+> two look identical. The
 > circuit is built, the wires are connected, the screen shows a number. You only
 > see that it is wrong once you write out the three rows.
 
@@ -281,8 +283,8 @@ saw it back in `02`:
 
 They are the same circuit. Which one you build depends on the parts in your hand
 — but **knowing they are the same** is mandatory. Because when you read code you
-will meet both `!a && !b` and `!(a || b)`, and if you cannot see that they are
-the same, you will think the same logic is two different things.
+will meet both `!a && !b` and `!(a || b)` (in code `!` means "not", `&&` means
+"and", `||` means "or"), and if you cannot see that they are the same, you will think the same logic is two different things.
 
 > ⚠️ Note the trap too: `!(a || b)` and `!a || !b` are **not the same.** In De
 > Morgan the gate changes as well — `and` ↔ `or`. Distributing the "not"s while
@@ -328,6 +330,16 @@ quietly starts doing something different.
 
 The bug is not born on that day. The bug is born on the day `xor` was written; it
 merely surfaces years later.
+
+> 💡 [06](./06_full_adder.md) said the opposite: there the solution that used `xor`
+> instead of `or` was praised as "the solution that *uses* the proof". The two
+> lessons do not contradict each other; the difference is **the gain.** In 06, the
+> fact that the two carries can never be 1 at the same time was proven inside the
+> same circuit, and the `xor` was already the output of a half adder you had: it
+> let you build the circuit without an `or` gate. Here `or` sits ready in the
+> toolbox; `xor` gains you nothing and only carries an assumption. Leaning on an
+> assumption has a price. That price is worth paying only if you gain something
+> in return.
 
 ---
 
@@ -415,16 +427,23 @@ permission = 1   →   and passes the detection straight on
 A **valve**. Open and it flows, closed and it holds. It decides nothing by
 itself.
 
-> 🔑 In `11` you built the selector and it **asked**: "which one shall I hand
-> over?" A valve asks nothing. It is unaware of its neighbours; it looks only at
-> its own permission.
+> 🔑 In `11` you built the selector. Look inside and it was made of valves too: two
+> `and`s and an `or`. The difference is in **the permissions.** In the selector
+> the two permissions came from a single wire: `s` and the inverse of `s`. When
+> one was open the other was necessarily closed; that is why the selector asked a
+> single question: "which one shall I hand over?"
 >
-> A selector is a central decision — one place, knowing everything. A valve is a
-> distributed decision: three separate places, three separate permissions, none
-> aware of the others.
+> Here the three permissions are **independent of each other.** You can open all
+> three or none. Each valve is unaware of its neighbours; it looks only at its own
+> permission. A selector is a central decision; independent valves are a
+> distributed decision.
 
-That is why there is no selector in the toolbox. This level was designed to teach
-the **alternative** to the selector.
+That is also why it makes sense that there is no selector in the toolbox: three
+independent permissions do not fit into the single question a selector asks.
+
+> 💡 You will meet the same idea from the other side in [17](./17_d_latch.md): if
+> you derive two commands from a single wire (`d` and the inverse of `d`), it
+> becomes impossible for both to arrive at once.
 
 ---
 
@@ -626,7 +645,7 @@ This is why real processors use two flags together:
 ```
 signed "less than"  =  N XOR OF
 
-N  = the result's sign bit (does it look negative)
+N  = the result's sign bit (does it look negative) — in 10 we called it SF
 OF = did an overflow occur (is the sign bit lying)
 ```
 
@@ -635,6 +654,28 @@ With no overflow (`OF = 0`) the answer is just `N`. With an overflow (`OF = 1`)
 
 In the `5 − (−4)` example: `N = 1` (it looks negative), `OF = 1` (it overflowed),
 `1 XOR 1 = 0` → "not less" → **the right answer.**
+
+### How does OF know?
+
+OF itself rests on a single rule. For `a − b`:
+
+```
+OF = 1   ⟺   a and b have DIFFERENT signs   and   the result's sign DIFFERS from a's
+```
+
+The reason: two numbers with the same sign sit in the same half of the range, and
+the difference between them cannot be larger than that half; the result always
+fits. Overflow can only happen with opposite signs, and when it does, the result
+lands on the wrong side, with the opposite sign to `a`.
+
+Check it with `5 − (−4)`:
+
+```
+a = 0101      sign 0
+b = 1100      sign 1        →  the signs differ          ✓
+result 1001   sign 1        →  differs from a's (0)      ✓
+                                         OF = 1
+```
 
 This is why x86 has two separate instruction families:
 
@@ -675,8 +716,8 @@ itself** and making a circuit *remember* something.
 ☐ Everything is relative to zero because A COMPARISON IS A SUBTRACTION: a ? b → X = a − b → where X sits vs zero.
 ☐ On x86, cmp a,b does exactly a−b and THROWS THE RESULT AWAY, keeping only the flags.
 ☐ There is no "is pos" in the toolbox: NOT negative and NOT zero → positive. The three outcomes exclude each other.
-☐ ⚠️ The logic can be right while the wiring is wrong. Feed is zero and is neg into an and and the output is 0 FOREVER.
-☐ The reason: two mutually exclusive things are never 1 at once. and can never combine them.
+☐ ⚠️ The sentence can be right while its translation is incomplete: two "not"s fall out, is zero and is neg go into an and, the output is 0 FOREVER.
+☐ The symptom: two mutually exclusive things are never 1 at once. and can never combine them.
 ☐ The "not"s sit INSIDE the parentheses in the sentence → so inv comes BEFORE the combining. Move the NOT to the input.
 ☐ De Morgan: (NOT A) AND (NOT B) ≡ NOT (A OR B). inv+inv+and = or+inv. Two parts instead of three.
 ☐ ⚠️ !(a || b) and !a || !b are NOT the same — in De Morgan the gate changes too (and ↔ or).
@@ -687,7 +728,7 @@ itself** and making a circuit *remember* something.
 ☐ 👾 The number is valid, the meaning is wrong. The software counterpart is an implicit type conversion, CWE-704: the conversion SUCCEEDS, no warning.
 ☐ The game widens with zeros (0000…0001). Had it copied the sign bit, the name would be CWE-194 (sign extension).
 ☐ Here and does no arithmetic, it is a VALVE: permission 0 means the branch is dead, permission 1 passes the detection straight on.
-☐ 🔑 A selector ASKS ("which shall I hand over"), a valve does not. Selector = central decision, valve = distributed decision.
+☐ 🔑 A selector is made of valves inside too. The difference is the permissions: in a selector two permissions come from ONE wire (s, not s), here three permissions are INDEPENDENT.
 ☐ Combining three things with two-legged gates = chaining (the trick from 06). Each new input adds one gate.
 ☐ Fan-out: the outputs of is zero and is neg go to TWO places each. A second copy of is zero swells the budget (is neg is free).
 ☐ Testing: open each valve ON ITS OWN (100 · 010 · 001), with three values of X. Compound rows are their or, so they hold too.
@@ -696,7 +737,8 @@ itself** and making a circuit *remember* something.
 ☐ What a circuit can do is not the same as what has been described. Look at the circuit, not the documentation.
 ☐ The OF debt: is neg looks at the sign bit. If X came from a subtraction that OVERFLOWED, the sign bit LIES.
 ☐ In 4 bits 5 − (−4) = 9 does not fit → 1001 → it looks like "−7". The true result is positive, the sign bit says negative.
-☐ 🔑 Signed "less than" = N XOR OF. Without overflow it is N itself; with overflow it is the opposite of N.
+☐ 🔑 Signed "less than" = N XOR OF. Without overflow it is N itself; with overflow it is the opposite of N. (N = SF from 10.)
+☐ OF (a − b) = 1 ⟺ a and b have DIFFERENT signs and the result's sign DIFFERS from a's. Same signs never overflow.
 ☐ x86: jl/jge are signed (they look at SF and OF), jb/jae are unsigned (they look at CF). The same subtraction, two different right answers.
 ☐ ⚠️ This level has no OF: if X came from a subtraction that OVERFLOWED, the circuit cannot notice the wrong answer.
 ☐ 👾 Looking at the sign bit alone is an INCOMPLETE comparison: CWE-1023.

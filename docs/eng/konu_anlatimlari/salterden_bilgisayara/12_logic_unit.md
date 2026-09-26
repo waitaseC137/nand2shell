@@ -28,8 +28,9 @@
 
 ## What Does This Part Do?
 
-In [lesson 13](../x86_assembly/13_bit_islemleri.md) of the x86 series you wrote
-these instructions:
+These instructions appear in [lesson 13](../x86_assembly/13_bit_islemleri.md) of
+the x86 series. If you read that series, you wrote them yourself; if not, that is
+fine:
 
 ```nasm
 and eax, ebx
@@ -105,18 +106,18 @@ The last row doesn't use Y at all. Inverting works on a single number.
 ## All Four Always Run
 
 Try an experiment. Put only `and 16` on the canvas and connect X and Y to it. Set
-the order to **or** (op1 = 0, op0 = 1). Then type the same number into X and Y,
-say hex `6553`.
+the order to **or** (op1 = 0, op0 = 1). Then type hex `00FF` into X and hex `0F0F`
+into Y.
 
 > 💡 **What is hex?** Writing a 16-bit number as 0s and 1s takes a while:
-> `0110010101010011`. So the bits are grouped four at a time and each group is
+> `0000000011111111`. So the bits are grouped four at a time and each group is
 > written as a single character: `0`–`9`, then `a` = 10, `b` = 11 … `f` = 15. This
 > is called **hexadecimal**, or **hex** for short. Four bits make one hex digit,
-> 16 bits make four: `0110 0101 0101 0011` = `6553`. By the same rule, `ffff` is
+> 16 bits make four: `0000 0000 1111 1111` = `00FF`. By the same rule, `ffff` is
 > the number with all sixteen bits set to 1.
 
-What does `and 16` show? **6553.** X AND X is X. The order says "or", yet AND
-keeps computing.
+What does `and 16` show? **`000F`.** Had the order been obeyed, you would see
+`0FFF`. The order says "or", yet AND keeps computing.
 
 Why? Look at `and 16`: **no wire** comes to it from op1 or op0. The box doesn't
 know the order exists. All it gets is X and Y, and it ANDs them nonstop.
@@ -125,6 +126,11 @@ know the order exists. All it gets is X and Y, and it ANDs them nonstop.
 > screen. But that wouldn't show the box had stopped, because 0 AND 0 is 0 anyway.
 > To see whether something is working, pick an input that gives a **non-zero**
 > result when it is.
+>
+> Even better, pick an input for which **all four operations give different
+> results.** `00FF` and `0F0F` are exactly that: and `000F`, or `0FFF`, xor
+> `0FF0`, invert X `FF00`. Whatever number you see on the screen, you know which
+> operation produced it.
 
 Put all four operations on the canvas and all four compute **at the same time,
 all the time.** The sentence from `08` holds here too: the information isn't lost,
@@ -305,6 +311,9 @@ This row doesn't just say "wrong". It gives you a clue:
    **or**, **xor** and **invert X** (the inverse of 0 is ffff).
 3. So when the order is AND, OR, XOR or INVERT is getting through. The problem isn't
    where the levers connect; it's which **inputs** the operations are plugged into.
+   Because with the order 0 0 both order wires are 0: whatever wire each lever is
+   connected to, all of them are at 0, and all three selectors pass D0. Only a
+   value sitting on a D0 input can reach the output.
 
 Then build that row by hand (op1 = 0, op0 = 0, X = 0, Y = ffff) and **trace the
 wrong value backwards.** Every box shows its current output above it. What is at

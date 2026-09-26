@@ -284,14 +284,16 @@ belirlenmiş pozisyona dokunur.
 sabitini bunlardan birine takmak çok kolay — ve yanlış olanına takmak daha da
 kolay.
 
-Yanlış kurulum şöyle görünür: `0`, `sw` ile sürülen seçicilerden birinin boş
-veri bacağına bağlanır.
+Yanlış kurulum şöyle görünür: `0`, `sw` ile sürülen S1'in boş veri bacağına
+takılır. Oraya gelmesi gereken `Y` açıkta kalır ve S3'ün boşta kalan bacağına
+gider. İkisi yer değiştirmiş olur:
 
 ```
-S1:  s = sw,  D0 = X,  D1 = 0      ← 0 burada YANLIŞ yerde
+S1:  s = sw,  D0 = X,   D1 = 0     ← 0 burada YANLIŞ yerde (Y olmalıydı)
+S3:  s = zx,  D0 = S1,  D1 = Y     ← Y de (0 olmalıydı)
 ```
 
-Bu devrede `0`, `sw` flip ettiğinde ortaya çıkar. Ama tabloya bak: `0` yalnızca
+Bu devrede `0`, `sw` çevrildiğinde ortaya çıkar. Ama tabloya bak: `0` yalnızca
 `zx = 1` satırlarında var. `sw` satırlarında hiç yok.
 
 Benzetmeyle:
@@ -303,9 +305,18 @@ zx  bir SİLGİ   →  soldakini siler
 
 Silgiyi makasın koluna bağlarsan, makası her çevirdiğinde silgi de devreye girer.
 
-**Belirtisi şu:** dört satırdan biri doğru çıkar, üçü yanlış. Ve doğru çıkan
-satır genelde başlangıç durumu (`zx=0, sw=0`) olduğu için ekrana ilk baktığında
-her şey yolunda görünür. `13`'teki ölçüyü hatırla — *"bozuk olsaydı
+**Belirtisi şu** (X = 5, Y = 3 ile):
+
+| `zx` | `sw` | görülen | beklenen | |
+|---|---|---|---|---|
+| `0` | `0` | `2` | `5 − 3 = 2` | ✓ |
+| `0` | `1` | `−5` | `3 − 5 = −2` | ✗ |
+| `1` | `0` | `0` | `0 − 3 = −3` | ✗ |
+| `1` | `1` | `−2` | `0 − 5 = −5` | ✗ |
+
+Dört satırdan yalnızca biri doğru, o da başlangıç satırı (`zx=0, sw=0`). Ekrana
+ilk baktığında her şey yolunda görünür. `0`'ı `sw` seçicilerinden birine takan
+başka kurulumlar da çoğu zaman aynı belirtiyi verir. `13`'teki ölçüyü hatırla — *"bozuk olsaydı
 farkederdim"* diyebilmek için **dört satırı da** yürütmek gerekiyor.
 
 ---
@@ -339,8 +350,9 @@ Sırayla git, canvas karışmasın:
    `Output`'a bağla.
 
 Ünitelerden önce ön katmanı doğrulamak, bu seviyenin tek gerçek yöntem dersi.
-Sonda yanlış bir sayı gördüğünde, hata dokuz yerden birinde olabilir. Ön katman
-doğrulanmışsa üçe iner.
+Sonda yanlış bir sayı gördüğünde, hata yedi parçanın herhangi birinde olabilir.
+Ön katman (S1, S2, S3 ve `0`) doğrulanmışsa şüpheli üçe iner: iki ünitenin
+bağlantıları ve son seçici.
 
 <details>
 <summary>🔑 Takıldıysan — bağlantı listesi</summary>
@@ -392,7 +404,8 @@ Ve tam burada dersin ikinci yüzü açılıyor:
 > sırada kapılar anahtarlandı, akım aktı, ısı çıktı, zaman geçti. Sonucu
 > okuyamazsın — ama hesaplandığının **izlerini** okuyabilirsin.
 
-Bu cümle şu an sadece bir merak. `Durak 4`'e geldiğinde bir yöntemin adı olacak.
+Bu cümle şu an sadece bir merak. İleride, işlemcinin içindeki ölçülebilir izlere
+geldiğimizde bir yöntemin adı olacak.
 [CWE-1300](../cwe/cwe_1300.md) — fiziksel yan kanal — tam olarak bu boşluğu
 tarif ediyor: mantıksal olarak gizli olan bir şeyin, fiziksel olarak ölçülebilir
 kalması.
@@ -522,8 +535,8 @@ Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 ☐ Sağ operand zx'i HİÇ görmez: tek katman. Sol operand iki soruya cevap verir: iki katman.
 ☐ ⚠️ Sıra zorunlu: önce sw, sonra zx. "Soldaki" diyen katman, konumu belirleyen katmandan SONRA gelir.
 ☐ ⚠️ 0 sabiti zx'in seçicisine bağlanır. sw'nin boş bacağına takarsan makasa silgi bağlamış olursun.
-☐ Yanlış kurulumun belirtisi: dört satırdan BİRİ doğru — ve o biri genelde başlangıç durumu.
-☐ Üniteleri koymadan önce ön katmanı doğrula: hata alanı dokuzdan üçe iner.
+☐ 0 ile Y yer değiştirirse (S1'e 0, S3'e Y) dört satırdan yalnız BİRİ doğru çıkar: başlangıç satırı. Dört satırı da yürüt.
+☐ Üniteleri koymadan önce ön katmanı doğrula: şüpheli parça yediden üçe iner.
 ☐ Hepsini üret, sonra seç: u=0 iken de aritmetik birim hesaplar, zx=1 iken de S1 çalışır.
 ☐ 🔑 Çöpe atılan sonuç YOK OLMAZ, sadece kullanılmaz. Kapı anahtarlandı, ısı çıktı, zaman geçti.
 ☐ Kontrol sözcüğü 5 bit = 32 durum. Belge 8 satır + 4 satırı AYRI AYRI veriyor; çarpımı hiç yazmıyor.

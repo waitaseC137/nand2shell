@@ -295,14 +295,16 @@ There are three selectors in the front layer and all of them have spare data
 legs. Plugging the `0` constant into one of them is very easy — and plugging it
 into the wrong one is easier still.
 
-The wrong build looks like this: `0` gets wired to the empty data leg of one of
-the selectors driven by `sw`.
+The wrong build looks like this: `0` gets plugged into the empty data leg of S1,
+which is driven by `sw`. The `Y` that should have gone there is left over and ends
+up on the free leg of S3. The two have swapped places:
 
 ```
-S1:  s = sw,  D0 = X,  D1 = 0      ← 0 is in the WRONG place here
+S1:  s = sw,  D0 = X,   D1 = 0     ← 0 is in the WRONG place here (should be Y)
+S3:  s = zx,  D0 = S1,  D1 = Y     ← and so is Y (should be 0)
 ```
 
-In this circuit `0` appears whenever `sw` flips. But look at the table: `0` only
+In this circuit `0` appears whenever `sw` is turned. But look at the table: `0` only
 appears in the `zx = 1` rows. It never appears in the `sw` rows.
 
 An analogy:
@@ -315,9 +317,18 @@ zx  is an ERASER           →  it erases the left one
 Tie the eraser to the handle of the scissors and the eraser fires every time you
 turn the scissors.
 
-**The symptom:** one of the four rows comes out right and three come out wrong.
-And because the correct row is usually the starting state (`zx=0, sw=0`),
-everything looks fine the first time you glance at the screen. Remember the
+**The symptom** (with X = 5, Y = 3):
+
+| `zx` | `sw` | seen | expected | |
+|---|---|---|---|---|
+| `0` | `0` | `2` | `5 − 3 = 2` | ✓ |
+| `0` | `1` | `−5` | `3 − 5 = −2` | ✗ |
+| `1` | `0` | `0` | `0 − 3 = −3` | ✗ |
+| `1` | `1` | `−2` | `0 − 5 = −5` | ✗ |
+
+Only one of the four rows is right, and it is the starting row (`zx=0, sw=0`).
+Everything looks fine the first time you glance at the screen. Other builds that
+plug `0` into one of the `sw` selectors usually give the same symptom too. Remember the
 measure from `13` — to be able to say *"I would have noticed if it were broken"*
 you have to walk **all four rows.**
 
@@ -352,8 +363,9 @@ Go in order so the canvas stays readable:
    Wire its output to `Output`.
 
 Verifying the front layer before placing the units is this level's one real
-lesson in method. When you see a wrong number at the end, the fault can be in one
-of nine places. With the front layer verified, that drops to three.
+lesson in method. When you see a wrong number at the end, the fault can be in any
+of the seven parts. With the front layer (S1, S2, S3 and `0`) verified, the
+suspects drop to three: the wiring of the two units and the last selector.
 
 <details>
 <summary>🔑 If you are stuck — the connection list</summary>
@@ -408,8 +420,8 @@ And right here the lesson's second face opens:
 > You cannot read the result — but you can read the **traces** of it having been
 > computed.
 
-For now that sentence is only a curiosity. By the time you reach `Stop 4` it will
-be the name of a method. [CWE-1300](../cwe/cwe_1300.md) — physical side channel —
+For now that sentence is only a curiosity. Later, when we reach the measurable
+traces inside a processor, it will be the name of a method. [CWE-1300](../cwe/cwe_1300.md) — physical side channel —
 describes exactly this gap: something that is logically hidden staying physically
 measurable.
 
@@ -539,8 +551,8 @@ there.
 ☐ The right operand NEVER sees zx: one layer. The left operand answers two questions: two layers.
 ☐ ⚠️ The order is mandatory: sw first, then zx. A layer that says "the left one" comes AFTER the layer that decides positions.
 ☐ ⚠️ The 0 constant belongs to zx's selector. Put it on sw's spare leg and you have tied an eraser to a pair of scissors.
-☐ The symptom of a wrong build: ONE of the four rows is right — and that one is usually the starting state.
-☐ Verify the front layer before placing the units: the fault surface drops from nine to three.
+☐ If 0 and Y swap places (0 on S1, Y on S3), only ONE of the four rows is right: the starting row. Walk all four rows.
+☐ Verify the front layer before placing the units: the suspect parts drop from seven to three.
 ☐ Compute everything then pick: the arithmetic unit computes even when u=0, S1 runs even when zx=1.
 ☐ 🔑 A discarded result DOES NOT VANISH, it is merely unused. Gates switched, heat came out, time passed.
 ☐ The control word is 5 bits = 32 states. The documentation gives 8 rows + 4 rows SEPARATELY; it never writes the product.
