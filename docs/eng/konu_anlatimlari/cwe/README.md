@@ -227,9 +227,12 @@ right at the crossroads, once 208 is written this page will be reachable from bo
 sides.
 
 **Why is 1242 in this tier but still important?** The ALU level's control word is
-5 bits, that is **32 states** — but the documentation defines 8 operations. The
-difference is harmless in NandGame. On a real chip, if an undocumented control bit
-switches off a security feature, its name is **chicken bit**. The rule: *every
+5 bits, that is **32 states** — but the documentation lists only 11 of them. Of the
+19 operations that come out, 8 are written nowhere. The difference is harmless in
+NandGame, and it can even be derived from the rule the game gives. On a real chip,
+bits left in to switch off a risky feature after manufacturing are called
+**chicken bits**; if such a bit is undocumented and switches off a security
+feature, a weakness is born. The rule: *every
 control word wider than its documented state space is a place to look.* That is
 exactly the job reverse engineering does.
 

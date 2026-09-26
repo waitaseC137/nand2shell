@@ -218,9 +218,11 @@ bundler'la geldi. Katalog yanlış değildi — o günkü kapsamın dürüst ayn
 208 yazıldığında bu sayfa iki taraftan da erişilebilir olacak.
 
 **1242 neden bu kademede ama önemli?** ALU seviyesinin kontrol sözcüğü 5 bit,
-yani **32 durum** — ama belge 8 işlem tanımlıyor. Aradaki fark NandGame'de
-zararsızdır. Gerçek bir çipte, belgelenmemiş bir kontrol biti bir güvenlik
-özelliğini kapatıyorsa adı **chicken bit**'tir. Kural: *belgelenmiş durum
+yani **32 durum** — ama belge bunların yalnızca 11'ini listeliyor. Ortaya çıkan 19
+işlemin 8'i hiçbir yerde yazmıyor. Aradaki fark NandGame'de zararsızdır, üstelik
+oyunun verdiği kuraldan türetilebilir. Gerçek bir çipte ise üretimden sonra riskli
+bir özelliği kapatmak için bırakılan bitlere **chicken bit** denir; böyle bir bit
+belgelenmemişse ve bir güvenlik özelliğini kapatıyorsa zayıflık doğar. Kural: *belgelenmiş durum
 uzayından geniş her kontrol sözcüğü, bakılacak bir yerdir.* Tersine mühendisliğin
 yaptığı iş tam olarak budur.
 

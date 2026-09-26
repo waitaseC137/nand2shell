@@ -71,6 +71,10 @@ Seviyenin verdiği tablo şu:
 | 0 | 1 | X + 1 |
 | 1 | 1 | X − 1 |
 
+> 💡 Oyun `op1` ve `op0`'a *bit-flags*, yani **bayrak** diyor. `10`'daki
+> bayraklarla (ZF, SF) aynı şey değil: onlar bir devrenin **çıkışıydı**, sonuç
+> hakkında bilgi veriyordu. Bunlar **giriş**: devreye ne yapacağını söylüyorlar.
+
 Dört satır, dört işlem. `12`'deki refleksle bakarsan dört kutu kurup çıkışta
 seçmek istersin. Çalışır da. Ama önce tabloyu **satır satır değil, sütun sütun**
 oku.
@@ -181,6 +185,10 @@ Y hazır, aşağıda giriş olarak duruyor. Peki 1 nereden gelecek?
 Toolbox'a bak. `nand`, `select 16`, `add 16`, `sub 16`, `inv`, `16 bit bundler`,
 ve bir de sabit **`0`** var.
 
+`08`'de `add 16`'nın altında bir `c` bacağı vardı ve 1'i oradan sokmak en ucuz
+yoldu. Bu seviyedeki `add 16`'da o bacak yok, `sub 16`'da da yok. 1'i ikinci sayı
+olarak vermek zorundasın.
+
 `1` yok.
 
 Bu bir eksiklik değil, seviyenin sorusu. Sabit 0'ı ters çevirirsen ne olur?
@@ -196,8 +204,8 @@ Bu bir eksiklik değil, seviyenin sorusu. Sabit 0'ı ters çevirirsen ne olur?
 > gerilimde tutulan bir teldir; onu ya doğrudan beslemeye bağlarsın ya da elindeki
 > bir 0'ı ters çevirirsin.
 
-Bir eksik kaldı: `inv`'in çıkışı **tek tel.** Seçicinin girişi ise 16 tel. Bunlar
-doğrudan birbirine bağlanmaz.
+Bir eksik kaldı: `inv`'in çıkışı **tek tel.** Seçicinin girişi ise 16 tel. Geri
+kalan on beş tele ne olacak?
 
 ---
 
@@ -217,9 +225,12 @@ sisteminde `1` şudur:
 
 **On altı tel.** On beşi 0'da, biri 1'de. `inv` sana bunlardan sadece birini
 veriyor — bit 0'ı. Geri kalan on beşin de var olması ve 0'da durması gerekiyor.
+Bunun iki yolu var.
 
-`16 bit bundler` tam bu iş için var: 16 ayrı tek-bitlik teli alır, tek bir
-16 bitlik değer hâline getirir.
+### Açık Yol: Bundler
+
+`16 bit bundler` 16 ayrı tek-bitlik teli alır, tek bir 16 bitlik değer hâline
+getirir.
 
 ```
   bit 0  ←── inv çıkışı (1)
@@ -231,27 +242,77 @@ veriyor — bit 0'ı. Geri kalan on beşin de var olması ve 0'da durması gerek
 
 Bağlanmamış girişler 0 sayıldığı için (`08`'deki kural) sadece bit 0'ı bağlaman
 yeterli. Ama on beşi **kavramsal olarak oradalar** — bundler onları da üretiyor.
+Ve 1'in hangi bite gideceğini **sen** seçiyorsun.
 
 > 🔑 Bundler bir hesap yapmaz. **Genişlik adaptörüdür:** tek tellerden bir yol
-> örer.
+> örer. Oyun da çözümdeki parçaları sayarken bundler'ı saymaz, çünkü içinde
+> mantık yoktur.
 
-Şunu ayırmak önemli, çünkü işlemcide ikisi hep birlikte ama işleri ayrı:
+### Gizli Yol: Oyun Kendisi Genişletir
+
+Bundler'ı çıkar ve `inv`'in çıkışını doğrudan seçicinin 16 bitlik girişine bağla.
+Oyun itiraz etmez, seviye yine geçer.
+
+Çünkü NandGame 1 bitlik bir teli 16 bitlik bir girişe bağladığında o biti
+**bit 0'a** koyar, kalan on beşini **0** yapar. Bundler'la elle yaptığın işi senin
+yerine, sessizce yapar.
+
+> 📌 Bu deney ders ilk yazıldıktan sonra yapıldı. İlk hâlinde burada "bunlar
+> doğrudan birbirine bağlanmaz" yazıyordu. Oyunda denenince yanlış çıktı.
+
+İki yol aynı sonucu verir ama aynı şey değildir:
+
+| | 1 hangi bite gidiyor | yanlış bağlarsan |
+|---|---|---|
+| bundler | **sen** seçiyorsun | teldeki sayı hemen söyler (aşağıdaki `0800` tuzağı) |
+| oyunun genişletmesi | hep bit 0, üstü hep 0 | ses çıkmaz, yanlış teli bağlasan da kabul eder |
+
+İkinci satırın tuzağı [15](./15_condition.md#tuzak-doğru-parça-yanlış-tel)'te
+karşına çıkacak: bir bayrağı 16 bitlik bir girişe yanlışlıkla bağlamak ve oyunun
+buna sessizce izin vermesi.
+
+### Gerçek Çipte
+
+Fizikte "kendiliğinden genişleme" yoktur. 16 bitlik bir giriş 16 ayrı bacaktır,
+tek bir tel ancak birine değer. Kalan on beş bacağa ne olacağına **biri karar
+vermek zorunda**:
+
+| kalan on beş bacak | sonuç |
+|---|---|
+| toprağa (0 V) bağlanır | `0000…0001`: sıfırla genişletme, NandGame'in yaptığı |
+| aynı sinyal on altısına birden dağıtılır | `1111…1111`: işaret uzatmasının mantığı |
+| hiçbir yere bağlanmaz | **tanımsız.** Bacak havada kalır, voltajı [01.5](./01.5_yasak_bolge.md)'teki yasak bölgeye düşebilir |
+
+Kararı ya tasarımcı verir ya da tasarım aracı. Çipler Verilog gibi dillerle
+tasarlanır ve bu dillerde işaretsiz dar bir değeri geniş bir tele koyarsan araç,
+NandGame gibi, üstünü sıfırla doldurur. Çip üretilirken o teller toprağa bağlanır.
+**Otomatik olan fizik değil, araç.**
+
+Aynı sebeple `08`'deki "bağlanmamış giriş 0 sayılır" kuralı da oyunun bir
+kolaylığıdır. Gerçek bir çipte kullanılmayan her giriş bilerek 0'a ya da 1'e
+bağlanır.
+
+---
+
+Şunu ayırmak önemli, çünkü işlemcide üçü hep birlikte ama işleri ayrı:
 
 | parça | işi |
 |---|---|
-| `0` + `inv` + `bundler` | sabit 1'i **imal etmek** |
+| `0` + `inv` | sabit 1'i **imal etmek** |
+| bundler ya da oyunun genişletmesi | onu 16 tele **yaymak** |
 | birinci `select 16` | Y ile o sabit arasında **seçmek** |
 
-Biri üretici, biri seçici.
+Biri üretir, biri yayar, biri seçer.
 
-Ve şuna dikkat et: bundler olmasaydı 16 bitlik sabiti seçicinin girişine
-koyamazdın. Koyamazsan girişte seçim yapamazsın; girişte seçemezsen dört
-aritmetik birim kurmak zorunda kalırdın. **Ucuz tasarımı mümkün kılan şey,
-genişlik adaptörü.**
+Ucuz tasarımı mümkün kılan şey, 16 bitlik sabiti seçicinin girişine koyabilmek.
+Koyamasaydın girişte seçim yapamaz, dört aritmetik birim kurmak zorunda
+kalırdın.
 
 > 💡 Bu genişlik meselesi bir daha karşına çıkacak. 8 bitlik bir değeri 16 bitlik
-> bir yere yüklediğinde geri kalan 8 biti neyle doldurursun? Negatif sayılarda
-> bunun iki farklı doğru cevabı var — bellek ünitesinde açacağız.
+> bir yere yüklediğinde geri kalan 8 biti neyle doldurursun? Sayıyı işaretsiz
+> okuyorsan 0'la, işaretli okuyorsan işaret bitinin kopyasıyla. Aynı desen için
+> iki farklı doğru cevap var; hangisinin doğru olduğunu sayının ne anlama geldiği
+> belirler. Ayrıntısı [CWE-194](../cwe/cwe_194.md) sayfasında.
 
 ---
 
@@ -316,7 +377,9 @@ Elindekiler: `nand`, `select 16`, `add 16`, `sub 16`, `0`, `inv`,
 Sırayla git, tek hamlede kurmaya çalışma:
 
 1. Önce **sabit 1'i imal et** (`0` → `inv` → bundler'ın **bit 0**'ı). Bundler'ın
-   çıkışında `Hex 0001` yazdığını gör. Yazmıyorsa ileri gitme.
+   çıkışında `Hex 0001` yazdığını gör. Yazmıyorsa ileri gitme. *(Bundler'sız da
+   geçer, oyun kendisi genişletir. Ama bundler'la kur: 1'in hangi bite gittiğini
+   görmek istiyorsun.)*
 2. Sonra **giriş seçicisini** kur (kol `op0`, Y ve sabit 1).
 3. Sonra `add 16` ve `sub 16` — **X ikisinin de `A`'sına**, seçicinin çıkışı
    ikisinin de `B`'sine.
@@ -331,6 +394,7 @@ Sırayla git, tek hamlede kurmaya çalışma:
 <summary>🔒 Çözüm şeması — önce kendin dene, sonra aç</summary>
 
 1. `0` → `inv` → `16 bit bundler`'ın **bit 0** girişi. Diğer 15 bit boşta (0).
+   *(Bundler'ı atlayıp `inv`'i doğrudan 2. adımdaki `D1`'e bağlasan da geçer.)*
 2. `select 16` (giriş): `D0` ← **Y**, `D1` ← bundler çıkışı, `s` ← **op0**.
 3. `add 16`: `A` ← **X**, `B` ← giriş seçicisinin çıkışı.
 4. `sub 16`: `A` ← **X**, `B` ← giriş seçicisinin çıkışı. *(aynı tel iki kutuya
@@ -399,12 +463,15 @@ Sadece o da değil:
 | nerede | ne |
 |---|---|
 | [döngüler](../x86_assembly/12_donguler.md) | `i++` — her turda bir artırma |
-| [yığın](../x86_assembly/14_stack.md) | her `push`/`pop`'ta yığın işaretçisi bir kayar |
-| dizi gezmek | "sonraki elemana geç" = adresi bir artır |
+| [yığın](../x86_assembly/14_stack.md) | her `push`/`pop`'ta yığın işaretçisi bir kutu kayar |
+| dizi gezmek | "sonraki elemana geç" = adresi bir eleman ileri al |
 
-Bu yüzden `+1` ve `−1`, `+Y` kadar meşru bir işlem olarak tabloya girmiş. Bugün
-kurduğun devre, ilerideki **Processor** ünitesinde program sayacını işletecek
-olan devre.
+x86'da bu adımlar bayt cinsinden sayılır: yığında 4, dizide bir elemanın boyu
+kadar. Fikir aynı: sabit bir miktar eklemek ya da çıkarmak.
+
+Bu yüzden `+1` ve `−1`, `+Y` kadar meşru bir işlem olarak tabloya girmiş.
+İlerideki **Processor** ünitesinde program sayacı her komutta tam bu işlemi
+yapacak.
 
 > 💡 x86'da aynı gerekçeyle `add`'den ayrı `inc` ve `dec` komutları var. Komik
 > son: modern işlemcilerde `inc` bazen `add reg, 1`'den **yavaş** çalışıyor,
@@ -432,7 +499,9 @@ kutuda birleştirecek. Ardından **Condition**'da `10`'da söz verilen taşma ba
 ☐ Refleks: aynı parçadan birden fazla varsa "farkı daha erken halledebilir miyim?" diye sor.
 ☐ Donanımda sabit saklanmaz, İMAL EDİLİR. Sabit 1 = inv(0).
 ☐ 16 bitlik "1" tek tel değil, ON ALTI teldir: 15'i alçak, 1'i yüksek.
-☐ bundler hesap yapmaz, GENİŞLİK ADAPTÖRÜdür. Onsuz girişte seçim kurulamazdı.
+☐ bundler hesap yapmaz, GENİŞLİK ADAPTÖRÜdür: 1'in hangi bite gideceğini SEN seçersin.
+☐ Oyun 1 biti 16 bite kendisi de genişletir (bit 0'a koyar, üstünü 0 yapar) — ama SESSİZCE.
+☐ Fizikte kendiliğinden genişleme yok: kalan bacakları tasarımcı ya da araç toprağa bağlar. Boşta bırakılan bacak havada kalır.
 ☐ ⚠️ sub değişmeli değil: X HER ZAMAN A'ya. Ters bağlarsan toplama doğru, çıkarma ters çıkar.
 ☐ D0/D1 sadece soket adı — tablodaki 1 ile ilgisi yok. Kol 0 iken geçecek şey D0'a.
 ☐ Sabit 1 yanlış bite giderse devre X + 2048 yapar; teldeki 0800 sayısı hatayı söyler.
@@ -447,6 +516,8 @@ kutuda birleştirecek. Ardından **Condition**'da `10`'da söz verilen taşma ba
 
 - 👾 **Meraklısına:** [CWE-193 — Off-by-one](../cwe/cwe_193.md) — bu dersteki `X + 1`'in bir birim yanlış yere düşmesi: `<` mi `<=` mi
 - 👾 **Genişlik ekseni:** [CWE-194 — İşaret uzatması](../cwe/cwe_194.md) (dar → geniş) ve [CWE-197 — Kırpma](../cwe/cwe_197.md) (geniş → dar) — bundler bölümünün güvenlik karşılığı
+- [15_condition.md](./15_condition.md) — Oyunun sessiz genişletmesinin tuzağı: bayrağı 16 bitlik girişe bağlamak
+- [01.5_yasak_bolge.md](./01.5_yasak_bolge.md) — Boşta kalan bir bacağın voltajı neden tanımsızdır
 - [12_logic_unit.md](./12_logic_unit.md) — Aynı fikrin mantık işlemleriyle hâli; emir, seçim, "hepsi çalışır biri seçilir"
 - [11_selector_switch.md](./11_selector_switch.md) — Seçicinin kendisi ve fan-out
 - [09_subtraction.md](./09_subtraction.md) — `sub 16`'nın içindeki devre
@@ -458,6 +529,6 @@ kutuda birleştirecek. Ardından **Condition**'da `10`'da söz verilen taşma ba
 ---
 
 **Önceki konu:** [12_logic_unit.md](./12_logic_unit.md)
-**Sonraki konu:** *(yolda — ALU)*
+**Sonraki konu:** [14_alu.md](./14_alu.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

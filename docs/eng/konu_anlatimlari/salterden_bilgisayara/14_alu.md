@@ -32,7 +32,7 @@
 ## What Does This Part Do?
 
 ALU = **Arithmetic Logic Unit**. The only part of a processor that does the
-arithmetic. In this level you build it — and because you are on the fourth level
+arithmetic. In this level you build it — and because you are on the third level
 of the unit, both of its halves are already in your hands.
 
 Inputs:
@@ -55,8 +55,8 @@ The first table in the documentation has eight rows:
 | `0` | `1` | `0` | `X xor Y` |
 | `0` | `1` | `1` | `invert X` |
 | `1` | `0` | `0` | `X + Y` |
-| `1` | `0` | `1` | `X + 1` |
 | `1` | `1` | `0` | `X − Y` |
+| `1` | `0` | `1` | `X + 1` |
 | `1` | `1` | `1` | `X − 1` |
 
 The top four rows are the **logic unit** you built in `12`, the bottom four the
@@ -105,8 +105,8 @@ and its name will be **machine instruction**.
 
 > 🔑 There is no physical difference between a control bit and a data bit. Both
 > are wires, both are either high or low. The difference is entirely in **where
-> they are wired**. Another face of the sentence from `04`: meaning is not in the
-> wire, it is in where the wire goes.
+> they are wired**. Another face of the control wire from `11`: meaning is not in
+> the wire, it is in where the wire goes.
 
 ---
 
@@ -156,12 +156,12 @@ The two units' contracts:
 | **logic unit** | the group: `and/or` or `xor/invert` | which member of the group |
 | **arithmetic unit** | the operation: add or subtract | the second number: `Y` or constant `1` |
 
-You worked out the right-hand column yourself in `13` — looking at the table and
+You worked out the bottom row yourself in `13` — looking at the table and
 saying *"`op1` changes what the operation is, `op0` changes what the second
-operand is"*. That observation still holds. What is new is that **the left column
-says something else at the same time.**
+operand is"*. That observation still holds. What is new is that **the top row says
+something else with the same wires.**
 
-> 👾 This is the purest form of the sentence from `04` — *"the pattern is the
+> 👾 This is the purest form of the sentence from `09` — *"the pattern is the
 > same, the meaning is the reader's decision"* — and the circuit side of
 > [CWE-681](../cwe/cwe_681.md). There the same bit pattern was read as two
 > different numbers; here the same bit pattern is read as two different
@@ -236,17 +236,17 @@ Draw the circuit as two separate pipelines and it settles:
 ```
 RIGHT OPERAND  —  a single layer, never sees zx
 
-   X ──┐
-       ├── S2  (s = sw) ──────────────────►  right operand
-   Y ──┘                                      → the Y input of both units
+   X ── D1 ┐
+           ├── S2  (s = sw) ──────────────────►  right operand
+   Y ── D0 ┘                                      → the Y input of both units
 
 
 LEFT OPERAND  —  two layers, two questions
 
-   X ──┐
-       ├── S1  (s = sw) ──┐
-   Y ──┘                  ├── S3  (s = zx) ──►  left operand
-                 0 ───────┘                      → the X input of both units
+                     0 ────── D1 ┐
+   Y ── D1 ┐                      ├── S3  (s = zx) ──►  left operand
+           ├── S1  (s = sw) ── D0 ┘                      → the X input of both units
+   X ── D0 ┘
 ```
 
 `S2` goes straight to the units because the right side's single question has been
@@ -278,8 +278,10 @@ erased → `0 − X` ✅
 Erase first: the left becomes `0`, then swap → `0` moves right, the left becomes
 `X` → `X − 0` ❌
 
-The reason is inside the word: `zx` says "**the left one**". For something to be
-on the left, the positions have to be settled first. `sw` settles the positions,
+The reason is in the game's description: for `zx` it says *"the left operand is
+replaced with 0"*. The X in its name is not the X input but the X leg of the
+units, that is, the left operand. For something to be on the left, the positions
+have to be settled first. `sw` settles the positions,
 `zx` touches the settled position.
 
 > 💡 The general rule: if a layer describes a position — "the one over there" —
@@ -425,11 +427,12 @@ How many of them are written down?
 
 - The first table: **8 rows** for `u`, `op1`, `op0`
 - The second table: **4 rows** for `zx`, `sw` — and only through the `X − Y`
-  example
+  example. One of them (`X − Y`) is already in the first table, three are new:
+  `Y − X`, `0 − Y`, `0 − X`.
 
 So the documentation describes the two axes **separately**. The full cross
 product is written nowhere. Each of the 32 combinations produces a result, but
-only eight have an entry in a table.
+only eleven have an entry in the documentation.
 
 ### 🔍 Let's count
 
@@ -453,8 +456,10 @@ subtractions   X−Y      Y−X
 logic          X and Y  X or Y   X xor Y
 ```
 
-**Eight** of them are written in the table. The remaining **eleven** come out of
-the product of the two tables and are listed nowhere.
+**Eleven** of them are written in the documentation: the eight of the first
+table, plus `Y − X`, `0 − Y` and `0 − X` from the second. The remaining **eight**
+come out of the product of the two tables and are listed nowhere: `0`, `1`, `−1`,
+`X`, `Y`, `not Y`, `Y+1`, `Y−1`.
 
 The most striking ones:
 
@@ -463,25 +468,36 @@ The most striking ones:
 | the `X + 1` operation, `zx = 1` | `0 + 1` = the constant **1** |
 | the `X − 1` operation, `zx = 1` | `0 − 1` = the constant **−1** |
 | the `X and Y` operation, `zx = 1` | `0 and Y` = the constant **0** |
-| the `X − Y` operation, `zx = 1` | `0 − Y` = **`−Y`**, negation |
 | the `X or Y` operation, `zx = 1` | `0 or Y` = **`Y`**, passed through as is |
+| the `X + 1` operation, `sw = 1` | `Y + 1`, **incrementing Y** |
 
-In `13` manufacturing the constant `1` cost you three parts (`0` + `inv` +
-bundler). Here the constants `1`, `−1` and `0` come **for free** — with no extra
-gate at all, purely as a flag combination. The same goes for "negate" and "pass
-through unchanged": not in the table, yet present in the circuit.
+In `13` you manufactured the constant `1` with `0` + `inv`. Here the constants
+`1`, `−1` and `0` come **for free** — with no extra gate at all, purely as a flag
+combination. The same goes for "pass through unchanged" and "increment Y": not in
+the list, yet present in the circuit.
 
 </details>
 
-### Undocumented States
+### Unlisted States
 
-Now to the real point. In NandGame these eleven undocumented states are **good
+Now to the real point. In NandGame these eight unlisted operations are **good
 news** — free operations. On a real chip the same picture means something else.
+
+But first, a subtlety. NandGame gives a **rule** for `zx` and `sw`: "`sw` swaps X
+and Y, `zx` makes the left operand 0." With that rule you can derive all 32
+combinations on paper. So these eight operations are **not hidden, just not
+listed.** The documentation does not count the product, but it gives you
+everything you need to compute it.
 
 If a piece of hardware has an `n`-bit control word, that part can enter `2ⁿ`
 states. If the documentation describes only some of them, the rest do not
-disappear — they **exist, undescribed.** If one of them switches off a security
-feature, it is called a **chicken bit**.
+disappear — they **exist, undescribed.** On real chips this is often not as
+innocent as in NandGame: for some bits **not even the rule** is written down, and
+nobody even knows they exist.
+
+Bits left in so that a risky feature can be switched off after manufacturing are
+called **chicken bits**. If such a bit is undocumented, reachable, and switches
+off a security feature, a weakness is born.
 
 MITRE catalogues this as a weakness of its own: **CWE-1242 — Inclusion of
 Undocumented Features or Chicken Bits**.
@@ -492,8 +508,8 @@ The working rule that falls out of this:
 
 That is exactly what reverse engineering does on the hardware side: put the
 states the documentation counts next to the states the word allows, and try the
-difference. The counting you did today in NandGame — 32 combinations, 8
-documented rows — is the smallest version of that job.
+difference. The counting you did today in NandGame — 32 combinations, 11
+documented — is the smallest version of that job.
 
 > 📄 Details on its own page: [CWE-1242](../cwe/cwe_1242.md) —
 > what a chicken bit is, why it gets left in, and
@@ -528,8 +544,9 @@ there.
 ☐ Compute everything then pick: the arithmetic unit computes even when u=0, S1 runs even when zx=1.
 ☐ 🔑 A discarded result DOES NOT VANISH, it is merely unused. Gates switched, heat came out, time passed.
 ☐ The control word is 5 bits = 32 states. The documentation gives 8 rows + 4 rows SEPARATELY; it never writes the product.
-☐ The circuit's real capacity is 19 distinct operations — 8 written down, 11 born from the flag product.
-☐ The constant 1 that cost three parts in 13 comes FREE here with zx=1. So do the constants 0 and −1.
+☐ The circuit's real capacity is 19 distinct operations — 11 written in the documentation, 8 listed nowhere.
+☐ Unlisted ≠ hidden: the game gives the zx/sw RULE, all 32 can be derived on paper. A chicken bit does not even have a rule.
+☐ The constant 1 you manufactured with 0 + inv in 13 comes FREE here with zx=1. So do the constants 0 and −1.
 ☐ 👾 Any control word wider than its documented state space is a place to look (CWE-1242).
 ```
 
@@ -539,12 +556,12 @@ there.
 
 - 👾 **Meaning is in the reader:** [CWE-681 — Incorrect conversion between numeric types](../cwe/cwe_681.md) — the same pattern read under two contracts
 - 👾 **The trace of what was thrown away:** [CWE-1300 — Physical side channel](../cwe/cwe_1300.md) — what is computed but unused staying measurable
-- 👾 **Undocumented space:** [CWE-1242 — Chicken Bits](../cwe/cwe_1242.md) — 32 states, 8 documented rows: the gap between them
+- 👾 **Undocumented space:** [CWE-1242 — Chicken Bits](../cwe/cwe_1242.md) — 32 states, 11 documented: the gap between them
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — Moving the selector to the input; the arithmetic contract of `op1`/`op0`
 - [12_logic_unit.md](./12_logic_unit.md) — The first circuit that takes an order; "all four always run"
 - [11_selector_switch.md](./11_selector_switch.md) — `select 16` itself, and fan-out
 - [10_bayraklar.md](./10_bayraklar.md) — Where flags are built; the OF debt
-- [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Meaning is not in the wire but in where it goes
+- [09_subtraction.md](./09_subtraction.md) — "The pattern is the same, the meaning is the reader's decision"
 - [../x86_assembly/09_aritmetik.md](../x86_assembly/09_aritmetik.md) — The software side of the same operations
 - [../x86_assembly/13_bit_islemleri.md](../x86_assembly/13_bit_islemleri.md) — The instruction counterparts of the logic floor
 

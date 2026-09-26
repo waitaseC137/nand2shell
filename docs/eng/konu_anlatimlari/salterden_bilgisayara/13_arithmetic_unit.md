@@ -73,6 +73,11 @@ Here is the table the level gives you:
 | 0 | 1 | X + 1 |
 | 1 | 1 | X − 1 |
 
+> 💡 The game calls `op1` and `op0` *bit-flags*. They are not the same thing as
+> the flags in `10` (ZF, SF): those were a circuit's **outputs**, reporting
+> something about the result. These are **inputs**: they tell the circuit what to
+> do.
+
 Four rows, four operations. With the reflex from `12` you would build four boxes
 and pick one at the output. That works. But first read the table **column by
 column, not row by row.**
@@ -189,6 +194,10 @@ Y is ready, sitting down there as an input. But where will the 1 come from?
 Look at the toolbox. There is `nand`, `select 16`, `add 16`, `sub 16`, `inv`,
 `16 bit bundler`, and a constant **`0`**.
 
+In `08`, the `add 16` had a `c` leg underneath, and feeding the 1 in there was
+the cheapest route. The `add 16` in this level has no such leg, and neither does
+`sub 16`. You have to supply the 1 as the second number.
+
 There is no `1`.
 
 This is not an omission, it is the level's question. What happens if you invert
@@ -206,7 +215,7 @@ input is 0, the output is 1. That is where the constant 1 comes from.
 > to the supply or you flip a 0 you already have.
 
 One thing is still missing: the output of `inv` is **a single wire.** The input
-of the selector is 16 wires. These do not connect directly.
+of the selector is 16 wires. What happens to the other fifteen?
 
 ---
 
@@ -225,10 +234,13 @@ In a 16-bit number system, `1` is this:
 ```
 
 **Sixteen wires.** Fifteen of them at 0, one at 1. `inv` hands you only one of
-them — bit 0. The remaining fifteen also have to exist and sit at 0.
+them — bit 0. The remaining fifteen also have to exist and sit at 0. There are
+two ways to get there.
 
-The `16 bit bundler` exists exactly for this job: it takes 16 separate one-bit
-wires and turns them into a single 16-bit value.
+### The Explicit Way: the Bundler
+
+The `16 bit bundler` takes 16 separate one-bit wires and turns them into a single
+16-bit value.
 
 ```
   bit 0  ←── inv output (1)
@@ -240,30 +252,80 @@ wires and turns them into a single 16-bit value.
 
 Since unconnected inputs count as 0 (the rule from `08`), wiring bit 0 alone is
 enough. But the other fifteen are **conceptually there** — the bundler produces
-them as well.
+them as well. And **you** choose which bit the 1 goes to.
 
 > 🔑 The bundler does not compute anything. It is a **width adapter:** it weaves
-> a road out of single wires.
+> a road out of single wires. The game does not even count the bundler when it
+> counts the parts of your solution, because there is no logic inside it.
 
-This distinction matters, because inside a processor the two always travel
+### The Hidden Way: the Game Widens It Itself
+
+Remove the bundler and wire the output of `inv` straight into the selector's
+16-bit input. The game does not object, and the level still passes.
+
+That is because when NandGame connects a 1-bit wire to a 16-bit input, it puts
+that bit on **bit 0** and sets the other fifteen to **0**. It does, silently and
+on your behalf, the job you did by hand with the bundler.
+
+> 📌 This experiment was done after the lesson was first written. The first
+> version said "these do not connect directly" here. Tried in the game, that
+> turned out to be wrong.
+
+The two ways give the same result, but they are not the same thing:
+
+| | which bit the 1 goes to | if you wire it wrong |
+|---|---|---|
+| bundler | **you** choose | the number on the wire tells you at once (the `0800` trap below) |
+| the game's widening | always bit 0, the rest always 0 | nothing is said; it accepts even the wrong wire |
+
+The trap in the second row is waiting for you in
+[15](./15_condition.md#the-trap-right-part-wrong-wire): wiring a flag into a
+16-bit input by mistake, and the game silently allowing it.
+
+### On a Real Chip
+
+In physics there is no "widening by itself". A 16-bit input is 16 separate pins,
+and a single wire can only touch one of them. **Someone has to decide** what
+happens to the other fifteen pins:
+
+| the other fifteen pins | result |
+|---|---|
+| tied to ground (0 V) | `0000…0001`: zero extension, what NandGame does |
+| the same signal is fanned out to all sixteen | `1111…1111`: the logic of sign extension |
+| connected to nothing | **undefined.** The pin floats, and its voltage can drift into the forbidden zone from [01.5](./01.5_yasak_bolge.md) |
+
+The decision is made either by the designer or by the design tool. Chips are
+designed in languages like Verilog, and in those languages, if you put a narrow
+unsigned value on a wide wire, the tool fills the top with zeros, just like
+NandGame. When the chip is made, those wires are tied to ground. **What is
+automatic is not the physics, it is the tool.**
+
+For the same reason, the rule from `08` that "an unconnected input counts as 0" is
+a convenience of the game too. On a real chip every unused input is deliberately
+tied to 0 or to 1.
+
+---
+
+This distinction matters, because inside a processor the three always travel
 together but their jobs are separate:
 
 | part | its job |
 |---|---|
-| `0` + `inv` + `bundler` | **manufacturing** the constant 1 |
+| `0` + `inv` | **manufacturing** the constant 1 |
+| the bundler or the game's widening | **spreading** it across 16 wires |
 | the first `select 16` | **choosing** between Y and that constant |
 
-One is a producer, the other is a chooser.
+One produces, one spreads, one chooses.
 
-And notice this: without the bundler you could not have put a 16-bit constant on
-the selector's input. If you cannot put it there, you cannot choose at the input;
-if you cannot choose at the input, you would have been forced to build four
-arithmetic units. **The thing that makes the cheap design possible is the width
-adapter.**
+The thing that makes the cheap design possible is being able to put a 16-bit
+constant on the selector's input. If you could not, you could not choose at the
+input, and you would have been forced to build four arithmetic units.
 
 > 💡 This width business will come up again. When you load an 8-bit value into a
-> 16-bit place, what do you fill the remaining 8 bits with? For negative numbers
-> there are two different correct answers — we will open that in the memory unit.
+> 16-bit place, what do you fill the remaining 8 bits with? With 0 if you read the
+> number as unsigned, with copies of the sign bit if you read it as signed. The
+> same pattern has two different correct answers; which one is right depends on
+> what the number means. The details are on the [CWE-194](../cwe/cwe_194.md) page.
 
 ---
 
@@ -332,7 +394,9 @@ Go in order, do not try to build it in one move:
 
 1. First **manufacture the constant 1** (`0` → `inv` → the bundler's **bit 0**).
    Check that the bundler's output reads `Hex 0001`. If it does not, do not go
-   further.
+   further. *(It passes without the bundler too, because the game widens by
+   itself. But build it with the bundler: you want to see which bit the 1 goes
+   to.)*
 2. Then build the **input selector** (lever `op0`, Y and the constant 1).
 3. Then `add 16` and `sub 16` — **X into the `A` of both**, the selector's output
    into the `B` of both.
@@ -348,7 +412,8 @@ Go in order, do not try to build it in one move:
 <summary>🔒 Solution schematic — try it yourself first, then open</summary>
 
 1. `0` → `inv` → the **bit 0** input of the `16 bit bundler`. The other 15 bits
-   are unconnected (0).
+   are unconnected (0). *(Skipping the bundler and wiring `inv` straight into the
+   `D1` of step 2 passes too.)*
 2. `select 16` (input): `D0` ← **Y**, `D1` ← the bundler's output, `s` ← **op0**.
 3. `add 16`: `A` ← **X**, `B` ← the input selector's output.
 4. `sub 16`: `A` ← **X**, `B` ← the input selector's output. *(the same wire goes
@@ -420,12 +485,15 @@ And not only there:
 | where | what |
 |---|---|
 | [loops](../x86_assembly/12_donguler.md) | `i++` — one increment per turn |
-| [the stack](../x86_assembly/14_stack.md) | the stack pointer shifts by one on every `push`/`pop` |
-| walking an array | "go to the next element" = increment the address |
+| [the stack](../x86_assembly/14_stack.md) | the stack pointer shifts by one slot on every `push`/`pop` |
+| walking an array | "go to the next element" = move the address one element forward |
+
+On x86 these steps are counted in bytes: 4 on the stack, the size of one element
+in an array. The idea is the same: adding or subtracting a fixed amount.
 
 That is why `+1` and `−1` earned a place in the table as legitimately as `+Y`.
-The circuit you built today is the circuit that will drive the program counter in
-the upcoming **Processor** unit.
+In the upcoming **Processor** unit, the program counter will do exactly this
+operation on every instruction.
 
 > 💡 x86 has separate `inc` and `dec` instructions for the same reason. The funny
 > ending: on modern processors `inc` is sometimes **slower** than `add reg, 1`,
@@ -453,7 +521,9 @@ overflow flag (OF) that was promised back in `10`.
 ☐ The reflex: if a design has more than one of the same part, ask "can I settle the difference earlier?"
 ☐ In hardware constants are not stored, they are MANUFACTURED. Constant 1 = inv(0).
 ☐ A 16-bit "1" is not one wire, it is SIXTEEN wires: 15 low, 1 high.
-☐ The bundler computes nothing, it is a WIDTH ADAPTER. Without it you could not choose at the input.
+☐ The bundler computes nothing, it is a WIDTH ADAPTER: YOU choose which bit the 1 goes to.
+☐ The game widens 1 bit to 16 bits by itself too (puts it on bit 0, the rest 0) — but SILENTLY.
+☐ In physics nothing widens by itself: the designer or the tool ties the other pins to ground. A pin left unconnected floats.
 ☐ ⚠️ sub is not commutative: X ALWAYS goes to A. Wire it backwards and addition is right, subtraction is inverted.
 ☐ D0/D1 are just socket names — nothing to do with the 1 in the table. What passes when the lever is 0 goes to D0.
 ☐ If the constant 1 lands on the wrong bit the circuit computes X + 2048; the 0800 on the wire tells you.
@@ -468,6 +538,8 @@ overflow flag (OF) that was promised back in `10`.
 
 - 👾 **For the curious:** [CWE-193 — Off-by-one](../cwe/cwe_193.md) — this lesson's `X + 1` landing one unit off: is it `<` or `<=`
 - 👾 **The width axis:** [CWE-194 — Sign extension](../cwe/cwe_194.md) (narrow → wide) and [CWE-197 — Truncation](../cwe/cwe_197.md) (wide → narrow) — the security counterpart of the bundler section
+- [15_condition.md](./15_condition.md) — The trap of the game's silent widening: wiring a flag into a 16-bit input
+- [01.5_yasak_bolge.md](./01.5_yasak_bolge.md) — Why the voltage of a pin left unconnected is undefined
 - [12_logic_unit.md](./12_logic_unit.md) — The same idea with logic operations; the order, the choice, "they all run, one gets picked"
 - [11_selector_switch.md](./11_selector_switch.md) — The selector itself and fan-out
 - [09_subtraction.md](./09_subtraction.md) — The circuit inside `sub 16`

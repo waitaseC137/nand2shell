@@ -68,9 +68,10 @@ eq  =  equal           eşittir
 gt  =  greater than    büyüktür
 ```
 
-Yazıda `lt` bazen `IT` gibi görünür — o büyük İ değil, küçük L. Bu üçlü karşına
-ömür boyu çıkacak: assembly'de, C'de, veritabanı sorgularında, hepsinde aynı
-kısaltmalar.
+Yazıda `lt` bazen `It` gibi görünür — o büyük I (ı'nın büyüğü) değil, küçük L.
+Bu üçlü karşına başka yerlerde de çıkacak: shell'de (`-lt`, `-eq`, `-gt`), ARM
+assembly'sinde (`LT`, `EQ`, `GT`), bazı veritabanı sorgularında (`$lt`, `$eq`,
+`$gt`).
 
 Ama asıl soru şu: **bu üç bit ne söylüyor?**
 
@@ -142,12 +143,13 @@ a > b   →   a − b pozitif  →   X > 0
 
 Yani bu seviye [ALU](./14_alu.md)'dan bağımsız değil. Dün kurduğun ALU çıkarmayı
 yapıyor, bu seviye sonucu **okuyor**. İkisi birleşince "a, b'den küçük mü"
-sorusu cevaplanabiliyor — ve iki ayrı devreye gerek kalmıyor.
+sorusu cevaplanabiliyor, iki ayrı devreye gerek kalmıyor. (Taşma olmadığı
+sürece — o istisnayı dersin sonunda göreceğiz.)
 
 Gerçek işlemcide bunun adı var. x86'da `cmp a, b` komutu tam olarak `a − b`
 yapar ve **sonucu atar** — sadece bayrakları tutar. Ardından gelen `jl` / `je` /
-`jg` / `jge` / `jne` komutları da tam olarak burada kuracağın devrenin işini
-yapar. Yazılım tarafını
+`jg` / `jge` / `jne` komutları da burada kuracağın devrenin işini yapar — tek bir
+farkla, onu da dersin sonunda göreceğiz: OF. Yazılım tarafını
 [10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md)'de görmüştün;
 işte donanım tarafı.
 
@@ -347,10 +349,14 @@ sıfır mı" diye sordu, oysa sorması gereken "X sıfır mı".
 > mesajı çıkmadı, sayı da geçerli göründü. Yakalamanın tek yolu **ne bağladığına
 > bakmak**.
 >
-> 👾 Bu sessizliğin yazılımdaki karşılığı: [CWE-194](../cwe/cwe_194.md) (işaret
-> uzatması) ve [CWE-197](../cwe/cwe_197.md) (kırpma). İkisinin de ortak yanı
-> şudur: dönüşüm **başarılı** olur. Uyarı yoktur, istisna yoktur, sonuç geçerli
-> bir sayıdır. Yanlış olan şey sayı değil, **anlamıdır**.
+> 👾 Bu sessizliğin yazılımdaki karşılığı örtük tip dönüşümü:
+> [CWE-704](../cwe/cwe_704.md) — *Incorrect Type Conversion or Cast*. Bir bayrak,
+> kimse fark etmeden bir sayıya dönüştü. Dönüşüm **başarılı** oldu: uyarı yok,
+> istisna yok, sonuç geçerli bir sayı. Yanlış olan şey sayı değil, **anlamı**.
+>
+> Buradaki genişletme sıfırla yapıldı (`0000000000000001`). Oyun işaret bitini
+> kopyalasaydı `1111111111111111` çıkardı; o durumun adı
+> [CWE-194](../cwe/cwe_194.md), işaret uzatması.
 
 ---
 
@@ -457,21 +463,38 @@ is neg(X) ────┤
 ```
 
 `11`'de öğrendiğin fan-out. Bir çıkış, istediğin kadar girişi besler. İkinci
-kopya kurarsan devre yine çalışır ama bütçe şişer — bu seviyede hedef 50 nand ve
-bu iki parça ucuz değil.
+kopya kurarsan devre yine çalışır ama bütçe şişer: `is zero` on altı biti tek tek
+yokladığı için pahalı bir parça. (`is neg` ise bedava, tek bir tel —
+[10](./10_bayraklar.md)'da gördün.)
 
 ### Testi nasıl seçersin
 
-İki uç satır bütün devreyi sınar:
+Her vanayı **tek başına** aç:
 
-| `lt` `eq` `gt` | `X` | beklenen |
+| `lt` `eq` `gt` | `X` = `5`, `0`, `−3` | beklenen |
 |---|---|---|
-| `0` `0` `0` | `5`, `0`, `−3` | hep **`0`** (Never) |
-| `1` `1` `1` | `5`, `0`, `−3` | hep **`1`** (Always) |
+| `1` `0` `0` | sadece `X < 0` | `0`, `0`, **`1`** |
+| `0` `1` `0` | sadece `X = 0` | `0`, **`1`**, `0` |
+| `0` `0` `1` | sadece `X > 0` | **`1`**, `0`, `0` |
 
-Bu ikisi tutuyorsa aradaki altı satır da tutar — çünkü aradakiler zaten bu
-ikisinin parçaları. `Never` bütün vanaların kapandığını, `Always` hepsinin
-açıldığını kanıtlar.
+Dokuz satır. Bu üçü tutuyorsa geri kalan satırlar da tutar: `X ≥ 0` gibi bileşik
+bir satır, tek vanalı satırların `or` ile birleşimidir. Parçalar doğruysa
+birleşimleri de doğrudur.
+
+Uç satırlar (`Never`, `Always`) bu işi **göremez.** `Always`'te üç vana birden
+açık. X ne olursa olsun tespitlerden biri 1'dir ve açık vanalardan birinden
+çıkışa geçer. Test yalnızca "çıkışa 1 geldi mi?" diye sorar, **hangi vanadan**
+geldiğini sormaz. `lt`'yi yanlışlıkla `is zero`'ya bağlasan bile `Always` geçer.
+`Never` ise yalnızca vanaların kapanabildiğini gösterir.
+
+> 📌 Bu dersin ilk hâlinde burada "iki uç satır bütün devreyi sınar, aradaki altı
+> satır bunların parçası" yazıyordu. Yanlıştı. İki hatalı kurulum — `lt` ile `eq`'nun
+> tespitleri ters bağlanmış hâli ve yukarıdaki "Doğru Parça, Yanlış Tel" tuzağı —
+> iki uç testi de geçiyor, ama yirmi dört satırın sekizinde yanlış cevap veriyor.
+> Tek vanalı satırlar ikisini de yakalıyor.
+>
+> Bu, yukarıdaki `xor` dersinin aynısı: uç testler **doğru cevabı yanlış sebeple**
+> kabul ediyor.
 
 <details>
 <summary>🔑 Takıldıysan — bağlantı listesi</summary>
@@ -522,8 +545,8 @@ yazmayan, ama bir araya gelince ortaya çıkan davranış. Sekiz satırlık tabl
 devrenin hiçbir yerinde durmuyor; devrenin **sonucu**.
 
 > 🔑 Bu, `14`'te konuştuğumuz meselenin öbür yüzü. Orada kontrol sözcüğü 5 bitti,
-> belge 8 satır tarif ediyordu, ve aradaki fark **belgelenmemiş davranış**
-> olarak duruyordu. Burada sekiz durumun hepsi belgeli — ama hiçbiri devrede
+> 32 kombinasyonun yalnızca 11'i belgede listeleniyordu, ve aradaki fark
+> **listelenmemiş davranış** olarak duruyordu. Burada sekiz durumun hepsi belgeli — ama hiçbiri devrede
 > yazılı değil.
 >
 > İkisi aynı gerçeğin iki yüzü: **bir devrenin yapabildikleri, tarif edilenlerle
@@ -588,21 +611,22 @@ Taşma yoksa (`OF = 0`) sonuç `N`'in kendisidir. Taşma varsa (`OF = 1`) `N` te
 
 x86'da bu yüzden iki ayrı komut ailesi var:
 
-| komut | kullandığı bayrak | ne zaman |
+| komut | baktığı bayrak | ne zaman |
 |---|---|---|
-| `jl` / `jge` | `SF ≠ OF` | **işaretli** karşılaştırma |
-| `jb` / `jae` | `CF` | **işaretsiz** karşılaştırma |
+| `jl` / `jge` | `jl`: `SF ≠ OF` · `jge`: `SF = OF` | **işaretli** karşılaştırma |
+| `jb` / `jae` | `jb`: `CF = 1` · `jae`: `CF = 0` | **işaretsiz** karşılaştırma |
 
 Aynı iki sayı, aynı çıkarma, **iki farklı doğru cevap** — hangisini istediğin
 sayıları nasıl okuduğuna bağlı. `04`'ün ve
 [CWE-681](../cwe/cwe_681.md)'in cümlesi burada da geçerli: desen aynı, anlam
 okuyanın kararı.
 
-> ⚠️ NandGame'in bu seviyesinde OF yok, çünkü `X` doğrudan sıfırla
-> karşılaştırılıyor — arada bir çıkarma adımı olmadığı için işaret biti hep
-> doğru. Ama gerçek bir işlemcide `cmp` bir çıkarmadır ve taşabilir. Bu yüzden
-> "işaret bitine bak" tek başına **eksik bir karşılaştırmadır**:
-> [CWE-1023](../cwe/cwe_1023.md).
+> ⚠️ Bu seviyede OF girişi yok. `X`'in kendisini sıfırla karşılaştırırken sorun da
+> yok: bir sayının işaret biti o sayı hakkında yalan söylemez. Ama dersin başında
+> söylediğimiz gibi, bu devre bir `a − b` çıkarmasının sonucunu okumak için
+> kullanılacak. O çıkarma taştıysa yukarıdaki yalan burada da olur, ve OF olmadan
+> devre bunu fark edemez. Bu yüzden "işaret bitine bak" tek başına **eksik bir
+> karşılaştırmadır**: [CWE-1023](../cwe/cwe_1023.md).
 
 ### Sırada
 
@@ -616,7 +640,7 @@ bir şeyi *hatırlamasını* sağlamak.
 ## Özet — Aklında Tut
 
 ```
-☐ lt / eq / gt = less than · equal · greater than. lt'deki ilk harf küçük L, büyük İ değil.
+☐ lt / eq / gt = less than · equal · greater than. lt'deki ilk harf küçük L, büyük I değil.
 ☐ Bu üç bit bir SAYI DEĞİL. "Hangi karşılaştırma" demiyorlar, "hangi sonuçlar başarı sayılsın" diyorlar.
 ☐ Karşılaştırmanın sonucu tam üç tanedir: küçük · eşit · büyük. Dördüncüsü yok (üçlem).
 ☐ 8 satır = üç sonucun alt kümeleri (2³). Never = boş küme, Always = hepsi.
@@ -633,18 +657,21 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ 🔑 Ama xor DOĞRU CEVABI YANLIŞ SEBEPLE verir. Devrenin çalışması yetmez, NİYETİNİ söylemesi gerekir.
 ☐ Varsayıma yaslanan devre, varsayım bozulduğu gün sessizce başka şey yapar. Hata o gün değil, yazıldığı gün doğar.
 ☐ ⚠️ is zero / is neg girişleri X'e bağlanır. Bayrağa bağlarsan NandGame itiraz ETMEZ — 1 biti 16 bite sessizce genişletir.
-☐ 👾 Sayı geçerli, anlam yanlış. Yazılımdaki karşılığı CWE-194 / CWE-197: dönüşüm BAŞARILI olur, uyarı çıkmaz.
+☐ 👾 Sayı geçerli, anlam yanlış. Yazılımdaki karşılığı örtük tip dönüşümü, CWE-704: dönüşüm BAŞARILI olur, uyarı çıkmaz.
+☐ Oyun sıfırla genişletir (0000…0001). İşaret bitini kopyalasaydı adı CWE-194 (işaret uzatması) olurdu.
 ☐ and burada hesap yapmaz, VANA olur: izin 0 ise dal ölü, izin 1 ise tespit aynen geçer.
 ☐ 🔑 Seçici SORAR ("hangisini vereyim"), vana SORMAZ. Seçici merkezî karar, vana dağıtık karar.
 ☐ Üç şeyi iki bacaklı kapılarla birleştirmek = zincirleme (06'daki numara). Her yeni giriş bir kapı ekler.
-☐ Fan-out: is zero ve is neg'in çıkışları İKİŞER yere gider. İkinci kopya kurma, bütçe şişer.
-☐ Test: 000 (Never) ve 111 (Always) satırları bütün devreyi sınar — aradaki altısı bunların parçası.
+☐ Fan-out: is zero ve is neg'in çıkışları İKİŞER yere gider. is zero'nun ikinci kopyası bütçeyi şişirir (is neg bedava).
+☐ Test: her vanayı TEK BAŞINA aç (100 · 010 · 001), üç X ile. Bileşik satırlar bunların or'u, onlar da tutar.
+☐ ⚠️ Never ve Always YETMEZ: Always hangi vananın 1 geçirdiğini sormaz. Yanlış bağlanmış devre de geçer.
 ☐ 🔑 Sekiz satırlık tabloyu HİÇ KURMADIN. Üç vana kurdun, sekiz satır kendiliğinden belirdi.
 ☐ Bir devrenin yapabildikleri, tarif edilenlerle aynı şey değildir. Belgeye değil devreye bak.
 ☐ OF borcu: is neg işaret bitine bakar. X bir çıkarmadan geldiyse ve TAŞTIYSA işaret biti YALAN söyler.
 ☐ 4 bitte 5 − (−4) = 9 sığmaz → 1001 → "−7" görünür. Gerçek sonuç pozitif, işaret biti negatif diyor.
 ☐ 🔑 İşaretli "küçüktür" = N XOR OF. Taşma yoksa N'in kendisi, taşma varsa N'in tersi.
-☐ x86: jl/jge işaretli (SF≠OF), jb/jae işaretsiz (CF). Aynı çıkarma, iki farklı doğru cevap.
+☐ x86: jl/jge işaretli (SF ile OF'a bakar), jb/jae işaretsiz (CF'ye bakar). Aynı çıkarma, iki farklı doğru cevap.
+☐ ⚠️ Bu seviyede OF yok: X bir çıkarmadan gelip TAŞTIYSA devre yanlış cevabı fark edemez.
 ☐ 👾 Tek başına işaret bitine bakmak EKSİK bir karşılaştırmadır: CWE-1023.
 ```
 
@@ -654,12 +681,13 @@ bir şeyi *hatırlamasını* sağlamak.
 
 - 👾 **Bu dersin sütunu:** [CWE-697 — Incorrect Comparison](../cwe/cwe_697.md) — karşılaştırmanın kendi üst kademesi; 682'nin kardeşi
 - 👾 **Atomik olanın zıttı:** [CWE-1254 — Karşılaştırma tanecikliği](../cwe/cwe_1254.md) — `is zero` on altı bite aynı anda bakar; parça parça bakan devre süre sızdırır
-- 👾 **Sessiz genişletme:** [CWE-194 — İşaret uzatması](../cwe/cwe_194.md) ve [CWE-197 — Kırpma](../cwe/cwe_197.md) — 1 bitlik bayrağı 16 bitlik bacağa bağladığında olan şey
+- 👾 **Sessiz dönüşüm:** [CWE-704 — Hatalı tip dönüşümü](../cwe/cwe_704.md) — 1 bitlik bayrağın kimse fark etmeden 16 bitlik sayıya dönüşmesi; işaret biti kopyalansaydı [CWE-194](../cwe/cwe_194.md)
 - 👾 **Eksik karşılaştırma:** [CWE-1023](../cwe/cwe_1023.md) — bayrakların yarısına bakmak; OF'suz işaretli karşılaştırma
 - 👾 **Yanlış işleç:** [CWE-480](../cwe/cwe_480.md) — De Morgan'ı yarım uygulamak, `&&` ile `||` karıştırmak
 - 👾 **Anlam okuyanda:** [CWE-681](../cwe/cwe_681.md) — aynı bit deseninin işaretli/işaretsiz okunması
 - 👾 **Taşmanın kendisi:** [CWE-190](../cwe/cwe_190.md) · [CWE-191](../cwe/cwe_191.md) — OF'un doğduğu yer
 - [14_alu.md](./14_alu.md) — Bu devrenin okuduğu sonucu üreten parça
+- [13_arithmetic_unit.md](./13_arithmetic_unit.md) — Genişletmenin açık yolu (bundler) ve oyunun gizli yolu
 - [11_selector_switch.md](./11_selector_switch.md) — Seçici ve fan-out; bu dersin karşıt kutbu
 - [10_bayraklar.md](./10_bayraklar.md) — Bayrakların kurulduğu yer; OF sözünün verildiği ders
 - [09_subtraction.md](./09_subtraction.md) — Karşılaştırmanın altındaki çıkarma

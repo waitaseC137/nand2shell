@@ -32,7 +32,7 @@
 ## Bu Parça Ne Yapıyor?
 
 ALU = **Arithmetic Logic Unit**, aritmetik ve mantık birimi. İşlemcinin hesap
-yapan tek parçası. Bu seviyede onu kuruyorsun — ve ünitenin dördüncü seviyesinde
+yapan tek parçası. Bu seviyede onu kuruyorsun — ve ünitenin üçüncü seviyesinde
 olduğun için, iki yarısı da elinde hazır.
 
 Girişler:
@@ -55,8 +55,8 @@ Belgedeki ilk tablo sekiz satır:
 | `0` | `1` | `0` | `X xor Y` |
 | `0` | `1` | `1` | `invert X` |
 | `1` | `0` | `0` | `X + Y` |
-| `1` | `0` | `1` | `X + 1` |
 | `1` | `1` | `0` | `X − Y` |
+| `1` | `0` | `1` | `X + 1` |
 | `1` | `1` | `1` | `X − 1` |
 
 Üst dört satır `12`'de kurduğun **logic unit**, alt dört satır `13`'te kurduğun
@@ -102,8 +102,8 @@ olarak alması. `12`'de iki bitlik bir emir vardı, `13`'te yine iki. Burada be�
 **makine komutu** olacak.
 
 > 🔑 Kontrol biti ile veri biti arasında fiziksel hiçbir fark yok. İkisi de tel,
-> ikisi de yüksek ya da alçak. Fark tamamen **nereye bağlandığında**. `04`'teki
-> cümlenin bir başka görünümü: anlam telde değil, telin gittiği yerde.
+> ikisi de yüksek ya da alçak. Fark tamamen **nereye bağlandığında**. `11`'deki
+> kontrol telinin bir başka görünümü: anlam telde değil, telin gittiği yerde.
 
 ---
 
@@ -150,11 +150,11 @@ Sinyal aynı. Voltaj aynı. Anlamı **kimin dinlediğine** göre değişiyor.
 | **logic unit** | grup: `and/or` mu, `xor/invert` mi | gruptaki hangi eleman |
 | **arithmetic unit** | işlem: toplama mı çıkarma mı | ikinci sayı: `Y` mi sabit `1` mi |
 
-Sağdaki sütunu `13`'te sen bulmuştun — tabloya bakıp *"`op1` işlemin ne
+Alttaki satırı `13`'te sen bulmuştun — tabloya bakıp *"`op1` işlemin ne
 olduğunu değiştiriyor, `op0` ikinci operandın ne olduğunu"* demiştin. O gözlem
-hâlâ geçerli. Yeni olan, **soldaki sütunun aynı anda başka bir şey söylemesi.**
+hâlâ geçerli. Yeni olan, **üstteki satırın aynı tellerle başka bir şey söylemesi.**
 
-> 👾 Bu, `04`'teki *"desen aynı, anlam okuyanın kararı"* cümlesinin en saf hâli
+> 👾 Bu, `09`'daki *"desen aynı, anlam okuyanın kararı"* cümlesinin en saf hâli
 > ve [CWE-681](../cwe/cwe_681.md)'in devre tarafı. Orada aynı bit deseni iki
 > farklı sayı olarak okunuyordu; burada aynı bit deseni iki farklı **komut**
 > olarak okunuyor. Yanlış ünite dinlerse ortaya çıkan şey hatalı değil —
@@ -226,17 +226,17 @@ Devreyi iki ayrı boru hattı olarak çizince yerleşiyor:
 ```
 SAĞ OPERAND  —  tek katman, zx'i hiç görmüyor
 
-   X ──┐
-       ├── S2  (s = sw) ──────────────────►  sağ operand
-   Y ──┘                                      → iki ünitenin de Y bacağı
+   X ── D1 ┐
+           ├── S2  (s = sw) ──────────────────►  sağ operand
+   Y ── D0 ┘                                      → iki ünitenin de Y bacağı
 
 
 SOL OPERAND  —  iki katman, iki soru
 
-   X ──┐
-       ├── S1  (s = sw) ──┐
-   Y ──┘                  ├── S3  (s = zx) ──►  sol operand
-                 0 ───────┘                      → iki ünitenin de X bacağı
+                     0 ────── D1 ┐
+   Y ── D1 ┐                      ├── S3  (s = zx) ──►  sol operand
+           ├── S1  (s = sw) ── D0 ┘                      → iki ünitenin de X bacağı
+   X ── D0 ┘
 ```
 
 `S2` doğrudan ünitelere gidiyor, çünkü sağ tarafın tek sorusu vardı ve
@@ -267,8 +267,10 @@ Turnusol kâğıdı son satır:
 Önce silersen: sol `0` olur, sonra takas → `0` sağa geçer, sol `X` olur →
 `X − 0` ❌
 
-Sebebi kelimenin içinde: `zx` "**soldaki**" diyor. Birinin solda olması için
-önce pozisyonların belli olması gerekiyor. `sw` pozisyonları belirler, `zx`
+Sebebi oyunun açıklamasında: `zx` için *"the left operand is replaced with 0"*,
+yani "**soldaki** operand 0 olur" yazıyor. Adındaki X, X girişi değil, ünitelerin
+X bacağı, yani soldaki operand. Birinin solda olması için önce pozisyonların belli
+olması gerekiyor. `sw` pozisyonları belirler, `zx`
 belirlenmiş pozisyona dokunur.
 
 > 💡 Genel kural: bir katman **"şuradaki"** diye konum tarif ediyorsa, konumu
@@ -408,11 +410,12 @@ u  op1  op0  zx  sw     =  5 bit  →  2⁵ = 32 kombinasyon
 Belgede kaç tanesi yazılı?
 
 - Birinci tablo: `u`, `op1`, `op0` için **8 satır**
-- İkinci tablo: `zx`, `sw` için **4 satır** — ve sadece `X − Y` örneği üzerinden
+- İkinci tablo: `zx`, `sw` için **4 satır** — ve sadece `X − Y` örneği üzerinden.
+  Biri (`X − Y`) birinci tabloda zaten var, üçü yeni: `Y − X`, `0 − Y`, `0 − X`.
 
 Yani belge iki ekseni **ayrı ayrı** anlatıyor. Çapraz çarpımın tamamı hiçbir
-yerde yazmıyor. 32 kombinasyonun her biri bir sonuç üretiyor, ama tabloda
-sekizinin karşılığı var.
+yerde yazmıyor. 32 kombinasyonun her biri bir sonuç üretiyor, ama belgede
+on birinin karşılığı var.
 
 ### 🔍 Say bakalım
 
@@ -436,8 +439,10 @@ toplama         X+Y
 mantık          X and Y  X or Y   X xor Y
 ```
 
-Tabloda yazılı olan **sekiz** tanesi. Geri kalan **on bir** tanesi, iki tablonun
-çarpımından doğuyor ve hiçbir yerde listelenmiyor.
+Belgede yazılı olan **on bir** tanesi: birinci tablonun sekizi, ikinci tablonun
+`Y − X`, `0 − Y` ve `0 − X`'i. Geri kalan **sekiz** tanesi iki tablonun
+çarpımından doğuyor ve hiçbir yerde listelenmiyor: `0`, `1`, `−1`, `X`, `Y`,
+`not Y`, `Y+1`, `Y−1`.
 
 En çarpıcıları:
 
@@ -446,25 +451,36 @@ En çarpıcıları:
 | `X + 1` işlemi, `zx = 1` | `0 + 1` = sabit **1** |
 | `X − 1` işlemi, `zx = 1` | `0 − 1` = sabit **−1** |
 | `X and Y` işlemi, `zx = 1` | `0 and Y` = sabit **0** |
-| `X − Y` işlemi, `zx = 1` | `0 − Y` = **`−Y`**, eksi alma |
 | `X or Y` işlemi, `zx = 1` | `0 or Y` = **`Y`**, olduğu gibi geçirme |
+| `X + 1` işlemi, `sw = 1` | `Y + 1`, **Y'yi artırma** |
 
-`13`'te sabit `1` imal etmek için üç parça harcamıştın (`0` + `inv` + bundler).
-Burada sabit `1`, `−1` ve `0` **bedava** geliyor — tek bir ek kapı olmadan,
-sadece bayrak kombinasyonu olarak. Aynı şekilde "eksisini al" ve "olduğu gibi
-geçir" işlemleri de tabloda yokken devrede var.
+`13`'te sabit `1`'i imal etmek için `0` + `inv` kullanmıştın. Burada sabit `1`,
+`−1` ve `0` **bedava** geliyor — tek bir ek kapı olmadan, sadece bayrak
+kombinasyonu olarak. Aynı şekilde "olduğu gibi geçir" ve "Y'yi artır" işlemleri
+de listede yokken devrede var.
 
 </details>
 
-### Belgelenmemiş Durumlar
+### Listelenmemiş Durumlar
 
-Şimdi asıl noktaya gelelim. NandGame'de belgelenmemiş bu on bir durum **iyi
+Şimdi asıl noktaya gelelim. NandGame'de listelenmemiş bu sekiz işlem **iyi
 haber** — bedava işlem. Gerçek bir çipte aynı manzara başka anlama gelir.
+
+Ama önce bir incelik. NandGame `zx` ve `sw` için bir **kural** veriyor: "`sw`
+X ile Y'yi takas eder, `zx` soldaki operandı 0 yapar." Bu kuralla 32
+kombinasyonun hepsini kâğıt üstünde türetebilirsin. Yani bu sekiz işlem **gizli
+değil, sadece listelenmemiş.** Belge çarpımı saymıyor, ama çarpımı hesaplamak
+için gereken her şeyi veriyor.
 
 Bir donanım parçasının kontrol sözcüğü `n` bit genişse, o parça `2ⁿ` duruma
 girebilir. Belge bunlardan yalnız bir kısmını tarif ediyorsa, geri kalanı yok
-olmaz — **tarif edilmemiş olarak var olur.** İçlerinden biri bir güvenlik
-özelliğini kapatıyorsa, ona **chicken bit** denir.
+olmaz — **tarif edilmemiş olarak var olur.** Gerçek çiplerde bu çoğu zaman
+NandGame'deki gibi masum değildir: bazı bitlerin **kuralı bile** yazılmaz,
+varlıkları bile bilinmez.
+
+Üretimden sonra riskli bir özelliği kapatabilmek için bırakılan bitlere
+**chicken bit** denir. Böyle bir bit belgelenmemişse, erişilebilir durumdaysa ve
+bir güvenlik özelliğini kapatıyorsa, zayıflık doğar.
 
 MITRE bunu ayrı bir zayıflık olarak katalogluyor: **[CWE-1242](../cwe/cwe_1242.md) —
 Inclusion of Undocumented Features or Chicken Bits**. Tipik örneği, hata ayıklama için
@@ -476,8 +492,8 @@ Buradan çıkan çalışma kuralı:
 
 Tersine mühendisliğin donanım tarafında yaptığı iş tam olarak budur: belgenin
 saydığı durumlarla, sözcüğün izin verdiği durumları yan yana koymak ve aradaki
-farkı denemek. Bugün NandGame'de yaptığın sayma işlemi — 32 kombinasyon, 8
-belgelenmiş satır — o işin en küçük hâli.
+farkı denemek. Bugün NandGame'de yaptığın sayma işlemi — 32 kombinasyon, 11
+belgelenmiş — o işin en küçük hâli.
 
 > 📄 Ayrıntısı kendi sayfasında: [CWE-1242](../cwe/cwe_1242.md) — chicken bit'in
 > ne olduğu, neden bırakıldığı, ve belgelenmemiş olmanın neden bir koruma
@@ -511,8 +527,9 @@ Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 ☐ Hepsini üret, sonra seç: u=0 iken de aritmetik birim hesaplar, zx=1 iken de S1 çalışır.
 ☐ 🔑 Çöpe atılan sonuç YOK OLMAZ, sadece kullanılmaz. Kapı anahtarlandı, ısı çıktı, zaman geçti.
 ☐ Kontrol sözcüğü 5 bit = 32 durum. Belge 8 satır + 4 satırı AYRI AYRI veriyor; çarpımı hiç yazmıyor.
-☐ Devrenin gerçek kapasitesi 19 farklı işlem — 8'i yazılı, 11'i bayrak çarpımından doğuyor.
-☐ 13'te 3 parçaya mal olan sabit 1, burada zx=1 ile BEDAVA geliyor. Sabit 0 ve −1 de öyle.
+☐ Devrenin gerçek kapasitesi 19 farklı işlem — 11'i belgede yazılı, 8'i hiçbir yerde listelenmiyor.
+☐ Listelenmemiş ≠ gizli: oyun zx/sw KURALINI veriyor, 32'nin hepsi kâğıt üstünde türetilebilir. Chicken bit'te kural bile yok.
+☐ 13'te 0 + inv ile imal ettiğin sabit 1, burada zx=1 ile BEDAVA geliyor. Sabit 0 ve −1 de öyle.
 ☐ 👾 Belgelenmiş durum uzayından geniş her kontrol sözcüğü bakılacak bir yerdir (CWE-1242).
 ```
 
@@ -522,16 +539,16 @@ Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 
 - 👾 **Anlam okuyanda:** [CWE-681 — Hatalı sayısal dönüşüm](../cwe/cwe_681.md) — aynı desenin iki farklı sözleşmeyle okunması
 - 👾 **Atılan sonucun izi:** [CWE-1300 — Fiziksel yan kanal](../cwe/cwe_1300.md) — hesaplanan ama kullanılmayan şeyin ölçülebilir kalması
-- 👾 **Belgelenmemiş uzay:** [CWE-1242 — Chicken Bits](../cwe/cwe_1242.md) — 32 durum, 8 belgelenmiş satır: aradaki fark
+- 👾 **Belgelenmemiş uzay:** [CWE-1242 — Chicken Bits](../cwe/cwe_1242.md) — 32 durum, 11 belgelenmiş: aradaki fark
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — Seçiciyi girişe taşımak; `op1`/`op0`'ın aritmetik sözleşmesi
 - [12_logic_unit.md](./12_logic_unit.md) — Emri dinleyen ilk devre; "dördü de hep çalışır"
 - [11_selector_switch.md](./11_selector_switch.md) — `select 16`'nın kendisi ve fan-out
 - [10_bayraklar.md](./10_bayraklar.md) — Bayrak kavramı; OF borcu
-- [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Anlam telde değil, telin gittiği yerde
+- [09_subtraction.md](./09_subtraction.md) — "Desen aynı, anlam okuyanın kararı"
 - [../x86_assembly/09_aritmetik.md](../x86_assembly/09_aritmetik.md) — Aynı işlemlerin yazılım tarafı
 - [../x86_assembly/13_bit_islemleri.md](../x86_assembly/13_bit_islemleri.md) — Mantık katının komut karşılıkları
 
 ---
 
 **Önceki konu:** [13_arithmetic_unit.md](./13_arithmetic_unit.md)
-**Sonraki konu:** *(yolda — Condition)*
+**Sonraki konu:** [15_condition.md](./15_condition.md)

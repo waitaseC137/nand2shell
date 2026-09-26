@@ -73,8 +73,9 @@ gt  =  greater than
 ```
 
 In some fonts `lt` looks like `It` — that first character is a lowercase L, not a
-capital i. You will meet this trio for the rest of your life: in assembly, in C,
-in database queries, always the same abbreviations.
+capital i. You will meet this trio elsewhere too: in the shell (`-lt`, `-eq`,
+`-gt`), in ARM assembly (`LT`, `EQ`, `GT`), in some database queries (`$lt`,
+`$eq`, `$gt`).
 
 But the real question is: **what do these three bits say?**
 
@@ -149,12 +150,13 @@ a > b   →   a − b is positive →   X > 0
 
 So this level is not independent of the [ALU](./14_alu.md). The ALU you built
 yesterday does the subtraction, this level **reads** the result. Put together,
-they answer "is a less than b" — and no second circuit is needed.
+they answer "is a less than b", and no second circuit is needed. (As long as
+nothing overflows — we will see that exception at the end of the lesson.)
 
 In a real processor this has a name. On x86, `cmp a, b` does exactly `a − b` and
 **throws the result away** — it only keeps the flags. The `jl` / `je` / `jg` /
-`jge` / `jne` instructions that follow do exactly the job of the circuit you are
-about to build. You saw the software side in
+`jge` / `jne` instructions that follow do the job of the circuit you are about to
+build — with one difference, which we will also see at the end of the lesson: OF. You saw the software side in
 [10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md); here is the
 hardware side.
 
@@ -360,12 +362,15 @@ asked "is the eq flag zero" when it should have asked "is X zero".
 > widening was silent, no error appeared, and the number looked perfectly valid.
 > The only way to catch it is **to look at what you wired.**
 >
-> 👾 The software counterpart of that silence:
-> [CWE-194](../cwe/cwe_194.md) (sign extension) and
-> [CWE-197](../cwe/cwe_197.md) (truncation).
-> What they share is this: the conversion
-> **succeeds.** No warning, no exception, and the result is a valid number. What
-> is wrong is not the number but its **meaning.**
+> 👾 The software counterpart of that silence is an implicit type conversion:
+> [CWE-704](../cwe/cwe_704.md) — *Incorrect Type Conversion or Cast*. A flag
+> turned into a number without anyone noticing. The conversion **succeeded**: no
+> warning, no exception, and the result is a valid number. What is wrong is not
+> the number but its **meaning.**
+>
+> The widening here was done with zeros (`0000000000000001`). Had the game copied
+> the sign bit, it would have produced `1111111111111111`; that case is called
+> [CWE-194](../cwe/cwe_194.md), sign extension.
 
 ---
 
@@ -479,21 +484,40 @@ is neg(X) ────┤
 ```
 
 The fan-out you learned in `11`. One output feeds as many inputs as you like.
-Build a second copy and the circuit still works, but the budget swells — the
-target here is 50 nands and these two parts are not cheap.
+Build a second copy and the circuit still works, but the budget swells: `is zero`
+is an expensive part, because it checks sixteen bits one by one. (`is neg` on the
+other hand is free, a single wire — you saw that in [10](./10_bayraklar.md).)
 
 ### How to choose the test
 
-Two extreme rows exercise the entire circuit:
+Open each valve **on its own**:
 
-| `lt` `eq` `gt` | `X` | expected |
+| `lt` `eq` `gt` | `X` = `5`, `0`, `−3` | expected |
 |---|---|---|
-| `0` `0` `0` | `5`, `0`, `−3` | always **`0`** (Never) |
-| `1` `1` `1` | `5`, `0`, `−3` | always **`1`** (Always) |
+| `1` `0` `0` | only `X < 0` | `0`, `0`, **`1`** |
+| `0` `1` `0` | only `X = 0` | `0`, **`1`**, `0` |
+| `0` `0` `1` | only `X > 0` | **`1`**, `0`, `0` |
 
-If those two hold, the six rows in between hold as well — because those six are
-made of parts of these two. `Never` proves all the valves close, `Always` proves
-they all open.
+Nine rows. If these three hold, the remaining rows hold as well: a compound row
+such as `X ≥ 0` is the `or` of single-valve rows. If the parts are right, their
+combinations are right too.
+
+The extreme rows (`Never`, `Always`) **cannot see** this. In `Always` all three
+valves are open. Whatever X is, one of the detections is 1 and it passes to the
+output through one of the open valves. The test only asks "did a 1 reach the
+output?", it never asks **which valve** it came through. Even if you wire `lt` to
+`is zero` by mistake, `Always` passes. `Never` only shows that the valves can
+close.
+
+> 📌 The first version of this lesson said here "the two extreme rows exercise
+> the whole circuit, the six rows in between are made of their parts". That was
+> wrong. Two faulty builds — the one with the detections of `lt` and `eq` wired
+> the other way round, and the "Right Part, Wrong Wire" trap above — pass both
+> extreme tests, yet give the wrong answer in eight of the twenty-four rows.
+> The single-valve rows catch both.
+>
+> It is the same lesson as the `xor` one above: the extreme tests accept **the
+> right answer for the wrong reason**.
 
 <details>
 <summary>🔑 If you are stuck — the connection list</summary>
@@ -546,8 +570,8 @@ appearing once they come together. The eight-row table sits nowhere in the
 circuit; it is the circuit's **consequence**.
 
 > 🔑 This is the other face of what we discussed in `14`. There the control word
-> was 5 bits, the documentation described 8 rows, and the gap between them stood
-> as **undocumented behaviour**. Here all eight states are documented — but none
+> was 5 bits, only 11 of the 32 combinations were listed in the documentation,
+> and the gap between them stood as **unlisted behaviour**. Here all eight states are documented — but none
 > of them is written in the circuit.
 >
 > Two faces of the same fact: **what a circuit can do is not the same thing as
@@ -616,19 +640,20 @@ This is why x86 has two separate instruction families:
 
 | instruction | flag it uses | when |
 |---|---|---|
-| `jl` / `jge` | `SF ≠ OF` | **signed** comparison |
-| `jb` / `jae` | `CF` | **unsigned** comparison |
+| `jl` / `jge` | `jl`: `SF ≠ OF` · `jge`: `SF = OF` | **signed** comparison |
+| `jb` / `jae` | `jb`: `CF = 1` · `jae`: `CF = 0` | **unsigned** comparison |
 
 The same two numbers, the same subtraction, **two different right answers** —
 which one you want depends on how you read the numbers. The sentence from `04`
 and from [CWE-681](../cwe/cwe_681.md) applies here too: the pattern is the same,
 the meaning is the reader's decision.
 
-> ⚠️ In this NandGame level there is no OF, because `X` is compared directly
-> against zero — with no subtraction step in between, the sign bit is always
-> right. But in a real processor `cmp` is a subtraction and it can overflow. That
-> is why "look at the sign bit" on its own is an **incomplete comparison**:
-> [CWE-1023](../cwe/cwe_1023.md).
+> ⚠️ This level has no OF input. Comparing `X` itself against zero is not a
+> problem: a number's sign bit never lies about that number. But as we said at
+> the start of the lesson, this circuit will be used to read the result of an
+> `a − b` subtraction. If that subtraction overflowed, the lie above happens here
+> too, and without OF the circuit cannot notice. That is why "look at the sign
+> bit" on its own is an **incomplete comparison**: [CWE-1023](../cwe/cwe_1023.md).
 
 ### Next up
 
@@ -659,18 +684,21 @@ itself** and making a circuit *remember* something.
 ☐ 🔑 But xor gives THE RIGHT ANSWER FOR THE WRONG REASON. Working is not enough; a circuit must state its INTENT.
 ☐ A circuit resting on an assumption quietly does something else the day the assumption breaks. The bug is born when it is written.
 ☐ ⚠️ is zero / is neg inputs go to X. Wire them to a flag and NandGame does NOT object — it silently widens 1 bit to 16.
-☐ 👾 The number is valid, the meaning is wrong. Software counterparts CWE-194 / CWE-197: the conversion SUCCEEDS, no warning.
+☐ 👾 The number is valid, the meaning is wrong. The software counterpart is an implicit type conversion, CWE-704: the conversion SUCCEEDS, no warning.
+☐ The game widens with zeros (0000…0001). Had it copied the sign bit, the name would be CWE-194 (sign extension).
 ☐ Here and does no arithmetic, it is a VALVE: permission 0 means the branch is dead, permission 1 passes the detection straight on.
 ☐ 🔑 A selector ASKS ("which shall I hand over"), a valve does not. Selector = central decision, valve = distributed decision.
 ☐ Combining three things with two-legged gates = chaining (the trick from 06). Each new input adds one gate.
-☐ Fan-out: the outputs of is zero and is neg go to TWO places each. Do not build a second copy, the budget swells.
-☐ Testing: the 000 (Never) and 111 (Always) rows exercise the whole circuit — the six in between are made of their parts.
+☐ Fan-out: the outputs of is zero and is neg go to TWO places each. A second copy of is zero swells the budget (is neg is free).
+☐ Testing: open each valve ON ITS OWN (100 · 010 · 001), with three values of X. Compound rows are their or, so they hold too.
+☐ ⚠️ Never and Always are NOT ENOUGH: Always never asks which valve let the 1 through. A miswired circuit passes too.
 ☐ 🔑 You NEVER BUILT the eight-row table. You built three valves and the eight rows emerged by themselves.
 ☐ What a circuit can do is not the same as what has been described. Look at the circuit, not the documentation.
 ☐ The OF debt: is neg looks at the sign bit. If X came from a subtraction that OVERFLOWED, the sign bit LIES.
 ☐ In 4 bits 5 − (−4) = 9 does not fit → 1001 → it looks like "−7". The true result is positive, the sign bit says negative.
 ☐ 🔑 Signed "less than" = N XOR OF. Without overflow it is N itself; with overflow it is the opposite of N.
-☐ x86: jl/jge are signed (SF≠OF), jb/jae are unsigned (CF). The same subtraction, two different right answers.
+☐ x86: jl/jge are signed (they look at SF and OF), jb/jae are unsigned (they look at CF). The same subtraction, two different right answers.
+☐ ⚠️ This level has no OF: if X came from a subtraction that OVERFLOWED, the circuit cannot notice the wrong answer.
 ☐ 👾 Looking at the sign bit alone is an INCOMPLETE comparison: CWE-1023.
 ```
 
@@ -680,12 +708,13 @@ itself** and making a circuit *remember* something.
 
 - 👾 **This lesson's pillar:** [CWE-697 — Incorrect Comparison](../cwe/cwe_697.md) — comparison's own top tier; the sibling of 682
 - 👾 **The opposite of atomic:** [CWE-1254 — Comparison logic granularity](../cwe/cwe_1254.md) — `is zero` looks at all sixteen bits at once; a circuit that looks piece by piece leaks timing
-- 👾 **Silent widening:** [CWE-194 — Sign extension](../cwe/cwe_194.md) and [CWE-197 — Truncation](../cwe/cwe_197.md) — what happens when a 1-bit flag meets a 16-bit leg
+- 👾 **Silent conversion:** [CWE-704 — Incorrect type conversion](../cwe/cwe_704.md) — a 1-bit flag turning into a 16-bit number without anyone noticing; had the sign bit been copied, [CWE-194](../cwe/cwe_194.md)
 - 👾 **Incomplete comparison:** [CWE-1023](../cwe/cwe_1023.md) — looking at half the flags; a signed comparison without OF
 - 👾 **Incorrect operator:** [CWE-480](../cwe/cwe_480.md) — half-applying De Morgan, mixing `&&` with `||`
 - 👾 **Meaning is in the reader:** [CWE-681](../cwe/cwe_681.md) — the same bit pattern read as signed or unsigned
 - 👾 **Overflow itself:** [CWE-190](../cwe/cwe_190.md) · [CWE-191](../cwe/cwe_191.md) — where OF is born
 - [14_alu.md](./14_alu.md) — The part that produces the result this circuit reads
+- [13_arithmetic_unit.md](./13_arithmetic_unit.md) — The explicit way of widening (the bundler) and the game's hidden way
 - [11_selector_switch.md](./11_selector_switch.md) — The selector and fan-out; this lesson's opposite pole
 - [10_bayraklar.md](./10_bayraklar.md) — Where the flags are built; the lesson that promised OF
 - [09_subtraction.md](./09_subtraction.md) — The subtraction underneath every comparison
