@@ -103,6 +103,13 @@ Son satırda Y hiç kullanılmıyor. Ters çevirme tek sayı üstünde çalış�
 Bir deney yap. Tuvale sadece `and 16` koy, X'i ve Y'yi ona bağla. Emri **or**'a
 ayarla (op1 = 0, op0 = 1). Sonra X'e ve Y'ye aynı sayıyı yaz, mesela hex `6553`.
 
+> 💡 **Hex ne?** 16 bitlik bir sayıyı 0 ve 1 olarak yazmak uzun sürer:
+> `0110010101010011`. Bu yüzden bitler dörder dörder gruplanır ve her grup tek bir
+> karakterle yazılır: `0`–`9`, ardından `a` = 10, `b` = 11 … `f` = 15. Buna
+> **onaltılık** (*hexadecimal*, kısaca **hex**) deniyor. Dört bit bir hex hanesi
+> eder, 16 bit dört hane: `0110 0101 0101 0011` = `6553`. Aynı kuralla `ffff`, on
+> altı bitin hepsinin 1 olduğu sayıdır.
+
 `and 16` ne gösteriyor? **6553.** X AND X yine X eder. Emir "or" dediği hâlde AND
 hesaplamaya devam ediyor.
 
@@ -283,8 +290,9 @@ op1  op0    X      Y       çıktı    beklenen
 Bu satır sadece "yanlış" demiyor, ipucu da veriyor:
 
 1. Emir 0 0, yani **and**. 0 AND ffff = 0 olmalıydı.
-2. Gelen **ffff.** 0 ile ffff'ten ffff çıkaran işlemler: **or** ve **xor.**
-3. Demek ki emir and iken or ya da xor geçiyor. Sorun kolların bağlandığı tellerde
+2. Gelen **ffff.** 0 ile ffff'ten ffff çıkaran işlemler: **or**, **xor** ve
+   **invert X** (0'ın tersi ffff).
+3. Demek ki emir and iken or, xor ya da invert geçiyor. Sorun kolların bağlandığı tellerde
    değil, işlemlerin takıldığı **bacaklarda.**
 
 Sonra o satırı elle kur (op1 = 0, op0 = 0, X = 0, Y = ffff) ve yanlış değeri
@@ -382,7 +390,7 @@ gelecek.
 
 ## 🔗 İlgili Konular
 
-- 👾 **Meraklısına:** [CWE-480 — Yanlış işleç kullanımı](../cwe/cwe_480.md) — bu derste kurduğun bit bit `&` ile mantıksal `&&`'i karıştırmak; 2003'te Linux çekirdeğine sokulmak istenen iki karakter
+- 👾 **Meraklısına:** [CWE-480 — Yanlış işleç kullanımı](../cwe/cwe_480.md) — bu derste kurduğun bit bit `&` ile mantıksal `&&`'i karıştırmak. Aynı ailenin en ünlü vakası, 2003'te Linux çekirdeğine sokulmak istenen tek bir eksik `=`
 - [11_selector_switch.md](./11_selector_switch.md) — Seçicinin kendisi; "hepsini yapar, birini seçer"
 - [06_full_adder.md](./06_full_adder.md) — Katlara ayırma numarası
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` tel → `2ⁿ` desen

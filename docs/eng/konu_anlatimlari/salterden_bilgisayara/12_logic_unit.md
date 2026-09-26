@@ -108,6 +108,13 @@ Try an experiment. Put only `and 16` on the canvas and connect X and Y to it. Se
 the order to **or** (op1 = 0, op0 = 1). Then type the same number into X and Y,
 say hex `6553`.
 
+> 💡 **What is hex?** Writing a 16-bit number as 0s and 1s takes a while:
+> `0110010101010011`. So the bits are grouped four at a time and each group is
+> written as a single character: `0`–`9`, then `a` = 10, `b` = 11 … `f` = 15. This
+> is called **hexadecimal**, or **hex** for short. Four bits make one hex digit,
+> 16 bits make four: `0110 0101 0101 0011` = `6553`. By the same rule, `ffff` is
+> the number with all sixteen bits set to 1.
+
 What does `and 16` show? **6553.** X AND X is X. The order says "or", yet AND
 keeps computing.
 
@@ -295,8 +302,8 @@ This row doesn't just say "wrong". It gives you a clue:
 
 1. The order is 0 0, which is **and**. 0 AND ffff should have been 0.
 2. What came out is **ffff.** The operations that turn 0 and ffff into ffff are
-   **or** and **xor.**
-3. So when the order is AND, OR or XOR is getting through. The problem isn't
+   **or**, **xor** and **invert X** (the inverse of 0 is ffff).
+3. So when the order is AND, OR, XOR or INVERT is getting through. The problem isn't
    where the levers connect; it's which **inputs** the operations are plugged into.
 
 Then build that row by hand (op1 = 0, op0 = 0, X = 0, Y = ffff) and **trace the
@@ -397,7 +404,7 @@ promised in `10`.
 
 ## 🔗 Related Topics
 
-- 👾 **For the curious:** [CWE-480 — Use of incorrect operator](../cwe/cwe_480.md) — mixing up the bitwise `&` you built in this lesson with the logical `&&`; the two characters someone tried to slip into the Linux kernel in 2003
+- 👾 **For the curious:** [CWE-480 — Use of incorrect operator](../cwe/cwe_480.md) — mixing up the bitwise `&` you built in this lesson with the logical `&&`. The most famous case in the same family: a single missing `=` someone tried to slip into the Linux kernel in 2003
 - [11_selector_switch.md](./11_selector_switch.md) — The selector itself; "it does them all, then picks one"
 - [06_full_adder.md](./06_full_adder.md) — The floors trick
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` wires → `2ⁿ` patterns
