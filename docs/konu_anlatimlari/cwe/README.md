@@ -19,7 +19,7 @@
 - [Zincirler: Hatalar Arasındaki Tel](#zincirler-hatalar-arasındaki-tel)
 - [NandGame Ağacı](#nandgame-ağacı)
 - [Yolda](#yolda)
-- [Askıda — OverTheWire](#askıda--overthewire)
+- [Kaldırılan Derslerin Sayfaları](#kaldırılan-derslerin-sayfaları)
 
 ---
 
@@ -218,6 +218,7 @@ bundler'la geldi. Katalog yanlış değildi — o günkü kapsamın dürüst ayn
 | [**CWE-1242**](./cwe_1242.md) | Inclusion of Undocumented Features or Chicken Bits | [14 · ALU](../salterden_bilgisayara/14_alu.md) | [📄](https://cwe.mitre.org/data/definitions/1242.html) |
 | [**CWE-1254**](./cwe_1254.md) | Incorrect Comparison Logic Granularity | [15 · Condition](../salterden_bilgisayara/15_condition.md) | [📄](https://cwe.mitre.org/data/definitions/1254.html) |
 | [**CWE-119**](./cwe_119.md) | Improper Restriction of Operations within the Bounds of a Memory Buffer — **çatı** | [08 · Increment](../salterden_bilgisayara/08_increment.md) | [📄](https://cwe.mitre.org/data/definitions/119.html) |
+| [**CWE-362**](./cwe_362.md) | Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition') — **çatı** | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#kullanılmayan-satır) | [📄](https://cwe.mitre.org/data/definitions/362.html) |
 
 **1254 bir ilk:** kataloğundaki tek **çift üstlü** CWE. MITRE onu hem
 [697](./cwe_697.md)'nin (karşılaştırma yanlış biçimde kuruldu) hem de **208**'in
@@ -261,14 +262,14 @@ yaptığı iş tam olarak budur.
 
 ---
 
-## Askıda — OverTheWire
+## Kaldırılan Derslerin Sayfaları
 
-Şu an OverTheWire çözülmüyor, o yüzden bu sayfalar **haritadan çıkarıldı.** Sayfalar
-duruyor ve kendi derslerinden erişilebiliyor; o serilere dönüldüğünde buraya
-geri alınacaklar.
+Bu beş sayfa OverTheWire derslerinden doğdu. O dersler repodan kaldırıldı; tam
+hâlleri `tam-hali-2026-09-27` etiketinde duruyor. Sayfalar yerinde, ama doğdukları
+derslere giden bağlantılar artık açılmıyor.
 
 [78](./cwe_78.md) · [59](./cwe_59.md) · [367](./cwe_367.md) ·
-[77](./cwe_77.md) · [706](./cwe_706.md) · [362](./cwe_362.md)
+[77](./cwe_77.md) · [706](./cwe_706.md)
 
 ---
 

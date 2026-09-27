@@ -19,7 +19,7 @@
 - [Chains: The Wire Between Two Bugs](#chains-the-wire-between-two-bugs)
 - [The NandGame Tree](#the-nandgame-tree)
 - [On the Way](#on-the-way)
-- [On Hold — OverTheWire](#on-hold--overthewire)
+- [Pages Whose Lessons Were Removed](#pages-whose-lessons-were-removed)
 
 ---
 
@@ -227,6 +227,7 @@ The catalogue was not wrong — it was an honest mirror of the scope at the time
 | [**CWE-1242**](./cwe_1242.md) | Inclusion of Undocumented Features or Chicken Bits | [14 · ALU](../salterden_bilgisayara/14_alu.md) | [📄](https://cwe.mitre.org/data/definitions/1242.html) |
 | [**CWE-1254**](./cwe_1254.md) | Incorrect Comparison Logic Granularity | [15 · Condition](../salterden_bilgisayara/15_condition.md) | [📄](https://cwe.mitre.org/data/definitions/1254.html) |
 | [**CWE-119**](./cwe_119.md) | Improper Restriction of Operations within the Bounds of a Memory Buffer — **umbrella** | [08 · Increment](../salterden_bilgisayara/08_increment.md) | [📄](https://cwe.mitre.org/data/definitions/119.html) |
+| [**CWE-362**](./cwe_362.md) | Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition') — **umbrella** | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#the-unused-row) | [📄](https://cwe.mitre.org/data/definitions/362.html) |
 
 **1254 is a first:** the only CWE in your catalogue with **two parents**. MITRE put
 it under both [697](./cwe_697.md) (the comparison was built in the wrong manner)
@@ -274,14 +275,14 @@ exactly the job reverse engineering does.
 
 ---
 
-## On Hold — OverTheWire
+## Pages Whose Lessons Were Removed
 
-OverTheWire is not being solved right now, so these pages were **taken off the
-map.** The pages remain and can be reached from their own lessons; they will come
-back here when those series are picked up again.
+These five pages were born in the OverTheWire lessons. Those lessons were removed
+from the repo; their full versions are kept under the `tam-hali-2026-09-27` tag. The
+pages are still here, but the links to the lessons they were born in no longer open.
 
 [78](./cwe_78.md) · [59](./cwe_59.md) · [367](./cwe_367.md) ·
-[77](./cwe_77.md) · [706](./cwe_706.md) · [362](./cwe_362.md)
+[77](./cwe_77.md) · [706](./cwe_706.md)
 
 ---
 
