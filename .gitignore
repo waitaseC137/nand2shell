@@ -10,3 +10,4 @@ docs/laboratuvar/*/_tek-dosya/
 CLAUDE.md
 claude-memory
 .graphifyignore
+__pycache__/
