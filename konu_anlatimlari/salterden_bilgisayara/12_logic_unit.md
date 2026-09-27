@@ -28,8 +28,9 @@
 
 ## Bu Parça Ne Yapıyor?
 
-x86 serisinin [13. dersinde](../x86_assembly/13_bit_islemleri.md) şu komutlar
-geçiyor. O seriyi okuduysan bunları kendin yazmıştın; okumadıysan da sorun değil:
+Gerçek bir işlemcide bit işlemleri tek satırlık komutlardır. Masaüstü ve dizüstü
+bilgisayarların çoğundaki işlemci ailesi x86'nın assembly dilinde şöyle yazılırlar
+(`eax` ile `ebx`, işlemcinin içinde sayı tutan iki küçük kutu, yani iki register):
 
 ```nasm
 and eax, ebx
@@ -410,7 +411,6 @@ gelecek.
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` tel → `2ⁿ` desen
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — or kutusunun içindeki devre
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Katlar ve sözleşmeler
-- [../x86_assembly/13_bit_islemleri.md](../x86_assembly/13_bit_islemleri.md) — **Aynı işlemler, yazılım tarafından**
 
 ---
 

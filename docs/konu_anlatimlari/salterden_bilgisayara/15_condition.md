@@ -150,9 +150,8 @@ sürece — o istisnayı dersin sonunda göreceğiz.)
 Gerçek işlemcide bunun adı var. x86'da `cmp a, b` komutu tam olarak `a − b`
 yapar ve **sonucu atar** — sadece bayrakları tutar. Ardından gelen `jl` / `je` /
 `jg` / `jge` / `jne` komutları da burada kuracağın devrenin işini yapar — tek bir
-farkla, onu da dersin sonunda göreceğiz: OF. Yazılım tarafını
-[10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md)'de görmüştün;
-işte donanım tarafı.
+farkla, onu da dersin sonunda göreceğiz: OF. `cmp` ile atlama komutları işin
+yazılım tarafı; bu derste kuracağın devre donanım tarafı.
 
 ---
 
@@ -762,8 +761,6 @@ bir şeyi *hatırlamasını* sağlamak.
 - [09_subtraction.md](./09_subtraction.md) — Karşılaştırmanın altındaki çıkarma
 - [06_full_adder.md](./06_full_adder.md) — Zincirleme numarası
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — De Morgan ve temel kapılar
-- [../x86_assembly/10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md) — `cmp` ve bayraklar, yazılım tarafı
-- [../x86_assembly/11_ziplamalar.md](../x86_assembly/11_ziplamalar.md) — `jl` / `jge` / `jb` / `jae`: bu devrenin komut karşılıkları
 
 ---
 

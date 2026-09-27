@@ -590,10 +590,10 @@ The order in which you press the switches decides the result.
 > designer does not care about is the row the attacker cares about.
 >
 > In software this situation, where nobody chooses the order, is called a
-> **race condition**: [CWE-362](../cwe/cwe_362.md). The TOCTOU you met in
-> Leviathan ([CWE-367](../cwe/cwe_367.md)), the case of "the file you checked
-> changed before you opened it", is the software member of this family. The race
-> when leaving `0 0` is its hardware ancestor.
+> **race condition**: [CWE-362](../cwe/cwe_362.md). TOCTOU
+> ([CWE-367](../cwe/cwe_367.md)), where a file changes between the moment a
+> program checks it and the moment it uses it, is the software member of this
+> family. The race when leaving `0 0` is its hardware ancestor.
 >
 > The weakness born from signals racing in hardware is called
 > [CWE-1298](../cwe/cwe_1298.md) — *Hardware Logic Contains Race Conditions*.
@@ -690,7 +690,6 @@ bad row can no longer occur at all once the inputs have settled.
 - [15_condition.md](./15_condition.md) — The difference between what a circuit can do and what is described
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: a counter with nowhere to be stored
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand`; here the same result is reached by fixing one leg to `1`
-- [../binary_exploitation/07_sembolik_link.md](../binary_exploitation/07_sembolik_link.md) — TOCTOU in practice
 
 ---
 

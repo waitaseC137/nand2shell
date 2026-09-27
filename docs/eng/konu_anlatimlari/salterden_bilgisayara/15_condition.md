@@ -156,9 +156,9 @@ nothing overflows — we will see that exception at the end of the lesson.)
 In a real processor this has a name. On x86, `cmp a, b` does exactly `a − b` and
 **throws the result away** — it only keeps the flags. The `jl` / `je` / `jg` /
 `jge` / `jne` instructions that follow do the job of the circuit you are about to
-build — with one difference, which we will also see at the end of the lesson: OF. You saw the software side in
-[10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md); here is the
-hardware side.
+build — with one difference, which we will also see at the end of the lesson: OF. `cmp`
+and the jump instructions are the software side; the circuit you build in this lesson is
+the hardware side.
 
 ---
 
@@ -793,8 +793,6 @@ itself** and making a circuit *remember* something.
 - [09_subtraction.md](./09_subtraction.md) — The subtraction underneath every comparison
 - [06_full_adder.md](./06_full_adder.md) — The chaining trick
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — De Morgan and the basic gates
-- [../x86_assembly/10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md) — `cmp` and the flags, software side
-- [../x86_assembly/11_ziplamalar.md](../x86_assembly/11_ziplamalar.md) — `jl` / `jge` / `jb` / `jae`: this circuit's instruction counterparts
 
 ---
 

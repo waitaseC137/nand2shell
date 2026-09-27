@@ -21,7 +21,7 @@
 - [Büyük Resim: Neden Şalterden Başlıyoruz?](#büyük-resim-neden-şalterden-başlıyoruz)
 - [Yol Haritası — Ders Ders](#yol-haritası--ders-ders)
 - [Nasıl Çalışmalısın?](#nasıl-çalışmalısın)
-- [Kardeş Seri: x86 Assembly](#kardeş-seri-x86-assembly)
+- [Merdivenin Öbür Ucu](#merdivenin-öbür-ucu)
 
 ---
 
@@ -215,22 +215,13 @@ Hafızanın geri kalanı (flip-flop, register, sayaç, RAM) → saat ve kontrol 
 
 ---
 
-## Kardeş Seri: x86 Assembly
+## Merdivenin Öbür Ucu
 
-Bu serinin bir kardeşi var: **x86 Assembly** kursu. İkisi aynı makineye iki uçtan bakar:
-
-- **Bu seri** işçiyi (işlemciyi) **parçalardan kurar** — "bu makine neyden yapılmış?"
-- **x86 serisi** o işçiye **emir vermeyi** öğretir — "bu makineye nasıl iş yaptırılır?"
-
-Birbirinden bağımsız okunabilirler; ama ikisini birden götürürsen, bir gün iki yol
-birleşir: orada, `add` diye yazdığın emrin, burada kendi elinle kurduğun toplayıcıya
-gittiğini göreceksin. O an, bu iki serinin var olma sebebidir.
-
-> 🔑 **Ve o an ilk kez geldi.** Bu serinin [10. dersinde](./10_bayraklar.md) kurduğun
-> `ZF` ve `SF` bayrakları, x86 serisinin
-> [10. dersinin](../x86_assembly/10_bayraklar_ve_cmp.md) konusudur. Orada onlar
-> işlemcinin sana **verdiği** gizemli bitlerdi; burada onları **kendin kuruyorsun.**
-> Merdiveni yukarıdan da örmüştük, aşağıdan da örüyoruz — aradaki boşluk daralıyor.
+Bu seri işçiyi (işlemciyi) **parçalardan kurar**: "bu makine neyden yapılmış?" Aynı
+makineye öbür uçtan, yazılımdan da bakılabilir: "bu makineye nasıl iş yaptırılır?"
+İki yol bir yerde birleşir. Assembly'de `add` diye yazılan emir, burada kendi elinle
+kurduğun toplayıcıya gider; yazılımın işlemciden hazır **aldığı** `ZF` ve `SF`
+bayraklarını da 10. derste **kendin kuracaksın.**
 
 ---
 

@@ -252,18 +252,18 @@ Hepsi bu. Kapı yok. Zorluk devrede değil, **neden bit 15 olduğunu bilmekte.**
 
 ## Kapanış: Merdivenin İki Ucu Buluşuyor
 
-Bu serinin bir kardeşi var: [x86 Assembly](../x86_assembly/00_buradan_basla.md).
-Orada 10. ders **"Bayraklar & cmp"** başlığını taşıyor ve `ZF`, `SF`, `cmp`, `test`
-anlatılıyor.
+Aynı bayraklara yukarıdan, yazılım tarafından da bakılabilir. Assembly'de `ZF` ve
+`SF` gündelik iki bittir: `cmp` ve `test` komutları onları ayarlar, `jz` ve `js`
+gibi koşullu atlamalar onlara bakar.
 
-O dersi okurken bayraklar sana **verilmiş** şeylerdi: işlemcinin bir yerinde duran,
-komutların ayarladığı gizemli bitler.
+Yazılımdan bakınca bayraklar sana **verilmiş** şeylerdir: işlemcinin bir yerinde
+duran, komutların ayarladığı gizemli bitler.
 
 Bugün onları **kendin kurdun.** ZF, dört OR ile bir inv'in çıkışı. SF, bir demetten
 çekilen tek tel.
 
 ```
-   x86 dersleri 00–20          ← merdivenin ÜST ucu
+   cmp · test · jz · js        ← merdivenin ÜST ucu
         ▲
         │   ... daralan boşluk
         ▼
@@ -273,8 +273,8 @@ Bugün onları **kendin kurdun.** ZF, dört OR ile bir inv'in çıkışı. SF, b
    NAND · Röle · Şalter
 ```
 
-Merdiveni yukarıdan da örmüştük, aşağıdan da örüyoruz. Bu ders, iki ucun ilk kez
-**aynı kavrama** dokunduğu yer.
+Merdiven iki uçtan da örülebilir: yukarıdan komutlarla, aşağıdan devrelerle. Bu
+ders, iki ucun ilk kez **aynı kavrama** dokunduğu yer.
 
 Aradaki boşlukta ne kaldı? Bütün bu işlemleri tek bir kutuya toplayıp "hangisini
 yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
@@ -304,7 +304,6 @@ yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
 - [09_subtraction.md](./09_subtraction.md) — Bayrakların baktığı sonucu üreten devre
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — NOR ve kapı ailesi
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Bit numaraları ve jeton değerleri
-- [../x86_assembly/10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md) — **Aynı bayraklar, yazılım tarafından**
 
 ---
 

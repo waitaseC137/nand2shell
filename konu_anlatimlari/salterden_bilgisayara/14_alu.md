@@ -564,8 +564,6 @@ Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 - [11_selector_switch.md](./11_selector_switch.md) — `select 16`'nın kendisi ve fan-out
 - [10_bayraklar.md](./10_bayraklar.md) — Bayrak kavramı; OF borcu
 - [09_subtraction.md](./09_subtraction.md) — "Desen aynı, anlam okuyanın kararı"
-- [../x86_assembly/09_aritmetik.md](../x86_assembly/09_aritmetik.md) — Aynı işlemlerin yazılım tarafı
-- [../x86_assembly/13_bit_islemleri.md](../x86_assembly/13_bit_islemleri.md) — Mantık katının komut karşılıkları
 
 ---
 

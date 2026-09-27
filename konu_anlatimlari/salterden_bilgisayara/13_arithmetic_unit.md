@@ -28,8 +28,7 @@
 
 ## Bu Parça Ne Yapıyor?
 
-x86 serisinin [9. dersinde](../x86_assembly/09_aritmetik.md) şu satırlar
-geçiyor. O seriyi okuduysan bunları kendin yazmıştın; okumadıysan da sorun değil:
+x86 assembly'sinde toplama, çıkarma, bir artırma ve bir azaltma şöyle yazılır:
 
 ```nasm
 add eax, ebx
@@ -469,8 +468,8 @@ Sadece o da değil:
 
 | nerede | ne |
 |---|---|
-| [döngüler](../x86_assembly/12_donguler.md) | `i++` — her turda bir artırma |
-| [yığın](../x86_assembly/14_stack.md) | her `push`/`pop`'ta yığın işaretçisi bir kutu kayar |
+| döngüler | `i++` — her turda bir artırma |
+| yığın | her `push`/`pop`'ta yığın işaretçisi bir kutu kayar |
 | dizi gezmek | "sonraki elemana geç" = adresi bir eleman ileri al |
 
 x86'da bu adımlar bayt cinsinden sayılır: yığında 4, dizide bir elemanın boyu
@@ -533,7 +532,6 @@ kutuda birleştirecek. Ardından **Condition**'da `10`'da söz verilen taşma ba
 - [08_increment.md](./08_increment.md) — Bağlanmamış giriş neden 0 sayılır
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Tellerin sayı olması; bit ağırlıkları (2¹¹ = 2048)
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` kutusunun içindeki devre
-- [../x86_assembly/09_aritmetik.md](../x86_assembly/09_aritmetik.md) — **Aynı işlemler, yazılım tarafından**
 
 ---
 

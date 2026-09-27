@@ -581,8 +581,6 @@ there.
 - [11_selector_switch.md](./11_selector_switch.md) — `select 16` itself, and fan-out
 - [10_bayraklar.md](./10_bayraklar.md) — Where flags are built; the OF debt
 - [09_subtraction.md](./09_subtraction.md) — "The pattern is the same, the meaning is the reader's decision"
-- [../x86_assembly/09_aritmetik.md](../x86_assembly/09_aritmetik.md) — The software side of the same operations
-- [../x86_assembly/13_bit_islemleri.md](../x86_assembly/13_bit_islemleri.md) — The instruction counterparts of the logic floor
 
 ---
 

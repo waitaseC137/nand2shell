@@ -259,17 +259,18 @@ That's all. No gates. The difficulty isn't in the circuit, it's in **knowing why
 
 ## Closing: The Two Ends of the Ladder Meet
 
-This series has a sibling: [x86 Assembly](../x86_assembly/00_buradan_basla.md). Over there,
-lesson 10 is titled **"Flags & cmp"** and covers `ZF`, `SF`, `cmp` and `test`.
+The same flags can also be seen from above, from the software side. In assembly, `ZF` and
+`SF` are two everyday bits: the `cmp` and `test` instructions set them, and conditional
+jumps such as `jz` and `js` look at them.
 
-While reading that lesson the flags were things **handed to you**: mysterious bits sitting
+Seen from software, the flags are things **handed to you**: mysterious bits sitting
 somewhere in the processor that instructions set.
 
 Today you built them **yourself.** ZF is the output of four ORs and an inv. SF is a single
 wire pulled out of a bundle.
 
 ```
-   x86 lessons 00–20           ← the TOP end of the ladder
+   cmp · test · jz · js        ← the TOP end of the ladder
         ▲
         │   ... the narrowing gap
         ▼
@@ -279,8 +280,8 @@ wire pulled out of a bundle.
    NAND · Relay · Switch
 ```
 
-We've been weaving the ladder from above and we're weaving it from below. This lesson is
-where the two ends touch **the same concept** for the first time.
+The ladder can be woven from both ends: from above with instructions, from below with
+circuits. This lesson is where the two ends touch **the same concept** for the first time.
 
 What's left in the gap? Gathering all these operations into a single box and letting
 something outside choose "which one to do" — that is, the **ALU.** That's the next stop.
@@ -310,7 +311,6 @@ something outside choose "which one to do" — that is, the **ALU.** That's the 
 - [09_subtraction.md](./09_subtraction.md) — The circuit that produces the result the flags look at
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — NOR and the family of gates
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Bit numbers and token values
-- [../x86_assembly/10_bayraklar_ve_cmp.md](../x86_assembly/10_bayraklar_ve_cmp.md) — **The same flags, from the software side**
 
 ---
 

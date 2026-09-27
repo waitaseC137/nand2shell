@@ -563,9 +563,9 @@ Sonucu, anahtarlara basma sıran belirliyor.
 > Tasarımcının umursamadığı satırı saldırgan umursar.
 >
 > Yazılımda sırayı kimsenin seçmediği bu duruma **yarış koşulu** deniyor:
-> [CWE-362](../cwe/cwe_362.md). Leviathan'da gördüğün TOCTOU
-> ([CWE-367](../cwe/cwe_367.md)), yani "kontrol ettiğin dosya sen açana kadar
-> değişti" durumu, bu ailenin yazılımdaki üyesi. `0 0`'dan çıkıştaki yarış da onun
+> [CWE-362](../cwe/cwe_362.md). TOCTOU ([CWE-367](../cwe/cwe_367.md)), yani
+> programın bir dosyayı kontrol ettiği an ile kullandığı an arasında dosyanın
+> değişmesi, bu ailenin yazılımdaki üyesi. `0 0`'dan çıkıştaki yarış da onun
 > donanımdaki atası.
 >
 > Donanımda sinyallerin yarışmasından doğan zayıflığın adı
@@ -662,7 +662,6 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 - [15_condition.md](./15_condition.md) — Bir devrenin yapabildikleri ile tarif edilenler arasındaki fark
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: saklanacak yeri olmayan sayaç
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand`; burada aynı sonuca bir ayağı `1`'e sabitleyerek varılıyor
-- [../binary_exploitation/07_sembolik_link.md](../binary_exploitation/07_sembolik_link.md) — TOCTOU'nun uygulamalı hâli
 
 ---
 

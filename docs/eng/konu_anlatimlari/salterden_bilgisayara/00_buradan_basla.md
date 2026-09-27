@@ -22,7 +22,7 @@
 - [The Big Picture: Why Do We Start From the Switch?](#the-big-picture-why-do-we-start-from-the-switch)
 - [Roadmap — Lesson by Lesson](#roadmap--lesson-by-lesson)
 - [How Should You Study?](#how-should-you-study)
-- [Sister Series: x86 Assembly](#sister-series-x86-assembly)
+- [The Other End of the Ladder](#the-other-end-of-the-ladder)
 
 ---
 
@@ -221,25 +221,13 @@ The rest of memory (flip-flop, register, counter, RAM) → clock and control uni
 
 ---
 
-## Sister Series: x86 Assembly
+## The Other End of the Ladder
 
-This series has a sibling: the **x86 Assembly** course. The two look at the same machine from
-two ends:
-
-- **This series** builds the worker (the processor) **from parts** — "what is this machine
-  made of?"
-- **The x86 series** teaches you to **give orders** to that worker — "how do you make this
-  machine do work?"
-
-They can be read independently of each other; but if you carry both at once, one day the two
-paths meet: there, you'll see that the `add` order you wrote goes to the adder you built here
-with your own hands. That moment is the reason both of these series exist.
-
-> 🔑 **And that moment has now arrived for the first time.** The `ZF` and `SF` flags you
-> build in [lesson 10](./10_bayraklar.md) of this series are the subject of
-> [lesson 10](../x86_assembly/10_bayraklar_ve_cmp.md) of the x86 series. Over there they
-> were mysterious bits the processor **handed** you; here you **build them yourself.** We've
-> been weaving the ladder from above and we're weaving it from below — the gap is narrowing.
+This series builds the worker (the processor) **from parts**: "what is this machine made
+of?" The same machine can also be seen from the other end, from software: "how do you make
+this machine do work?" The two paths meet somewhere. The `add` order written in assembly
+goes to the adder you build here with your own hands; and the `ZF` and `SF` flags that
+software **receives** ready-made from the processor, you will **build yourself** in lesson 10.
 
 ---
 

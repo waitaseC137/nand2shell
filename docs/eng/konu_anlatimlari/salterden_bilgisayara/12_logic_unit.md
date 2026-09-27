@@ -28,9 +28,10 @@
 
 ## What Does This Part Do?
 
-These instructions appear in [lesson 13](../x86_assembly/13_bit_islemleri.md) of
-the x86 series. If you read that series, you wrote them yourself; if not, that is
-fine:
+In a real processor, bitwise operations are one-line instructions. On x86, the
+processor family inside most desktops and laptops, they are written like this in
+assembly (`eax` and `ebx` are two small boxes inside the processor that hold
+numbers, i.e. two registers):
 
 ```nasm
 and eax, ebx
@@ -426,7 +427,6 @@ promised in `10`.
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` wires → `2ⁿ` patterns
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — The circuit inside the OR box
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Layers and agreements
-- [../x86_assembly/13_bit_islemleri.md](../x86_assembly/13_bit_islemleri.md) — **The same operations, from the software side**
 
 ---
 

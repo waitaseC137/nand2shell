@@ -30,8 +30,8 @@
 
 ## What Does This Part Do?
 
-These lines appear in [lesson 9](../x86_assembly/09_aritmetik.md) of the x86
-series. If you read that series, you wrote them yourself; if not, that is fine:
+In x86 assembly, addition, subtraction, adding one and subtracting one are
+written like this:
 
 ```nasm
 add eax, ebx
@@ -490,8 +490,8 @@ And not only there:
 
 | where | what |
 |---|---|
-| [loops](../x86_assembly/12_donguler.md) | `i++` — one increment per turn |
-| [the stack](../x86_assembly/14_stack.md) | the stack pointer shifts by one slot on every `push`/`pop` |
+| loops | `i++` — one increment per turn |
+| the stack | the stack pointer shifts by one slot on every `push`/`pop` |
 | walking an array | "go to the next element" = move the address one element forward |
 
 On x86 these steps are counted in bytes: 4 on the stack, the size of one element
@@ -555,7 +555,6 @@ overflow flag (OF) that was promised back in `10`.
 - [08_increment.md](./08_increment.md) — Why an unconnected input counts as 0
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Wires becoming numbers; bit weights (2¹¹ = 2048)
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — The circuit inside the `inv` box
-- [../x86_assembly/09_aritmetik.md](../x86_assembly/09_aritmetik.md) — **The same operations, from the software side**
 
 ---
 
