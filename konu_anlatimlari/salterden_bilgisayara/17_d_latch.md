@@ -26,6 +26,7 @@
 - [Neden Ters d?](#neden-ters-d)
 - [Yasak Satır Artık Yok](#yasak-satır-artık-yok)
 - [🎮 Şimdi Sen Kur](#-şimdi-sen-kur)
+- [Neden Select Değil?](#neden-select-değil)
 - [Kapı Açıkken](#kapı-açıkken)
 - [Değişmeyen Tek Şey](#değişmeyen-tek-şey)
 
@@ -142,7 +143,7 @@ Buradaki en önemli satır üçüncüsü. `s` ve `r` hiçbir zaman veri değildi
 
 Peki `d` değişince döngü neden duymuyor?
 
-Çünkü `d` döngüye **hiç doğrudan değmiyor.** Bu seviyede yeni bir hafıza
+Çünkü `d` döngüye **hiç doğrudan değmiyor.** Bu çözümde yeni bir hafıza
 kurmuyorsun. Hafıza zaten var, SR Latch'in içinde. Bu seviyede kurduğun şey onun
 önüne koyduğun bir **çevirmen:**
 
@@ -155,8 +156,9 @@ SR Latch `st` ile `d`'nin dilini bilmiyor, yalnızca `s` ile `r`'yi anlıyor.
 Çevirmenin işi `st` ile `d`'yi o dile çevirmek. `st=0` iken çevirmen `d` ne
 olursa olsun "dokunma" komutu üretiyorsa `d`'nin sesi döngüye hiç ulaşmaz.
 
-> 🔑 Her parça bir öncekinin mirasını taşır. D Latch'in kendine ait bir hafızası
-> yok, SR Latch'inkini kullanıyor. Yeni olan yalnızca kapıcılık.
+> 🔑 Bu çözümde D Latch'in kendine ait bir hafızası yok, SR Latch'inkini
+> kullanıyor. Yeni olan yalnızca kapıcılık. Başka bir yol da var, ama bir bedeli
+> var: [Neden Select Değil?](#neden-select-değil)
 
 ---
 
@@ -440,6 +442,85 @@ Toplam: 3 bileşen, 4 `nand`. Aynı tel iki iş yapıyor: `sr latch`'e komut,
 
 ---
 
+## Neden Select Değil?
+
+Tabloya bir kez daha bak:
+
+```
+st = 1   →   çıkış d
+st = 0   →   çıkış kendisi (önceki)
+```
+
+Bu bir seçici cümlesi: *"`st` 1 ise `d`'yi, 0 ise çıkışın kendisini geçir."* Kutuda
+`select` de var. Tek parçayla kurulabilir mi?
+
+```
+select:   s ← st    d1 ← d    d0 ← kendi çıkışı    →  Output
+```
+
+Ders yazıldıktan sonra oyunda denendi ve **geçti:** *"1 components used. 13 nand
+gates in total."* Oyun bileşen sayısında bundan azının olmadığını, nand sayısında
+ise daha azının mümkün olduğunu söyledi.
+
+Yani D Latch, SR Latch'e **muhtaç değil.** Hafıza yine bir döngüden geliyor, ama bu
+sefer döngü seçicinin içinden geçiyor.
+
+O zaman neden SR Latch? Cevap, seçici parçalarına açılınca çıktı (parçanın ▾
+menüsü). İçinde şu var:
+
+```
+çıkış = or( and(st, d),  and(ters st, çıkış) )
+            ───────────   ──────────────────
+            yazma vanası     tutma vanası
+```
+
+`st=1`, `d=1` ile 1 yazıldı, sonra `st` 0'a indirildi. Tuvalde çıkış **0'a düştü**,
+saklanması gereken 1 kayboldu. Aynı devrede **Check solution** da artık geçmedi:
+
+> *"Set d=1. Set st=1: a 1 should be stored and emitted. Change st to 0. Output
+> should not change. **The circuit did not reach a stable state.**"*
+
+Sebep bir yarış. `st` inince yazma vanası kapanıyor, ama tutma vanasını açan
+`ters st` bir kapı geç geliyor, çünkü önce `inv`'den geçmesi gerekiyor. O kısa anda
+iki vana da kapalı. Döngüde 1'i tutan kimse kalmıyor.
+
+Aynı devre kapı düzeyinde, farklı gecikmelerle simüle edildi:
+
+| gecikmeler | `st` inince |
+|---|---|
+| `inv` yavaş | biti kaybediyor (tuvalde görülen) |
+| bütün kapılar aynı hızda | titriyor (denetleyicinin gördüğü) |
+| `inv` hızlı | sorunsuz |
+
+Aynı devre, üç farklı sonuç. Hangisinin çıkacağını kapıların hızı belirliyor.
+
+Kara kutu hâli neden geçti? Görünüşe göre oyun kutuyu tek bir parça gibi
+hesaplıyor: `st`'ye bakıp **tek adımda** karar veriyor, içeride ayrı bir gecikme
+yok. `st` indiği an çıkış doğrudan kendi eski değerine geçiyor, iki vananın
+birlikte kapalı olduğu bir an hiç oluşmuyor. Parçalarına açınca her kapı kendi
+adımında hesaplanıyor ve `inv`'in gecikmesi ortaya çıkıyor.
+
+Oyunun kodu okunmadı, bu bir çıkarım. Ama iki model kapı düzeyinde yan yana
+simüle edildi: tek adımda karar veren kutu biti tuttu, kapılardan kurulu hâli
+titredi. Oyunda görülenle aynı. **Kutu, içindeki yarışı gizliyordu.**
+
+SR Latch'li çözümde bu yarış yok. `st` inerken değişen tek şey, bir komut telinin
+"yaz"dan "sus"a dönmesi. Döngünün kendisi, yani iki çapraz `nand`, `st`'yi hiç
+görmüyor, o yüzden bir an bile açılmıyor. Bu da sekiz farklı gecikme düzeniyle
+simüle edildi: `d` sabitken `st` inince bit hiçbirinde kaybolmadı.
+
+> 🔑 SR Latch'in kullanılma sebebi "bir önceki seviyede kurduk" değil. Sebep şu:
+> **döngüyü tutan kapılar, kapıyı açıp kapayan telden bağımsız.** Seçicili latch'te
+> döngü `st`'nin kontrol ettiği vanadan geçiyor, ve `st` değişirken o vana bir an
+> kapalı kalabiliyor.
+
+> 💡 Gerçek çiplerde seçicili latch de kullanılıyor, ama bu yarışa karşı bir terim
+> eklenerek: `and(d, çıkış)`. `d` ile çıkış aynıyken bu terim döngüyü `st`'den
+> bağımsız tutuyor. Adı **Earle latch.** Aynı simülasyonda, `inv` yavaşken bile bit
+> kaybolmadı.
+
+---
+
 ## Kapı Açıkken
 
 Kapıcı `st=0` iken işini kusursuz yapıyor. Ama `st=1` iken ne oluyor?
@@ -551,7 +632,7 @@ kurulabilir.
 ☐ "Önceki değer" dışarıdan gelmez, SR Latch'in döngüsünde döner. İyi döngü: çift ters çevirme.
 ☐ 🔑 Memory'de VERİ, döngü tellerinin durumu. d aday, st karar, s/r KOMUT. s ve r hiç veri değildi.
 ☐ 🔑 Latch şu anki d'yi değil, st'nin EN SON 1 olduğu andaki d'yi saklar.
-☐ D Latch yeni hafıza kurmaz. SR Latch'in önüne bir ÇEVİRMEN (kapıcı) koyar.
+☐ Bu çözümde D Latch yeni hafıza kurmaz. SR Latch'in önüne bir ÇEVİRMEN (kapıcı) koyar.
 ☐ SR Latch dilinde 1 = "sustum", 0 = "komut". Dinlenme 1-1.
 ☐ 🔑 Komutun 0 olmasının sebebi nand: sözü geçen değeri 0. nor ile kurulsa komut 1 olurdu.
 ☐ ⚠️ Bir ayağı 1 olan nand öbür ayağı DİNLER ve ters çevirir (inv). Dinlemeyen yalnızca ayağı 0 olan.
@@ -561,6 +642,8 @@ kurulabilir.
 ☐ 🔑 d ile ters d asla ikisi birden 1 olamaz → s ve r asla ikisi birden 0 olamaz → YASAK SATIR İMKÂNSIZ.
 ☐ 👾 CWE-1245'e cevap: tanımsız satırı "kullanma" diye rica etmek yerine ulaşılamaz kılmak.
 ☐ Çözüm: 4 bileşen, 5 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 4 nand.
+☐ D Latch SR Latch'e MUHTAÇ DEĞİL: select'le de kurulur ve kara kutu hâli geçer. Açılınca st inerken bit kaybolur / titrer (oyun: "did not reach a stable state").
+☐ 🔑 SR Latch'in sebebi sıra değil: döngüyü tutan kapılar st'den BAĞIMSIZ. Select'te döngü st'nin vanasından geçer. Düzeltmesi: Earle latch, and(d, çıkış).
 ☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli.
 ☐ st=1 iken çıkış d'yi ANINDA izler: ŞEFFAF latch. PC ← PC + 1 bununla kurulursa sayı durmadan artar.
 ☐ İhtiyaç "kapı açıkken" değil "tam şu anda, bir kez" → Data Flip-Flop ve saat.

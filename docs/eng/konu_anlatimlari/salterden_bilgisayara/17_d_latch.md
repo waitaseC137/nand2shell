@@ -28,6 +28,7 @@
 - [Why the Inverse of d?](#why-the-inverse-of-d)
 - [The Forbidden Row Is Gone](#the-forbidden-row-is-gone)
 - [🎮 Now You Build It](#-now-you-build-it)
+- [Why Not Select?](#why-not-select)
 - [While the Gate Is Open](#while-the-gate-is-open)
 - [The One Thing That Does Not Change](#the-one-thing-that-does-not-change)
 
@@ -152,7 +153,7 @@ the previous level either. Both were **commands**: "make it 1", "make it 0",
 
 So why does the loop not hear `d` changing?
 
-Because `d` **never touches the loop directly.** In this level you are not
+Because `d` **never touches the loop directly.** In this solution you are not
 building a new memory. The memory already exists, inside the SR Latch. What you
 build in this level is a **translator** placed in front of it:
 
@@ -166,8 +167,9 @@ The SR Latch does not speak the language of `st` and `d`; it only understands
 language. If the translator produces a "leave it alone" command while `st=0`,
 whatever `d` is, then `d`'s voice never reaches the loop.
 
-> 🔑 Every part carries the inheritance of the one before it. The D Latch has no
-> memory of its own; it uses the SR Latch's. The only new thing is the gatekeeping.
+> 🔑 In this solution the D Latch has no memory of its own; it uses the SR
+> Latch's. The only new thing is the gatekeeping. There is another way too, but it
+> has a price: [Why Not Select?](#why-not-select)
 
 ---
 
@@ -464,6 +466,91 @@ Total: 3 components, 4 `nand`s. One wire does two jobs: a command for the
 
 ---
 
+## Why Not Select?
+
+Look at the table once more:
+
+```
+st = 1   →   output d
+st = 0   →   output itself (the previous one)
+```
+
+That is a selector sentence: *"if `st` is 1 pass `d`, if it is 0 pass the output
+itself."* And `select` is in the box. Can it be built with a single part?
+
+```
+select:   s ← st    d1 ← d    d0 ← its own output    →  Output
+```
+
+After the lesson was written this was tried in the game, and it **passed:** *"1
+components used. 13 nand gates in total."* The game said no solution uses fewer
+components, but a lower total of nand gates is possible.
+
+So the D Latch is **not dependent** on the SR Latch. The memory still comes from a
+loop, but this time the loop runs through the selector.
+
+Then why the SR Latch? The answer came out when the selector was opened up into
+its parts (the part's ▾ menu). Inside there is this:
+
+```
+output = or( and(st, d),  and(inverse st, output) )
+             ───────────   ──────────────────────
+             write valve        hold valve
+```
+
+A 1 was written with `st=1`, `d=1`, then `st` was brought down to 0. On the
+canvas the output **dropped to 0**; the 1 that should have been stored was lost.
+With the same circuit **Check solution** no longer passed either:
+
+> *"Set d=1. Set st=1: a 1 should be stored and emitted. Change st to 0. Output
+> should not change. **The circuit did not reach a stable state.**"*
+
+The reason is a race. When `st` falls the write valve closes, but the
+`inverse st` that opens the hold valve arrives one gate later, because it first
+has to pass through the `inv`. For that short moment both valves are closed.
+Nobody is left holding the 1 in the loop.
+
+The same circuit was simulated at gate level with different delays:
+
+| delays | when `st` falls |
+|---|---|
+| slow `inv` | loses the bit (what the canvas showed) |
+| all gates equally fast | oscillates (what the checker saw) |
+| fast `inv` | no trouble |
+
+The same circuit, three different outcomes. Which one you get is decided by how
+fast the gates are.
+
+Why did the black box pass? Apparently the game computes the box as a single
+part: it looks at `st` and decides **in a single step**, with no separate delay
+inside. The moment `st` falls, the output goes straight to its own old value;
+there is never a moment when both valves are closed together. Open it up and
+each gate is computed in its own step, and the `inv`'s delay appears.
+
+The game's code was not read, so this is an inference. But the two models were
+simulated side by side at gate level: the box that decides in one step held the
+bit, the version built from gates oscillated. The same as what the game showed.
+**The box was hiding the race inside it.**
+
+The solution with the SR Latch has no such race. When `st` falls, the only thing
+that changes is one command wire going from "write" to "be quiet". The loop
+itself, the two cross-coupled `nand`s, never sees `st`, so it never opens even
+for a moment. This was also simulated with eight different delay patterns: with
+`d` held steady, the bit was lost in none of them when `st` fell.
+
+> 🔑 The reason for using the SR Latch is not "we built it in the previous level".
+> The reason is this: **the gates holding the loop are independent of the wire
+> that opens and closes the gate.** In the selector latch the loop runs through
+> the valve `st` controls, and while `st` is changing that valve can be closed
+> for a moment.
+
+> 💡 Real chips use selector latches too, but with an extra term against this
+> race: `and(d, output)`. While `d` and the output agree, that term holds the loop
+> independently of `st`. Its name is the **Earle latch.** In the same simulation
+> the bit was not lost even with a slow `inv`.
+
+---
+
 ## While the Gate Is Open
 
 The gatekeeper does its job perfectly while `st=0`. But what happens while
@@ -583,7 +670,7 @@ built as `nand(and(st, r), rst_n)`.
 ☐ The "previous value" does not come from outside, it circulates in the SR Latch's loop. The good loop: even inversions.
 ☐ 🔑 In Memory, DATA is the state of the loop's wires. d is the candidate, st the decision, s/r the COMMAND. s and r were never data.
 ☐ 🔑 The latch stores not the current d, but the d from the moment st was LAST 1.
-☐ The D Latch builds no new memory. It places a TRANSLATOR (gatekeeper) in front of the SR Latch.
+☐ In this solution the D Latch builds no new memory. It places a TRANSLATOR (gatekeeper) in front of the SR Latch.
 ☐ In the SR Latch's language 1 = "I am silent", 0 = "command". Resting is 1-1.
 ☐ 🔑 The command is 0 because of nand: the value that has a say over it is 0. Built from nor, the command would be 1.
 ☐ ⚠️ A nand with one leg at 1 DOES LISTEN to its other leg and inverts it (inv). Only the one with a leg at 0 does not listen.
@@ -593,6 +680,8 @@ built as `nand(and(st, r), rst_n)`.
 ☐ 🔑 d and inverse d can never both be 1 → s and r can never both be 0 → THE FORBIDDEN ROW IS IMPOSSIBLE.
 ☐ 👾 An answer to CWE-1245: instead of asking people not to use the undefined row, make it unreachable.
 ☐ Solution: 4 components, 5 nands. Fewer: delete the inv, give r to nand1 (while st=1, r = inverse d) → 3 components, 4 nands.
+☐ The D Latch is NOT DEPENDENT on the SR Latch: it can be built with select, and the black box passes. Opened up, the bit is lost / oscillates when st falls (game: "did not reach a stable state").
+☐ 🔑 The reason for the SR Latch is not the order of levels: the gates holding the loop are INDEPENDENT of st. In select the loop runs through st's valve. The fix: the Earle latch, and(d, output).
 ☐ Testing memory is a SEQUENCE: write → st=0 → change d → the output must not change.
 ☐ While st=1 the output follows d INSTANTLY: a TRANSPARENT latch. Build PC ← PC + 1 with it and the number keeps climbing.
 ☐ The need is not "while the gate is open" but "exactly now, once" → Data Flip-Flop and the clock.
