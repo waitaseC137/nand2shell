@@ -694,6 +694,31 @@ which one you want depends on how you read the numbers. The sentence from `04`
 and from [CWE-681](../cwe/cwe_681.md) applies here too: the pattern is the same,
 the meaning is the reader's decision.
 
+> ⚠️ **Do not take CF for the carry from 09.** Tried in the game: in the
+> subtractor from 09, doing `3 − 5` makes the `c` output of `add 16` give **0**.
+> The first reading is "no carry, no borrow". The truth is the opposite: **0
+> means there is a borrow.**
+>
+> The reason is in the formula from 09: `inc16(inv16(B)) = 65536 − B`. The adder
+> is really computing `A + (65536 − B)`:
+>
+> ```
+> A ≥ B  →  the sum reaches 65536   →  does not fit in 16 bits  →  c = 1     5 + (65536 − 3) = 65538
+> A < B  →  the sum stays below it  →  fits                     →  c = 0     3 + (65536 − 5) = 65534
+> ```
+>
+> So the carry answers the question "was A enough to pay B?": **1 = it was, no
+> borrow.** x86 inverts this bit and puts it in CF: CF = 1 means **there is a
+> borrow**, which is why `jb` looks at CF = 1. ARM does not invert it: its C flag
+> means the same as the game's `c`, "no borrow". The same wire, two
+> manufacturers, two opposite rules. Look at the flag's contract, not its name.
+>
+> One more subtle point: in your circuit from 09 the carry comes out wrong when
+> `B = 0`. `inv16(0) = ffff`, `inc16` wraps it to `0000` and the overflowing
+> carry is lost inside the `inc`, so for `5 − 0` you see `c = 0`. On the path
+> real ALUs take (no `inc`, `inv16(B)` straight into `B`, the carry-in of
+> `add 16` at 1) the same row gives `c = 1`. Both were tried in the game.
+
 > ⚠️ This level has no OF input. Comparing `X` itself against zero is not a
 > problem: a number's sign bit never lies about that number. But as we said at
 > the start of the lesson, this circuit will be used to read the result of an
@@ -745,6 +770,7 @@ itself** and making a circuit *remember* something.
 ☐ 🔑 Signed "less than" = N XOR OF. Without overflow it is N itself; with overflow it is the opposite of N. (N = SF from 10.)
 ☐ OF (a − b) = 1 ⟺ a and b have DIFFERENT signs and the result's sign DIFFERS from a's. Same signs never overflow.
 ☐ x86: jl/jge are signed (they look at SF and OF), jb/jae are unsigned (they look at CF). The same subtraction, two different right answers.
+☐ ⚠️ The subtractor's carry is the INVERSE of the borrow: c = 1 means no borrow (A + 65536 − B overflowed). x86 inverts it (CF = 1 borrow), ARM does not.
 ☐ ⚠️ This level has no OF: if X came from a subtraction that OVERFLOWED, the circuit cannot notice the wrong answer.
 ☐ 👾 Looking at the sign bit alone is an INCOMPLETE comparison: CWE-1023.
 ```

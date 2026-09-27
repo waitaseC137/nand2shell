@@ -159,7 +159,7 @@ Raporu olduğu gibi uygulamadık. Her iddia üç yoldan biriyle sınandı:
 | Doğrulandı, hataydı | 18 | 15'te "Never ile Always testi tutarsa aradaki altı satır da tutar" deniyordu. Simülasyonda iki farklı yanlış devre bu iki testi de geçti ve yirmi dört satırın sekizinde yanlış cevap verdi. |
 | Oyunda deneyerek karara bağlandı | 6 | 13'te "1 bitlik tel 16 bitlik girişe doğrudan bağlanmaz, bundler şart" deniyordu. Denedim: oyun bağlantıya izin veriyor ve kalan 15 biti sıfırla dolduruyor. |
 | Raporun kendisi yanılmıştı | 2 | Rapor 13'teki tablo sırasının yanlış olduğunu söylüyordu. Oyundaki tablo da aynı sıradaymış. |
-| Öneri, uygulandı | 24 / 25 | Sonuncusu (x86'da CF'nin "borç" demesi) oyunda birlikte deneyip yazılacak. |
+| Öneri, uygulandı | 25 / 25 | Sonuncusu x86'da CF'nin "borç" demesiydi. Oyunda denerken ben de tam o tuzağa düştüm, 15'teki kutu şimdi o soruyla açılıyor. |
 | Bilinçli olarak reddedildi | 5 | İkisi serinin kapsam kuralıyla çelişiyordu, üçü bilerek seçilmiş bir ifade ya da benzetmeydi. |
 
 #### Ne öğrendik

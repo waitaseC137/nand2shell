@@ -389,7 +389,7 @@ nand2:     a ← st    b ← d             →  sr latch.r
 sr latch:  çıkış  →  Output
 ```
 
-Toplam: 4 bileşen, 6 `nand` (`sr latch` içinde 2, `inv` içinde 1).
+Toplam: 4 bileşen, 5 `nand` (`sr latch` içinde 2, `inv` içinde 1).
 
 </details>
 
@@ -433,7 +433,7 @@ st=0      →  r = 1               s = nand(0,1) = 1   →  tut    ✓
 `st=0` iken `r`'nin 1 olması sorun çıkarmıyor, çünkü `nand1`'in `st` ayağı 0 ve
 bir ayağı 0 olan nand öbür ayağını dinlemiyor.
 
-Toplam: 3 bileşen, 5 `nand`. Aynı tel iki iş yapıyor: `sr latch`'e komut,
+Toplam: 3 bileşen, 4 `nand`. Aynı tel iki iş yapıyor: `sr latch`'e komut,
 `nand1`'e ters d.
 
 </details>
@@ -514,7 +514,7 @@ anlamı, açılışta bir kez `st=1` yapıp bilinen bir `d` yazmak.
 ☐ inv olmasa: st=1 d=1'de s ve r ikisi de 0 → yasak satır. inv iki iş yapar.
 ☐ 🔑 d ile ters d asla ikisi birden 1 olamaz → s ve r asla ikisi birden 0 olamaz → YASAK SATIR İMKÂNSIZ.
 ☐ 👾 CWE-1245'e cevap: tanımsız satırı "kullanma" diye rica etmek yerine ulaşılamaz kılmak.
-☐ Çözüm: 4 bileşen, 6 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 5 nand.
+☐ Çözüm: 4 bileşen, 5 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 4 nand.
 ☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli.
 ☐ st=1 iken çıkış d'yi ANINDA izler: ŞEFFAF latch. PC ← PC + 1 bununla kurulursa sayı durmadan artar.
 ☐ İhtiyaç "kapı açıkken" değil "tam şu anda, bir kez" → Data Flip-Flop ve saat.

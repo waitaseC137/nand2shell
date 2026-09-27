@@ -664,6 +664,30 @@ sayıları nasıl okuduğuna bağlı. `04`'ün ve
 [CWE-681](../cwe/cwe_681.md)'in cümlesi burada da geçerli: desen aynı, anlam
 okuyanın kararı.
 
+> ⚠️ **CF'yi 09'daki elde sanma.** Oyunda denendi: 09'daki çıkarıcıda `3 − 5`
+> yapınca `add 16`'nın `c` çıkışı **0** veriyor. İlk okuyuş "elde yok, borç yok"
+> olur. Doğrusu tam tersi: **0, borç var demek.**
+>
+> Sebebi 09'daki formülde: `inc16(inv16(B)) = 65536 − B`. Toplayıcı aslında
+> `A + (65536 − B)` hesaplıyor:
+>
+> ```
+> A ≥ B  →  toplam 65536'ya ulaşır    →  16 bite sığmaz  →  c = 1     5 + (65536 − 3) = 65538
+> A < B  →  toplam 65536'nın altında  →  sığar           →  c = 0     3 + (65536 − 5) = 65534
+> ```
+>
+> Yani elde "A, B'yi ödemeye yetti mi?" sorusunun cevabı: **1 = yetti, borç yok.**
+> x86 bu biti ters çevirip CF'ye koyar: CF = 1 **borç var** demek, `jb` bu yüzden
+> CF = 1'e bakar. ARM çevirmez: onun C bayrağı oyundaki `c` ile aynı anlamda,
+> "borç yok" demek. Aynı tel, iki üretici, iki ters kural. Bayrağın adına değil
+> sözleşmesine bak.
+>
+> Bir ince nokta daha: 09'daki devrende elde `B = 0` iken yanlış çıkar.
+> `inv16(0) = ffff`, `inc16` bunu `0000`'a sarar ve taşan elde `inc`'in içinde
+> kaybolur, `5 − 0`'da `c = 0` görürsün. Gerçek ALU'ların yolunda (`inc` yok,
+> `inv16(B)` doğrudan `B`'ye, `add 16`'nın carry-in'i 1) aynı satırda `c = 1`
+> çıkar. İkisi de oyunda denendi.
+
 > ⚠️ Bu seviyede OF girişi yok. `X`'in kendisini sıfırla karşılaştırırken sorun da
 > yok: bir sayının işaret biti o sayı hakkında yalan söylemez. Ama dersin başında
 > söylediğimiz gibi, bu devre bir `a − b` çıkarmasının sonucunu okumak için
@@ -715,6 +739,7 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ 🔑 İşaretli "küçüktür" = N XOR OF. Taşma yoksa N'in kendisi, taşma varsa N'in tersi. (N = 10'daki SF.)
 ☐ OF (a − b) = 1 ⟺ a ile b'nin işareti FARKLI ve sonucun işareti a'nınkinden FARKLI. Aynı işaretliler taşmaz.
 ☐ x86: jl/jge işaretli (SF ile OF'a bakar), jb/jae işaretsiz (CF'ye bakar). Aynı çıkarma, iki farklı doğru cevap.
+☐ ⚠️ Çıkarıcının eldesi borcun TERSİ: c = 1 borç yok (A + 65536 − B taştı). x86 çevirir (CF = 1 borç), ARM çevirmez.
 ☐ ⚠️ Bu seviyede OF yok: X bir çıkarmadan gelip TAŞTIYSA devre yanlış cevabı fark edemez.
 ☐ 👾 Tek başına işaret bitine bakmak EKSİK bir karşılaştırmadır: CWE-1023.
 ```

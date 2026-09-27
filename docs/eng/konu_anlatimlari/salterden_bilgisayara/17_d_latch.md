@@ -410,7 +410,7 @@ nand2:     a ← st    b ← d             →  sr latch.r
 sr latch:  output  →  Output
 ```
 
-Total: 4 components, 6 `nand`s (2 inside the `sr latch`, 1 inside the `inv`).
+Total: 4 components, 5 `nand`s (2 inside the `sr latch`, 1 inside the `inv`).
 
 </details>
 
@@ -457,7 +457,7 @@ st=0      →  r = 1               s = nand(0,1) = 1   →  hold     ✓
 `r` being 1 while `st=0` causes no trouble, because `nand1`'s `st` leg is 0, and a
 nand with one leg at 0 does not listen to its other leg.
 
-Total: 3 components, 5 `nand`s. One wire does two jobs: a command for the
+Total: 3 components, 4 `nand`s. One wire does two jobs: a command for the
 `sr latch`, the inverse of d for `nand1`.
 
 </details>
@@ -543,7 +543,7 @@ writing a known `d`.
 ☐ Without the inv: at st=1 d=1 both s and r are 0 → forbidden row. The inv does two jobs.
 ☐ 🔑 d and inverse d can never both be 1 → s and r can never both be 0 → THE FORBIDDEN ROW IS IMPOSSIBLE.
 ☐ 👾 An answer to CWE-1245: instead of asking people not to use the undefined row, make it unreachable.
-☐ Solution: 4 components, 6 nands. Fewer: delete the inv, give r to nand1 (while st=1, r = inverse d) → 3 components, 5 nands.
+☐ Solution: 4 components, 5 nands. Fewer: delete the inv, give r to nand1 (while st=1, r = inverse d) → 3 components, 4 nands.
 ☐ Testing memory is a SEQUENCE: write → st=0 → change d → the output must not change.
 ☐ While st=1 the output follows d INSTANTLY: a TRANSPARENT latch. Build PC ← PC + 1 with it and the number keeps climbing.
 ☐ The need is not "while the gate is open" but "exactly now, once" → Data Flip-Flop and the clock.
