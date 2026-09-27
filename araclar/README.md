@@ -16,7 +16,6 @@ Dersler tek başına, yapay zekâyla birlikte öğrenilerek yazılıyor. Öğren
 yanındaki yapay zekâ da aynı yanlış cümleyi "mantıklı" bulabiliyor. Bu yüzden kural
 şu: **hakem ne yazan, ne yapay zekâ, ne de ikinci bir yapay zekâ. Hakem oyun ve
 simülasyon.**
-(Hikâyesi: [README · Hataları kim yakalıyor?](../README.md#-hataları-kim-yakalıyor))
 
 Buradaki araçlar o hakemliğin makinede yapılabilen kısmı. Oyunun kendisiyle ilgili
 iddialar (bir bağlantıya izin veriyor mu, bir parçayı kaç nand sayıyor) yalnızca

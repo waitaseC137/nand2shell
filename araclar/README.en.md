@@ -16,7 +16,6 @@ The lessons are written by someone learning alone, together with an AI. The
 learner and the AI can both find the same wrong sentence "reasonable". So the rule
 is: **the referee is not the writer, not the AI, and not a second AI. The referee
 is the game and the simulation.**
-(The story: [README · Who catches the mistakes?](../README.md#-hataları-kim-yakalıyor), in Turkish)
 
 The tools here are the part of that refereeing that can be done on a machine.
 Claims about the game itself (does it allow a connection, how many nands does it
