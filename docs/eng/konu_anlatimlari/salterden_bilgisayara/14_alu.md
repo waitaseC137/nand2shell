@@ -103,8 +103,7 @@ Together the five form a **control word**:
 
 This is the first time in the series you meet it: a circuit taking an entire
 **instruction** as input. In `12` the order was two bits, in `13` two again. Here
-it is five. In the upcoming **Processor** unit this word will be read from memory
-and its name will be **machine instruction**.
+it is five.
 
 > 🔑 There is no physical difference between a control bit and a data bit. Both
 > are wires, both are either high or low. The difference is entirely in **where
@@ -538,8 +537,7 @@ documented — is the smallest version of that job.
 
 **Condition**, the last level of the ALU unit. This time there is **no selector**
 in the toolbox — for three levels you solved everything with `select`, and that
-habit breaks here. And the overflow flag (OF) promised back in `10` gets paid off
-there.
+habit breaks here.
 
 ---
 
@@ -548,7 +546,7 @@ there.
 ```
 ☐ You build no gate in this level: you JOIN what you built in 12 and 13.
 ☐ Two kinds of bit: DATA (X, Y) and CONTROL (u, op1, op0, zx, sw). The difference is not in the wire but in where it is wired.
-☐ Five control bits form a CONTROL WORD — in the Processor unit its name becomes "machine instruction".
+☐ Five control bits form a CONTROL WORD.
 ☐ u · op1 · op0 are an ADDRESS: 2 floors × 4 flats = the 8 rows in the table.
 ☐ ⚠️ op1/op0 go to both units at once and are read under TWO DIFFERENT CONTRACTS. Same signal, separate meaning.
 ☐ zx and sw pick no operation: they say not "which machine" but "WHAT gets handed to the machine".

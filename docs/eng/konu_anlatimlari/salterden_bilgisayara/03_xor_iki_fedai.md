@@ -151,7 +151,7 @@ separate rows — if the table has four rows, two "no"s + two "yes"es is the who
 
 ```
 ☐ XOR = difference detector: 1 if different, 0 if the same.
-☐ Second reading: "1 if there is EXACTLY ONE 1" — don't forget this, it comes back in addition.
+☐ Second reading: "1 if there is EXACTLY ONE 1" — don't forget this.
 ☐ One gate isn't enough, because the request is TWO sentences: "at least one" + "not both."
 ☐ The solution team: OR bouncer (eliminates 0,0) + NAND bouncer (eliminates 1,1) + AND approval desk.
 ☐ Design method: split a complex request into sentences, hand out gates to the sentences.

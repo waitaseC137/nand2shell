@@ -45,8 +45,8 @@ bağlandı.
 | 14 · ALU | "Sıfırı yanlış bayrağa bağlamak" tuzağı neye benzer? | `14_alu/sifir_tuzagi.py` | aynı belirtiyi veren 60 kurulum; `X=5, Y=3` tablosu | tuzak tam kurulumuyla yeniden yazıldı ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
 | 15 · Condition | "Never ve Always tutarsa aradaki altı satır da tutar" | `15_condition/never_always.py` · `15_condition/digital/` | iki yanlış devre de iki testi geçiyor, 24 satırın 8'inde yanlış | test bölümü tek izinli satırlarla yeniden yazıldı ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
 | 15 · Condition | OF kuralı: işaretler farklı **ve** sonucun işareti `a`'nınkinden farklı | `15_condition/of_kurali.py` | 256 çiftte uyuşmazlık 0 | "OF nereden biliyor?" bölümü ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
-| 15 · Condition | Çıkarıcının eldesi x86'nın CF'sinin tersi; 09'daki `inc`'li yolda `B = 0` iken elde kaybolur | `15_condition/cf_borc.py` | tek geçişte 0/256 uyuşmazlık; `inc`'li yolda 16 satır, hepsi `B = 0` | "CF'yi 09'daki elde sanma" kutusu ([7b94374](https://github.com/waitaseC137/nand2shell/commit/7b94374)) |
-| 16 · SR Latch | `0 0`'dan çıkışta kim kazanır; parite kuralı ne zaman geçerli; `and+and`; `or(s, q)`; neden çapraz bağlantı | `16-17_latch/sr_latch_16.py` | son kalkanın komutu kazanır; kural yalnız `1 1`'de; `and+and` 1 yazamaz | tersler kuralı, yarış, metastabilite ([dc754b6](https://github.com/waitaseC137/nand2shell/commit/dc754b6)); çapraz bağlantı türetmesi ([7552a3b](https://github.com/waitaseC137/nand2shell/commit/7552a3b)) |
+| 15 · Condition | Çıkarıcının eldesi x86'nın CF'sinin tersi; 09'daki `inc`'li yolda `B = 0` iken elde kaybolur | `15_condition/cf_borc.py` | tek geçişte 0/256 uyuşmazlık; `inc`'li yolda 16 satır, hepsi `B = 0` | "CF'yi 09'daki elde sanma" kutusu yazıldı ([7b94374](https://github.com/waitaseC137/nand2shell/commit/7b94374)), sonra x86'nın kendi sırasına bırakılıp dersten çıkarıldı; sınama duruyor |
+| 16 · SR Latch | `0 0`'dan çıkışta kim kazanır; parite kuralı ne zaman geçerli; `and+and`; `or(s, q)`; neden çapraz bağlantı | `16-17_latch/sr_latch_16.py` | son kalkanın komutu kazanır; kural yalnız `1 1`'de; `and+and` 1 yazamaz | tersler kuralı ve yarış ([dc754b6](https://github.com/waitaseC137/nand2shell/commit/dc754b6)); çapraz bağlantı türetmesi ([7552a3b](https://github.com/waitaseC137/nand2shell/commit/7552a3b)) |
 | 17 · D Latch | "Yasak satır fiziksel olarak imkânsız"; test tablosu; `select`'li latch | `16-17_latch/d_latch_17.py` | bir tiklik `s = r = 0` iğnesi; `d`'den 1 tik sonra inen `st` titretiyor; önce `d` çevrilirse doğru devre bozuk görünüyor | "Bir anlık iğne", tek anahtarlı test tablosu ([271d06f](https://github.com/waitaseC137/nand2shell/commit/271d06f)) |
 | 17 · D Latch | `select`'li latch gecikmeye göre ne yapar; SR'li çözüm her gecikmede tutar mı; oyundaki kara kutu neden geçti? | `16-17_latch/verilog/select_latch.v` · `sr_dlatch_delays.v` · `kutu_vs_kapi.v` | üç sonuç (bit kaybı · titreme · sorunsuz); SR'li çözüm 8 düzende hatasız; tek adımda karar veren kutu biti tutuyor | "Neden Select Değil?" ([282fdbf](https://github.com/waitaseC137/nand2shell/commit/282fdbf)) |
 | 17 · D Latch · CWE-1271 | İlk yazmayı beklemek pencereyi kapatır mı; reset girişli latch | `16-17_latch/reset_latch_17.py` · `verilog/reset_latch.v` | resetsiz devre ilk yazmaya kadar `x`; reset girişli devre her açılışta 1 | reset doğru anlatıldı ([144d061](https://github.com/waitaseC137/nand2shell/commit/144d061)) |
@@ -98,8 +98,7 @@ gerek kalmadı. Gerektiği gün buraya eklenecek.
 
 - Bu simülatörler fiziği değil, **basit gecikme modellerini** gösteriyor. Bir
   sonucun anlamı "bu modelde böyle". Derslerde de öyle yazıldı.
-- Metastabiliteyi (bir latch'in iki değer arasında asılı kalması) hiçbiri
-  göstermiyor. Onun anlatımı derste, sınaması burada yok.
+- Bir latch'in iki değer arasında bir süre asılı kalmasını hiçbiri göstermiyor.
 - "Oyun kutuyu tek adımda hesaplıyor" bir **çıkarım.** Oyunun kodu okunmadı.
   `kutu_vs_kapi.v` yalnızca bu çıkarımın oyunda görülenle uyuştuğunu gösteriyor.
 

@@ -18,7 +18,6 @@
 - [The Hierarchy Between CWEs](#the-hierarchy-between-cwes)
 - [Chains: The Wire Between Two Bugs](#chains-the-wire-between-two-bugs)
 - [The NandGame Tree](#the-nandgame-tree)
-- [On the Way](#on-the-way)
 
 ---
 
@@ -184,9 +183,7 @@ construction in the settled state ([17](../salterden_bilgisayara/17_d_latch.md#t
 **Why is 1298 here?** It is not needed to build the D Latch, but only this
 weakness explains why the solution with the SR Latch was chosen. The selector
 latch passes in the game as a black box and loses the bit once it is opened up.
-The first example MITRE gives for this weakness is the same selector. The page
-was being held for the clock unit; it came early because the race was covered in
-two lessons at once.
+The first example MITRE gives for this weakness is the same selector.
 
 **The three are a chain.** In the Security Bridge example in lesson 09 the same
 number is read three times under three different contracts: [196](./cwe_196.md) as
@@ -212,8 +209,7 @@ The catalogue was not wrong — it was an honest mirror of the scope at the time
 
 ### 🟢 Tier 3 — Useful Later
 
-> Not needed to understand NandGame. You will meet these in assembly and reverse
-> engineering.
+> Not needed to understand NandGame.
 
 | CWE | Official name | Where it is born | link |
 |---|---|---|---|
@@ -230,9 +226,7 @@ The catalogue was not wrong — it was an honest mirror of the scope at the time
 
 **1254 is a first:** the only CWE in your catalogue with **two parents**. MITRE put
 it under both [697](./cwe_697.md) (the comparison was built in the wrong manner)
-and **208** (the time difference is observable from outside). Because it stands
-right at the crossroads, once 208 is written this page will be reachable from both
-sides.
+and **208** (the time difference is observable from outside).
 
 **Why is 1242 in this tier but still important?** The ALU level's control word is
 5 bits, that is **32 states** — but the documentation lists only 11 of them. Of the
@@ -243,34 +237,6 @@ bits left in to switch off a risky feature after manufacturing are called
 feature, a weakness is born. The rule: *every
 control word wider than its documented state space is a place to look.* That is
 exactly the job reverse engineering does.
-
----
-
-## On the Way
-
-🔜 These arrive as the lessons are written. The order follows the curriculum.
-
-| Where | CWE | Official name |
-|---|---|---|
-| Memory unit · addressing | **125** | Out-of-bounds Read |
-| Memory unit | **416** | Use After Free |
-| Pipeline / speculation | **208** | Observable Timing Discrepancy |
-| SMT / shared units | **1303** | Non-Transparent Sharing of Microarchitectural Resources |
-| After the two above | **203** | Observable Discrepancy (umbrella) |
-| Microcode / privileged controls | **1256** | Improper Restriction of Software Interfaces to Hardware Features |
-
-> 📌 **The "where" column here is an estimate, not a promise.** It sharpens as the
-> lessons are written. The only firm condition known for `125` is this: reading out
-> of bounds first needs an **address** — that weakness cannot be born before the
-> question *"which slot shall I read?"* appears. We will write down which level it is
-> born in once we reach that level.
->
-> 🔑 **We are not writing 203 now, on purpose.** A topic with no lesson gets no CWE.
-> 203 only becomes meaningful once 208 and 1303 are written — building an umbrella
-> without both of its children would put the map ahead of the curriculum.
->
-> 697, 1242 and 1298 used to be on this list; they moved into the tree once their
-> lessons were written.
 
 ---
 

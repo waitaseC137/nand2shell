@@ -41,6 +41,6 @@
 
 | File | Topics |
 |---|---|
-| [README.md](./cwe/README.md) | What a CWE is, what a CVE is, the difference · chains · the CWEs of the From Switches to a Computer lessons · what is on the way |
+| [README.md](./cwe/README.md) | What a CWE is, what a CVE is, the difference · chains · the CWEs of the From Switches to a Computer lessons |
 
 ---

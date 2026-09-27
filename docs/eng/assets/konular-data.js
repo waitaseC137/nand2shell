@@ -18,6 +18,7 @@ window.KONULAR = {
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Start Here",              h: "Course map; from switches to a CPU (🚧 in progress)" },
         { f: "salterden_bilgisayara/01_akim_salter_role.md",     n: "01",   t: "Current · Switch · Relay", h: "Electricity → switch → relay = the first logic" },
+        { f: "salterden_bilgisayara/01.5_yasak_bolge.md", n: "01.5", t: "The Forbidden Zone", h: "interlude: voltage · noise margin · MOSFET · CMOS · P ≈ C·V²·f" },
         { f: "salterden_bilgisayara/02_nanddan_kapilar.md",      n: "02",   t: "Gates from NAND",         h: "NAND is universal: derive NOT/AND/OR/XOR" },
         { f: "salterden_bilgisayara/03_xor_iki_fedai.md",        n: "03",   t: "XOR: The Two Workhorses", h: "Building XOR from OR+NAND+AND" },
         { f: "salterden_bilgisayara/03.5_soyutlama_merdiveni.md",n: "03.5", t: "The Ladder of Abstraction", h: "A gate = a closed box; climbing one floor up" },

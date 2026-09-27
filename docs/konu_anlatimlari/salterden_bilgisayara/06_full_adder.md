@@ -196,8 +196,7 @@ konuda üç ayrı yerde geçiyor ve üçü birbiriyle alakasız:
 > girişin tamamına bakıyor.
 >
 > Genel kural: aynı ismi taşıyan iki şey gördüğünde, **hangisinden bahsettiğini
-> her seferinde yüksek sesle söyle.** Bu seride ileride aynı tuzak `c` harfiyle
-> (giren elde / çıkan elde) ve kutu bacak isimleriyle tekrar karşına çıkacak.
+> her seferinde yüksek sesle söyle.**
 
 ---
 

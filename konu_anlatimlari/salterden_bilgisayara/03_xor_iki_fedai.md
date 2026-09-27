@@ -151,7 +151,7 @@ ayrı satırı öldürüyor — tablo dört satırsa, iki "hayır" + iki "evet" 
 
 ```
 ☐ XOR = farklılık dedektörü: farklıysa 1, aynıysa 0.
-☐ İkinci okuma: "TAM BİR tane 1 varsa 1" — bunu unutma, toplamada geri gelecek.
+☐ İkinci okuma: "TAM BİR tane 1 varsa 1" — bunu unutma.
 ☐ Tek kapı yetmez, çünkü istek İKİ cümle: "en az biri" + "ikisi birden değil".
 ☐ Çözüm takımı: OR fedaisi (0,0'ı eler) + NAND fedaisi (1,1'i eler) + AND onay masası.
 ☐ Tasarım yöntemi: karmaşık isteği cümlelere böl, cümlelere kapı dağıt.

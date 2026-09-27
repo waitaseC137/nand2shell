@@ -37,25 +37,8 @@ inc eax
 dec eax
 ```
 
-Dördü de bu derste kuracağın devrede çalışır. `12`'deki yolculuğun aynısı, sadece
-işlemler aritmetik:
-
-```
-add eax, ebx
-   │
-   ①  assembler satırı bitlere çevirir
-   │
-   ②  kontrol birimi bitleri okur, "topla" der    →  op1 = 0, op0 = 0
-   │
-   ③  eax ile ebx'in değerleri X ve Y tellerine gelir
-   │
-   ④  ARITHMETIC UNIT: emre göre doğru sonuç çıkar   ← bu ders
-   │
-   ⑤  sonuç eax'a geri yazılır
-```
-
-`12` ile aradaki tek fark ④. Ama o kutunun **içi** bambaşka kurulacak — ve farkın
-sebebi tabloda saklı.
+Dördü de bu derste kuracağın devrede çalışır. Ama bu kutunun **içi** `12`'dekinden
+bambaşka kurulacak — ve farkın sebebi tabloda saklı.
 
 ---
 
@@ -273,9 +256,8 @@ yerine, sessizce yapar.
 | bundler | **sen** seçiyorsun | teldeki sayı hemen söyler (aşağıdaki `0800` tuzağı) |
 | oyunun genişletmesi | hep bit 0, üstü hep 0 | ses çıkmaz, yanlış teli bağlasan da kabul eder |
 
-İkinci satırın tuzağı [15](./15_condition.md#tuzak-doğru-parça-yanlış-tel)'te
-karşına çıkacak: bir bayrağı 16 bitlik bir girişe yanlışlıkla bağlamak ve oyunun
-buna sessizce izin vermesi.
+İkinci satırın tuzağı: bir bayrağı 16 bitlik bir girişe yanlışlıkla bağlamak ve
+oyunun buna sessizce izin vermesi.
 
 ### Gerçek Çipte
 
@@ -314,7 +296,7 @@ Ucuz tasarımı mümkün kılan şey, 16 bitlik sabiti seçicinin girişine koya
 Koyamasaydın girişte seçim yapamaz, dört aritmetik birim kurmak zorunda
 kalırdın.
 
-> 💡 Bu genişlik meselesi bir daha karşına çıkacak. 8 bitlik bir değeri 16 bitlik
+> 💡 Aynı genişlik meselesi sayılarda da var. 8 bitlik bir değeri 16 bitlik
 > bir yere yüklediğinde geri kalan 8 biti neyle doldurursun? Sayıyı işaretsiz
 > okuyorsan 0'la, işaretli okuyorsan işaret bitinin kopyasıyla. Aynı desen için
 > iki farklı doğru cevap var; hangisinin doğru olduğunu sayının ne anlama geldiği
@@ -464,34 +446,12 @@ PC ← PC + 1
 `PC` = program sayacı, sıradaki komutun adresini tutan kayıt. Bu toplama **her
 komutta**, makine açık olduğu sürece durmadan yapılır.
 
-Sadece o da değil:
-
-| nerede | ne |
-|---|---|
-| döngüler | `i++` — her turda bir artırma |
-| yığın | her `push`/`pop`'ta yığın işaretçisi bir kutu kayar |
-| dizi gezmek | "sonraki elemana geç" = adresi bir eleman ileri al |
-
-x86'da bu adımlar bayt cinsinden sayılır: yığında 4, dizide bir elemanın boyu
-kadar. Fikir aynı: sabit bir miktar eklemek ya da çıkarmak.
-
 Bu yüzden `+1` ve `−1`, `+Y` kadar meşru bir işlem olarak tabloya girmiş.
-İlerideki **Processor** ünitesinde program sayacı her komutta tam bu işlemi
-yapacak.
-
-> 💡 x86'da aynı gerekçeyle `add`'den ayrı `inc` ve `dec` komutları var. Hikâyenin
-> iki kıvrımı var. `inc` elde bayrağına (CF) dokunmuyor, CF'yi eski değerinde
-> bırakıyor. Pentium 4 döneminde bu yarım güncelleme boru hattını takıyordu ve
-> `inc`, `add reg, 1`'den **yavaş** kalıyordu. Hızlandırmak için konan komut,
-> mimari değişince yük olmuştu. Sonra mimari yine değişti. Bugünkü işlemcilerin
-> çoğunda ikisi aynı hızda. Ceza ancak `inc`'ten hemen sonra gelen bir komut,
-> `inc`'in dokunmadığı CF'yi de okumak isterse çıkabiliyor.
 
 ### Sırada
 
 **ALU**, bu ünitede kurduğun iki birimi — Logic Unit ile Arithmetic Unit — tek
-kutuda birleştirecek. Ardından **Condition**'da `10`'da söz verilen taşma bayrağı
-(OF) gelecek.
+kutuda birleştirecek.
 
 ---
 

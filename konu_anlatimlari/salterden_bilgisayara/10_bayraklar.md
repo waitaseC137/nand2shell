@@ -22,7 +22,7 @@
 - [İşaret Biti Neden 15?](#i̇şaret-biti-neden-15)
 - [Karşılaştırmanın Tamamı](#karşılaştırmanın-tamamı)
 - [🎮 Şimdi Sen Kur](#-şimdi-sen-kur)
-- [Kapanış: Merdivenin İki Ucu Buluşuyor](#kapanış-merdivenin-i̇ki-ucu-buluşuyor)
+- [Kapanış: Bayrakları Kendin Kurdun](#kapanış-bayrakları-kendin-kurdun)
 
 ---
 
@@ -213,8 +213,7 @@ je   esitse_git    ; ZF = 1 ise atla
 > SF'ye bakan devre "a küçük değil" der, oysa küçük.
 >
 > Gerçek işlemciler bu yüzden bir **overflow flag (OF)** daha tutar ve işaretli
-> karşılaştırmada `SF ≠ OF` koşuluna bakar. Sen bu derste temeli kuruyorsun;
-> taşma bayrağı ALU dersinde gelecek.
+> karşılaştırmada `SF ≠ OF` koşuluna bakar. Sen bu derste temeli kuruyorsun.
 
 ---
 
@@ -250,31 +249,12 @@ Hepsi bu. Kapı yok. Zorluk devrede değil, **neden bit 15 olduğunu bilmekte.**
 
 ---
 
-## Kapanış: Merdivenin İki Ucu Buluşuyor
+## Kapanış: Bayrakları Kendin Kurdun
 
-Aynı bayraklara yukarıdan, yazılım tarafından da bakılabilir. Assembly'de `ZF` ve
-`SF` gündelik iki bittir: `cmp` ve `test` komutları onları ayarlar, `jz` ve `js`
-gibi koşullu atlamalar onlara bakar.
-
-Yazılımdan bakınca bayraklar sana **verilmiş** şeylerdir: işlemcinin bir yerinde
-duran, komutların ayarladığı gizemli bitler.
-
-Bugün onları **kendin kurdun.** ZF, dört OR ile bir inv'in çıkışı. SF, bir demetten
-çekilen tek tel.
-
-```
-   cmp · test · jz · js        ← merdivenin ÜST ucu
-        ▲
-        │   ... daralan boşluk
-        ▼
-   Bayraklar (bu ders)         ← merdivenin ALT ucu
-   Subtraction · Increment
-   Multi-bit Adder · Full Adder
-   NAND · Röle · Şalter
-```
-
-Merdiven iki uçtan da örülebilir: yukarıdan komutlarla, aşağıdan devrelerle. Bu
-ders, iki ucun ilk kez **aynı kavrama** dokunduğu yer.
+Yazılımdan bakınca bayraklar **verilmiş** şeylerdir: işlemcinin bir yerinde duran,
+komutların ayarladığı gizemli bitler. Bugün onları **kendin kurdun.** ZF, dört OR
+ile bir inv'in çıkışı. SF, bir demetten çekilen tek tel. Assembly'de "sonuç sıfır
+mı?" diye soran her `jz`, bugün kurduğun bu devreye bakıyor.
 
 Aradaki boşlukta ne kaldı? Bütün bu işlemleri tek bir kutuya toplayıp "hangisini
 yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
@@ -293,7 +273,7 @@ yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
 ☐ Negatiflik testi tek tel: bit 15. Kapı gerekmiyor.
 ☐ İşaret biti sonradan eklenmedi — sarma sınırının geçtiği yer orası.
 ☐ İyi tasarım işi devreden alıp TEMSİLE yıkar (ikinin tümleyeni tam bunu yapar).
-☐ a < b için tek başına SF yetmez; çıkarma taşarsa yanıltır → OF gerekir (ALU dersi).
+☐ a < b için tek başına SF yetmez; çıkarma taşarsa yanıltır → OF gerekir.
 ```
 
 ---

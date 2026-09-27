@@ -23,7 +23,7 @@
 - [Why Is the Sign Bit Number 15?](#why-is-the-sign-bit-number-15)
 - [The Whole of Comparison](#the-whole-of-comparison)
 - [🎮 Now You Build It](#-now-you-build-it)
-- [Closing: The Two Ends of the Ladder Meet](#closing-the-two-ends-of-the-ladder-meet)
+- [Closing: You Built the Flags Yourself](#closing-you-built-the-flags-yourself)
 
 ---
 
@@ -220,7 +220,7 @@ je   if_equal      ; jump if ZF = 1
 >
 > This is why real processors keep one more flag, the **overflow flag (OF)**, and in signed
 > comparison they check the condition `SF ≠ OF`. You're laying the foundation in this
-> lesson; the overflow flag arrives in the ALU lesson.
+> lesson.
 
 ---
 
@@ -257,31 +257,12 @@ That's all. No gates. The difficulty isn't in the circuit, it's in **knowing why
 
 ---
 
-## Closing: The Two Ends of the Ladder Meet
-
-The same flags can also be seen from above, from the software side. In assembly, `ZF` and
-`SF` are two everyday bits: the `cmp` and `test` instructions set them, and conditional
-jumps such as `jz` and `js` look at them.
+## Closing: You Built the Flags Yourself
 
 Seen from software, the flags are things **handed to you**: mysterious bits sitting
-somewhere in the processor that instructions set.
-
-Today you built them **yourself.** ZF is the output of four ORs and an inv. SF is a single
-wire pulled out of a bundle.
-
-```
-   cmp · test · jz · js        ← the TOP end of the ladder
-        ▲
-        │   ... the narrowing gap
-        ▼
-   Flags (this lesson)         ← the BOTTOM end of the ladder
-   Subtraction · Increment
-   Multi-bit Adder · Full Adder
-   NAND · Relay · Switch
-```
-
-The ladder can be woven from both ends: from above with instructions, from below with
-circuits. This lesson is where the two ends touch **the same concept** for the first time.
+somewhere in the processor that instructions set. Today you built them **yourself.** ZF is
+the output of four ORs and an inv. SF is a single wire pulled out of a bundle. Every `jz`
+in assembly that asks "is the result zero?" looks at the circuit you built today.
 
 What's left in the gap? Gathering all these operations into a single box and letting
 something outside choose "which one to do" — that is, the **ALU.** That's the next stop.
@@ -300,7 +281,7 @@ something outside choose "which one to do" — that is, the **ALU.** That's the 
 ☐ The negativity test is one wire: bit 15. No gate needed.
 ☐ The sign bit wasn't added afterwards — it's where the wrapping boundary passes.
 ☐ Good design takes work off the circuit and puts it on the REPRESENTATION (two's complement).
-☐ SF alone isn't enough for a < b; if the subtraction overflows it misleads → you need OF (ALU lesson).
+☐ SF alone isn't enough for a < b; if the subtraction overflows it misleads → you need OF.
 ```
 
 ---

@@ -113,13 +113,6 @@ devre hem 0'da hem 1'de durabilir, ve hangisinde olduğunu **geçmişi** belirle
 > dönüp duran bir şey yok, besleme sürdükçe ayakta duran bir **denge** var.
 > Elektrik kesilirse denge çöker ve bit gider.
 
-İşlemcinin içindeki register'lar ve önbellek bu fikrin milyonlarca kez
-tekrarlanmış hâli. Bilgisayarındaki gigabaytlarca RAM ise başka bir yol seçiyor:
-her biti bir [sığaçta](./01.5_yasak_bolge.md) yük olarak tutuyor, döngü yok. Yük
-sızdığı için her hücrenin yaklaşık 64 milisaniyede bir tazelenmesi gerekiyor.
-SSD'deki flash bellek de ayrı bir yol: yükü yalıtılmış bir katmanda hapsediyor,
-elektrik kesilince bile bit kalıyor.
-
 ---
 
 ## Komut Sıfırdır
@@ -181,8 +174,7 @@ Latch hiçbir şeyi itmiyor. Çıkış teli saklanan biti **sürekli gösteriyor
 açık ya da kapalı duran bir lamba gibi. Sonraki devre ne zaman bakarsa o anki
 değeri görüyor.
 
-Değerin *ne zaman* alınacağına karar vermek ayrı bir iş. O iş bu bölümün
-ilerleyen seviyelerinde **saatle** birlikte gelecek.
+Değerin *ne zaman* alınacağına karar vermek ayrı bir iş, bu devrenin işi değil.
 
 ---
 
@@ -386,18 +378,6 @@ değerlerin yazılabileceğini ise
 [yukarıda gördüğün](#sıfır-gelince-kesin-konuşan-kapı) şey, kapının 0 gelince
 dayattığı değer belirliyor.
 
-Tek sayılı döngü de işe yaramaz bir şey değil. Gerçek çiplerde bilerek kurulur,
-çünkü durmadan yanıp sönen bir sinyal üretir. Adı **halka osilatör** (*ring
-oscillator*). Saat konusuna geldiğimizde karşına tekrar çıkacak.
-
-> 🔬 Gerçek bir çipte ince bir nokta var. Tek bir `inv`'in çıkışını kendi girişine
-> bağlarsan titremez: çıkış, [01.5](./01.5_yasak_bolge.md)'teki yasak bölgede, 0 ile
-> 1'in ortasında bir gerilimde durur. Titreme için döngüde en az **üç** evirici
-> kademe gerekir, gerçek halka osilatörler de bu yüzden 3, 5, 7… kademeyle
-> kurulur. Bu dersteki `and` + `nand` döngüsü aslında zaten öyle:
-> [02](./02_nanddan_kapilar.md#ve-and-tersin-tersi)'de `and`'i bir `nand` ile bir
-> `inv`'den kurmuştun, yani döngüde `nand`, `inv`, `nand` diye üç kademe var.
-
 ---
 
 ## Neden Kimse Yanlış Demedi
@@ -530,12 +510,7 @@ kalktığı sonucu belirler, ve kazanan **son kalkan girişin komutu** olur:
 ```
 
 Hangisinin önce kalkacağını **önceden bilemezsin.** Sonucu iki telin yarışı
-belirler.
-
-Bir incelik daha var. Fark çok küçükse devre bir süre ikisinin arasında,
-[01.5](./01.5_yasak_bolge.md)'teki yasak bölgede asılı kalabilir: ne 0 ne 1.
-Sonunda bir tarafa düşer, ama ne zaman düşeceği belli değildir. Buna
-**metastabilite** deniyor. Saat konusuna geldiğimizde tekrar karşına çıkacak.
+belirler. (Fark çok küçükse devrenin karar vermesi de zaman alır.)
 
 NandGame'de bunu kendin görebilirsin. `0 0`'dan `1 1`'e geçmek için iki anahtarı
 **tek tek** çevirmen gerekiyor. Oyunda denendi:
@@ -619,11 +594,10 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 ☐ Hatırlayan devre ARDIŞIKTIR. Tek yeni fikir: GERİ BESLEME, yani çıkışı bir kapının girişine geri bağlamak.
 ☐ Geri beslemeli devrede "çıkış ne?" sorusunun birden fazla cevabı olabilir. Hangisi olduğunu GEÇMİŞ belirler.
 ☐ 🔑 Kapılarla kurulan bellek bir defter değil, beslemeyle ayakta duran bir DENGE. Elektrik kesilince denge çöker, bit gider.
-☐ Register ve önbellek bu fikirle kurulur. RAM (DRAM) biti sığaçta yük olarak tutar ve tazelenir; flash elektriksiz de tutar.
 ☐ Bu devrede komut 0'dır: devre 1-1'de dinlenir, bir giriş 0'a DÜŞÜNCE iş yapar (aktif düşük).
 ☐ r düşerse çıkış 1, s düşerse çıkış 0. İsimler "hangisi 1'de kaldı" der; ikisi aynı satırın iki okuması.
 ☐ ⚠️ Veri sayfasında S̄ düşünce Q = 1: oyundaki r, veri sayfasındaki S̄'nın işini yapar. İsme değil davranışa bak. Q̄'daki çizgi ise "tersi" demek.
-☐ Set "gönder" değil, "biti 1 yap" demektir. Çıkış biti SÜREKLİ gösterir; ne zaman alınacağı saatin işi.
+☐ Set "gönder" değil, "biti 1 yap" demektir. Çıkış biti SÜREKLİ gösterir; ne zaman alınacağı ayrı bir iş.
 ☐ 0 gelince kesin konuşan iki kapı var: and zorla 0, nand zorla 1 verir. Farkları DAYATTIKLARI DEĞER.
 ☐ Her giriş tek kapıya gider → her kapının bir ayağı boşa çıkar → geri besleme o boş ayağa takılır.
 ☐ Boş ayağa ÖBÜR kapının çıkışı gelir (çapraz): çıkış iki girişi de duymalı. Kendi çıkışını dinleyen kapı öbür girişi hiç duymaz.
@@ -631,7 +605,6 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 ☐ 🔑 Girişler dinlenirken (1-1) belirleyen şey TERS ÇEVİRME SAYISI. Çift → kendini onaylar → HAFIZA. Tek → kendini yalanlar → SALINIM.
 ☐ ⚠️ Sayı hafızanın olup olmayacağını söyler, hangi değerin yazılacağını KAPININ TÜRÜ söyler: and+and çift ama 1 yazamaz.
 ☐ Bir ayağı 1 olan nand bir inv gibi davranır. İki nand'lı döngü = inv → inv = (−)×(−) = (+).
-☐ Tek sayılı döngü de işe yarar: halka osilatör, durmadan yanıp sönen sinyal. Saat konusunda geri gelecek.
 ☐ Doğru devre NEYİN çalıştığını, yanlış devre NEDEN çalıştığını gösterir.
 ☐ and hiçbir kuralı çiğnemiyordu; sorun kapıda değil DÖNGÜNÜN BÜTÜNÜNDEYDİ. Döngü hataları tek tek kapıya bakarak bulunmaz.
 ☐ Çözüm: 2 nand, optimal. Output r'nin kapısında; s'nin kapısı tersini tutar (Q ve Q̄), 0-0 hariç.
@@ -640,7 +613,6 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 ☐ Testteki sırayı sen seçersin, sonuç hep aynı: bu yarış DEĞİL. Yarış, sırayı kimsenin seçmediği yerde: 0-0'dan çıkış.
 ☐ "Kullanılmıyor" satırı (0-0) yine bir şey yapar: iki çıkış da 1, kural bozuk.
 ☐ 0-0'dan 1-1'e çıkarken sonucu iki sinyalin YARIŞI belirler: SON kalkanın komutu kazanır (önce s → 1, önce r → 0; oyunda denendi).
-☐ Fark çok küçükse METASTABİLİTE: devre yasak bölgede asılı kalır, ne zaman düşeceği belli değildir.
 ☐ 👾 Sırayı kimsenin seçmediği durum: yarış koşulu, CWE-362. 0-0'dan çıkıştaki yarış onun donanımdaki üyesi.
 ☐ 👾 Latch iki durumlu bir DURUM MAKİNESİ; 0-0 onun tanımsız geçişi: CWE-1245 (MITRE'ninki reset ister, latch sonraki komutla kurtulur). Tasarımcının umursamadığı satırı saldırgan umursar.
 ☐ 👾 Donanımda sinyal yarışı: CWE-1298. Belge "kullanılmıyor" der, devre yine bir şey yapar.

@@ -147,9 +147,8 @@ O son satırı aklında tut. İlerideki derslerde `65535` sayısı ısrarla kar�
 demetin **taşabileceği en son değer.**
 
 > 💡 Peki 65535'in üstüne bir eklersen ne olur? Kilometre sayacı 999999'dan sonra
-> ne yapıyorsa onu: **başa sarar.** Bu küçük ayrıntı, ileride hem eksi sayıların
-> nasıl temsil edildiğini hem de bilgisayar güvenliğindeki bir zafiyet sınıfının
-> nasıl doğduğunu açıklayacak. Şimdilik sadece not et: **hane biter, sayaç döner.**
+> ne yapıyorsa onu: **başa sarar.** Şimdilik sadece not et: **hane biter, sayaç
+> döner.**
 
 ---
 
@@ -178,7 +177,7 @@ uzattığında paniklemeyeceksin; "2·h + l" diye okuyup geçeceksin.
 ☐ Sayı = yanan tellerin değerleri toplamı. (Jeton benzetmesi: hangi jetonları verdin?)
 ☐ Her jetondan en fazla BİR tane → değerler mecburen 1, 2, 4, 8... (ikinin katları).
 ☐ İkilik sistem = okuldaki basamak fikri, iki rakamla. `10` (ikilik) = "bir 2'lik" = 2.
-☐ n telle 2ⁿ desen, en büyük sayı 2ⁿ−1. 16 tel → 0–65535 (ileride ısrarla karşına çıkar).
+☐ n telle 2ⁿ desen, en büyük sayı 2ⁿ−1. 16 tel → 0–65535.
 ☐ Hane bitince sayaç BAŞA SARAR — eksi sayıların ve taşmanın tohumu burada.
 ☐ Okuma formülü: sayı = 4x + 2h + 1l. İki dersin anahtarı bu satır.
 ☐ Bilgisayar ikiliği seçmedi; ikilik, telin var/yok doğasından çıktı.

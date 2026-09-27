@@ -192,11 +192,6 @@ Read the files in this order. Each lesson leans on the previous one.
 | 16 | [16_sr_latch](./16_sr_latch.md) | Feedback; even inversions remember, odd inversions oscillate | SR Latch |
 | 17 | [17_d_latch](./17_d_latch.md) | The gatekeeper of memory; making the forbidden row unreachable, the transparent latch | D Latch |
 
-### 🔜 On the way (to be written as the game advances)
-
-The rest of memory (flip-flop, register, counter, RAM) → clock and control unit →
-**a processor that executes instructions.**
-
 > 💡 Files whose number ends in `.5` are short **interludes**: on the side of the main road,
 > lighter, with no game level to go with them. But don't skip any of them — `03.5` carries
 > the most important idea in the series, `08.5` opens up the mathematics underneath the
@@ -224,10 +219,8 @@ The rest of memory (flip-flop, register, counter, RAM) → clock and control uni
 ## The Other End of the Ladder
 
 This series builds the worker (the processor) **from parts**: "what is this machine made
-of?" The same machine can also be seen from the other end, from software: "how do you make
-this machine do work?" The two paths meet somewhere. The `add` order written in assembly
-goes to the adder you build here with your own hands; and the `ZF` and `SF` flags that
-software **receives** ready-made from the processor, you will **build yourself** in lesson 10.
+of?" An `add` order written in assembly ends up at the adder you build here with your own
+hands.
 
 ---
 

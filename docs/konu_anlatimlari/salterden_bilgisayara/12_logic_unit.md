@@ -41,30 +41,6 @@ xor eax, eax
 Bunlara bir de bitleri ters çeviren `not eax`'i ekle. İşlemci `and eax, ebx`
 satırına geldiğinde AND'i yapan devre, **bu derste kuracağın devre.**
 
-O tek satırın baştan sona yolculuğu şöyle:
-
-```
-and eax, ebx
-   │
-   ①  assembler satırı bitlere çevirir            →  21 D8
-   │
-   ②  kontrol birimi bitleri okur, "AND" der      →  op1 = 0, op0 = 0
-   │
-   ③  eax ile ebx'in değerleri X ve Y tellerine gelir
-   │
-   ④  LOGIC UNIT: dört sonuç hazır, emir "AND",
-   │  AND'in sonucu dışarı çıkar                     ← bu ders
-   │
-   ⑤  sonuç eax'a geri yazılır
-```
-
-① adımındaki **assembler**, `and eax, ebx` gibi insanın okuyabileceği satırları
-işlemcinin okuduğu bitlere çeviren programdır. `21 D8`, bu satırın gerçek x86
-kodlaması (bir assembler olan `nasm` ile derleyip bakıldı).
-NandGame'in makinesi kendi bit düzenini kullanacak, ama iskelet aynı. ② kontrol
-biriminde, ③ ile ⑤ bellek ünitesinde gelecek. Gerçek x86'da araya daha fazla
-katman giriyor, ama iskelet bu.
-
 > 🔑 Arkadaki soru şu: **assembly'de bir komut yazınca makinenin içinde nerede ne
 > oluyor?** Bu ders o sorunun ilk cevabı: işlemin kendisinin yapıldığı yer.
 
@@ -353,14 +329,14 @@ Son bir soru: "op 00 = and" kuralını kim koydu?
 Doğa değil. Seviyeyi tasarlayan biri öyle karar verdi. 00'a xor da denebilirdi;
 o zaman devre başka türlü bağlanırdı, o kadar. Bu bir **sözleşme.**
 
-Aslında her kat, bir alttakiyle böyle bir sözleşme yapıyor:
+Bu devrede iki kat var, ve arada bir sözleşme duruyor:
 
 ```
-a & b             C, Python      derleyicinin sözleşmesi : "& demek and komutu demek"
-and eax, ebx      assembly       assembler'ın sözleşmesi : "and demek şu bitler demek"
-21 D8             makine kodu    tasarımcının sözleşmesi : "bu bitler şu seçicileri çevirir"
-op1 = 0, op0 = 0  teller         buradan aşağısı fizik   : akım bağlantının izin verdiği yoldan geçer
+op1 = 0, op0 = 0  emir telleri   tasarımcının sözleşmesi : "00 demek and demek"
+                                 buradan aşağısı fizik   : akım bağlantının izin verdiği yoldan geçer
 ```
+
+Assembly'de `and eax, ebx` yazmak da bir üst katta yapılan aynı türden bir sözleşme.
 
 Burada iki şeyi ayırmak gerekiyor:
 
@@ -369,16 +345,13 @@ Burada iki şeyi ayırmak gerekiyor:
   "00 = and" demek. Bunlar bizim kararlarımız.
 
 > 🔑 Parçalar ne yapacaklarını bağlantılarından biliyor. Anlamı biz veriyoruz, ama
-> tek bir yerde değil, her katta bir sözleşmeyle. Üst seviye diller o
-> sözleşmelerin en üst katı. [03.5](./03.5_soyutlama_merdiveni.md)'teki merdiven
-> tam olarak bu.
+> tek bir yerde değil, her katta bir sözleşmeyle. [03.5](./03.5_soyutlama_merdiveni.md)'teki
+> merdiven tam olarak bu.
 
 ### Sırada
 
 **Arithmetic Unit** aynı fikri dört **aritmetik** işlemle kuruyor: X + Y, X − Y,
-X + 1, X − 1. Ardından **ALU** bu iki birimi tek kutuda birleştirecek. Ünitenin
-son seviyesi **Condition**'da da `10`'da söz verdiğimiz taşma bayrağı (OF)
-gelecek.
+X + 1, X − 1.
 
 ---
 

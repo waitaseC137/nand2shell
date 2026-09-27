@@ -101,8 +101,6 @@ Beşi bir arada bir **kontrol sözcüğü** oluşturuyor:
 
 Bu, seride ilk defa karşına çıkan şey: bir devrenin bütün bir **komutu** girdi
 olarak alması. `12`'de iki bitlik bir emir vardı, `13`'te yine iki. Burada beş.
-İlerideki **Processor** ünitesinde bu sözcük bellekten okunacak ve adı
-**makine komutu** olacak.
 
 > 🔑 Kontrol biti ile veri biti arasında fiziksel hiçbir fark yok. İkisi de tel,
 > ikisi de yüksek ya da alçak. Fark tamamen **nereye bağlandığında**. `11`'deki
@@ -522,7 +520,6 @@ belgelenmiş — o işin en küçük hâli.
 
 **Condition**, ALU ünitesinin son seviyesi. Kutuda bu sefer **seçici yok** —
 üç seviyedir her şeyi `select` ile çözüyordun, o alışkanlık burada kırılıyor.
-Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 
 ---
 
@@ -531,7 +528,7 @@ Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 ```
 ☐ Bu seviyede tek kapı kurmuyorsun: 12 ve 13'te kurduklarını BİRLEŞTİRİYORSUN.
 ☐ İki tür bit var: VERİ (X, Y) ve KONTROL (u, op1, op0, zx, sw). Fark telde değil, bağlandığı yerde.
-☐ Beş kontrol biti bir KONTROL SÖZCÜĞÜ — Processor ünitesinde adı "makine komutu" olacak.
+☐ Beş kontrol biti bir KONTROL SÖZCÜĞÜ.
 ☐ u · op1 · op0 bir ADRES: 2 kat × 4 daire = tablodaki 8 satır.
 ☐ ⚠️ op1/op0 iki üniteye birden gidiyor ve İKİ FARKLI SÖZLEŞMEYLE okunuyor. Sinyal aynı, anlam ayrı.
 ☐ zx ve sw hiçbir işlem seçmez: "hangi makine" değil, "makineye NE verilecek" derler.

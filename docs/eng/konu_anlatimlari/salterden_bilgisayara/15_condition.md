@@ -73,9 +73,7 @@ gt  =  greater than
 ```
 
 In some fonts `lt` looks like `It` — that first character is a lowercase L, not a
-capital i. You will meet this trio elsewhere too: in the shell (`-lt`, `-eq`,
-`-gt`), in ARM assembly (`LT`, `EQ`, `GT`), in some database queries (`$lt`,
-`$eq`, `$gt`).
+capital i.
 
 But the real question is: **what do these three bits say?**
 
@@ -322,7 +320,7 @@ inputs are 1** — and that row never occurs in this circuit.
 > least one", write `or`. It is not enough for a circuit to work correctly; it
 > has to **state its intent.**
 
-This is a pattern you will see often: a circuit, or a piece of code, works
+This is a common pattern: a circuit, or a piece of code, works
 because of an **assumption** standing behind it. While the assumption holds, no
 one notices. If the assumption ever breaks — say these two signals start being
 fed from somewhere else — the `or` version stays the same and the `xor` version
@@ -441,9 +439,6 @@ itself.
 That is also why it makes sense that there is no selector in the toolbox: three
 independent permissions do not fit into the single question a selector asks.
 
-> 💡 You will meet the same idea from the other side in [17](./17_d_latch.md): if
-> you derive two commands from a single wire (`d` and the inverse of `d`), it
-> becomes impossible for both to arrive at once.
 
 ---
 
@@ -609,8 +604,9 @@ documentation.
 
 ## The Debt That Closes: OF
 
-Back in `10`, while building the flags, a promise was made: the overflow flag
-(OF) would be explained later. The debt closes here.
+Back in `10`, while building the flags, something was left missing: it was seen
+that in signed comparison the sign bit is not enough on its own, but the overflow
+flag (OF) was not built. The debt closes here.
 
 In the circuit you built, `is neg` looks at one thing: the number's **sign bit**,
 the leftmost bit of the 16-bit value. `1` means negative, `0` means not.
@@ -682,42 +678,13 @@ result 1001   sign 1        →  differs from a's (0)      ✓
                                          OF = 1
 ```
 
-This is why x86 has two separate instruction families:
-
-| instruction | flag it uses | when |
-|---|---|---|
-| `jl` / `jge` | `jl`: `SF ≠ OF` · `jge`: `SF = OF` | **signed** comparison |
-| `jb` / `jae` | `jb`: `CF = 1` · `jae`: `CF = 0` | **unsigned** comparison |
+This is why real processors carry separate jump instructions for signed and
+unsigned comparison.
 
 The same two numbers, the same subtraction, **two different right answers** —
 which one you want depends on how you read the numbers. The sentence from `04`
 and from [CWE-681](../cwe/cwe_681.md) applies here too: the pattern is the same,
 the meaning is the reader's decision.
-
-> ⚠️ **Do not take CF for the carry from 09.** Tried in the game: in the
-> subtractor from 09, doing `3 − 5` makes the `c` output of `add 16` give **0**.
-> The first reading is "no carry, no borrow". The truth is the opposite: **0
-> means there is a borrow.**
->
-> The reason is in the formula from 09: `inc16(inv16(B)) = 65536 − B`. The adder
-> is really computing `A + (65536 − B)`:
->
-> ```
-> A ≥ B  →  the sum reaches 65536   →  does not fit in 16 bits  →  c = 1     5 + (65536 − 3) = 65538
-> A < B  →  the sum stays below it  →  fits                     →  c = 0     3 + (65536 − 5) = 65534
-> ```
->
-> So the carry answers the question "was A enough to pay B?": **1 = it was, no
-> borrow.** x86 inverts this bit and puts it in CF: CF = 1 means **there is a
-> borrow**, which is why `jb` looks at CF = 1. ARM does not invert it: its C flag
-> means the same as the game's `c`, "no borrow". The same wire, two
-> manufacturers, two opposite rules. Look at the flag's contract, not its name.
->
-> One more subtle point: in your circuit from 09 the carry comes out wrong when
-> `B = 0`. `inv16(0) = ffff`, `inc16` wraps it to `0000` and the overflowing
-> carry is lost inside the `inc`, so for `5 − 0` you see `c = 0`. On the path
-> real ALUs take (no `inc`, `inv16(B)` straight into `B`, the carry-in of
-> `add 16` at 1) the same row gives `c = 1`. Both were tried in the game.
 
 > ⚠️ This level has no OF input. Comparing `X` itself against zero is not a
 > problem: a number's sign bit never lies about that number. But as we said at
@@ -769,8 +736,7 @@ itself** and making a circuit *remember* something.
 ☐ In 4 bits 5 − (−4) = 9 does not fit → 1001 → it looks like "−7". The true result is positive, the sign bit says negative.
 ☐ 🔑 Signed "less than" = N XOR OF. Without overflow it is N itself; with overflow it is the opposite of N. (N = SF from 10.)
 ☐ OF (a − b) = 1 ⟺ a and b have DIFFERENT signs and the result's sign DIFFERS from a's. Same signs never overflow.
-☐ x86: jl/jge are signed (they look at SF and OF), jb/jae are unsigned (they look at CF). The same subtraction, two different right answers.
-☐ ⚠️ The subtractor's carry is the INVERSE of the borrow: c = 1 means no borrow (A + 65536 − B overflowed). x86 inverts it (CF = 1 borrow), ARM does not.
+☐ Signed and unsigned comparison are separate jobs: the same subtraction, two different right answers.
 ☐ ⚠️ This level has no OF: if X came from a subtraction that OVERFLOWED, the circuit cannot notice the wrong answer.
 ☐ 👾 Looking at the sign bit alone is an INCOMPLETE comparison: CWE-1023.
 ```
@@ -789,7 +755,7 @@ itself** and making a circuit *remember* something.
 - [14_alu.md](./14_alu.md) — The part that produces the result this circuit reads
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — The explicit way of widening (the bundler) and the game's hidden way
 - [11_selector_switch.md](./11_selector_switch.md) — The selector and fan-out; this lesson's opposite pole
-- [10_bayraklar.md](./10_bayraklar.md) — Where the flags are built; the lesson that promised OF
+- [10_bayraklar.md](./10_bayraklar.md) — Where the flags are built; the lesson where the missing OF was first seen
 - [09_subtraction.md](./09_subtraction.md) — The subtraction underneath every comparison
 - [06_full_adder.md](./06_full_adder.md) — The chaining trick
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — De Morgan and the basic gates

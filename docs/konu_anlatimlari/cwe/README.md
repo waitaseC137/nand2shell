@@ -18,7 +18,6 @@
 - [CWE'ler Arasındaki Hiyerarşi](#cweler-arasındaki-hiyerarşi)
 - [Zincirler: Hatalar Arasındaki Tel](#zincirler-hatalar-arasındaki-tel)
 - [NandGame Ağacı](#nandgame-ağacı)
-- [Yolda](#yolda)
 
 ---
 
@@ -180,8 +179,7 @@ oluşamaz kılıyor ([17](../salterden_bilgisayara/17_d_latch.md#yasak-satır-ar
 **1298 neden burada?** D Latch'i kurmak için şart değil, ama SR Latch'li çözümün
 neden seçildiğini ancak bu zayıflık açıklıyor. Seçicili latch oyunda kara kutu
 olarak geçiyor, parçalarına açılınca biti kaybediyor. MITRE'nin bu zayıflık için
-verdiği ilk örnek de aynı seçici. Sayfa aslında saat ünitesine bekletiliyordu;
-yarış iki derste birden işlenince erken geldi.
+verdiği ilk örnek de aynı seçici.
 
 **Üçü bir zincir.** 09'un Güvenlik Köprüsü'ndeki örnekte aynı sayı üç kez farklı
 sözleşmeyle okunuyor: değişkene girerken [196](./cwe_196.md), kontrolde
@@ -204,7 +202,7 @@ bundler'la geldi. Katalog yanlış değildi — o günkü kapsamın dürüst ayn
 
 ### 🟢 Kademe 3 — İleride İşe Yarayan
 
-> NandGame'i anlamak için gerekmiyor. Assembly ve tersine mühendislikte karşına çıkacak.
+> NandGame'i anlamak için gerekmiyor.
 
 | CWE | Resmî adı | Nerede doğdu | link |
 |---|---|---|---|
@@ -221,8 +219,7 @@ bundler'la geldi. Katalog yanlış değildi — o günkü kapsamın dürüst ayn
 
 **1254 bir ilk:** kataloğundaki tek **çift üstlü** CWE. MITRE onu hem
 [697](./cwe_697.md)'nin (karşılaştırma yanlış biçimde kuruldu) hem de **208**'in
-(süre farkı dışarıdan gözlenebiliyor) altına koymuş. Tam kavşakta durduğu için,
-208 yazıldığında bu sayfa iki taraftan da erişilebilir olacak.
+(süre farkı dışarıdan gözlenebiliyor) altına koymuş.
 
 **1242 neden bu kademede ama önemli?** ALU seviyesinin kontrol sözcüğü 5 bit,
 yani **32 durum** — ama belge bunların yalnızca 11'ini listeliyor. Ortaya çıkan 19
@@ -232,32 +229,6 @@ bir özelliği kapatmak için bırakılan bitlere **chicken bit** denir; böyle 
 belgelenmemişse ve bir güvenlik özelliğini kapatıyorsa zayıflık doğar. Kural: *belgelenmiş durum
 uzayından geniş her kontrol sözcüğü, bakılacak bir yerdir.* Tersine mühendisliğin
 yaptığı iş tam olarak budur.
-
----
-
-## Yolda
-
-🔜 Dersler yazıldıkça gelecek. Sıra müfredata bağlı.
-
-| Nerede | CWE | Resmî adı |
-|---|---|---|
-| Bellek ünitesi · adresleme | **125** | Out-of-bounds Read |
-| Bellek ünitesi | **416** | Use After Free |
-| Boru hattı / spekülasyon | **208** | Observable Timing Discrepancy |
-| SMT / paylaşılan birimler | **1303** | Non-Transparent Sharing of Microarchitectural Resources |
-| Yukarıdaki ikisinden sonra | **203** | Observable Discrepancy (çatı) |
-| Microcode / ayrıcalıklı kontroller | **1256** | Improper Restriction of Software Interfaces to Hardware Features |
-
-> 📌 **Buradaki "nerede" sütunu bir tahmindir, söz değildir.** Ders yazıldıkça
-> keskinleşir. `125` için bilinen tek kesin şart şu: sınır dışına okumak için
-> önce bir **adres** gerekir — *"kaçıncı gözü okuyayım?"* sorusu ortaya çıkmadan
-> o zayıflık doğamaz. Hangi seviyede doğacağını o seviyeye gelince yazarız.
->
-> 🔑 **203'ü şimdi yazmıyoruz, bilerek.** Dersi olmayan konunun CWE'si olmaz.
-> 203, ancak 208 ile 1303 yazıldığında anlamlı hâle gelir — iki çocuğu birden
-> olmadan çatı kurmak, haritayı müfredatın önüne geçirmek olur.
->
-> 697, 1242 ve 1298 bu listede duruyordu; dersleri yazıldığı için ağaca taşındılar.
 
 ---
 

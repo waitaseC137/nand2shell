@@ -67,8 +67,8 @@ ne?"*
 
 - **`d` = data (veri).** Saklanmak istenen bit. Sürekli değişebilir.
 - **`st` = store (sakla).** "Şimdi `d`'de ne varsa al" diyen tetik. 16'da "ne
-  zaman alınacağı saatin işi" demiştik. `st` o işin kaba bir öncüsü, farkını
-  dersin sonunda göreceksin ([Kapı Açıkken](#kapı-açıkken)).
+  zaman alınacağı ayrı bir iş" demiştik. `st` tam o işi yapıyor, ama kaba bir
+  biçimde; farkını dersin sonunda göreceksin ([Kapı Açıkken](#kapı-açıkken)).
 
 Bir fotoğraf makinesi düşün. `d` vizörde gördüğün manzara, durmadan değişiyor.
 `st` deklanşör. Basılıyken çıkış o anki manzarayı gösteriyor. Bıraktığında son
@@ -230,19 +230,6 @@ döngünün kendi değerini iletiyor. Bu yüzden `1 1` "dinlen", tek bir 0 ise
 Aynı latch **`nor`** ile de kurulabilir. `nor`'un sözü geçen değeri 1, yani o
 latch'te komut 1, dinlenme `0 0` olur. Mantık aynı, işaretler ters.
 
-> 💡 SSD'lerde geçen **"NAND flash"** adı da buradan mı geliyor? Kısmen. İsim,
-> bellek hücrelerinin zincir gibi **arka arkaya (seri) dizilmesinden** geliyor.
-> [01](./01_akim_salter_role.md)'de "ikisi de geldi mi?" sorusunu, `b`'nin akımını
-> `a`'nın açıp kapadığı bir röleden geçirerek sormuştun: çıkışa akım ancak ikisi
-> birden 1 iken ulaşıyordu. Gerçek bir `nand` kapısının içinde bu iş arka arkaya
-> dizilmiş transistörlerle yapılıyor, akım ancak hepsi açıkken geçiyor. NAND flash
-> hücreleri de böyle arka arkaya diziliyor.
->
-> Ama NAND flash, bu dersteki gibi `nand` kapılarından kurulmuş bir hafıza değil.
-> Biti bir döngüde değil, yalıtılmış bir katmanda hapsedilmiş yükte tutuyor, o
-> yüzden elektrik kesilince de kalıyor. İsimdeki "NAND" bir benzerlik, yapının
-> kendisi değil.
-
 ---
 
 ## Bir Ayağı 1 Olan Nand Dinler
@@ -379,9 +366,7 @@ iki komut **aynı anda** kalkar. Bu, [16](./16_sr_latch.md#kullanılmayan-satır
 `0 0`'dan çıkış yarışının ta kendisi. Simülasyonda `d`'den bir kapı gecikmesi
 sonra inen `st` döngüyü titretti, iki gecikme sonra inen sorunsuzdu.
 
-Yani yasak satır tamamen kalkmadı, bir **zaman kuralına** dönüştü: *`st` inerken
-`d` bir süre sabit kalmalı.* Gerçek çiplerin veri sayfaları bu kuralı bir süre
-olarak yazar (*setup* ve *hold time*). Saat konusunda tekrar karşına çıkacak.
+Yani yasak satır tamamen kalkmadı: `d` değişirken `st` inerse geri gelebiliyor.
 
 ---
 
@@ -557,14 +542,9 @@ simüle edildi: `d` sabitken `st` inince bit hiçbirinde kaybolmadı.
 > döngü `st`'nin kontrol ettiği vanadan geçiyor, ve `st` değişirken o vana bir an
 > kapalı kalabiliyor.
 
-> 💡 Gerçek çiplerde seçicili latch de kullanılıyor, ama bu yarışa karşı bir terim
-> eklenerek: `and(d, çıkış)`. `d` ile çıkış aynıyken bu terim döngüyü `st`'den
-> bağımsız tutuyor. Adı **Earle latch.** Aynı simülasyonda, `inv` yavaşken bile bit
-> kaybolmadı.
-
 > 👾 Bu yarışın zayıflık kataloğundaki adı [CWE-1298](../cwe/cwe_1298.md) —
 > *Hardware Logic Contains Race Conditions*. MITRE'nin bu zayıflık için verdiği
-> ilk örnek, kapılardan kurulmuş bir seçici. Düzeltmesi de Earle terimiyle aynı.
+> ilk örnek, kapılardan kurulmuş bir seçici.
 
 ---
 
@@ -687,11 +667,11 @@ kurulabilir.
 ☐ Ters d gerekir çünkü nand yalnızca 1-1'de 0 verir; s'nin d=0'da ateşlenmesi lazım.
 ☐ Ters d olmasa: st=1 d=1'de s ve r ikisi de 0 → yasak satır. Ters d iki iş yapar (inv ile ya da r teliyle üretilir).
 ☐ 🔑 Kararlı hâlde d ile ters d ikisi birden 1 olamaz → s ve r ikisi birden 0 olamaz → YASAK SATIR KARARLI DURUMDA İMKÂNSIZ.
-☐ ⚠️ Geçişte bir anlık iğne var: ters d bir kapı geç gelir. d değişirken st inerse 16'daki yarış geri gelir → ZAMAN KURALI: st inerken d sabit kalmalı (setup/hold).
+☐ ⚠️ Geçişte bir anlık iğne var: ters d bir kapı geç gelir. d değişirken st inerse 16'daki yarış geri gelir.
 ☐ 👾 CWE-1245'e cevap: tanımsız satırı "kullanma" diye rica etmek yerine ulaşılamaz kılmak.
 ☐ Çözüm: 4 bileşen, 5 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 4 nand.
 ☐ D Latch SR Latch'e MUHTAÇ DEĞİL: select'le de kurulur ve kara kutu hâli geçer. Açılınca st inerken bit kaybolur / titrer (oyun: "did not reach a stable state").
-☐ 🔑 SR Latch'in sebebi sıra değil: döngüyü tutan kapılar st'den BAĞIMSIZ. Select'te döngü st'nin vanasından geçer. Düzeltmesi: Earle latch, and(d, çıkış).
+☐ 🔑 SR Latch'in sebebi sıra değil: döngüyü tutan kapılar st'den BAĞIMSIZ. Select'te döngü st'nin vanasından geçer.
 ☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli. Her adımda TEK anahtar.
 ☐ st=1 iken çıkış d'yi ANINDA izler: ŞEFFAF latch. PC ← PC + 1 bununla kurulursa sayı durmadan artar.
 ☐ İhtiyaç "kapı açıkken" değil "tam şu anda, bir kez" → Data Flip-Flop ve saat.

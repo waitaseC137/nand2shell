@@ -118,13 +118,6 @@ it sits at is decided by its **past**.
 > is circling around in there; there is a **balance** that stays up as long as
 > the power does. Cut the power and the balance collapses, and the bit is gone.
 
-The registers and the cache inside the processor are this one idea repeated
-millions of times. The gigabytes of RAM in your computer take another road: they
-hold each bit as charge in a [capacitor](./01.5_yasak_bolge.md), with no loop.
-Because the charge leaks, every cell has to be refreshed roughly every 64
-milliseconds. The flash memory in an SSD is yet another road: it traps the
-charge in an insulated layer, and the bit stays even when the power is cut.
-
 ---
 
 ## The Command Is Zero
@@ -187,8 +180,8 @@ The latch does not push anything. The output wire **shows the stored bit all the
 time**, like a lamp that is either on or off. Whenever the next circuit looks,
 it sees the value at that moment.
 
-Deciding *when* the value should be taken is a separate job. That job arrives
-later in this unit, together with the **clock**.
+Deciding *when* the value should be taken is a separate job; it is not this
+circuit's job.
 
 ---
 
@@ -401,19 +394,6 @@ whether there is a memory. Which values can be written is decided by what you
 [saw above](#the-gate-that-speaks-firmly-at-zero): the value the gate forces
 when a 0 arrives.
 
-An odd loop is not useless either. Real chips build it on purpose, because it
-produces a signal that blinks on and off without stopping. It is called a **ring
-oscillator**. You will meet it again when we get to the clock.
-
-> 🔬 On a real chip there is a subtle point. Wire a single `inv`'s output back to
-> its own input and it does not flicker: the output sits in the forbidden zone
-> from [01.5](./01.5_yasak_bolge.md), at a voltage halfway between 0 and 1. To
-> flicker, the loop needs at least **three** inverting stages, and that is why
-> real ring oscillators are built with 3, 5, 7… stages. The `and` + `nand` loop in
-> this lesson is already like that: in
-> [02](./02_nanddan_kapilar.md#and-the-inverse-of-the-inverse) you built `and` from
-> a `nand` and an `inv`, so the loop has three stages: `nand`, `inv`, `nand`.
-
 ---
 
 ## Why Nobody Said Wrong
@@ -555,13 +535,8 @@ r rises first  →  s is still 0, the "make it 0" command holds   →  output 0
 ```
 
 You **cannot know in advance** which one will rise first. The race between the
-two wires decides the result.
-
-One more subtlety. If the difference is very small, the circuit can hang between
-the two for a while, in the forbidden zone from
-[01.5](./01.5_yasak_bolge.md): neither 0 nor 1. It falls to one side in the end,
-but when it will fall is not known. This is called **metastability**. You will
-meet it again when we get to the clock.
+two wires decides the result. (If the gap is very small, the circuit also takes
+time to decide.)
 
 You can see this yourself in NandGame. To get from `0 0` to `1 1` you have to
 flip the two switches **one at a time**. It was tried in the game:
@@ -647,11 +622,10 @@ bad row can no longer occur at all once the inputs have settled.
 ☐ A circuit that remembers is SEQUENTIAL. The one new idea: FEEDBACK, wiring the output back into a gate's input.
 ☐ In a circuit with feedback, "what is the output?" can have more than one answer. The PAST decides which.
 ☐ 🔑 Memory built from gates is not a notebook, it is a BALANCE that stays up with the power. Cut the power and the balance collapses, the bit is gone.
-☐ Registers and cache are built on this idea. RAM (DRAM) holds the bit as charge in a capacitor and is refreshed; flash holds it without power.
 ☐ In this circuit the command is 0: the circuit rests at 1-1 and acts when an input DROPS to 0 (active low).
 ☐ r drops → output 1, s drops → output 0. The names say "which one stayed at 1"; both are readings of the same row.
 ☐ ⚠️ In a datasheet, when S̄ drops Q = 1: the game's r does the job of the datasheet's S̄. Look at the behaviour, not the name. The bar on Q̄ means "inverse".
-☐ Set does not mean "send", it means "make the bit 1". The output shows the bit ALL THE TIME; when to take it is the clock's job.
+☐ Set does not mean "send", it means "make the bit 1". The output shows the bit ALL THE TIME; when to take it is a separate job.
 ☐ Two gates speak firmly at 0: and forces 0, nand forces 1. The difference is the VALUE THEY FORCE.
 ☐ Each input goes to one gate → one leg of each gate is left free → the feedback plugs into that free leg.
 ☐ The free leg gets the OTHER gate's output (cross-coupling): the output must hear both inputs. A gate listening to its own output never hears the other input.
@@ -659,7 +633,6 @@ bad row can no longer occur at all once the inputs have settled.
 ☐ 🔑 While the inputs rest (1-1), what decides is the NUMBER OF INVERSIONS. Even → confirms itself → MEMORY. Odd → contradicts itself → OSCILLATION.
 ☐ ⚠️ The number says whether there is a memory; which value can be written is decided by THE GATE TYPE: and+and is even but cannot write 1.
 ☐ A nand with one leg at 1 behaves like an inv. The two-nand loop = inv → inv = (−)×(−) = (+).
-☐ An odd loop is useful too: the ring oscillator, a signal that blinks without stopping. It returns with the clock.
 ☐ The right circuit shows WHAT works, the wrong circuit shows WHY it works.
 ☐ and broke no rule; the problem was not in the gate but in THE LOOP AS A WHOLE. Loop bugs are not found by looking at gates one by one.
 ☐ Solution: 2 nand, optimal. The Output is on r's gate; s's gate holds its inverse (Q and Q̄), except at 0-0.
@@ -668,7 +641,6 @@ bad row can no longer occur at all once the inputs have settled.
 ☐ You choose the order in the test, and the result is always the same: that is NOT a race. The race is where nobody chooses the order: leaving 0-0.
 ☐ The "not used" row (0-0) still does something: both outputs are 1, the rule is broken.
 ☐ Leaving 0-0 for 1-1, the RACE between two signals decides the result: the command of the one that rises LAST wins (s first → 1, r first → 0; tried in the game).
-☐ If the difference is very small: METASTABILITY. The circuit hangs in the forbidden zone; when it will fall is not known.
 ☐ 👾 The situation where nobody chooses the order: race condition, CWE-362. The race when leaving 0-0 is its member in hardware.
 ☐ 👾 The latch is a two-state STATE MACHINE; 0-0 is its undefined transition: CWE-1245 (MITRE's needs a reset, the latch recovers with the next command). The row the designer ignores is the row the attacker cares about.
 ☐ 👾 Signal race in hardware: CWE-1298. The documentation says "not used", the circuit still does something.

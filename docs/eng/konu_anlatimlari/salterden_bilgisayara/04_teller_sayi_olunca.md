@@ -150,9 +150,8 @@ lessons — because most computers work with **16-bit** bundles, and that is the
 value a bundle **can hold before it overflows.**
 
 > 💡 So what happens if you add one to 65535? Whatever an odometer does after 999999: it
-> **wraps around.** This small detail will later explain both how negative numbers are
-> represented and how a whole vulnerability class in computer security is born. For now just
-> note it down: **the digits run out, the counter turns over.**
+> **wraps around.** For now just note it down: **the digits run out, the counter turns
+> over.**
 
 ---
 

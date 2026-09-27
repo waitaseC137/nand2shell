@@ -40,25 +40,9 @@ inc eax
 dec eax
 ```
 
-All four of them run on the circuit you are about to build. The same journey as
-in `12`, only the operations are arithmetic:
-
-```
-add eax, ebx
-   │
-   ①  the assembler turns the line into bits
-   │
-   ②  the control unit reads the bits and says "add"   →  op1 = 0, op0 = 0
-   │
-   ③  the values of eax and ebx arrive on wires X and Y
-   │
-   ④  ARITHMETIC UNIT: the right result comes out, per the order   ← this lesson
-   │
-   ⑤  the result is written back into eax
-```
-
-The only difference from `12` is ④. But the **inside** of that box will be built
-in a completely different way — and the reason is hidden in the table.
+All four of them run on the circuit you are about to build. But the **inside** of
+this box will be built in a completely different way from `12` — and the reason
+is hidden in the table.
 
 ---
 
@@ -284,9 +268,8 @@ The two ways give the same result, but they are not the same thing:
 | bundler | **you** choose | the number on the wire tells you at once (the `0800` trap below) |
 | the game's widening | always bit 0, the rest always 0 | nothing is said; it accepts even the wrong wire |
 
-The trap in the second row is waiting for you in
-[15](./15_condition.md#the-trap-right-part-wrong-wire): wiring a flag into a
-16-bit input by mistake, and the game silently allowing it.
+The trap in the second row: wiring a flag into a 16-bit input by mistake, and the
+game silently allowing it.
 
 ### On a Real Chip
 
@@ -327,7 +310,7 @@ The thing that makes the cheap design possible is being able to put a 16-bit
 constant on the selector's input. If you could not, you could not choose at the
 input, and you would have been forced to build four arithmetic units.
 
-> 💡 This width business will come up again. When you load an 8-bit value into a
+> 💡 The same width business exists for numbers too. When you load an 8-bit value into a
 > 16-bit place, what do you fill the remaining 8 bits with? With 0 if you read the
 > number as unsigned, with copies of the sign bit if you read it as signed. The
 > same pattern has two different correct answers; which one is right depends on
@@ -486,35 +469,12 @@ PC ← PC + 1
 instruction. This addition happens **on every instruction**, nonstop, as long as
 the machine is on.
 
-And not only there:
-
-| where | what |
-|---|---|
-| loops | `i++` — one increment per turn |
-| the stack | the stack pointer shifts by one slot on every `push`/`pop` |
-| walking an array | "go to the next element" = move the address one element forward |
-
-On x86 these steps are counted in bytes: 4 on the stack, the size of one element
-in an array. The idea is the same: adding or subtracting a fixed amount.
-
 That is why `+1` and `−1` earned a place in the table as legitimately as `+Y`.
-In the upcoming **Processor** unit, the program counter will do exactly this
-operation on every instruction.
-
-> 💡 x86 has separate `inc` and `dec` instructions for the same reason. The story
-> has two twists. `inc` does not touch the carry flag (CF); it leaves CF at its
-> old value. In the Pentium 4 era that partial update stalled the pipeline, and
-> `inc` ended up **slower** than `add reg, 1`. An instruction added to speed
-> things up had become a burden once the architecture changed. Then the
-> architecture changed again. On most of today's processors the two run at the
-> same speed. A penalty can only appear if an instruction right after `inc` also
-> wants to read CF, the flag `inc` did not touch.
 
 ### Next up
 
 **ALU** will merge the two units you built in this unit — the Logic Unit and the
-Arithmetic Unit — into a single box. After that, **Condition** will bring the
-overflow flag (OF) that was promised back in `10`.
+Arithmetic Unit — into a single box.
 
 ---
 

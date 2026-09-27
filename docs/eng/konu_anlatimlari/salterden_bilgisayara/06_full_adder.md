@@ -202,8 +202,7 @@ comes up in three different places here and the three have nothing to do with ea
 > `a = 1` floor; the circuit's `h` looks at all three inputs.
 >
 > The general rule: when you see two things carrying the same name, **say out loud, every
-> single time, which one you're talking about.** Later in this series the same trap will
-> come back with the letter `c` (carry in / carry out) and with box pin names.
+> single time, which one you're talking about.**
 
 ---
 

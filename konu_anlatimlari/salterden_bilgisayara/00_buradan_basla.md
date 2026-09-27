@@ -186,11 +186,6 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | 16 | [16_sr_latch](./16_sr_latch.md) | Geri besleme; çift ters hafıza, tek ters salınım | SR Latch |
 | 17 | [17_d_latch](./17_d_latch.md) | Hafızanın kapıcısı; yasak satırı ulaşılamaz kılmak, şeffaf latch | D Latch |
 
-### 🔜 Yolda (oyun ilerledikçe yazılacak)
-
-Hafızanın geri kalanı (flip-flop, register, sayaç, RAM) → saat ve kontrol birimi
-→ **komut işleyen işlemci.**
-
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
 > daha hafif, karşılığında bir oyun seviyesi yok. Ama hiçbirini atlama — `03.5`
 > serinin en önemli fikrini taşıyor, `08.5` kurduğun devrenin altındaki matematiği
@@ -217,11 +212,9 @@ Hafızanın geri kalanı (flip-flop, register, sayaç, RAM) → saat ve kontrol 
 
 ## Merdivenin Öbür Ucu
 
-Bu seri işçiyi (işlemciyi) **parçalardan kurar**: "bu makine neyden yapılmış?" Aynı
-makineye öbür uçtan, yazılımdan da bakılabilir: "bu makineye nasıl iş yaptırılır?"
-İki yol bir yerde birleşir. Assembly'de `add` diye yazılan emir, burada kendi elinle
-kurduğun toplayıcıya gider; yazılımın işlemciden hazır **aldığı** `ZF` ve `SF`
-bayraklarını da 10. derste **kendin kuracaksın.**
+Bu seri işçiyi (işlemciyi) **parçalardan kurar**: "bu makine neyden yapılmış?"
+Assembly'de `add` diye yazılan bir emir, sonunda burada kendi elinle kurduğun
+toplayıcıya gider.
 
 ---
 

@@ -70,9 +70,6 @@ gt  =  greater than    büyüktür
 ```
 
 Yazıda `lt` bazen `It` gibi görünür — o büyük I (ı'nın büyüğü) değil, küçük L.
-Bu üçlü karşına başka yerlerde de çıkacak: shell'de (`-lt`, `-eq`, `-gt`), ARM
-assembly'sinde (`LT`, `EQ`, `GT`), bazı veritabanı sorgularında (`$lt`, `$eq`,
-`$gt`).
 
 Ama asıl soru şu: **bu üç bit ne söylüyor?**
 
@@ -310,7 +307,7 @@ ayrışır — ve o satır bu devrede hiç oluşmuyor.
 > istiyorsan `or` yaz. Devrenin doğru çalışması yetmez; **niyetini söylemesi**
 > gerekir.
 
-Bu, ileride sık göreceğin bir kalıp: bir devre ya da kod parçası, arkada duran
+Bu sık görülen bir kalıp: bir devre ya da kod parçası, arkada duran
 bir **varsayım** sayesinde çalışır. Varsayım tutarken kimse fark etmez. Varsayım
 bir gün bozulursa — mesela bu iki sinyal başka bir yerden beslenmeye başlarsa —
 `or` sürümü aynı kalır, `xor` sürümü sessizce başka bir şey yapmaya başlar.
@@ -419,9 +416,6 @@ Bir **vana**. Açıksa akıtır, kapalıysa tutar. Kendi başına bir şeye kara
 Kutuda seçici olmaması da bu yüzden anlamlı: üç bağımsız izin, bir seçicinin
 sorduğu tek soruya sığmıyor.
 
-> 💡 Aynı fikir [17](./17_d_latch.md)'de tersinden karşına çıkacak: iki komutu tek
-> bir telden (`d` ve `d`'nin tersi) türetirsen, ikisinin aynı anda gelmesi
-> imkânsız olur.
 
 ---
 
@@ -581,8 +575,9 @@ bakmak.
 
 ## Kapanan Borç: OF
 
-`10`'da bayrakları kurarken bir söz verilmişti: taşma bayrağı (OF) ileride
-anlatılacaktı. Borç burada kapanıyor.
+`10`'da bayrakları kurarken bir eksik kalmıştı: işaretli karşılaştırmada işaret
+bitinin tek başına yetmediği görülmüş, ama taşma bayrağı (OF) kurulmamıştı. Borç
+burada kapanıyor.
 
 Kurduğun devrede `is neg` bir şeye bakıyor: sayının **işaret biti**, yani 16
 bitlik değerin en soldaki biti. `1` ise negatif, `0` ise değil.
@@ -651,41 +646,13 @@ sonuç 1001 işaret 1        →  a'nınkinden (0) farklı    ✓
                                          OF = 1
 ```
 
-x86'da bu yüzden iki ayrı komut ailesi var:
-
-| komut | baktığı bayrak | ne zaman |
-|---|---|---|
-| `jl` / `jge` | `jl`: `SF ≠ OF` · `jge`: `SF = OF` | **işaretli** karşılaştırma |
-| `jb` / `jae` | `jb`: `CF = 1` · `jae`: `CF = 0` | **işaretsiz** karşılaştırma |
+Gerçek işlemciler bu yüzden işaretli ve işaretsiz karşılaştırma için ayrı atlama
+komutları taşır.
 
 Aynı iki sayı, aynı çıkarma, **iki farklı doğru cevap** — hangisini istediğin
 sayıları nasıl okuduğuna bağlı. `04`'ün ve
 [CWE-681](../cwe/cwe_681.md)'in cümlesi burada da geçerli: desen aynı, anlam
 okuyanın kararı.
-
-> ⚠️ **CF'yi 09'daki elde sanma.** Oyunda denendi: 09'daki çıkarıcıda `3 − 5`
-> yapınca `add 16`'nın `c` çıkışı **0** veriyor. İlk okuyuş "elde yok, borç yok"
-> olur. Doğrusu tam tersi: **0, borç var demek.**
->
-> Sebebi 09'daki formülde: `inc16(inv16(B)) = 65536 − B`. Toplayıcı aslında
-> `A + (65536 − B)` hesaplıyor:
->
-> ```
-> A ≥ B  →  toplam 65536'ya ulaşır    →  16 bite sığmaz  →  c = 1     5 + (65536 − 3) = 65538
-> A < B  →  toplam 65536'nın altında  →  sığar           →  c = 0     3 + (65536 − 5) = 65534
-> ```
->
-> Yani elde "A, B'yi ödemeye yetti mi?" sorusunun cevabı: **1 = yetti, borç yok.**
-> x86 bu biti ters çevirip CF'ye koyar: CF = 1 **borç var** demek, `jb` bu yüzden
-> CF = 1'e bakar. ARM çevirmez: onun C bayrağı oyundaki `c` ile aynı anlamda,
-> "borç yok" demek. Aynı tel, iki üretici, iki ters kural. Bayrağın adına değil
-> sözleşmesine bak.
->
-> Bir ince nokta daha: 09'daki devrende elde `B = 0` iken yanlış çıkar.
-> `inv16(0) = ffff`, `inc16` bunu `0000`'a sarar ve taşan elde `inc`'in içinde
-> kaybolur, `5 − 0`'da `c = 0` görürsün. Gerçek ALU'ların yolunda (`inc` yok,
-> `inv16(B)` doğrudan `B`'ye, `add 16`'nın carry-in'i 1) aynı satırda `c = 1`
-> çıkar. İkisi de oyunda denendi.
 
 > ⚠️ Bu seviyede OF girişi yok. `X`'in kendisini sıfırla karşılaştırırken sorun da
 > yok: bir sayının işaret biti o sayı hakkında yalan söylemez. Ama dersin başında
@@ -737,8 +704,7 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ 4 bitte 5 − (−4) = 9 sığmaz → 1001 → "−7" görünür. Gerçek sonuç pozitif, işaret biti negatif diyor.
 ☐ 🔑 İşaretli "küçüktür" = N XOR OF. Taşma yoksa N'in kendisi, taşma varsa N'in tersi. (N = 10'daki SF.)
 ☐ OF (a − b) = 1 ⟺ a ile b'nin işareti FARKLI ve sonucun işareti a'nınkinden FARKLI. Aynı işaretliler taşmaz.
-☐ x86: jl/jge işaretli (SF ile OF'a bakar), jb/jae işaretsiz (CF'ye bakar). Aynı çıkarma, iki farklı doğru cevap.
-☐ ⚠️ Çıkarıcının eldesi borcun TERSİ: c = 1 borç yok (A + 65536 − B taştı). x86 çevirir (CF = 1 borç), ARM çevirmez.
+☐ İşaretli ve işaretsiz karşılaştırma ayrı iş: aynı çıkarma, iki farklı doğru cevap.
 ☐ ⚠️ Bu seviyede OF yok: X bir çıkarmadan gelip TAŞTIYSA devre yanlış cevabı fark edemez.
 ☐ 👾 Tek başına işaret bitine bakmak EKSİK bir karşılaştırmadır: CWE-1023.
 ```
@@ -757,7 +723,7 @@ bir şeyi *hatırlamasını* sağlamak.
 - [14_alu.md](./14_alu.md) — Bu devrenin okuduğu sonucu üreten parça
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — Genişletmenin açık yolu (bundler) ve oyunun gizli yolu
 - [11_selector_switch.md](./11_selector_switch.md) — Seçici ve fan-out; bu dersin karşıt kutbu
-- [10_bayraklar.md](./10_bayraklar.md) — Bayrakların kurulduğu yer; OF sözünün verildiği ders
+- [10_bayraklar.md](./10_bayraklar.md) — Bayrakların kurulduğu yer; OF eksiğinin ilk görüldüğü ders
 - [09_subtraction.md](./09_subtraction.md) — Karşılaştırmanın altındaki çıkarma
 - [06_full_adder.md](./06_full_adder.md) — Zincirleme numarası
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — De Morgan ve temel kapılar

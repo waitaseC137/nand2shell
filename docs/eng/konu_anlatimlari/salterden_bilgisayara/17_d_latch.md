@@ -70,8 +70,8 @@ first question: *"What are `st` and `d`?"*
 
 - **`d` = data.** The bit that should be stored. It can keep changing.
 - **`st` = store.** The trigger that says "take whatever is on `d` right now".
-  In 16 we said "when to take it is the clock's job". `st` is a rough forerunner
-  of that job; you will see the difference at the end of the lesson
+  In 16 we said "when to take it is a separate job". `st` does exactly that job,
+  but roughly; you will see the difference at the end of the lesson
   ([While the Gate Is Open](#while-the-gate-is-open)).
 
 Think of a camera. `d` is the scene in the viewfinder, changing all the time.
@@ -246,19 +246,6 @@ The same latch can also be built from **`nor`**. The value that has a say over
 `nor` is 1, so in that latch the command is 1 and resting is `0 0`. Same logic,
 opposite signs.
 
-> 💡 Does the name **"NAND flash"** in SSDs come from here? Partly. The name
-> comes from the memory cells being **strung one after another (in series)** like
-> a chain. In [01](./01_akim_salter_role.md) you asked "did both arrive?" by
-> passing `b`'s current through a relay that `a` switches on and off: current
-> reached the output only when both were 1. Inside a real `nand` gate that job is
-> done by transistors lined up one after another, and current only flows when all
-> of them are on. NAND flash cells are lined up one after another like that too.
->
-> But NAND flash is not a memory built from `nand` gates the way this lesson's
-> is. It holds the bit not in a loop but as charge trapped in an insulated layer,
-> which is why it stays even when the power is cut. The "NAND" in the name is a
-> resemblance, not the structure itself.
-
 ---
 
 ## A Nand with One Leg at 1 Listens
@@ -404,10 +391,8 @@ is exactly the race when leaving `0 0` from
 [16](./16_sr_latch.md#the-unused-row). In the simulation, `st` falling one gate
 delay after `d` made the loop oscillate; falling two delays after was fine.
 
-So the forbidden row did not go away completely; it turned into a **timing
-rule**: *while `st` falls, `d` has to stay steady for a while.* The data sheets of
-real chips write this rule as a duration (*setup* and *hold time*). You will meet
-it again with the clock.
+So the forbidden row did not go away completely: if `st` falls while `d` is
+changing, it can come back.
 
 ---
 
@@ -593,15 +578,9 @@ for a moment. This was also simulated with eight different delay patterns: with
 > the valve `st` controls, and while `st` is changing that valve can be closed
 > for a moment.
 
-> 💡 Real chips use selector latches too, but with an extra term against this
-> race: `and(d, output)`. While `d` and the output agree, that term holds the loop
-> independently of `st`. Its name is the **Earle latch.** In the same simulation
-> the bit was not lost even with a slow `inv`.
-
 > 👾 The weakness catalogue's name for this race is
 > [CWE-1298](../cwe/cwe_1298.md) — *Hardware Logic Contains Race Conditions*.
 > The first example MITRE gives for this weakness is a selector built from gates.
-> Its fix is the same as the Earle term.
 
 ---
 
@@ -733,11 +712,11 @@ built as `nand(and(st, r), rst_n)`.
 ☐ The inverse of d is needed because nand gives 0 only at 1-1; s has to fire when d=0.
 ☐ Without the inverse of d: at st=1 d=1 both s and r are 0 → forbidden row. The inverse of d does two jobs (made by an inv or by the r wire).
 ☐ 🔑 In the settled state d and inverse d cannot both be 1 → s and r cannot both be 0 → THE FORBIDDEN ROW IS IMPOSSIBLE IN THE SETTLED STATE.
-☐ ⚠️ A transition has an instant spike: inverse d arrives one gate late. If st falls while d is changing, the race from 16 is back → TIMING RULE: d must stay steady while st falls (setup/hold).
+☐ ⚠️ A transition has an instant spike: inverse d arrives one gate late. If st falls while d is changing, the race from 16 is back.
 ☐ 👾 An answer to CWE-1245: instead of asking people not to use the undefined row, make it unreachable.
 ☐ Solution: 4 components, 5 nands. Fewer: delete the inv, give r to nand1 (while st=1, r = inverse d) → 3 components, 4 nands.
 ☐ The D Latch is NOT DEPENDENT on the SR Latch: it can be built with select, and the black box passes. Opened up, the bit is lost / oscillates when st falls (game: "did not reach a stable state").
-☐ 🔑 The reason for the SR Latch is not the order of levels: the gates holding the loop are INDEPENDENT of st. In select the loop runs through st's valve. The fix: the Earle latch, and(d, output).
+☐ 🔑 The reason for the SR Latch is not the order of levels: the gates holding the loop are INDEPENDENT of st. In select the loop runs through st's valve.
 ☐ Testing memory is a SEQUENCE: write → st=0 → change d → the output must not change. ONE switch per step.
 ☐ While st=1 the output follows d INSTANTLY: a TRANSPARENT latch. Build PC ← PC + 1 with it and the number keeps climbing.
 ☐ The need is not "while the gate is open" but "exactly now, once" → Data Flip-Flop and the clock.

@@ -42,6 +42,6 @@
 
 | Dosya | Konular |
 |---|---|
-| [README.md](./cwe/README.md) | CWE nedir, CVE nedir, farkları · zincirler · Şalterden Bilgisayara derslerinin CWE'leri · yoldakiler |
+| [README.md](./cwe/README.md) | CWE nedir, CVE nedir, farkları · zincirler · Şalterden Bilgisayara derslerinin CWE'leri |
 
 ---

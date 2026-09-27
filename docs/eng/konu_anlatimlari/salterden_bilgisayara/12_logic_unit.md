@@ -43,30 +43,6 @@ Add `not eax`, which flips every bit, to that list. When the processor reaches t
 line `and eax, ebx`, the circuit that does the AND is **the circuit you build in
 this lesson.**
 
-Here is that one line's journey from start to finish:
-
-```
-and eax, ebx
-   │
-   ①  the assembler turns the line into bits       →  21 D8
-   │
-   ②  the control unit reads the bits, says "AND"  →  op1 = 0, op0 = 0
-   │
-   ③  the values in eax and ebx arrive on the X and Y wires
-   │
-   ④  LOGIC UNIT: four results are ready, the order is "AND",
-   │  the AND result goes out                         ← this lesson
-   │
-   ⑤  the result is written back into eax
-```
-
-The **assembler** in step ① is the program that turns human-readable lines such
-as `and eax, ebx` into the bits the processor reads. `21 D8` is the real x86
-encoding of that line (checked by assembling it with `nasm`, which is an
-assembler). NandGame's machine will use its own bit layout, but the skeleton is the
-same. ② comes with the control unit, ③ and ⑤ with the memory unit. Real x86
-puts more layers in between, but this is the skeleton.
-
 > 🔑 The question underneath is: **when you write an instruction in assembly, what
 > happens where inside the machine?** This lesson is the first answer: the place
 > where the operation itself happens.
@@ -368,14 +344,14 @@ Not nature. Whoever designed the level decided it. 00 could just as well have
 meant XOR; the circuit would simply have been wired differently. It's an
 **agreement.**
 
-In fact, every layer makes an agreement like this with the one below it:
+This circuit has two layers, with an agreement between them:
 
 ```
-a & b             C, Python      the compiler's agreement : "& means the and instruction"
-and eax, ebx      assembly       the assembler's agreement: "and means these bits"
-21 D8             machine code   the designer's agreement : "these bits turn these selectors"
-op1 = 0, op0 = 0  wires          below this it's physics  : current flows where the wiring lets it
+op1 = 0, op0 = 0  order wires    the designer's agreement : "00 means and"
+                                 below this it's physics  : current flows where the wiring lets it
 ```
+
+Writing `and eax, ebx` in assembly is the same kind of agreement, one layer up.
 
 Two things need to be kept apart here:
 
@@ -385,16 +361,13 @@ Two things need to be kept apart here:
   as an order, saying "00 = and": those are our decisions.
 
 > 🔑 The parts know what to do from their wiring. We give them meaning, not in one
-> place but with an agreement at every layer. High-level languages are the top
-> layer of those agreements. That is exactly the ladder from
+> place but with an agreement at every layer. That is exactly the ladder from
 > [03.5](./03.5_soyutlama_merdiveni.md).
 
 ### Next up
 
 **Arithmetic Unit** builds the same idea with four **arithmetic** operations:
-X + Y, X − Y, X + 1, X − 1. After that the **ALU** puts the two units in one box.
-And the unit's last level, **Condition**, brings the overflow flag (OF) we
-promised in `10`.
+X + Y, X − Y, X + 1, X − 1.
 
 ---
 
