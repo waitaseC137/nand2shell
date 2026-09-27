@@ -70,6 +70,9 @@ first question: *"What are `st` and `d`?"*
 
 - **`d` = data.** The bit that should be stored. It can keep changing.
 - **`st` = store.** The trigger that says "take whatever is on `d` right now".
+  In 16 we said "when to take it is the clock's job". `st` is a rough forerunner
+  of that job; you will see the difference at the end of the lesson
+  ([While the Gate Is Open](#while-the-gate-is-open)).
 
 Think of a camera. `d` is the scene in the viewfinder, changing all the time.
 `st` is the shutter button. While it is pressed, the output shows the current
@@ -194,7 +197,8 @@ Fill it in yourself, then continue.
 The first two rows are easy: "leave it alone" is `1 1` in the SR Latch's
 language. For the bottom two rows you need to find which wire should drop, and
 rather than going from memory, the safest way is to press the **`i`** button of
-the `sr latch` in the toolbox and look at its own table.
+the `sr latch` in the toolbox (the small `i` in the part's corner) and look at
+its own table.
 
 ```
 write 0   →   s must drop   →   s=0  r=1
@@ -243,10 +247,17 @@ The same latch can also be built from **`nor`**. The value that has a say over
 opposite signs.
 
 > 💡 Does the name **"NAND flash"** in SSDs come from here? Partly. The name
-> comes from the memory cells being **strung in series** like a chain, because
-> that arrangement resembles the transistor layout of a `nand` gate. But NAND
-> flash is not a memory built from `nand` gates the way this lesson's is. The
-> "NAND" in the name is a resemblance, not the structure itself.
+> comes from the memory cells being **strung one after another (in series)** like
+> a chain. In [01](./01_akim_salter_role.md) you asked "did both arrive?" by
+> passing `b`'s current through a relay that `a` switches on and off: current
+> reached the output only when both were 1. Inside a real `nand` gate that job is
+> done by transistors lined up one after another, and current only flows when all
+> of them are on. NAND flash cells are lined up one after another like that too.
+>
+> But NAND flash is not a memory built from `nand` gates the way this lesson's
+> is. It holds the bit not in a loop but as charge trapped in an insulated layer,
+> which is why it stays even when the power is cut. The "NAND" in the name is a
+> resemblance, not the structure itself.
 
 ---
 

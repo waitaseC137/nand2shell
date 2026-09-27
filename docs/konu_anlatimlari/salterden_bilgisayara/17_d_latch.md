@@ -66,7 +66,9 @@ Tabloya bakmadan önce iki ismi yerine oturt, çünkü ilk soru buydu: *"`st` ve
 ne?"*
 
 - **`d` = data (veri).** Saklanmak istenen bit. Sürekli değişebilir.
-- **`st` = store (sakla).** "Şimdi `d`'de ne varsa al" diyen tetik.
+- **`st` = store (sakla).** "Şimdi `d`'de ne varsa al" diyen tetik. 16'da "ne
+  zaman alınacağı saatin işi" demiştik. `st` o işin kaba bir öncüsü, farkını
+  dersin sonunda göreceksin ([Kapı Açıkken](#kapı-açıkken)).
 
 Bir fotoğraf makinesi düşün. `d` vizörde gördüğün manzara, durmadan değişiyor.
 `st` deklanşör. Basılıyken çıkış o anki manzarayı gösteriyor. Bıraktığında son
@@ -182,7 +184,8 @@ Kendin doldur, sonra devam et.
 
 İlk iki satır kolay: "dokunma" SR Latch'in dilinde `1 1`. Alt iki satır için
 hangi telin düşeceğini bulman gerekiyor, ve ezberden gitmek yerine kutudaki
-`sr latch`'in **`i`** düğmesine basıp kendi tablosuna bakmak en sağlamı.
+`sr latch`'in **`i`** düğmesine (parçanın köşesindeki küçük `i`) basıp kendi
+tablosuna bakmak en sağlamı.
 
 ```
 0 yaz   →   s düşmeli   →   s=0  r=1
@@ -228,10 +231,17 @@ Aynı latch **`nor`** ile de kurulabilir. `nor`'un sözü geçen değeri 1, yani
 latch'te komut 1, dinlenme `0 0` olur. Mantık aynı, işaretler ters.
 
 > 💡 SSD'lerde geçen **"NAND flash"** adı da buradan mı geliyor? Kısmen. İsim,
-> bellek hücrelerinin zincir gibi **seri dizilmesinden** geliyor, çünkü bu
-> dizilim `nand` kapısının transistör düzenine benziyor. Ama NAND flash, bu
-> dersteki gibi `nand` kapılarından kurulmuş bir hafıza değil. İsimdeki "NAND"
-> bir benzerlik, yapının kendisi değil.
+> bellek hücrelerinin zincir gibi **arka arkaya (seri) dizilmesinden** geliyor.
+> [01](./01_akim_salter_role.md)'de "ikisi de geldi mi?" sorusunu, `b`'nin akımını
+> `a`'nın açıp kapadığı bir röleden geçirerek sormuştun: çıkışa akım ancak ikisi
+> birden 1 iken ulaşıyordu. Gerçek bir `nand` kapısının içinde bu iş arka arkaya
+> dizilmiş transistörlerle yapılıyor, akım ancak hepsi açıkken geçiyor. NAND flash
+> hücreleri de böyle arka arkaya diziliyor.
+>
+> Ama NAND flash, bu dersteki gibi `nand` kapılarından kurulmuş bir hafıza değil.
+> Biti bir döngüde değil, yalıtılmış bir katmanda hapsedilmiş yükte tutuyor, o
+> yüzden elektrik kesilince de kalıyor. İsimdeki "NAND" bir benzerlik, yapının
+> kendisi değil.
 
 ---
 

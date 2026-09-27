@@ -89,7 +89,7 @@ hand. You read the result, and then the result was gone.
 
 > 🔑 What you have built so far is a **calculator.** A computer is something that
 > can keep its own result and put a new calculation on top of it. The difference
-> between them is a single ability: **remembering.**
+> between them starts with one ability: **remembering.**
 
 Circuits that remember are called **sequential**. Every level of this unit builds
 that ability, and all of them rest on the single idea in this level.
@@ -157,9 +157,10 @@ circuit, the second reading is more useful: the circuit **rests at `1 1`**, and
 for something to happen an input has to **drop to 0**.
 
 > 🔑 In this circuit the command is not `1`, it is `0`. In electronics this is
-> called **active low**. If you later see a bar over a signal name in a datasheet
-> (`S̄`, `R̄`) or `_n` / `#` at the end of the name (`RESET#`), this is what it
-> means: "this signal does its job when it is 0."
+> called **active low**. If you later see, in a **datasheet** (the technical
+> document a maker publishes for a chip), a bar over a signal name (`S̄`, `R̄`) or
+> `_n` / `#` at the end of the name (`RESET#`), this is what it means: "this
+> signal does its job when it is 0."
 
 > ⚠️ **Careful when you look at a datasheet: the names map to the game's the
 > other way round.** In a datasheet's `nand` latch, when `S̄` drops, `Q = 1`, that

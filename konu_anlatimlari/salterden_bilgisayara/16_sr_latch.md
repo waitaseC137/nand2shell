@@ -84,8 +84,8 @@ Hiçbir yerde. Öyle bir şey yok. ALU'ya `X` ve `Y`'yi hep elle girdin. Sonucu
 okudun, sonra sonuç kayboldu.
 
 > 🔑 Şu ana kadar kurduğun şey bir **hesap makinesi.** Bilgisayar ise kendi
-> sonucunu saklayıp üstüne yeni bir hesap koyabilen şey. Aradaki fark tek bir
-> yetenek: **hatırlamak.**
+> sonucunu saklayıp üstüne yeni bir hesap koyabilen şey. Aradaki farkın ilk
+> parçası: **hatırlamak.**
 
 Hatırlayan devrelere **ardışık** (*sequential*) deniyor. Bu bölümün bütün
 seviyeleri o yeteneği kuruyor, ve hepsi bu seviyedeki tek fikrin üstüne
@@ -151,9 +151,10 @@ ise ikinci okuma daha kullanışlı: devre **`1 1`'de dinleniyor**, ve bir şey
 olması için bir girişin **0'a düşmesi** gerekiyor.
 
 > 🔑 Bu devrede komut `1` değil, `0`. Elektronikte buna **aktif düşük**
-> (*active low*) deniyor. İleride veri sayfalarında sinyal adının üstünde bir
-> çizgi görürsen (`S̄`, `R̄`) ya da adın sonunda `_n` / `#` görürsen (`RESET#`),
-> anlamı bu: "bu sinyal 0 olduğunda iş yapar."
+> (*active low*) deniyor. İleride bir **veri sayfasında** (*datasheet*: üreticinin
+> bir çip için yayımladığı teknik belge) sinyal adının üstünde bir çizgi görürsen
+> (`S̄`, `R̄`) ya da adın sonunda `_n` / `#` görürsen (`RESET#`), anlamı bu: "bu
+> sinyal 0 olduğunda iş yapar."
 
 > ⚠️ **Bir veri sayfasına bakarken dikkat: isimler oyunla ters eşleşiyor.** Veri
 > sayfalarındaki `nand` latch'te `S̄` düşünce `Q = 1` olur, yani "set". Oyunda
