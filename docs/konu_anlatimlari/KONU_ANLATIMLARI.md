@@ -6,9 +6,9 @@
 
 ## 🔌 Şalterden Bilgisayara (NAND'dan CPU'ya)
 
-> 🚧 **Bu kurs yazım aşamasında** — NandGame yolculuğundan doğdu; **aritmetik ve yönlendirme üniteleri tamamlandı** (00–11, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF) ve veri yönlendirmeye (multiplexer) kadar. Devamı (ALU, hafıza, saat, kontrol birimi) NandGame ilerledikçe eklenecek.
+> 🚧 **Bu kurs yazım aşamasında** — NandGame yolculuğundan doğdu; **aritmetik, yönlendirme ve ALU üniteleri tamamlandı, Memory ünitesi sürüyor** (21 dosya: 00–17, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF), veri yönlendirmeye (multiplexer), hesap çekirdeğine (ALU) ve ilk hafıza devrelerine (SR Latch, D Latch) kadar. Devamı (hafızanın geri kalanı, saat, kontrol birimi) NandGame ilerledikçe eklenecek.
 >
-> 🧭 **Yeni mi başlıyorsun?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — işlemciyi "nedir?" diye değil, **parçalarından kurarak** öğrenmek isteyenler için. x86 kursunun kardeşi ve altı: orası işçiye emir vermeyi öğretir, burası işçiyi transistörden kurar.
+> 🧭 **Yeni mi başlıyorsun?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — işlemciyi "nedir?" diye değil, **parçalarından kurarak** öğrenmek isteyenler için. Burası işçiyi transistörden kurar: assembly'de yazılan her emrin altındaki devreyi.
 
 | Dosya | Konular |
 |---|---|
@@ -42,6 +42,6 @@
 
 | Dosya | Konular |
 |---|---|
-| [README.md](./cwe/README.md) | CWE nedir, CVE nedir, farkları · zincirler · Şalterden Bilgisayara ve Leviathan derslerinin CWE'leri · yoldakiler |
+| [README.md](./cwe/README.md) | CWE nedir, CVE nedir, farkları · zincirler · Şalterden Bilgisayara derslerinin CWE'leri · yoldakiler |
 
 ---

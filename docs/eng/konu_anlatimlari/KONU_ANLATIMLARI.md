@@ -6,9 +6,9 @@
 
 ## 🔌 From Switches to a Computer (NAND to CPU)
 
-> 🚧 **This course is still being written** — it grew out of the NandGame journey; the **arithmetic and routing units are complete** (00–11, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF) and data routing (the multiplexer). The rest (ALU, memory, clock, control unit) will be added as the journey continues.
+> 🚧 **This course is still being written** — it grew out of the NandGame journey; the **arithmetic, routing and ALU units are complete, and the Memory unit is in progress** (21 files: 00–17, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF), data routing (the multiplexer), the calculation core (ALU) and the first memory circuits (SR Latch, D Latch). The rest (the remainder of memory, clock, control unit) will be added as the journey continues.
 >
-> 🧭 **New to this?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — for people who want to learn the processor not by asking "what is it?" but by **building it from its parts**. It's the sibling and the floor beneath the x86 course: there you learn to give the worker orders, here you build the worker from transistors.
+> 🧭 **New to this?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — for people who want to learn the processor not by asking "what is it?" but by **building it from its parts**. Here you build the worker from transistors: the circuit underneath every order written in assembly.
 
 | File | Topics |
 |---|---|
@@ -41,6 +41,6 @@
 
 | File | Topics |
 |---|---|
-| [README.md](./cwe/README.md) | What a CWE is, what a CVE is, the difference · chains · the CWEs of the From Switches to a Computer and Leviathan lessons · what is on the way |
+| [README.md](./cwe/README.md) | What a CWE is, what a CVE is, the difference · chains · the CWEs of the From Switches to a Computer lessons · what is on the way |
 
 ---

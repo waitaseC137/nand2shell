@@ -13,8 +13,8 @@ window.KONULAR = {
       id: "salterden_bilgisayara",
       label: "From Switches to a Computer (NAND to CPU)",
       accent: "var(--d-low)",
-      tag: "16 lessons · 🚧 ALU started",
-      blurb: "A course born from the NandGame journey — from switch/relay to NAND, from NAND to logic gates, from gates to the adder (half/full adder). Learn the processor not by asking 'what is it' but by building it from its parts yourself. The arithmetic and routing units are complete (00–11): adder, subtractor, flags and the multiplexer. The ALU unit has started (12). The rest of the ALU, memory and the CPU are next.",
+      tag: "21 lessons · 🚧 Memory unit in progress",
+      blurb: "A course born from the NandGame journey — from switch/relay to NAND, from NAND to logic gates, from gates to the adder (half/full adder). Learn the processor not by asking 'what is it' but by building it from its parts yourself. The arithmetic, routing and ALU units are complete (00–15): adder, subtractor, flags, the multiplexer and the ALU. The Memory unit is in progress (16 SR Latch, 17 D Latch). The rest of memory and the CPU are next.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Start Here",              h: "Course map; from switches to a CPU (🚧 in progress)" },
         { f: "salterden_bilgisayara/01_akim_salter_role.md",     n: "01",   t: "Current · Switch · Relay", h: "Electricity → switch → relay = the first logic" },

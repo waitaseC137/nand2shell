@@ -9,8 +9,8 @@ window.KONULAR = {
       id: "salterden_bilgisayara",
       label: "Şalterden Bilgisayara (NAND'dan CPU'ya)",
       accent: "var(--d-low)",
-      tag: "16 ders · 🚧 ALU başladı",
-      blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10) ve yönlendirme (11) tamamlandı; ALU ünitesi başladı (12). Sırada ALU'nun geri kalanı, bellek ve işlemci.",
+      tag: "21 ders · 🚧 Memory ünitesi sürüyor",
+      blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10), yönlendirme (11) ve ALU (12–15) üniteleri tamamlandı; Memory ünitesi sürüyor (16 SR Latch, 17 D Latch). Sırada hafızanın geri kalanı ve işlemci.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Buradan Başla",        h: "Kurs haritası; şalterden CPU'ya (🚧 yazılıyor)" },
         { f: "salterden_bilgisayara/01_akim_salter_role.md",     n: "01",   t: "Akım · Şalter · Röle", h: "Elektrik → şalter → röle = ilk mantık" },
