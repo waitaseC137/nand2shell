@@ -51,7 +51,7 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/14_alu.md",                 n: "14",   t: "ALU",                     h: "The control word · changing the material, not the operation" },
         { f: "salterden_bilgisayara/15_condition.md",           n: "15",   t: "Condition",               h: "AND as a valve · trichotomy · N XOR OF" },
         { f: "salterden_bilgisayara/16_sr_latch.md",            n: "16",   t: "SR Latch",                h: "Feedback · even inversions remember, odd ones oscillate" },
-        { f: "salterden_bilgisayara/17_d_latch.md",             n: "17",   t: "D Latch",                 h: "The gatekeeper of memory · forbidden row impossible · transparent latch" }
+        { f: "salterden_bilgisayara/17_d_latch.md",             n: "17",   t: "D Latch",                 h: "The gatekeeper of memory · the forbidden row becomes a timing rule · why not select · transparent latch" }
       ]
     },
     {

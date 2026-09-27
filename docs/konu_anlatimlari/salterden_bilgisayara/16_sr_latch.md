@@ -98,8 +98,8 @@ oturuyor.
 Şimdiye kadar sinyal hep **tek yöne** aktı: girişten kapılara, kapılardan çıkışa.
 Hiçbir tel geriye dönmedi.
 
-Tablonun üçüncü satırı "çıkış, önceki çıkıştır" diyor. Önceki çıkışı devreye
-sokmanın tek yolu var: **çıkışı bir kapının girişine geri bağlamak.**
+Tablonun üçüncü satırı "çıkış, önceki çıkıştır" diyor. Elindeki kapılarla
+önceki çıkışı devreye sokmanın tek yolu var: **çıkışı bir kapının girişine geri bağlamak.**
 
 Buna **geri besleme** (*feedback*) deniyor. Ve bu fikir kulağa geldiğinden
 tuhaftır.
@@ -108,12 +108,17 @@ Birleşimsel bir devreye "çıkış ne?" diye sorarsan tek bir cevabı vardır. 
 beslemeli bir devrede bu sorunun **birden fazla cevabı** olabilir. Aynı girişlerle
 devre hem 0'da hem 1'de durabilir, ve hangisinde olduğunu **geçmişi** belirler.
 
-> 🔑 Hatırlamak mürekkeple yazmak gibi bir şey değil. Devre kendi kuyruğunu
-> tutuyor ve o döngünün içinde bir bit taşıyor. Elektrik kesilirse döngü durur ve
-> bit gider. Bellek bir defter değil, sürekli devam eden bir hareket.
+> 🔑 Bu tür hatırlamak mürekkeple yazmak gibi bir şey değil. Devre kendi
+> kuyruğunu tutuyor: döngüdeki kapılar birbirini aynı değerde tutuyor. Orada
+> dönüp duran bir şey yok, besleme sürdükçe ayakta duran bir **denge** var.
+> Elektrik kesilirse denge çöker ve bit gider.
 
-Bilgisayarındaki bütün bellek, gigabaytlarca RAM dahil, bu tek fikrin milyarlarca
-kez tekrarlanmış hâli.
+İşlemcinin içindeki register'lar ve önbellek bu fikrin milyonlarca kez
+tekrarlanmış hâli. Bilgisayarındaki gigabaytlarca RAM ise başka bir yol seçiyor:
+her biti bir [sığaçta](./01.5_yasak_bolge.md) yük olarak tutuyor, döngü yok. Yük
+sızdığı için her hücrenin yaklaşık 64 milisaniyede bir tazelenmesi gerekiyor.
+SSD'deki flash bellek de ayrı bir yol: yükü yalıtılmış bir katmanda hapsediyor,
+elektrik kesilince bile bit kalıyor.
 
 ---
 
@@ -537,8 +542,8 @@ Seviye açıklamasında bir cümle daha vardı: *"İlk set ya da reset sinyaline
 
 Neden tanımsız? Çünkü devrenin iki kararlı durumu var ve ikisi de eşit derecede
 kararlı. Elektrik geldiği an iki kapı da bir yöne düşecek, ve hangi yöne
-düşeceğini **hiçbir şey seçmiyor.** Tellerdeki küçük farklar, sıcaklık, üretimden
-kalan minik dengesizlikler seçiyor.
+düşeceğini **hiçbir tasarım kararı seçmiyor.** Tellerdeki küçük farklar, sıcaklık,
+üretimden kalan minik dengesizlikler seçiyor.
 
 Masum bir detay gibi görünüyor, ama bir de şöyle düşün: bu bit bir **kilidi**
 tutuyor olsun. "Hata ayıklama modu açık mı?", "Bu bellek bölgesi korumalı mı?"
@@ -564,7 +569,7 @@ Bir güvenlik ayarı tanımsız başladığında ise kimse o ayarın ne olduğun
 
 **D Latch.** SR Latch'in iki komutu var ve kötü bir satırı var. Bir sonraki
 seviye bu ikisini tek bir veri teline ve bir "şimdi al" teline dönüştürüyor. O
-kötü satır da böylece hiç oluşamaz hâle geliyor.
+kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor.
 
 ---
 
@@ -575,7 +580,8 @@ kötü satır da böylece hiç oluşamaz hâle geliyor.
 ☐ Hesap makinesi hesaplar, bilgisayar HATIRLAR. 13'teki PC ← PC + 1'in PC'si hiçbir yerde durmuyordu.
 ☐ Hatırlayan devre ARDIŞIKTIR. Tek yeni fikir: GERİ BESLEME, yani çıkışı bir kapının girişine geri bağlamak.
 ☐ Geri beslemeli devrede "çıkış ne?" sorusunun birden fazla cevabı olabilir. Hangisi olduğunu GEÇMİŞ belirler.
-☐ 🔑 Bellek bir defter değil, sürekli devam eden bir hareket. Elektrik kesilince döngü durur, bit gider.
+☐ 🔑 Kapılarla kurulan bellek bir defter değil, beslemeyle ayakta duran bir DENGE. Elektrik kesilince denge çöker, bit gider.
+☐ Register ve önbellek bu fikirle kurulur. RAM (DRAM) biti sığaçta yük olarak tutar ve tazelenir; flash elektriksiz de tutar.
 ☐ Bu devrede komut 0'dır: devre 1-1'de dinlenir, bir giriş 0'a DÜŞÜNCE iş yapar (aktif düşük).
 ☐ r düşerse çıkış 1, s düşerse çıkış 0. İsimler "hangisi 1'de kaldı" der; ikisi aynı satırın iki okuması.
 ☐ Set "gönder" değil, "biti 1 yap" demektir. Çıkış biti SÜREKLİ gösterir; ne zaman alınacağı saatin işi.
@@ -598,7 +604,7 @@ kötü satır da böylece hiç oluşamaz hâle geliyor.
 ☐ 👾 Yazılımda yarış koşulu CWE-362, TOCTOU CWE-367. 0-0'dan çıkıştaki yarış onların donanımdaki atası.
 ☐ 👾 Latch iki durumlu bir DURUM MAKİNESİ; 0-0 onun tanımsız geçişi: CWE-1245 (MITRE'ninki reset ister, latch sonraki komutla kurtulur). Tasarımcının umursamadığı satırı saldırgan umursar.
 ☐ 👾 Donanımda sinyal yarışı: CWE-1298. Belge "kullanılmıyor" der, devre yine bir şey yapar.
-☐ Açılışta latch tanımsız: iki kararlı durum eşit, hangisine düşeceğini HİÇBİR ŞEY seçmez.
+☐ Açılışta latch tanımsız: iki kararlı durum eşit, hangisine düşeceğini HİÇBİR TASARIM KARARI seçmez, fizik seçer.
 ☐ 👾 O bit bir güvenlik kilidiyse bazı açılışlarda kapı açık başlar: CWE-1271. Güvenlik bitini reset sürerken bilinen değere zorla.
 ```
 

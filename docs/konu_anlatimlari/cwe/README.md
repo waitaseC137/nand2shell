@@ -153,11 +153,11 @@ Kataloğun geri kalanı bu iki sütunun etrafına diziliyor. Aşağıdaki üç k
 **787 neden burada?** Taşmanın kendisi bir şey bozmaz. Sonuç bu olmasaydı 190 bir
 merak konusu olarak kalırdı — Top-25'in birinci sırasında olmasının sebebi bu.
 
-**1245 neden burada?** Memory ünitesinin ilk CWE'si. SR Latch var olabilecek en
-küçük **durum makinesi**, ve tablosundaki `0 0 → kullanılmıyor` satırı onun
+**1245 neden burada?** Memory ünitesinin ilk CWE'si. SR Latch iki durumlu bir
+**durum makinesi**, ve tablosundaki `0 0 → kullanılmıyor` satırı onun
 tanımlanmamış geçişi. Bir sonraki seviye olan D Latch'in neden var olduğunu
-anlamak, bu zayıflığı anlamaktan geçiyor: D Latch o satırı yapı gereği oluşamaz
-kılıyor ([17](../salterden_bilgisayara/17_d_latch.md#yasak-satır-artık-yok)).
+anlamak, bu zayıflığı anlamaktan geçiyor: D Latch o satırı kararlı hâlde yapı gereği
+oluşamaz kılıyor ([17](../salterden_bilgisayara/17_d_latch.md#yasak-satır-artık-yok)).
 
 ---
 

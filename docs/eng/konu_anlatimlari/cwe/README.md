@@ -157,11 +157,11 @@ NandGame?**
 **Why is 787 here?** The overflow itself breaks nothing. Without this outcome 190
 would remain a curiosity — this is why it sits at number one in the Top 25.
 
-**Why is 1245 here?** The first CWE of the Memory unit. The SR Latch is the smallest
-possible **state machine**, and the `0 0 → not used` row in its table is its
+**Why is 1245 here?** The first CWE of the Memory unit. The SR Latch is a two-state
+**state machine**, and the `0 0 → not used` row in its table is its
 undefined transition. Understanding why the next level, the D Latch, exists goes
 through understanding this weakness: the D Latch makes that row impossible by
-construction ([17](../salterden_bilgisayara/17_d_latch.md#the-forbidden-row-is-gone)).
+construction in the settled state ([17](../salterden_bilgisayara/17_d_latch.md#the-forbidden-row-is-gone)).
 
 ---
 

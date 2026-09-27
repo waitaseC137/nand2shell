@@ -100,7 +100,7 @@
 | [14_alu.md](./salterden_bilgisayara/14_alu.md) | ALU; the control word, flags changing the operand |
 | [15_condition.md](./salterden_bilgisayara/15_condition.md) | Condition; AND as a valve, trichotomy and closing the OF debt |
 | [16_sr_latch.md](./salterden_bilgisayara/16_sr_latch.md) | SR Latch; feedback, the number of inversions: memory or oscillation |
-| [17_d_latch.md](./salterden_bilgisayara/17_d_latch.md) | D Latch; a translator in front of the SR Latch, the forbidden row made impossible |
+| [17_d_latch.md](./salterden_bilgisayara/17_d_latch.md) | D Latch; a translator in front of the SR Latch, the forbidden row made impossible in the settled state and turned into a timing rule, why not select |
 
 ---
 ## ⚙️ x86 Assembly (from scratch)

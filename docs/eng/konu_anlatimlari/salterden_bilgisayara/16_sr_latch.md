@@ -101,8 +101,9 @@ that ability, and all of them rest on the single idea in this level.
 So far the signal has always flowed **in one direction**: from the inputs into the
 gates, from the gates to the output. No wire ever turned back.
 
-The third row of the table says "the output is the previous output". There is
-only one way to bring the previous output into the circuit: **wire the output
+The third row of the table says "the output is the previous output". With the
+gates you have, there is only one way to bring the previous output into the
+circuit: **wire the output
 back into the input of a gate.**
 
 This is called **feedback**. And the idea is stranger than it sounds.
@@ -112,12 +113,17 @@ answer. In a circuit with feedback that question can have **more than one
 answer**. With the same inputs the circuit can sit at 0 or at 1, and which one
 it sits at is decided by its **past**.
 
-> 🔑 Remembering is not like writing in ink. The circuit is holding its own tail
-> and carrying a bit around inside that loop. Cut the power and the loop stops,
-> and the bit is gone. Memory is not a notebook, it is a motion that never stops.
+> 🔑 This kind of remembering is not like writing in ink. The circuit is holding
+> its own tail: the gates in the loop hold each other at the same value. Nothing
+> is circling around in there; there is a **balance** that stays up as long as
+> the power does. Cut the power and the balance collapses, and the bit is gone.
 
-All the memory in your computer, gigabytes of RAM included, is this one idea
-repeated billions of times.
+The registers and the cache inside the processor are this one idea repeated
+millions of times. The gigabytes of RAM in your computer take another road: they
+hold each bit as charge in a [capacitor](./01.5_yasak_bolge.md), with no loop.
+Because the charge leaks, every cell has to be refreshed roughly every 64
+milliseconds. The flash memory in an SSD is yet another road: it traps the
+charge in an insulated layer, and the bit stays even when the power is cut.
 
 ---
 
@@ -562,8 +568,8 @@ first set or reset signal."*
 
 Why undefined? Because the circuit has two stable states and both are equally
 stable. The moment power arrives, the two gates will fall one way, and
-**nothing chooses** which way. Small differences in the wires, temperature, and
-tiny imbalances left over from manufacturing do the choosing.
+**no design decision chooses** which way. Small differences in the wires,
+temperature, and tiny imbalances left over from manufacturing do the choosing.
 
 It looks like an innocent detail, but think of it this way: let this bit hold a
 **lock**. A lock such as "Is debug mode on?" or "Is this memory region
@@ -590,7 +596,7 @@ it. When a security setting starts undefined, nobody knows what that setting is.
 
 **D Latch.** The SR Latch has two commands and one bad row. The next level turns
 those two into a single data wire and a single "take it now" wire. That way the
-bad row can no longer occur at all.
+bad row can no longer occur at all once the inputs have settled.
 
 ---
 
@@ -601,7 +607,8 @@ bad row can no longer occur at all.
 ☐ A calculator computes, a computer REMEMBERS. The PC in 13's PC ← PC + 1 lived nowhere.
 ☐ A circuit that remembers is SEQUENTIAL. The one new idea: FEEDBACK, wiring the output back into a gate's input.
 ☐ In a circuit with feedback, "what is the output?" can have more than one answer. The PAST decides which.
-☐ 🔑 Memory is not a notebook, it is a motion that never stops. Cut the power and the loop stops, the bit is gone.
+☐ 🔑 Memory built from gates is not a notebook, it is a BALANCE that stays up with the power. Cut the power and the balance collapses, the bit is gone.
+☐ Registers and cache are built on this idea. RAM (DRAM) holds the bit as charge in a capacitor and is refreshed; flash holds it without power.
 ☐ In this circuit the command is 0: the circuit rests at 1-1 and acts when an input DROPS to 0 (active low).
 ☐ r drops → output 1, s drops → output 0. The names say "which one stayed at 1"; both are readings of the same row.
 ☐ Set does not mean "send", it means "make the bit 1". The output shows the bit ALL THE TIME; when to take it is the clock's job.
@@ -624,7 +631,7 @@ bad row can no longer occur at all.
 ☐ 👾 In software, race condition CWE-362, TOCTOU CWE-367. The race when leaving 0-0 is their hardware ancestor.
 ☐ 👾 The latch is a two-state STATE MACHINE; 0-0 is its undefined transition: CWE-1245 (MITRE's needs a reset, the latch recovers with the next command). The row the designer ignores is the row the attacker cares about.
 ☐ 👾 Signal race in hardware: CWE-1298. The documentation says "not used", the circuit still does something.
-☐ At power-on the latch is undefined: the two stable states are equal, NOTHING chooses which one it falls into.
+☐ At power-on the latch is undefined: the two stable states are equal, NO DESIGN DECISION chooses which one it falls into; physics does.
 ☐ 👾 If that bit is a security lock, on some boots the door starts open: CWE-1271. Force security bits to a known value while reset is active.
 ```
 

@@ -103,9 +103,10 @@ been 1, nothing would have been stored either. The table shows the proof side by
 side: the `0 1` and `0 0` rows give the same answer.
 
 **Second: "previous" does not come from outside.** The value the output is
-holding does not come from any wire at that moment; it circulates **inside** the
-SR Latch's loop. The previous lesson gave this a name: memory is not a notebook,
-it is a motion that never stops.
+holding does not come from any outside wire at that moment; it stays **inside**
+the SR Latch's loop: the two gates in the loop hold each other at the same value.
+The previous lesson gave this a name: this memory is not a notebook, it is a
+balance that stays up with the power.
 
 > *"Haven't we fallen into a loop?"* We have, but into the **good** one. The loop
 > has an even number of inversions, so it confirms itself. The loop that
@@ -139,9 +140,11 @@ In this level every wire has a different role:
 | `s`, `r` | **command** — tells the SR Latch what to do |
 | the wires of the loop | **the actual data** — the stored bit lives here |
 
-The most important row here is the third. `s` and `r` were never data, not in
-the previous level either. Both were **commands**: "make it 1", "make it 0",
-"leave it alone".
+The most important row here is the third. The role of `s` and `r` was never
+data, not in the previous level either. Their role is **command**: "make it 1",
+"make it 0", "leave it alone". (In the inv-less solution you will see a little
+later, the `r` wire also carries the inverse of d while `st=1`. But what it tells
+the latch is still a command.)
 
 > 🔑 What the latch stores is not the current `d`, but **the `d` from the
 > moment `st` was last 1.** After that moment `d` can change as much as it
@@ -336,7 +339,9 @@ In three steps:
    and the `nand` fires.
 
 In short, `r` asks "is d 1?" and `s` asks "is d 0?". Translating the second
-question into a language `nand` understands takes an `inv`.
+question into a language `nand` understands takes **the inverse of d**. The most
+direct way to make it is an `inv`, but not the only way
+([One part too many](#one-part-too-many)).
 
 ---
 
@@ -345,30 +350,53 @@ question into a language `nand` understands takes an `inv`.
 What this section describes came up after the circuit was built and the level
 was passed, while trying to explain the lesson.
 
-What would happen without the `inv`? Both `nand`s would get `st` and `d`:
+What would happen with no inverse of d at all? Both `nand`s would get `st` and `d`:
 
 ```
 st=1  d=1   →   s = nand(1,1) = 0   r = nand(1,1) = 0   →   0 0  ⚠️ forbidden row
 st=1  d=0   →   s = nand(1,0) = 1   r = nand(1,0) = 1   →   1 1     nothing gets written
 ```
 
-So the `inv` does two jobs at once: it makes writing 0 possible, and it stops
+So the inverse of d does two jobs at once: it makes writing 0 possible, and it stops
 two commands from arriving at the same time.
 
-Look at the second one more closely. `d` and `inverse d` can **never both be 1
-at the same time.** So `s` and `r` can never both drop to 0 at the same time.
+Look at the second one more closely. Once the inputs have settled, `d` and
+`inverse d` can **never both be 1 at the same time.** So in the settled state
+`s` and `r` can never both drop to 0 at the same time.
 
-> 🔑 The SR Latch's forbidden `0 0` row is **physically impossible** in this
-> circuit. Because both commands are derived from a single data wire, two
-> opposing orders cannot arrive at once.
+> 🔑 The SR Latch's forbidden `0 0` row is **impossible in the settled state** in
+> this circuit. Because both commands are derived from a single data wire, two
+> opposing orders cannot arrive at once once the inputs have settled.
 
 In the previous lesson that row got its name,
 [CWE-1245](../cwe/cwe_1245.md):
 leaving an undefined transition as "not used" and trusting that nobody
 will use it. The D Latch gives a different answer to the same problem: **instead
 of asking people not to use the undefined row, it builds a structure that cannot
-reach it.** It does not leave the rule to the user; it bakes it into the shape of
-the circuit.
+reach it.** It does not leave most of the rule to the user; it bakes it into the
+shape of the circuit.
+
+### A spike that lasts an instant
+
+The "once the inputs have settled" qualifier is there for a reason. `inverse d`
+arrives one gate later than `d`, because it passes through the `inv`. If `d` goes
+from 0 to 1 while `st=1`, then for an instant `s` and `r` are **both 0**. This was
+simulated at gate level: a spike lasting exactly one gate delay. The inv-less
+solution has the same thing; there the late arrival is `r`.
+
+Most of the time it is harmless: right after it `s` rises, `r` stays at 0 and the
+circuit settles on 1.
+
+The moment it does harm is this: if `st` also falls right after `d` changes,
+while the spike is still there, both commands rise **at the same moment**. That
+is exactly the race when leaving `0 0` from
+[16](./16_sr_latch.md#the-unused-row). In the simulation, `st` falling one gate
+delay after `d` made the loop oscillate; falling two delays after was fine.
+
+So the forbidden row did not go away completely; it turned into a **timing
+rule**: *while `st` falls, `d` has to stay steady for a while.* The data sheets of
+real chips write this rule as a duration (*setup* and *hold time*). You will meet
+it again with the clock.
 
 ---
 
@@ -397,10 +425,20 @@ As in the previous lesson, looking at single rows is not enough; you need a
 | 2 | `0` `1` | **`1`** | does it hold |
 | 3 | `0` `0` | **`1`** | `d` changed, did it ignore it |
 | 4 | `1` `0` | `0` | is 0 written |
-| 5 | `0` `1` | **`0`** | `d` changed, did it ignore it |
+| 5 | `0` `0` | **`0`** | does it hold |
+| 6 | `0` `1` | **`0`** | `d` changed, did it ignore it |
 
-Look at steps 3 and 5: `d` changes, the output does not. Those two rows are the
+Look at steps 3 and 6: `d` changes, the output does not. Those two rows are the
 proof of the gatekeeper.
+
+Only **one** switch changes at each step. That is on purpose: in the game the
+switches are flipped one at a time, so a step where two switches change is really
+two steps, and the result can depend on which one you flip first.
+
+> 📌 In the first version of this table, step 4 went straight to `0 1`, so two
+> inputs changed at once. If `d` was flipped first, `st` was still 1, the latch
+> wrote a 1, and a correctly built circuit looked broken. This was found by
+> simulation.
 
 <details>
 <summary>🔑 If you are stuck — the connection list</summary>
@@ -568,8 +606,9 @@ On its own this is an innocent property. Now recall the line from
 PC ← PC + 1
 ```
 
-Imagine keeping PC in a D Latch, feeding its output into the increment circuit,
-and wiring the result back into the same latch's `d`. The moment you set
+Imagine keeping PC in D Latches (16 of them for 16 bits), feeding their outputs
+into the increment circuit, and wiring the result back into the same latches'
+`d`s. The moment you set
 `st=1`:
 
 ```
@@ -583,8 +622,8 @@ other words, once again, a **race.** What you wanted was a single step.
 > 🔑 A transparent latch gives a crude answer to the question "when": "as long as
 > the gate is open." A computer needs a sharper answer: **"exactly now, once."**
 
-The next level, **Data Flip-Flop**, builds that sharp moment. Its name comes from
-there: the clock.
+The next level, **Data Flip-Flop**, builds that sharp moment. The signal that
+gives that moment is called the **clock.**
 
 ---
 
@@ -667,8 +706,8 @@ built as `nand(and(st, r), rst_n)`.
 ☐ d = data, the bit to store (viewfinder). st = store, "take it now" (shutter).
 ☐ st=1 → the output takes d. st=0 → d is not heard, the previous value stays.
 ☐ ⚠️ 0 does NOT mean "no data". The reason nothing is stored at st=0 is st, not d.
-☐ The "previous value" does not come from outside, it circulates in the SR Latch's loop. The good loop: even inversions.
-☐ 🔑 In Memory, DATA is the state of the loop's wires. d is the candidate, st the decision, s/r the COMMAND. s and r were never data.
+☐ The "previous value" does not come from outside, it stays in the SR Latch's loop: the two gates hold each other. The good loop: even inversions.
+☐ 🔑 In Memory, DATA is the state of the loop's wires. d is the candidate, st the decision, s/r the COMMAND. The role of s and r was always command.
 ☐ 🔑 The latch stores not the current d, but the d from the moment st was LAST 1.
 ☐ In this solution the D Latch builds no new memory. It places a TRANSLATOR (gatekeeper) in front of the SR Latch.
 ☐ In the SR Latch's language 1 = "I am silent", 0 = "command". Resting is 1-1.
@@ -676,13 +715,14 @@ built as `nand(and(st, r), rst_n)`.
 ☐ ⚠️ A nand with one leg at 1 DOES LISTEN to its other leg and inverts it (inv). Only the one with a leg at 0 does not listen.
 ☐ Read the translation table COLUMN BY COLUMN: r = nand(st, d), s = nand(st, inv(d)).
 ☐ The inverse of d is needed because nand gives 0 only at 1-1; s has to fire when d=0.
-☐ Without the inv: at st=1 d=1 both s and r are 0 → forbidden row. The inv does two jobs.
-☐ 🔑 d and inverse d can never both be 1 → s and r can never both be 0 → THE FORBIDDEN ROW IS IMPOSSIBLE.
+☐ Without the inverse of d: at st=1 d=1 both s and r are 0 → forbidden row. The inverse of d does two jobs (made by an inv or by the r wire).
+☐ 🔑 In the settled state d and inverse d cannot both be 1 → s and r cannot both be 0 → THE FORBIDDEN ROW IS IMPOSSIBLE IN THE SETTLED STATE.
+☐ ⚠️ A transition has an instant spike: inverse d arrives one gate late. If st falls while d is changing, the race from 16 is back → TIMING RULE: d must stay steady while st falls (setup/hold).
 ☐ 👾 An answer to CWE-1245: instead of asking people not to use the undefined row, make it unreachable.
 ☐ Solution: 4 components, 5 nands. Fewer: delete the inv, give r to nand1 (while st=1, r = inverse d) → 3 components, 4 nands.
 ☐ The D Latch is NOT DEPENDENT on the SR Latch: it can be built with select, and the black box passes. Opened up, the bit is lost / oscillates when st falls (game: "did not reach a stable state").
 ☐ 🔑 The reason for the SR Latch is not the order of levels: the gates holding the loop are INDEPENDENT of st. In select the loop runs through st's valve. The fix: the Earle latch, and(d, output).
-☐ Testing memory is a SEQUENCE: write → st=0 → change d → the output must not change.
+☐ Testing memory is a SEQUENCE: write → st=0 → change d → the output must not change. ONE switch per step.
 ☐ While st=1 the output follows d INSTANTLY: a TRANSPARENT latch. Build PC ← PC + 1 with it and the number keeps climbing.
 ☐ The need is not "while the gate is open" but "exactly now, once" → Data Flip-Flop and the clock.
 ☐ 👾 Still undefined at power-on: the D Latch does not solve CWE-1271. Force security bits to a known value IN HARDWARE WHILE RESET IS ACTIVE.
@@ -699,7 +739,7 @@ built as `nand(and(st, r), rst_n)`.
 - 👾 **A race while the gate is open:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — a counter built on a transparent latch races instead of taking one step
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: why it cannot be built with a transparent latch
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Boxing up what you built and climbing on top; the SR Latch is now a single part
-- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand`; why a `nand` with one leg at 1 behaves like an `inv`
+- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand(x, x)`; that tying one leg to 1 does the same job is in [16](./16_sr_latch.md#count-the-inversions)
 
 ---
 

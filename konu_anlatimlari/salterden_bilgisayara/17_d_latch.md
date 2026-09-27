@@ -97,9 +97,10 @@ saklanmamasının sebebi `d`'nin 0 olması değil, **`st`'nin 0 olması.** `d=1`
 olsaydı da hiçbir şey saklanmazdı. Tabloda bunun kanıtı yan yana duruyor: `0 1`
 ve `0 0` satırları aynı cevabı veriyor.
 
-**İkincisi: "önceki" dışarıdan gelmiyor.** Çıkışın tuttuğu değer o an hiçbir
-telden gelmiyor, SR Latch'in döngüsünün **içinde** dönüyor. Bir önceki derste
-bunun adı konmuştu: bellek bir defter değil, sürekli devam eden bir hareket.
+**İkincisi: "önceki" dışarıdan gelmiyor.** Çıkışın tuttuğu değer o an dışarıdan
+gelen hiçbir telden gelmiyor, SR Latch'in döngüsünün **içinde** duruyor: döngüdeki
+iki kapı birbirini aynı değerde tutuyor. Bir önceki derste bunun adı konmuştu: bu
+bellek bir defter değil, beslemeyle ayakta duran bir denge.
 
 > *"Döngüye girmedik mi?"* Girdik, ama **iyi** döngüye. Döngüde çift sayıda ters
 > çevirme var, yani kendini onaylıyor. Titreyen döngü tek sayılı olandı.
@@ -131,8 +132,10 @@ Bu seviyede her telin rolü farklı:
 | `s`, `r` | **komut** — SR Latch'e ne yapacağını söyler |
 | döngünün telleri | **asıl veri** — saklanan bit burada yaşıyor |
 
-Buradaki en önemli satır üçüncüsü. `s` ve `r` hiçbir zaman veri değildi, bir
-önceki seviyede de değildi. İkisi de **komuttu**: "1 yap", "0 yap", "dokunma".
+Buradaki en önemli satır üçüncüsü. `s` ile `r`'nin rolü hiçbir zaman veri
+olmadı, bir önceki seviyede de olmadı. İkisinin rolü **komut**: "1 yap", "0 yap",
+"dokunma". (Az ileride göreceğin inv'siz çözümde `r` teli `st=1` iken ters d'yi
+de taşıyor. Ama latch'e söylediği şey yine bir komut.)
 
 > 🔑 Latch'in sakladığı şey şu anki `d` değil, **`st`'nin en son 1 olduğu
 > andaki `d`.** O andan sonra `d` istediği kadar değişsin, döngü duymaz.
@@ -318,7 +321,8 @@ Bu da gerçekten sorulan bir soru: *"`s` için neden ters d lazım?"*
    ateşlenir.
 
 Kısacası `r` "d 1 mi?" diye soruyor, `s` "d 0 mı?" diye soruyor. İkinci soruyu
-`nand`'ın anlayacağı dile çevirmek için `inv` gerekiyor.
+`nand`'ın anlayacağı dile çevirmek için **ters d** gerekiyor. Onu üretmenin en
+doğrudan yolu bir `inv`, ama tek yolu değil ([Bir parça fazla](#bir-parça-fazla)).
 
 ---
 
@@ -327,28 +331,47 @@ Kısacası `r` "d 1 mi?" diye soruyor, `s` "d 0 mı?" diye soruyor. İkinci soru
 Bu bölümdeki fark devre kurulup seviye geçildikten sonra, dersi anlatmaya
 çalışırken ortaya çıktı.
 
-`inv` olmasaydı ne olurdu? İki `nand`'ın ikisine de `st` ve `d` giderdi:
+Ters d hiç olmasaydı ne olurdu? İki `nand`'ın ikisine de `st` ve `d` giderdi:
 
 ```
 st=1  d=1   →   s = nand(1,1) = 0   r = nand(1,1) = 0   →   0 0  ⚠️ yasak satır
 st=1  d=0   →   s = nand(1,0) = 1   r = nand(1,0) = 1   →   1 1     hiçbir şey yazılmaz
 ```
 
-Yani `inv` iki iş birden yapıyor: 0 yazmayı mümkün kılıyor, ve iki komutun aynı
+Yani ters d iki iş birden yapıyor: 0 yazmayı mümkün kılıyor, ve iki komutun aynı
 anda gelmesini engelliyor.
 
-İkincisini daha yakından gör. `d` ile `ters d` **asla aynı anda 1 olamaz.** Bu
-yüzden `s` ile `r` asla aynı anda 0'a düşemez.
+İkincisini daha yakından gör. Girişler durulduktan sonra `d` ile `ters d` **asla
+aynı anda 1 olamaz.** Bu yüzden `s` ile `r` de kararlı hâlde asla aynı anda 0'a
+düşemez.
 
-> 🔑 SR Latch'in yasak `0 0` satırı bu devrede **fiziksel olarak imkânsız.** İki
-> komut tek bir veri telinden türediği için iki zıt emrin aynı anda gelmesi
-> mümkün değil.
+> 🔑 SR Latch'in yasak `0 0` satırı bu devrede **kararlı durumda imkânsız.** İki
+> komut tek bir veri telinden türediği için, girişler durulunca iki zıt emir aynı
+> anda gelemez.
 
 Bir önceki derste o satırın adı [CWE-1245](../cwe/cwe_1245.md) olarak konmuştu:
 tanımlanmamış bir geçişi "kullanılmıyor" diye bırakıp kimsenin kullanmamasına
 güvenmek. D Latch aynı soruna başka bir cevap veriyor: **tanımsız satırı
-kullanmamayı rica etmek yerine, ona ulaşılamayan bir yapı kurmak.** Kuralı
-kullanıcıya bırakmıyor, devrenin şekline gömüyor.
+kullanmamayı rica etmek yerine, ona ulaşılamayan bir yapı kurmak.** Kuralın
+büyük kısmını kullanıcıya bırakmıyor, devrenin şekline gömüyor.
+
+### Bir anlık iğne
+
+"Girişler durulunca" kaydı boşuna değil. `ters d`, `inv`'den geçtiği için `d`'den
+bir kapı geç gelir. `st=1` iken `d` 0'dan 1'e geçerse, bir anlığına `s` ile `r`
+**ikisi de 0** olur. Kapı düzeyinde simüle edildi: tam bir kapı gecikmesi süren
+bir iğne. İnv'siz çözümde de aynısı var, orada geç gelen şey `r`.
+
+Çoğu zaman zararsız: hemen ardından `s` kalkar, `r` 0'da kalır ve devre 1'e oturur.
+
+Zararlı olduğu an şu: `d` değiştikten hemen sonra, iğne sürerken `st` de inerse
+iki komut **aynı anda** kalkar. Bu, [16](./16_sr_latch.md#kullanılmayan-satır)'daki
+`0 0`'dan çıkış yarışının ta kendisi. Simülasyonda `d`'den bir kapı gecikmesi
+sonra inen `st` döngüyü titretti, iki gecikme sonra inen sorunsuzdu.
+
+Yani yasak satır tamamen kalkmadı, bir **zaman kuralına** dönüştü: *`st` inerken
+`d` bir süre sabit kalmalı.* Gerçek çiplerin veri sayfaları bu kuralı bir süre
+olarak yazar (*setup* ve *hold time*). Saat konusunda tekrar karşına çıkacak.
 
 ---
 
@@ -376,10 +399,20 @@ Bir önceki dersteki gibi tek tek satırlara bakmak yetmez, **sıra** gerekiyor:
 | 2 | `0` `1` | **`1`** | tutuyor mu |
 | 3 | `0` `0` | **`1`** | `d` değişti, duymadı mı |
 | 4 | `1` `0` | `0` | 0 yazılıyor mu |
-| 5 | `0` `1` | **`0`** | `d` değişti, duymadı mı |
+| 5 | `0` `0` | **`0`** | tutuyor mu |
+| 6 | `0` `1` | **`0`** | `d` değişti, duymadı mı |
 
-Adım 3 ile 5'e bak: `d` değişiyor, çıkış değişmiyor. Kapıcının kanıtı bu iki
+Adım 3 ile 6'ya bak: `d` değişiyor, çıkış değişmiyor. Kapıcının kanıtı bu iki
 satır.
+
+Her adımda **tek** bir anahtar değişiyor. Bu bilinçli: oyunda anahtarlar tek tek
+çevriliyor, iki anahtarın birden değiştiği bir adım aslında iki adım, ve önce
+hangisini çevirdiğine göre sonuç değişebilir.
+
+> 📌 Bu tablonun ilk hâlinde 4. adımdan sonra doğrudan `0 1`'e geçiliyordu, yani
+> iki giriş birden değişiyordu. Önce `d` çevrilirse `st` hâlâ 1 olduğu için latch
+> 1 yazıyor ve doğru kurulmuş bir devre bozukmuş gibi görünüyordu. Simülasyonla
+> bulundu.
 
 <details>
 <summary>🔑 Takıldıysan — bağlantı listesi</summary>
@@ -537,8 +570,8 @@ hatırla:
 PC ← PC + 1
 ```
 
-PC'yi bir D Latch'te tuttuğunu, çıkışını artırma devresine verdiğini, sonucu da
-aynı latch'in `d`'sine geri bağladığını düşün. `st=1` yaptığın an:
+PC'yi D Latch'lerde tuttuğunu (16 bit için 16 tane), çıkışlarını artırma
+devresine verdiğini, sonucu da aynı latch'lerin `d`'lerine geri bağladığını düşün. `st=1` yaptığın an:
 
 ```
 PC = 5  →  d = 6  →  kapı açık, PC = 6  →  d = 7  →  PC = 7  →  ...
@@ -551,8 +584,8 @@ kadar açık kaldığı ve kapıların ne kadar hızlı olduğu belirler, yani y
 > 🔑 Şeffaf latch "ne zaman" sorusuna kaba bir cevap veriyor: "kapı açık olduğu
 > sürece." Bilgisayarın ihtiyacı daha keskin bir cevap: **"tam şu anda, bir kez."**
 
-Bir sonraki seviye, **Data Flip-Flop**, o keskin anı kuruyor. Adı da oradan
-geliyor: saat.
+Bir sonraki seviye, **Data Flip-Flop**, o keskin anı kuruyor. O anı veren
+sinyalin adı: **saat.**
 
 ---
 
@@ -629,8 +662,8 @@ kurulabilir.
 ☐ d = data, saklanmak istenen bit (vizör). st = store, "şimdi al" (deklanşör).
 ☐ st=1 → çıkış d'yi alır. st=0 → d duyulmaz, önceki değer kalır.
 ☐ ⚠️ 0 "veri yok" demek DEĞİL. st=0'da bir şey saklanmamasının sebebi st, d değil.
-☐ "Önceki değer" dışarıdan gelmez, SR Latch'in döngüsünde döner. İyi döngü: çift ters çevirme.
-☐ 🔑 Memory'de VERİ, döngü tellerinin durumu. d aday, st karar, s/r KOMUT. s ve r hiç veri değildi.
+☐ "Önceki değer" dışarıdan gelmez, SR Latch'in döngüsünde durur: iki kapı birbirini tutar. İyi döngü: çift ters çevirme.
+☐ 🔑 Memory'de VERİ, döngü tellerinin durumu. d aday, st karar, s/r KOMUT. s ile r'nin rolü hep komuttu.
 ☐ 🔑 Latch şu anki d'yi değil, st'nin EN SON 1 olduğu andaki d'yi saklar.
 ☐ Bu çözümde D Latch yeni hafıza kurmaz. SR Latch'in önüne bir ÇEVİRMEN (kapıcı) koyar.
 ☐ SR Latch dilinde 1 = "sustum", 0 = "komut". Dinlenme 1-1.
@@ -638,13 +671,14 @@ kurulabilir.
 ☐ ⚠️ Bir ayağı 1 olan nand öbür ayağı DİNLER ve ters çevirir (inv). Dinlemeyen yalnızca ayağı 0 olan.
 ☐ Çeviri tablosunu SÜTUN SÜTUN oku: r = nand(st, d), s = nand(st, inv(d)).
 ☐ Ters d gerekir çünkü nand yalnızca 1-1'de 0 verir; s'nin d=0'da ateşlenmesi lazım.
-☐ inv olmasa: st=1 d=1'de s ve r ikisi de 0 → yasak satır. inv iki iş yapar.
-☐ 🔑 d ile ters d asla ikisi birden 1 olamaz → s ve r asla ikisi birden 0 olamaz → YASAK SATIR İMKÂNSIZ.
+☐ Ters d olmasa: st=1 d=1'de s ve r ikisi de 0 → yasak satır. Ters d iki iş yapar (inv ile ya da r teliyle üretilir).
+☐ 🔑 Kararlı hâlde d ile ters d ikisi birden 1 olamaz → s ve r ikisi birden 0 olamaz → YASAK SATIR KARARLI DURUMDA İMKÂNSIZ.
+☐ ⚠️ Geçişte bir anlık iğne var: ters d bir kapı geç gelir. d değişirken st inerse 16'daki yarış geri gelir → ZAMAN KURALI: st inerken d sabit kalmalı (setup/hold).
 ☐ 👾 CWE-1245'e cevap: tanımsız satırı "kullanma" diye rica etmek yerine ulaşılamaz kılmak.
 ☐ Çözüm: 4 bileşen, 5 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 4 nand.
 ☐ D Latch SR Latch'e MUHTAÇ DEĞİL: select'le de kurulur ve kara kutu hâli geçer. Açılınca st inerken bit kaybolur / titrer (oyun: "did not reach a stable state").
 ☐ 🔑 SR Latch'in sebebi sıra değil: döngüyü tutan kapılar st'den BAĞIMSIZ. Select'te döngü st'nin vanasından geçer. Düzeltmesi: Earle latch, and(d, çıkış).
-☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli.
+☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli. Her adımda TEK anahtar.
 ☐ st=1 iken çıkış d'yi ANINDA izler: ŞEFFAF latch. PC ← PC + 1 bununla kurulursa sayı durmadan artar.
 ☐ İhtiyaç "kapı açıkken" değil "tam şu anda, bir kez" → Data Flip-Flop ve saat.
 ☐ 👾 Açılışta hâlâ tanımsız: D Latch CWE-1271'i çözmez. Güvenlik bitini RESET SÜRERKEN donanımla bilinen değere zorla.
@@ -661,7 +695,7 @@ kurulabilir.
 - 👾 **Kapı açıkken yarış:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — şeffaf latch'le kurulan sayaç tek adım yerine yarışa girer
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: şeffaf latch'le neden kurulamayacağı
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Kurduğun şeyi kapatıp üstüne çıkmak; SR Latch artık tek parça
-- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand`; bir ayağı 1 olan `nand`'ın neden `inv` gibi davrandığı
+- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand(x, x)`; bir ayağı 1'e sabitlemenin de aynı işi gördüğü [16](./16_sr_latch.md#tersleri-say)'da
 
 ---
 
