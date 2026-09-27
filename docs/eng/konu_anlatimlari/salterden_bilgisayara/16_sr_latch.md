@@ -161,6 +161,17 @@ for something to happen an input has to **drop to 0**.
 > (`S̄`, `R̄`) or `_n` / `#` at the end of the name (`RESET#`), this is what it
 > means: "this signal does its job when it is 0."
 
+> ⚠️ **Careful when you look at a datasheet: the names map to the game's the
+> other way round.** In a datasheet's `nand` latch, when `S̄` drops, `Q = 1`, that
+> is, "set". In the game, what makes the output 1 is **`r`** dropping. The game's
+> `r` does the job of the datasheet's `S̄`, and `s` does the job of `R̄`. The reason
+> is the naming: the game named them by the first reading of the table above
+> ("which one stayed at 1"), the datasheet by the second ("which one dropped").
+>
+> This trap was fallen into even after the lesson was written: the SR Latch's
+> contract was once stated backwards, as "if s drops 1, if r drops 0". Do not
+> trust the name; look at what it does when it drops.
+
 ---
 
 ## Set Does Not Mean Send
@@ -258,6 +269,21 @@ r  →  the "make it 1" command
 
 It is enough for each input to go to a single gate. Then one leg of each gate is
 left free, and the free legs are waiting for the wires that come back.
+
+So **which** wire should come to the free leg, the gate's own output or the other
+gate's? You can derive this from the table too:
+
+- The `Output` comes out of a single gate, but it has to hear **both** inputs:
+  0 when `s` drops, 1 when `r` drops.
+- The gate of `s` does not see `r` directly. It only hears about `r` if the output
+  of `r`'s gate comes to its free leg. The same holds for the other side.
+- If a gate listens to its own output, it never hears the other input at all. The
+  two gates become two separate loops, cut off from each other. In the
+  simulation the `and`'s output never heard `r`, and the `nand` inverted itself
+  and flickered.
+
+So each gate has to listen to the other: **cross-coupling.** It is not something
+to memorise; it follows from the need that "the output must hear both inputs".
 
 ---
 
@@ -428,6 +454,11 @@ The reason is in the previous section: `nand` passes the value inverted. The
 gate of `s` now holds the **inverse** of the stored bit. The two gates (except
 at `0 0`) carry opposite values, and that is why real latches have two outputs:
 `Q` and `Q̄`.
+
+The bar here does not mean the same thing as the bar on `S̄`
+[above](#the-command-is-zero). The bar on `S̄` says "does its job when it is 0"
+(active low); the one on `Q̄` says "the inverse of `Q`". Datasheets write both
+meanings with the same mark; you tell them apart from the context.
 
 ### How to test the memory
 
@@ -611,9 +642,11 @@ bad row can no longer occur at all once the inputs have settled.
 ☐ Registers and cache are built on this idea. RAM (DRAM) holds the bit as charge in a capacitor and is refreshed; flash holds it without power.
 ☐ In this circuit the command is 0: the circuit rests at 1-1 and acts when an input DROPS to 0 (active low).
 ☐ r drops → output 1, s drops → output 0. The names say "which one stayed at 1"; both are readings of the same row.
+☐ ⚠️ In a datasheet, when S̄ drops Q = 1: the game's r does the job of the datasheet's S̄. Look at the behaviour, not the name. The bar on Q̄ means "inverse".
 ☐ Set does not mean "send", it means "make the bit 1". The output shows the bit ALL THE TIME; when to take it is the clock's job.
 ☐ Two gates speak firmly at 0: and forces 0, nand forces 1. The difference is the VALUE THEY FORCE.
 ☐ Each input goes to one gate → one leg of each gate is left free → the feedback plugs into that free leg.
+☐ The free leg gets the OTHER gate's output (cross-coupling): the output must hear both inputs. A gate listening to its own output never hears the other input.
 ☐ ⚠️ and + nand cross-coupled: two rows right, at 1-1 the circuit FLICKERS. The two ends of one wire show different values.
 ☐ 🔑 While the inputs rest (1-1), what decides is the NUMBER OF INVERSIONS. Even → confirms itself → MEMORY. Odd → contradicts itself → OSCILLATION.
 ☐ ⚠️ The number says whether there is a memory; which value can be written is decided by THE GATE TYPE: and+and is even but cannot write 1.

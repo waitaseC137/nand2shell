@@ -155,6 +155,17 @@ olması için bir girişin **0'a düşmesi** gerekiyor.
 > çizgi görürsen (`S̄`, `R̄`) ya da adın sonunda `_n` / `#` görürsen (`RESET#`),
 > anlamı bu: "bu sinyal 0 olduğunda iş yapar."
 
+> ⚠️ **Bir veri sayfasına bakarken dikkat: isimler oyunla ters eşleşiyor.** Veri
+> sayfalarındaki `nand` latch'te `S̄` düşünce `Q = 1` olur, yani "set". Oyunda
+> çıkışı 1 yapan ise **`r`'nin** düşmesi. Oyundaki `r`, veri sayfasındaki `S̄`'nın
+> işini yapıyor, `s` de `R̄`'nin. Sebep adlandırmada: oyun isimleri yukarıdaki
+> tablonun ilk okumasıyla koymuş ("hangisi 1'de kaldı"), veri sayfası ikincisiyle
+> ("hangisi düştü").
+>
+> Bu tuzağa ders yazıldıktan sonra da düşüldü: SR Latch'in sözleşmesi bir kez
+> "s düşerse 1, r düşerse 0" diye ters söylendi. İsme güvenme, düşünce ne
+> yaptığına bak.
+
 ---
 
 ## Set Göndermek Değildir
@@ -248,6 +259,20 @@ r  →  "1 yap" komutu
 
 Her girişin tek bir kapıya gitmesi yeterli. O zaman her kapının bir ayağı boşa
 çıkıyor, ve boş ayaklar geri dönen telleri bekliyor.
+
+Peki boş ayağa **hangi** tel gelmeli, kapının kendi çıkışı mı, öbür kapınınki mi?
+Bunu da tablodan türetebilirsin:
+
+- `Output` tek bir kapıdan çıkıyor, ama **iki** girişi de duyması gerekiyor: `s`
+  düşünce 0, `r` düşünce 1.
+- `s`'nin kapısı `r`'yi doğrudan görmüyor. `r`'den haberi, ancak `r`'nin kapısının
+  çıkışı kendi boş ayağına gelirse olur. Öbür taraf için de aynısı geçerli.
+- Kapı kendi çıkışını dinlerse öbür girişten hiç haber alamaz. İki kapı birbirinden
+  kopuk iki ayrı döngü olur. Simülasyonda `and`'in çıkışı `r`'yi hiç duymadı,
+  `nand` ise kendi kendini ters çevirip titredi.
+
+Yani her kapı öbürünü dinlemeli: **çapraz bağlantı.** Bu bir ezber değil, "çıkış
+iki girişi de duysun" ihtiyacının sonucu.
 
 ---
 
@@ -409,6 +434,11 @@ yap, hangi kapı `1` veriyor?
 Sebebi de bir önceki bölümde: `nand` değeri ters geçiriyor. `s`'nin kapısı artık
 saklanan bitin **tersini** tutuyor. İki kapı (`0 0` dışında) hep birbirinin zıddını
 taşıyor, ve gerçek latch'ler bu yüzden iki çıkış verir: `Q` ve `Q̄`.
+
+Buradaki üst çizgi, [yukarıdaki](#komut-sıfırdır) `S̄`'daki çizgiyle aynı anlamda
+değil. `S̄`'daki çizgi "0 olduğunda iş yapar" (aktif düşük) diyor, `Q̄`'daki ise
+"`Q`'nun tersi". Veri sayfaları iki anlamı da aynı işaretle yazar, hangisi olduğunu
+bağlamdan anlarsın.
 
 ### Hafızayı nasıl test edersin
 
@@ -584,9 +614,11 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 ☐ Register ve önbellek bu fikirle kurulur. RAM (DRAM) biti sığaçta yük olarak tutar ve tazelenir; flash elektriksiz de tutar.
 ☐ Bu devrede komut 0'dır: devre 1-1'de dinlenir, bir giriş 0'a DÜŞÜNCE iş yapar (aktif düşük).
 ☐ r düşerse çıkış 1, s düşerse çıkış 0. İsimler "hangisi 1'de kaldı" der; ikisi aynı satırın iki okuması.
+☐ ⚠️ Veri sayfasında S̄ düşünce Q = 1: oyundaki r, veri sayfasındaki S̄'nın işini yapar. İsme değil davranışa bak. Q̄'daki çizgi ise "tersi" demek.
 ☐ Set "gönder" değil, "biti 1 yap" demektir. Çıkış biti SÜREKLİ gösterir; ne zaman alınacağı saatin işi.
 ☐ 0 gelince kesin konuşan iki kapı var: and zorla 0, nand zorla 1 verir. Farkları DAYATTIKLARI DEĞER.
 ☐ Her giriş tek kapıya gider → her kapının bir ayağı boşa çıkar → geri besleme o boş ayağa takılır.
+☐ Boş ayağa ÖBÜR kapının çıkışı gelir (çapraz): çıkış iki girişi de duymalı. Kendi çıkışını dinleyen kapı öbür girişi hiç duymaz.
 ☐ ⚠️ and + nand çapraz: iki satır doğru, 1-1'de devre TİTRER. Aynı telin iki ucu farklı değer gösterir.
 ☐ 🔑 Girişler dinlenirken (1-1) belirleyen şey TERS ÇEVİRME SAYISI. Çift → kendini onaylar → HAFIZA. Tek → kendini yalanlar → SALINIM.
 ☐ ⚠️ Sayı hafızanın olup olmayacağını söyler, hangi değerin yazılacağını KAPININ TÜRÜ söyler: and+and çift ama 1 yazamaz.
