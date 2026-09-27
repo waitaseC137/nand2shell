@@ -101,7 +101,7 @@ Raporu olduğu gibi uygulamadık. Her iddia şu yollardan biriyle sınandı:
 | Doğrulandı, hataydı | 18 | 15'te "Never ile Always testi tutarsa aradaki altı satır da tutar" deniyordu. Simülasyonda iki farklı yanlış devre bu iki testi de geçti ve yirmi dört satırın sekizinde yanlış cevap verdi. |
 | Oyunda deneyerek karara bağlandı | 6 | 13'te "1 bitlik tel 16 bitlik girişe doğrudan bağlanmaz, bundler şart" deniyordu. Denedim: oyun bağlantıya izin veriyor ve kalan 15 biti sıfırla dolduruyor. |
 | Raporun kendisi yanılmıştı | 2 | Rapor 13'teki tablo sırasının yanlış olduğunu söylüyordu. Oyundaki tablo da aynı sıradaymış. |
-| Öneri, uygulandı | 25 / 25 | Sonuncusu x86'da CF'nin "borç" demesiydi. Oyunda denerken ben de tam o tuzağa düştüm, 15'teki kutu şimdi o soruyla açılıyor. |
+| Öneri, uygulandı | 25 / 25 | Sonuncusu x86'da CF'nin "borç" demesiydi. Oyunda denerken ben de tam o tuzağa düştüm. Kutu yazıldı, sonra x86'nın kendi sırası gelene kadar dersten çıkarıldı. |
 | Bilinçli olarak reddedildi | 5 | İkisi serinin kapsam kuralıyla çelişiyordu, üçü bilerek seçilmiş bir ifade ya da benzetmeydi. |
 
 #### Sonuç: 16–17
@@ -122,7 +122,9 @@ Soğuk okur da her zaman haklı çıkmadı. İki itirazı oyunda denenince çür
 
 Buradan çıkan kural şu: **hakem ne ben, ne Claude, ne de ikinci yapay zekâ. Hakem oyun ve simülasyon.** Artık derslerde bir "şart" ya da "yeter" cümlesi ya denenmiş oluyor ya da yumuşatılıyor.
 
-İkinci turda aynı desen bir kez daha çıktı: "fiziksel olarak imkânsız", "`inv` gerekiyor", "bilgisayarındaki bütün bellek". Bir de yenisi: dersler kapıları gecikmesiz varsayıp "fiziksel" diye konuşmuştu. Gecikme hesaba katılınca bir anlık iğneler, zaman kuralları ve yarışlar ortaya çıktı. Bunlar bir sonraki seviyenin, Data Flip-Flop'un, var olma sebepleri.
+İkinci turda aynı desen bir kez daha çıktı: "fiziksel olarak imkânsız", "`inv` gerekiyor", "bilgisayarındaki bütün bellek". Bir de yenisi: dersler kapıları gecikmesiz varsayıp "fiziksel" diye konuşmuştu. Gecikme hesaba katılınca bir anlık iğneler ve yarışlar ortaya çıktı.
+
+Temizlik sırasında bir kural daha netleşti: sohbette konuşulan ama sırası gelmemiş bir konu repoya girmiyor, o anki işe ne kadar uysa da. Sırası gelince zaten anlatılacak. Repo işlenen konu üzerinde şekilleniyor ve daha güzel oluyor.
 
 Yeni soru da işe yaradı. "SR Latch neden kullanılıyor?" sorusunun cevabı artık "bir önceki seviyede kurduk" değil. `select`'le kurulan latch'in neden biti kaybettiğini görünce asıl sebep ortaya çıktı: SR Latch'te döngüyü tutan kapılar, kapıyı açıp kapayan telden bağımsız. Bu deney bir CWE sayfası da doğurdu: [CWE-1298](konu_anlatimlari/cwe/cwe_1298.md) planlanandan erken yazıldı.
 
