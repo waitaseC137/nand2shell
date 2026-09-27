@@ -337,10 +337,23 @@ başladığı yere **aynı** değerle varıyor:
 İki değerde de rahat duruyor. Hangisinde olduğuna, en son hangi girişin düştüğü
 karar veriyor. **Hafıza bu.**
 
-> 🔑 **Geri beslemede her şeyi belirleyen şey döngüdeki ters çevirme sayısı.**
+> 🔑 **Girişler dinlenirken (`1 1`) döngünün kaderini ters çevirme sayısı belirler.**
 >
 > **Çift** sayıda → döngü kendini onaylar → iki kararlı durum → **hafıza**
 > **Tek** sayıda → döngü kendini yalanlar → hiç kararlı durum yok → **salınım**
+
+Kutudaki koşul önemli. `and`'li devre de `1 0` ve `0 1` satırlarında kararlıydı
+(yukarıdaki test), titreme yalnızca `1 1`'de çıktı. Bir giriş 0'a düşünce o kapı
+öbür ayağını dinlemiyor, döngü kırılıyor, sayılacak bir tur kalmıyor. Sayma
+kuralı ancak iki kapı da dinlerken, yani dinlenme satırında işliyor.
+
+Çift sayı da tek başına yetmiyor. İki `and`'i çapraz bağlarsan döngüde hiç ters
+çevirme olmaz, sıfır da çift sayıdır: döngü hafıza tutar. Ama `and` 0 gelince
+yalnızca **0** dayatabiliyor. Hiçbir giriş bu devreye 1 yazdıramıyor, `s=1 r=0`'da
+bile çıkış 0'da kalıyor. Sayı hafızanın olup olmayacağını söylüyor. Hangi
+değerlerin yazılabileceğini ise
+[yukarıda gördüğün](#sıfır-gelince-kesin-konuşan-kapı) şey, kapının 0 gelince
+dayattığı değer belirliyor.
 
 Tek sayılı döngü de işe yaramaz bir şey değil. Gerçek çiplerde bilerek kurulur,
 çünkü durmadan yanıp sönen bir sinyal üretir. Adı **halka osilatör** (*ring
@@ -367,8 +380,8 @@ kendisinde değil, **döngünün bütününde** çıktı. Bu tür bir sorunu kap
 tek bakarak bulamazsın, döngüyü dolaşman gerekir.
 
 > 🔑 Doğruyu bulmak için bazen hatayı düşünmek yetmez, **yaşamak** gerekir.
-> Kağıt üstünde `and` hiçbir kuralı çiğnemiyordu. Hatayı ancak devre titreyince
-> görmek mümkün oldu.
+> Kapılara tek tek bakınca `and` hiçbir kuralı çiğnemiyordu. Hatayı görmek için
+> turu dolaşmak gerekiyordu, ve turu dolaştıran şey titremenin kendisi oldu.
 
 ---
 
@@ -389,8 +402,8 @@ Parça listesi: **2 × `nand`**. Başka bir şey yok.
 yap, hangi kapı `1` veriyor?
 
 Sebebi de bir önceki bölümde: `nand` değeri ters geçiriyor. `s`'nin kapısı artık
-saklanan bitin **tersini** tutuyor. İki kapı her zaman birbirinin zıddını taşıyor,
-ve gerçek latch'ler bu yüzden iki çıkış verir: `Q` ve `Q̄`.
+saklanan bitin **tersini** tutuyor. İki kapı (`0 0` dışında) hep birbirinin zıddını
+taşıyor, ve gerçek latch'ler bu yüzden iki çıkış verir: `Q` ve `Q̄`.
 
 ### Hafızayı nasıl test edersin
 
@@ -414,7 +427,7 @@ nand1:  a ← s              b ← nand2 çıkışı
 nand2:  a ← nand1 çıkışı   b ← r              →  Output
 ```
 
-`Output` `r`'nin kapısında. `nand1` ise her zaman bunun tersini tutuyor.
+`Output` `r`'nin kapısında. `nand1` ise (`0 0` dışında) bunun tersini tutuyor.
 
 </details>
 
@@ -426,8 +439,8 @@ Test tablosundaki adım 2 ile adım 4'ü bir kez daha düşün. Bu, bundan sonra
 kurduğun her şeyi etkileyecek bir değişim.
 
 On sekiz seviye boyunca yanlış bir devre **yanlış bir değer** verdi, ve hep aynı
-yanlış değeri verdi. Girişi tekrar verdiğinde hatayı tekrar görürdün. Hata
-**deterministikti.**
+yanlış değeri verdi. Girişi tekrar verdiğinde hatayı tekrar görürdün. Hata **yalnızca girişe**
+bağlıydı.
 
 Artık devrenin bir geçmişi var. Aynı giriş, aynı devre, **iki farklı sonuç**
 verebiliyor. Hangisinin çıkacağı, oraya hangi sırayla gelindiğine bağlı.
@@ -436,10 +449,9 @@ verebiliyor. Hangisinin çıkacağı, oraya hangi sırayla gelindiğine bağlı.
 > **sıraya bağlı hatalar.** Girişlere tek tek bakan bir test bunları bulamaz.
 > Bulmak için sırayı sınaman gerekir.
 
-Yazılımda bunun adı **yarış koşulu**: [CWE-362](../cwe/cwe_362.md). Leviathan'da
-gördüğün TOCTOU ([CWE-367](../cwe/cwe_367.md)), yani "kontrol ettiğin dosya sen
-açana kadar değişti" durumu, bu ailenin yazılımdaki üyesi. Bu seviyedeki devre
-de onun donanımdaki atası.
+Buradaki sıra testi yapanın elinde: aynı sırayı her verdiğinde aynı sonucu
+alırsın. Sıranın **kimsenin elinde olmadığı**, iki sinyalin kendi aralarında
+yarıştığı durum ise bir sonraki bölümde çıkıyor. Yarış koşulu orada.
 
 ---
 
@@ -461,13 +473,35 @@ Asıl sorun bu satırdan **çıkarken** başlıyor. İki giriş aynı anda `0`'d
 dönerse, iki kapı da aynı anda `nand(1, 1)` hesaplar ve aynı anda `0`'a düşer.
 Sonra ikisi de aynı anda `1`'e döner. Döngü titremeye başlar.
 
-Gerçek bir çipte iki sinyal hiçbir zaman tam aynı anda gelmez. Hangisi bir
-nanosaniye önce gelirse devre onun tarafına düşer, ve bunu **önceden bilemezsin.**
-Sonucu, iki telin yarışı belirler.
+Bu, "çift sayı → hafıza" kuralıyla çelişmiyor. Kural döngünün **nerede
+durabileceğini** söylüyor, oraya **nasıl varılacağını** söylemiyor. İki kararlı
+durum hâlâ var, ama tam simetrik bir çıkışta devre ikisinden birini seçemiyor.
+
+Gerçek bir çipte iki sinyal hiçbir zaman tam aynı anda gelmez. Hangisinin önce
+kalktığı sonucu belirler, ve kazanan **son kalkan girişin komutu** olur:
+
+```
+önce s kalkar  →  r hâlâ 0, "1 yap" komutu sürüyor   →  çıkış 1
+önce r kalkar  →  s hâlâ 0, "0 yap" komutu sürüyor   →  çıkış 0
+```
+
+Hangisinin önce kalkacağını **önceden bilemezsin.** Sonucu iki telin yarışı
+belirler.
+
+Bir incelik daha var. Fark çok küçükse devre bir süre ikisinin arasında,
+[01.5](./01.5_yasak_bolge.md)'teki yasak bölgede asılı kalabilir: ne 0 ne 1.
+Sonunda bir tarafa düşer, ama ne zaman düşeceği belli değildir. Buna
+**metastabilite** deniyor. Saat konusuna geldiğimizde tekrar karşına çıkacak.
 
 NandGame'de bunu kendin görebilirsin. `0 0`'dan `1 1`'e geçmek için iki anahtarı
-**tek tek** çevirmen gerekiyor. Önce `s`'yi çevirirsen bir şey olur, önce `r`'yi
-çevirirsen başka bir şey. Sonucu, anahtarlara basma sıran belirliyor.
+**tek tek** çevirmen gerekiyor. Oyunda denendi:
+
+| sıra | çıkış |
+|---|---|
+| önce `s`, sonra `r` | `1` |
+| önce `r`, sonra `s` | `0` |
+
+Sonucu, anahtarlara basma sıran belirliyor.
 
 > 🔑 Belge bu satır için "kullanılmıyor" diyor, devre ise yine bir şey yapıyor.
 > Bu, [15](./15_condition.md)'teki fikrin karanlık yüzü: **bir devrenin
@@ -476,10 +510,19 @@ NandGame'de bunu kendin görebilirsin. `0 0`'dan `1 1`'e geçmek için iki anaht
 >
 > 👾 Bu satırın zayıflık kataloğundaki adı
 > [CWE-1245](../cwe/cwe_1245.md) — *Improper Finite State Machines (FSMs) in
-> Hardware Logic*. Kurduğun latch, var olabilecek en küçük **durum makinesi**, ve
-> `0 0` satırı onun tanımlanmamış geçişi. MITRE'nin tarifi bu satırı birebir
-> anlatıyor: *"undefined states (left as don't cares) … drive the system into an
-> unstable state."* Tasarımcının umursamadığı satırı saldırgan umursar.
+> Hardware Logic*. Kurduğun latch iki durumlu bir **durum makinesi**: girişe ve o
+> anki durumuna bakıp bir durumdan ötekine **geçen** bir devre. `0 0` satırı onun
+> tanımlanmamış geçişi. MITRE'nin tarifi bu satıra uyuyor: *"undefined states
+> (left as don't cares) … drive the system into an unstable state."* (*Don't
+> care*, "umurumda değil" demek.) Bir farkla: MITRE'nin makinesi o durumdan ancak
+> reset ile çıkıyor, latch ise bir sonraki geçerli komutla kurtuluyor.
+> Tasarımcının umursamadığı satırı saldırgan umursar.
+>
+> Yazılımda sırayı kimsenin seçmediği bu duruma **yarış koşulu** deniyor:
+> [CWE-362](../cwe/cwe_362.md). Leviathan'da gördüğün TOCTOU
+> ([CWE-367](../cwe/cwe_367.md)), yani "kontrol ettiğin dosya sen açana kadar
+> değişti" durumu, bu ailenin yazılımdaki üyesi. `0 0`'dan çıkıştaki yarış da onun
+> donanımdaki atası.
 >
 > Donanımda sinyallerin yarışmasından doğan zayıflığın adı **CWE-1298** —
 > *Hardware Logic Contains Race Conditions*. [CWE-362](../cwe/cwe_362.md)
@@ -539,18 +582,21 @@ kötü satır da böylece hiç oluşamaz hâle geliyor.
 ☐ 0 gelince kesin konuşan iki kapı var: and zorla 0, nand zorla 1 verir. Farkları DAYATTIKLARI DEĞER.
 ☐ Her giriş tek kapıya gider → her kapının bir ayağı boşa çıkar → geri besleme o boş ayağa takılır.
 ☐ ⚠️ and + nand çapraz: iki satır doğru, 1-1'de devre TİTRER. Aynı telin iki ucu farklı değer gösterir.
-☐ 🔑 Belirleyen şey döngüdeki TERS ÇEVİRME SAYISI. Çift → kendini onaylar → HAFIZA. Tek → kendini yalanlar → SALINIM.
+☐ 🔑 Girişler dinlenirken (1-1) belirleyen şey TERS ÇEVİRME SAYISI. Çift → kendini onaylar → HAFIZA. Tek → kendini yalanlar → SALINIM.
+☐ ⚠️ Sayı hafızanın olup olmayacağını söyler, hangi değerin yazılacağını KAPININ TÜRÜ söyler: and+and çift ama 1 yazamaz.
 ☐ Bir ayağı 1 olan nand bir inv gibi davranır. İki nand'lı döngü = inv → inv = (−)×(−) = (+).
 ☐ Tek sayılı döngü de işe yarar: halka osilatör, durmadan yanıp sönen sinyal. Saat konusunda geri gelecek.
 ☐ Doğru devre NEYİN çalıştığını, yanlış devre NEDEN çalıştığını gösterir.
 ☐ and hiçbir kuralı çiğnemiyordu; sorun kapıda değil DÖNGÜNÜN BÜTÜNÜNDEYDİ. Döngü hataları tek tek kapıya bakarak bulunmaz.
-☐ Çözüm: 2 nand, optimal. Output r'nin kapısında; s'nin kapısı her zaman tersini tutar (Q ve Q̄).
+☐ Çözüm: 2 nand, optimal. Output r'nin kapısında; s'nin kapısı tersini tutar (Q ve Q̄), 0-0 hariç.
 ☐ Hafıza testi bir SIRADIR: set → 1-1 → reset → 1-1. Aynı giriş (1-1), farklı çıkış. Kanıt bu.
 ☐ 🔑 Zaman devreye girdi: aynı girdi, aynı devre, iki farklı sonuç. Yeni hata sınıfı: SIRAYA BAĞLI hatalar.
-☐ 👾 Yazılımda yarış koşulu CWE-362, TOCTOU CWE-367. Bu devre onların donanımdaki atası.
+☐ Testteki sırayı sen seçersin, sonuç hep aynı: bu yarış DEĞİL. Yarış, sırayı kimsenin seçmediği yerde: 0-0'dan çıkış.
 ☐ "Kullanılmıyor" satırı (0-0) yine bir şey yapar: iki çıkış da 1, kural bozuk.
-☐ 0-0'dan 1-1'e çıkarken sonucu iki sinyalin YARIŞI belirler. NandGame'de anahtarlara basma sıran belirler.
-☐ 👾 Latch en küçük DURUM MAKİNESİ; 0-0 onun tanımsız geçişi: CWE-1245. Tasarımcının umursamadığı satırı saldırgan umursar.
+☐ 0-0'dan 1-1'e çıkarken sonucu iki sinyalin YARIŞI belirler: SON kalkanın komutu kazanır (önce s → 1, önce r → 0; oyunda denendi).
+☐ Fark çok küçükse METASTABİLİTE: devre yasak bölgede asılı kalır, ne zaman düşeceği belli değildir.
+☐ 👾 Yazılımda yarış koşulu CWE-362, TOCTOU CWE-367. 0-0'dan çıkıştaki yarış onların donanımdaki atası.
+☐ 👾 Latch iki durumlu bir DURUM MAKİNESİ; 0-0 onun tanımsız geçişi: CWE-1245 (MITRE'ninki reset ister, latch sonraki komutla kurtulur). Tasarımcının umursamadığı satırı saldırgan umursar.
 ☐ 👾 Donanımda sinyal yarışı: CWE-1298. Belge "kullanılmıyor" der, devre yine bir şey yapar.
 ☐ Açılışta latch tanımsız: iki kararlı durum eşit, hangisine düşeceğini HİÇBİR ŞEY seçmez.
 ☐ 👾 O bit bir güvenlik kilidiyse bazı açılışlarda kapı açık başlar: CWE-1271. Güvenlik bitini reset sürerken bilinen değere zorla.

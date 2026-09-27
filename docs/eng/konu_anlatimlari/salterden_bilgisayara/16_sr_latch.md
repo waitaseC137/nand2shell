@@ -348,11 +348,25 @@ half, and arrives where it started with the **same** value:
 It rests comfortably at both values. Which one it is at is decided by the input
 that dropped last. **That is memory.**
 
-> 🔑 **In feedback, what decides everything is the number of inversions in the
-> loop.**
+> 🔑 **While the inputs are resting (`1 1`), the number of inversions decides
+> the loop's fate.**
 >
 > **Even** → the loop confirms itself → two stable states → **memory**
 > **Odd** → the loop contradicts itself → no stable state → **oscillation**
+
+The condition in the box matters. The circuit with `and` was also stable in the
+`1 0` and `0 1` rows (the test above); the flicker only appeared at `1 1`. When
+an input drops to 0, that gate stops listening to its other leg, the loop is
+broken, and there is no round left to count. The counting rule only works while
+both gates are listening, that is, in the resting row.
+
+An even number is not enough on its own either. Cross-couple two `and`s and the
+loop has no inversion at all, and zero is an even number: the loop holds a
+memory. But when a 0 arrives, `and` can only force **0**. No input can write a 1
+into this circuit; even at `s=1 r=0` the output stays at 0. The number tells you
+whether there is a memory. Which values can be written is decided by what you
+[saw above](#the-gate-that-speaks-firmly-at-zero): the value the gate forces
+when a 0 arrives.
 
 An odd loop is not useless either. Real chips build it on purpose, because it
 produces a signal that blinks on and off without stopping. It is called a **ring
@@ -382,8 +396,9 @@ a whole**. You cannot find this kind of problem by looking at the gates one by
 one; you have to walk the loop.
 
 > 🔑 Sometimes thinking about the mistake is not enough to find the right answer;
-> you have to **live through** it. On paper `and` broke no rule. The mistake only
-> became visible once the circuit flickered.
+> you have to **live through** it. Looking at the gates one by one, `and` broke no
+> rule. Seeing the mistake took walking the round, and what made us walk it was
+> the flicker itself.
 
 ---
 
@@ -404,9 +419,9 @@ with two `nand`s this **changes.** Do not memorise which gate to wire it to; fin
 it by testing: set `s=1 r=0`, which gate gives `1`?
 
 The reason is in the previous section: `nand` passes the value inverted. The
-gate of `s` now holds the **inverse** of the stored bit. The two gates always
-carry opposite values, and that is why real latches have two outputs: `Q` and
-`Q̄`.
+gate of `s` now holds the **inverse** of the stored bit. The two gates (except
+at `0 0`) carry opposite values, and that is why real latches have two outputs:
+`Q` and `Q̄`.
 
 ### How to test the memory
 
@@ -430,7 +445,7 @@ nand1:  a ← s               b ← nand2 output
 nand2:  a ← nand1 output    b ← r              →  Output
 ```
 
-The `Output` is on the gate of `r`. `nand1` always holds its inverse.
+The `Output` is on the gate of `r`. `nand1` holds its inverse (except at `0 0`).
 
 </details>
 
@@ -443,7 +458,7 @@ affects everything you build from here on.
 
 For eighteen levels a wrong circuit gave **a wrong value**, and always the same
 wrong value. Feed the input again and you would see the mistake again. The
-mistake was **deterministic.**
+mistake depended **on the input alone.**
 
 Now the circuit has a past. The same input and the same circuit can give **two
 different results**. Which one comes out depends on the order in which you got
@@ -453,10 +468,10 @@ there.
 > **order-dependent bugs.** A test that looks at inputs one by one cannot find
 > them. To find them you have to test the order.
 
-In software this is called a **race condition**:
-[CWE-362](../cwe/cwe_362.md). The TOCTOU you met in Leviathan ([CWE-367](../cwe/cwe_367.md)), the case of
-"the file you checked changed before you opened it", is the software member of
-this family. The circuit in this level is its hardware ancestor.
+Here the order is in the tester's hands: give the same order every time and you
+get the same result. The case where the order is **in nobody's hands**, where two
+signals race each other, comes up in the next section. That is where the race
+condition is.
 
 ---
 
@@ -479,14 +494,37 @@ The real trouble starts when **leaving** this row. If both inputs go from `0` to
 drop to `0` at the same moment. Then both go back to `1` at the same moment. The
 loop starts to flicker.
 
-On a real chip two signals never arrive at exactly the same moment. Whichever
-arrives a nanosecond earlier, the circuit falls to its side, and you **cannot
-know in advance** which. The race between the two wires decides the result.
+This does not contradict the "even → memory" rule. The rule says **where** the
+loop can rest, not **how it gets there**. The two stable states still exist, but
+on a perfectly symmetric exit the circuit cannot pick one of them.
+
+On a real chip two signals never arrive at exactly the same moment. Which one
+rises first decides the result, and the winner is **the command of the input
+that rises last**:
+
+```
+s rises first  →  r is still 0, the "make it 1" command holds   →  output 1
+r rises first  →  s is still 0, the "make it 0" command holds   →  output 0
+```
+
+You **cannot know in advance** which one will rise first. The race between the
+two wires decides the result.
+
+One more subtlety. If the difference is very small, the circuit can hang between
+the two for a while, in the forbidden zone from
+[01.5](./01.5_yasak_bolge.md): neither 0 nor 1. It falls to one side in the end,
+but when it will fall is not known. This is called **metastability**. You will
+meet it again when we get to the clock.
 
 You can see this yourself in NandGame. To get from `0 0` to `1 1` you have to
-flip the two switches **one at a time**. Flip `s` first and one thing happens,
-flip `r` first and something else happens. The order in which you press the
-switches decides the result.
+flip the two switches **one at a time**. It was tried in the game:
+
+| order | output |
+|---|---|
+| `s` first, then `r` | `1` |
+| `r` first, then `s` | `0` |
+
+The order in which you press the switches decides the result.
 
 > 🔑 The documentation says "not used" for this row, yet the circuit still does
 > something. This is the dark side of the idea from [15](./15_condition.md):
@@ -496,11 +534,19 @@ switches decides the result.
 > 👾 The weakness catalogue's name for this row is
 > [CWE-1245](../cwe/cwe_1245.md) —
 > *Improper Finite State Machines (FSMs) in Hardware Logic*. The
-> latch you built is the smallest possible **state machine**, and the `0 0` row
-> is its undefined transition. MITRE's description describes this row word for
-> word: *"undefined states (left as don't cares) … drive the system into an
-> unstable state."* The row the designer does not care about is the row the
-> attacker cares about.
+> latch you built is a two-state **state machine**: a circuit that looks at its
+> input and its current state and **moves** from one state to another. The `0 0`
+> row is its undefined transition. MITRE's description fits this row:
+> *"undefined states (left as don't cares) … drive the system into an unstable
+> state."* With one difference: MITRE's machine only gets out of that state with
+> a reset, while the latch recovers with the next valid command. The row the
+> designer does not care about is the row the attacker cares about.
+>
+> In software this situation, where nobody chooses the order, is called a
+> **race condition**: [CWE-362](../cwe/cwe_362.md). The TOCTOU you met in
+> Leviathan ([CWE-367](../cwe/cwe_367.md)), the case of "the file you checked
+> changed before you opened it", is the software member of this family. The race
+> when leaving `0 0` is its hardware ancestor.
 >
 > The weakness born from signals racing in hardware is called **CWE-1298** —
 > *Hardware Logic Contains Race Conditions*. On the
@@ -562,18 +608,21 @@ bad row can no longer occur at all.
 ☐ Two gates speak firmly at 0: and forces 0, nand forces 1. The difference is the VALUE THEY FORCE.
 ☐ Each input goes to one gate → one leg of each gate is left free → the feedback plugs into that free leg.
 ☐ ⚠️ and + nand cross-coupled: two rows right, at 1-1 the circuit FLICKERS. The two ends of one wire show different values.
-☐ 🔑 What decides is the NUMBER OF INVERSIONS in the loop. Even → confirms itself → MEMORY. Odd → contradicts itself → OSCILLATION.
+☐ 🔑 While the inputs rest (1-1), what decides is the NUMBER OF INVERSIONS. Even → confirms itself → MEMORY. Odd → contradicts itself → OSCILLATION.
+☐ ⚠️ The number says whether there is a memory; which value can be written is decided by THE GATE TYPE: and+and is even but cannot write 1.
 ☐ A nand with one leg at 1 behaves like an inv. The two-nand loop = inv → inv = (−)×(−) = (+).
 ☐ An odd loop is useful too: the ring oscillator, a signal that blinks without stopping. It returns with the clock.
 ☐ The right circuit shows WHAT works, the wrong circuit shows WHY it works.
 ☐ and broke no rule; the problem was not in the gate but in THE LOOP AS A WHOLE. Loop bugs are not found by looking at gates one by one.
-☐ Solution: 2 nand, optimal. The Output is on r's gate; s's gate always holds its inverse (Q and Q̄).
+☐ Solution: 2 nand, optimal. The Output is on r's gate; s's gate holds its inverse (Q and Q̄), except at 0-0.
 ☐ Testing memory is a SEQUENCE: set → 1-1 → reset → 1-1. Same input (1-1), different output. That is the proof.
 ☐ 🔑 Time has entered the circuit: same input, same circuit, two different results. New bug class: ORDER-DEPENDENT bugs.
-☐ 👾 In software, race condition CWE-362, TOCTOU CWE-367. This circuit is their hardware ancestor.
+☐ You choose the order in the test, and the result is always the same: that is NOT a race. The race is where nobody chooses the order: leaving 0-0.
 ☐ The "not used" row (0-0) still does something: both outputs are 1, the rule is broken.
-☐ Leaving 0-0 for 1-1, the RACE between two signals decides the result. In NandGame the order you press the switches decides.
-☐ 👾 The latch is the smallest STATE MACHINE; 0-0 is its undefined transition: CWE-1245. The row the designer ignores is the row the attacker cares about.
+☐ Leaving 0-0 for 1-1, the RACE between two signals decides the result: the command of the one that rises LAST wins (s first → 1, r first → 0; tried in the game).
+☐ If the difference is very small: METASTABILITY. The circuit hangs in the forbidden zone; when it will fall is not known.
+☐ 👾 In software, race condition CWE-362, TOCTOU CWE-367. The race when leaving 0-0 is their hardware ancestor.
+☐ 👾 The latch is a two-state STATE MACHINE; 0-0 is its undefined transition: CWE-1245 (MITRE's needs a reset, the latch recovers with the next command). The row the designer ignores is the row the attacker cares about.
 ☐ 👾 Signal race in hardware: CWE-1298. The documentation says "not used", the circuit still does something.
 ☐ At power-on the latch is undefined: the two stable states are equal, NOTHING chooses which one it falls into.
 ☐ 👾 If that bit is a security lock, on some boots the door starts open: CWE-1271. Force security bits to a known value while reset is active.
