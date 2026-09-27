@@ -5,51 +5,51 @@
 /* ---------- 1. hero: terminal yazma demosu ---------- */
 const SCRIPT_DESKTOP = [
   { t: 'prompt', text: '~/nand2shell $ ', cmd: 'tree -L 1' },
-  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">overthewire/</span>      <span class="td">8 wargame · level-by-level çözümler</span>' },
-  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">konu_anlatimlari/</span> <span class="td">wargame-bağımsız konu anlatımları</span>' },
+  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">konu_anlatimlari/</span> <span class="td">NandGame dersleri · CWE kataloğu</span>' },
+  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">araclar/</span>          <span class="td">derslerdeki iddiaların sınamaları</span>' },
   { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">docs/</span>             <span class="td">bu site</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: '~/nand2shell $ ', cmd: 'ssh bandit0@bandit.labs.overthewire.org -p 2220' },
-  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">bağlandı —</span> <span class="tc">bandit.labs.overthewire.org:2220</span>' },
+  { t: 'prompt', text: '~/nand2shell $ ', cmd: 'python3 araclar/14_alu/alu_sayim.py' },
+  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">farklı işlem:</span> <span class="tc">19</span> <span class="td">· belgelenmiş 11 · listelenmemiş 8</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: 'bandit0@bandit:~$ ', cmd: 'cat readme', last: true },
+  { t: 'prompt', text: '~/nand2shell $ ', cmd: 'cat 00_buradan_basla.md', last: true },
 ];
 
 /* mobil: kısa, hizaya dayanmayan satırlar (sarma/taşma olmaz) */
 const SCRIPT_MOBILE = [
-  { t: 'prompt', text: '~/ll $ ', cmd: 'tree -L 1' },
-  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">overthewire/</span>' },
+  { t: 'prompt', text: '~/n2s $ ', cmd: 'tree -L 1' },
   { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">konu_anlatimlari/</span>' },
+  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">araclar/</span>' },
   { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">docs/</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: '~/ll $ ', cmd: 'ssh bandit0@…:2220' },
-  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">bağlandı</span>' },
+  { t: 'prompt', text: '~/n2s $ ', cmd: 'python3 alu_sayim.py' },
+  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">farklı işlem: 19</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: 'bandit0@bandit:~$ ', cmd: 'cat readme', last: true },
+  { t: 'prompt', text: '~/n2s $ ', cmd: 'cat 00_buradan_basla.md', last: true },
 ];
 
 const SCRIPT_DESKTOP_EN = [
   { t: 'prompt', text: '~/nand2shell $ ', cmd: 'tree -L 1' },
-  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">overthewire/</span>      <span class="td">8 wargames · level-by-level writeups</span>' },
-  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">konu_anlatimlari/</span> <span class="td">wargame-independent topic guides</span>' },
+  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">konu_anlatimlari/</span> <span class="td">NandGame lessons · CWE catalogue</span>' },
+  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">araclar/</span>          <span class="td">tests for the claims in the lessons</span>' },
   { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">docs/</span>             <span class="td">this site</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: '~/nand2shell $ ', cmd: 'ssh bandit0@bandit.labs.overthewire.org -p 2220' },
-  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">connected —</span> <span class="tc">bandit.labs.overthewire.org:2220</span>' },
+  { t: 'prompt', text: '~/nand2shell $ ', cmd: 'python3 araclar/14_alu/alu_sayim.py' },
+  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">distinct operations:</span> <span class="tc">19</span> <span class="td">· 11 documented · 8 unlisted</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: 'bandit0@bandit:~$ ', cmd: 'cat readme', last: true },
+  { t: 'prompt', text: '~/nand2shell $ ', cmd: 'cat 00_buradan_basla.md', last: true },
 ];
 
 const SCRIPT_MOBILE_EN = [
-  { t: 'prompt', text: '~/ll $ ', cmd: 'tree -L 1' },
-  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">overthewire/</span>' },
+  { t: 'prompt', text: '~/n2s $ ', cmd: 'tree -L 1' },
   { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">konu_anlatimlari/</span>' },
+  { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">araclar/</span>' },
   { t: 'raw', html: '<span class="tm">▸</span> <span class="tw">docs/</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: '~/ll $ ', cmd: 'ssh bandit0@…:2220' },
-  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">connected</span>' },
+  { t: 'prompt', text: '~/n2s $ ', cmd: 'python3 alu_sayim.py' },
+  { t: 'raw', html: '<span class="tg">✓</span> <span class="td">distinct operations: 19</span>' },
   { t: 'blank' },
-  { t: 'prompt', text: 'bandit0@bandit:~$ ', cmd: 'cat readme', last: true },
+  { t: 'prompt', text: '~/n2s $ ', cmd: 'cat 00_buradan_basla.md', last: true },
 ];
 
 const IS_EN = document.documentElement.lang === 'en';
@@ -116,7 +116,7 @@ function wireCopy() {
       const txt = pre.innerText.replace(/^\$\s?/gm, '').trim();
       navigator.clipboard && navigator.clipboard.writeText(txt);
       const old = btn.textContent;
-      btn.textContent = '✓ kopyalandı'; btn.classList.add('ok');
+      btn.textContent = IS_EN ? '✓ copied' : '✓ kopyalandı'; btn.classList.add('ok');
       setTimeout(() => { btn.textContent = old; btn.classList.remove('ok'); }, 1600);
     });
   });

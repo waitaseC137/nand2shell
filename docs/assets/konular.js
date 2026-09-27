@@ -6,7 +6,7 @@
   const BASE = DATA.base;
   const ROOT_LABEL = DATA.rootLabel || 'konu_anlatimlari';
   const TITLE = DATA.title || 'Konu Anlatımları';
-  const INTRO = DATA.intro || 'Komutların ve kavramların wargame-bağımsız referansı. Bir kategoriden başla — ya da soldaki ağaçtan / aramadan istediğin konuya git. Hepsi site içinde.';
+  const INTRO = DATA.intro || 'NandGame ile şalterden bilgisayara giden dersler ve bu derslerde karşına çıkan zayıflıklar. Bir kategoriden başla — ya da soldaki ağaçtan / aramadan istediğin konuya git. Hepsi site içinde.';
   const UNIT = DATA.unit || 'dosya';
   const REPO_BLOB = 'https://github.com/waitaseC137/nand2shell/blob/main/';
 

@@ -1,6 +1,6 @@
 name: docs-sync-check
 
-# Kaynak içerik (konu_anlatimlari / overthewire) değiştiğinde docs/ aynasının
+# Kaynak içerik (konu_anlatimlari) değiştiğinde docs/ aynasının
 # senkron olduğunu doğrular. Senkron değilse CI HATA verir → "sync-docs.sh unutuldu".
 # Otomatik düzeltmez; sadece bekçilik eder (auto-commit yok = token/döngü derdi yok).
 
@@ -8,16 +8,12 @@ on:
   push:
     paths:
       - 'konu_anlatimlari/**'
-      - 'overthewire/**'
       - 'scripts/sync-docs.sh'
       - 'docs/konu_anlatimlari/**'
-      - 'docs/overthewire/**'
   pull_request:
     paths:
       - 'konu_anlatimlari/**'
-      - 'overthewire/**'
       - 'docs/konu_anlatimlari/**'
-      - 'docs/overthewire/**'
   workflow_dispatch:
 
 jobs:

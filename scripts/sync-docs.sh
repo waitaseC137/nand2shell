@@ -3,8 +3,8 @@
 # sync-docs.sh — docs/ içerik aynasını KAYNAKTAN yeniden üretir.
 #
 # Neden var? Repo'da içerik iki yerde tutuluyor:
-#   - Kaynak (kanonik):  konu_anlatimlari/  +  overthewire/
-#   - Yayın aynası:       docs/konu_anlatimlari/  +  docs/overthewire/
+#   - Kaynak (kanonik):  konu_anlatimlari/
+#   - Yayın aynası:       docs/konu_anlatimlari/
 # Elle iki yeri güncellemeye çalışmak sürüklenmeye (drift) yol açıyordu
 # (eski TOCTOU metni, "suncuya" yazım hatası, docs'a hiç eklenmeyen 00a...).
 # Bu script kaynağı TEK GERÇEK kabul edip docs aynasını birebir eşitler.
@@ -23,7 +23,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 # Aynalanacak içerik dizinleri (kaynak → docs)
-DIRS=(konu_anlatimlari overthewire)
+DIRS=(konu_anlatimlari)
 
 for d in "${DIRS[@]}"; do
   if [[ ! -d "$d" ]]; then
@@ -32,7 +32,6 @@ for d in "${DIRS[@]}"; do
   fi
   mkdir -p "docs/$d"
   # --delete: docs'ta olup kaynakta olmayanı sil (birebir ayna)
-  # Not: leviathan dahil TÜM wargame'ler artık per-level; özel durum yok.
   rsync -a --delete \
     --exclude='.DS_Store' \
     --exclude='.gitkeep' \
