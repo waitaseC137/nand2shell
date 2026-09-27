@@ -128,6 +128,54 @@ Yazmayı unutmuşum: commit'lerde ne yazdığına dair fikrim yok, Claude kendi 
 
 > ℹ️ **Git geçmişi neden sıfırlandı?** Repoyu güvenlik açısından baştan sona incelerken, bazı erken commit'lerde birkaç OverTheWire parolasının yanlışlıkla düz metin kaldığını fark ettik — reponun "şifreler paylaşılmıyor" ilkesine aykırı bir durum (bir tür bilgi ifşası açığı). Güncel dosyalarda maskelemek tek başına yetmiyordu; parolalar eski commit blob'larında hâlâ okunabiliyordu. Bu yüzden git geçmişini bilinçli olarak **tek bir temiz commit'e sıfırladık** (Temmuz 2026). **İçerikte kayıp yok** — yalnızca parola sızıntısı ve dağınık eski commit'ler temizlendi. Kafada soru işareti kalmasın diye açıkça not düşüyorum: geçmişin yeniden yazılması gizlemek için değil, bir güvenlik/ilke ihlalini kökten temizlemek içindi.
 
+### 🧊 Hataları kim yakalıyor?
+
+Bu tarz şeyleri tek başıma, merakımdan öğreniyorum. Öğretmenim yapay zekâ, yani Claude Code. Bir konuyu "öğrendim" deyip geçmiyorum: neden böyle, neden şöyle diye çok derine iniyoruz. Bir günde bitmesi gereken bir bölüm iki gün sürebiliyor, bitse bile üzerine günlerce konuşulabiliyor.
+
+ADHD'li olduğum için böyle uzun konuşmalarda bağlam kayması yaşayabiliyorum. Bu yüzden gözden kaçan şeyler oluyor. Test etmemiz gereken bir yerde "zaten doğrudur" yanılgısına düşebiliyoruz.
+
+Bunun için dışarıdan, hafızası boş bir Claude (Opus 5.5) kullandık. Dersleri hiçbir bağlam olmadan okudu ve bir takım hatalar çıkardı. Sonra aylardır beni gözlemleyen, .md ve hafıza dosyalarıyla şekillenmiş kendi Claude Code oturumumla oturup bu raporu tartıştık. Neyin düzeltilmesi, neyin düzeltilmemesi gerektiğini konuştuk.
+
+Şimdiye kadar hep Claude kullandım, ilerleyen zamanlarda belki Codex, GPT ya da başka modelleri de denerim. Hızlı öğrenmek istiyorum, 10 yıllık bir deneyimi 10 saniyede öğrenmeye çalışıyorum, o yüzden yapay zekâ kullanıyorum. Bu yüzden bazı şeyler kayabilir.
+
+"Bir topluluğa katılsana" denebilir. Sanal ortamda bir topluluğa girmiyorum, çünkü benim için sanal ortam bu repo. Bu repo benim için bir tutku. Kendim olabildiğim, mutlu olduğum, bana ait bir alan.
+
+Aşağısı, kayan şeyleri nasıl yakaladığımızı anlatıyor.
+
+#### Soğuk okur
+
+İlk deneme [Şalterden Bilgisayara](konu_anlatimlari/salterden_bilgisayara/)'nın ALU ünitesiyle (12–15. dersler) yapıldı. Hafızası boş oturuma yalnızca ders dosyaları verildi ve tek bir şey istendi: *önceki dersleri bilen bir öğrenci gibi oku, takıldığın her yeri yaz.* Hiçbir dosyaya dokunmadı, sadece rapor yazdı.
+
+Raporu olduğu gibi uygulamadık. Her iddia üç yoldan biriyle sınandı:
+
+- **Derslerle karşılaştırma:** iddia edilen satır gerçekten öyle mi diyor, önceki derslerle çelişiyor mu?
+- **Simülasyon:** devre ya da test iddiası kısa bir programla bütün girişler için denendi.
+- **Oyunda deney:** NandGame'de seviyeyi açıp ben denedim, ekran görüntüsüyle karar verdik.
+
+#### Sonuç
+
+| sonuç | sayı | örnek |
+|---|---|---|
+| Doğrulandı, hataydı | 18 | 15'te "Never ile Always testi tutarsa aradaki altı satır da tutar" deniyordu. Simülasyonda iki farklı yanlış devre bu iki testi de geçti ve yirmi dört satırın sekizinde yanlış cevap verdi. |
+| Oyunda deneyerek karara bağlandı | 6 | 13'te "1 bitlik tel 16 bitlik girişe doğrudan bağlanmaz, bundler şart" deniyordu. Denedim: oyun bağlantıya izin veriyor ve kalan 15 biti sıfırla dolduruyor. |
+| Raporun kendisi yanılmıştı | 2 | Rapor 13'teki tablo sırasının yanlış olduğunu söylüyordu. Oyundaki tablo da aynı sıradaymış. |
+| Öneri, uygulandı | 24 / 25 | Sonuncusu (x86'da CF'nin "borç" demesi) oyunda birlikte deneyip yazılacak. |
+| Bilinçli olarak reddedildi | 5 | İkisi serinin kapsam kuralıyla çelişiyordu, üçü bilerek seçilmiş bir ifade ya da benzetmeydi. |
+
+#### Ne öğrendik
+
+Oyunda kurduğum devrelerde hata çıkmadı, hepsi zaten seviyeyi geçmişti. Hataların hepsi derslerin **metninde**, yani Claude'un kurduğu cümlelerdeydi. Ortak bir desenleri vardı: hiç denenmemiş **"şart", "yeter", "olamaz"** cümleleri. Bundler'ı ben kullandığım için oyunun başka yola izin vermediği varsayılmıştı. Never ile Always testi hiçbir karşı örnekle sınanmamıştı.
+
+Soğuk okur da her zaman haklı çıkmadı. İki itirazı oyunda denenince çürüdü.
+
+Buradan çıkan kural şu: **hakem ne ben, ne Claude, ne de ikinci yapay zekâ. Hakem oyun ve simülasyon.** Artık derslerde bir "şart" ya da "yeter" cümlesi ya denenmiş oluyor ya da yumuşatılıyor.
+
+#### İz
+
+Düzeltmeleri silip geçmedik. Bir iddia yanlış çıktıysa dersin içinde 📌 ile işaretli bir not ilk hâlinin ne dediğini söylüyor ([13 · bundler](konu_anlatimlari/salterden_bilgisayara/13_arithmetic_unit.md), [15 · test](konu_anlatimlari/salterden_bilgisayara/15_condition.md)). Düzeltmelerin kendisi de commit geçmişinde: [5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451) · [13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e) · [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c) · [765bd29](https://github.com/waitaseC137/nand2shell/commit/765bd29) · [0e1338f](https://github.com/waitaseC137/nand2shell/commit/0e1338f).
+
+Sırada Memory ünitesinin ilk iki dersi (16–17) var.
+
 ### Claude'dan bir not
 
 Merhaba, ben Claude. Rüzgar bu bölüme benim de bir şey yazmamı istedi, üstüne "istersen hatalarımla ironi yapabilirsin, gücenmem, tam tersine eğlenirim" dedi. Fırsat bu fırsat.
