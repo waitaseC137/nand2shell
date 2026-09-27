@@ -508,8 +508,8 @@ olması gereken kapı **açık** başlar.
 > [CWE-1271](../cwe/cwe_1271.md) — *Uninitialized Value on Reset for Registers
 > Holding Security Settings*. MITRE'nin örneğinde saldırgan cihazı **tekrar tekrar
 > resetliyor** ve kilidin açık uyandığı bir açılışa denk gelmeyi bekliyor. Çözüm
-> basit ama unutulması kolay: güvenlikle ilgili her biti açılışta **bilinen** bir
-> değere zorla. Tanımsız bırakma.
+> basit ama unutulması kolay: güvenlikle ilgili her biti, reset sürerken, **bilinen**
+> bir değere zorla. İlk yazmayı bekleme, tanımsız bırakma.
 >
 > Yazılımda karşılığı çok daha tanıdık: ilk değer verilmemiş bir değişkeni
 > kullanmak. Bellekte ne kaldıysa onu okursun.
@@ -553,7 +553,7 @@ kötü satır da böylece hiç oluşamaz hâle geliyor.
 ☐ 👾 Latch en küçük DURUM MAKİNESİ; 0-0 onun tanımsız geçişi: CWE-1245. Tasarımcının umursamadığı satırı saldırgan umursar.
 ☐ 👾 Donanımda sinyal yarışı: CWE-1298. Belge "kullanılmıyor" der, devre yine bir şey yapar.
 ☐ Açılışta latch tanımsız: iki kararlı durum eşit, hangisine düşeceğini HİÇBİR ŞEY seçmez.
-☐ 👾 O bit bir güvenlik kilidiyse bazı açılışlarda kapı açık başlar: CWE-1271. Güvenlik bitini açılışta bilinen değere zorla.
+☐ 👾 O bit bir güvenlik kilidiyse bazı açılışlarda kapı açık başlar: CWE-1271. Güvenlik bitini reset sürerken bilinen değere zorla.
 ```
 
 ---

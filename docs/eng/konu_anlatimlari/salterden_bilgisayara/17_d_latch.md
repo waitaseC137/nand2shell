@@ -515,8 +515,57 @@ The previous lesson gave this its name:
 [CWE-1271](../cwe/cwe_1271.md),
 a security bit with no defined value at power-on. The D Latch does
 not solve it. The fix is still the same: force every security-related bit to a
-**known** value at power-on. Here that means setting `st=1` once at power-on and
-writing a known `d`.
+**known** value at power-on.
+
+But the key word here is "force". The first way that comes to mind is to set
+`st=1` once at power-on and write a known `d`. That is **not enough.** The first
+write does not close the window; it is the **end** of the window. From the
+moment power arrives until the first write the lock is undefined, and that gap
+is exactly the moment an attacker is looking for. MITRE's
+[insecure example code](../cwe/cwe_1271.md#mitres-example-resetting-over-and-over)
+does exactly this: "write when write permission arrives."
+
+A simulator that works at gate level (Verilog) shows this gap plainly. It writes
+the undefined value as `x`:
+
+```
+                           first write only     with a reset input
+power-on, reset active            x                     1
+reset ended, st=0                 x                     1
+d changed, st=0                   x                     1
+after the first write             1                     1
+```
+
+What closes the window is forcing the value **in hardware while reset is
+active.** In the D Latch that means giving the translator a third input: one
+that sends the "locked" command to the SR Latch while reset is active, whatever
+`st` and `d` say.
+
+<details>
+<summary>🔎 For the curious — a D Latch with a reset input</summary>
+
+Let the locked value be 1. The reset is active low: as long as `rst_n = 0`, reset
+is active (like `RESET#` in [16](./16_sr_latch.md#the-command-is-zero)). In the
+SR Latch's language the "write 1" command is `r = 0`, the "stay quiet" command is
+`s = 1`. Two touches to the inv-less solution are enough:
+
+```
+r = and( nand(st, d), rst_n )     while reset is active r = 0   →  "write 1"
+s = nand( st, r, rst_n )          while reset is active s = 1   →  "stay quiet"
+```
+
+When reset ends, `rst_n = 1`, both gates go back to what they were, and the
+circuit works as an ordinary D Latch.
+
+This circuit was simulated at gate level. Whether the power-on value was 0 or 1,
+the output is 1 while reset is active. After reset ends it does not hear `d`
+while `st=0`, and normal writes are correct.
+
+A three-legged `nand` is nothing new: it gives 0 when all its legs are 1, and
+locks to 1 as soon as one of them is 0. NandGame's box has none, but it can be
+built as `nand(and(st, r), rst_n)`.
+
+</details>
 
 ### Next up
 
@@ -547,7 +596,8 @@ writing a known `d`.
 ☐ Testing memory is a SEQUENCE: write → st=0 → change d → the output must not change.
 ☐ While st=1 the output follows d INSTANTLY: a TRANSPARENT latch. Build PC ← PC + 1 with it and the number keeps climbing.
 ☐ The need is not "while the gate is open" but "exactly now, once" → Data Flip-Flop and the clock.
-☐ 👾 Still undefined at power-on: the D Latch does not solve CWE-1271. Force security bits to a known value at power-on.
+☐ 👾 Still undefined at power-on: the D Latch does not solve CWE-1271. Force security bits to a known value IN HARDWARE WHILE RESET IS ACTIVE.
+☐ ⚠️ Waiting for the first write does not close the window: the first write is the window's END. The window is open until then.
 ```
 
 ---

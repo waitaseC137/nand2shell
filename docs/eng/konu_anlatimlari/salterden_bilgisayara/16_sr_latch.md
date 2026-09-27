@@ -531,8 +531,8 @@ some boots the door that should be closed starts **open**.
 > *Uninitialized Value on Reset for Registers Holding Security
 > Settings*. In MITRE's example the attacker **resets the device over and over**
 > and waits to land on a boot where the lock wakes up open. The fix is simple but
-> easy to forget: force every security-related bit to a **known** value at power
-> on. Do not leave it undefined.
+> easy to forget: force every security-related bit to a **known** value while
+> reset is active. Do not wait for the first write, do not leave it undefined.
 >
 > In software the counterpart is far more familiar: using a variable that was
 > never given an initial value. You read whatever was left in memory.
@@ -576,7 +576,7 @@ bad row can no longer occur at all.
 ☐ 👾 The latch is the smallest STATE MACHINE; 0-0 is its undefined transition: CWE-1245. The row the designer ignores is the row the attacker cares about.
 ☐ 👾 Signal race in hardware: CWE-1298. The documentation says "not used", the circuit still does something.
 ☐ At power-on the latch is undefined: the two stable states are equal, NOTHING chooses which one it falls into.
-☐ 👾 If that bit is a security lock, on some boots the door starts open: CWE-1271. Force security bits to a known value at power-on.
+☐ 👾 If that bit is a security lock, on some boots the door starts open: CWE-1271. Force security bits to a known value while reset is active.
 ```
 
 ---

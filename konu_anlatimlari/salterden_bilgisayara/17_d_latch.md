@@ -486,8 +486,54 @@ oluyor.
 
 Bir önceki derste bunun adı konmuştu: [CWE-1271](../cwe/cwe_1271.md), açılışta
 değeri belirlenmemiş güvenlik biti. D Latch onu çözmüyor. Çözüm hâlâ aynı:
-güvenlikle ilgili her biti açılışta **bilinen** bir değere zorla. Burada bunun
-anlamı, açılışta bir kez `st=1` yapıp bilinen bir `d` yazmak.
+güvenlikle ilgili her biti açılışta **bilinen** bir değere zorla.
+
+Ama buradaki kilit kelime "zorla". İlk akla gelen yol, açılışta bir kez `st=1`
+yapıp bilinen bir `d` yazmak. Bu **yetmiyor.** İlk yazma pencereyi kapatmıyor,
+pencerenin **sonu** oluyor. Elektrik geldiği andan ilk yazmaya kadar kilit
+tanımsız, saldırganın aradığı an da tam o aralık. MITRE'nin
+[güvensiz örnek kodu](../cwe/cwe_1271.md#mitrenin-örneği-tekrar-tekrar-reset)
+da tam olarak bunu yapıyor: "yazma izni gelince yaz."
+
+Kapı düzeyinde çalışan bir simülatör (Verilog) bu aralığı açıkça gösteriyor.
+Tanımsız değeri `x` diye yazıyor:
+
+```
+                          yalnız ilk yazma     reset girişli
+açılış, reset sürüyor            x                   1
+reset bitti, st=0                x                   1
+d değişti, st=0                  x                   1
+ilk yazmadan sonra               1                   1
+```
+
+Pencereyi kapatan şey, değerin **reset sürerken donanımla** zorlanması. D Latch'te
+bunun anlamı çevirmene üçüncü bir giriş eklemek: reset etkinken `st` ve `d` ne
+derse desin SR Latch'e "kilitli" komutunu gönderen bir giriş.
+
+<details>
+<summary>🔎 Meraklısına — reset girişli D Latch</summary>
+
+Kilitli değer 1 olsun. Reset aktif düşük: `rst_n = 0` olduğu sürece reset sürüyor
+([16](./16_sr_latch.md#komut-sıfırdır)'daki `RESET#` gibi). SR Latch'in dilinde
+"1 yaz" komutu `r = 0`, "sus" komutu `s = 1`. İnv'siz çözüme iki dokunuş yetiyor:
+
+```
+r = and( nand(st, d), rst_n )     reset sürerken r = 0   →  "1 yaz"
+s = nand( st, r, rst_n )          reset sürerken s = 1   →  "sus"
+```
+
+Reset bitince `rst_n = 1` olur, iki kapı da eski hâline döner ve devre sıradan
+bir D Latch gibi çalışır.
+
+Bu devre kapı düzeyinde simüle edildi. Açılış değeri 0 da olsa 1 de olsa reset
+sürerken çıkış 1. Reset bittikten sonra `st=0` iken `d`'yi duymuyor, normal
+yazmalar da doğru.
+
+Üç ayaklı `nand` yeni bir şey değil: ayakların hepsi 1 iken 0 verir, biri 0 olunca
+1'e kilitlenir. NandGame'in kutusunda yok ama `nand(and(st, r), rst_n)` olarak
+kurulabilir.
+
+</details>
 
 ### Sırada
 
@@ -518,7 +564,8 @@ anlamı, açılışta bir kez `st=1` yapıp bilinen bir `d` yazmak.
 ☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli.
 ☐ st=1 iken çıkış d'yi ANINDA izler: ŞEFFAF latch. PC ← PC + 1 bununla kurulursa sayı durmadan artar.
 ☐ İhtiyaç "kapı açıkken" değil "tam şu anda, bir kez" → Data Flip-Flop ve saat.
-☐ 👾 Açılışta hâlâ tanımsız: D Latch CWE-1271'i çözmez. Güvenlik bitini açılışta bilinen değere zorla.
+☐ 👾 Açılışta hâlâ tanımsız: D Latch CWE-1271'i çözmez. Güvenlik bitini RESET SÜRERKEN donanımla bilinen değere zorla.
+☐ ⚠️ İlk yazmayı beklemek pencereyi kapatmaz: ilk yazma pencerenin SONUDUR. Pencere ona kadar açık.
 ```
 
 ---
