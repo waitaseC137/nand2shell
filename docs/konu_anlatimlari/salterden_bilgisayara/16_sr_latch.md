@@ -390,6 +390,14 @@ Tek sayılı döngü de işe yaramaz bir şey değil. Gerçek çiplerde bilerek 
 çünkü durmadan yanıp sönen bir sinyal üretir. Adı **halka osilatör** (*ring
 oscillator*). Saat konusuna geldiğimizde karşına tekrar çıkacak.
 
+> 🔬 Gerçek bir çipte ince bir nokta var. Tek bir `inv`'in çıkışını kendi girişine
+> bağlarsan titremez: çıkış, [01.5](./01.5_yasak_bolge.md)'teki yasak bölgede, 0 ile
+> 1'in ortasında bir gerilimde durur. Titreme için döngüde en az **üç** evirici
+> kademe gerekir, gerçek halka osilatörler de bu yüzden 3, 5, 7… kademeyle
+> kurulur. Bu dersteki `and` + `nand` döngüsü aslında zaten öyle:
+> [02](./02_nanddan_kapilar.md#ve-and-tersin-tersi)'de `and`'i bir `nand` ile bir
+> `inv`'den kurmuştun, yani döngüde `nand`, `inv`, `nand` diye üç kademe var.
+
 ---
 
 ## Neden Kimse Yanlış Demedi

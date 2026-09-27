@@ -172,7 +172,7 @@ Raporu olduğu gibi uygulamadık. Her iddia şu yollardan biriyle sınandı:
 | Doğrulandı, hataydı | 24 | 17 "açılışta bir kez `st=1` yapıp bilinen bir `d` yaz" diyordu. Bu, MITRE'nin güvensiz örnek kodunun ta kendisiydi: ilk yazma pencereyi kapatmıyor, pencerenin sonu oluyor. |
 | Oyunda deneyerek karara bağlandı | 2 | Raporun önerisiyle `select`'le SR Latch'siz bir D Latch kurdum. Kara kutu hâli geçti, parçalarına açınca bit kayboldu ve oyun *"did not reach a stable state"* dedi. MITRE'nin donanımdaki yarış için verdiği ilk örnek de aynı devre çıktı. |
 | Raporun kendisi yanılmıştı | 2 | Rapor, D Latch'teki "başlangıç çıkışı tanımsız" notunun oyunda olmadığını düşünüyordu. Oyunun ekranında var. |
-| Öneri, uygulandı | 13 / 15 | 16'ya bir uyarı girdi: oyundaki `r`, veri sayfalarındaki `S̄`'nın işini yapıyor. Claude aynı gün bu isim tuzağına kendisi düştü. |
+| Öneri, uygulandı | 15 / 15 | 16'ya bir uyarı girdi: oyundaki `r`, veri sayfalarındaki `S̄`'nın işini yapıyor. Claude aynı gün bu isim tuzağına kendisi düştü. |
 | Bilinçli olarak reddedildi | 3 | 1245'teki 606 → 835 zinciri: resmî bir ilişki yok ama MITRE'nin kendi sayfasındaki bir örnek tam bu zinciri kuruyor. |
 
 #### Ne öğrendik

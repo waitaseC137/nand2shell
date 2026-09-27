@@ -405,6 +405,15 @@ An odd loop is not useless either. Real chips build it on purpose, because it
 produces a signal that blinks on and off without stopping. It is called a **ring
 oscillator**. You will meet it again when we get to the clock.
 
+> 🔬 On a real chip there is a subtle point. Wire a single `inv`'s output back to
+> its own input and it does not flicker: the output sits in the forbidden zone
+> from [01.5](./01.5_yasak_bolge.md), at a voltage halfway between 0 and 1. To
+> flicker, the loop needs at least **three** inverting stages, and that is why
+> real ring oscillators are built with 3, 5, 7… stages. The `and` + `nand` loop in
+> this lesson is already like that: in
+> [02](./02_nanddan_kapilar.md#and-the-inverse-of-the-inverse) you built `and` from
+> a `nand` and an `inv`, so the loop has three stages: `nand`, `inv`, `nand`.
+
 ---
 
 ## Why Nobody Said Wrong
