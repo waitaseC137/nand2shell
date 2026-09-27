@@ -146,13 +146,16 @@ Aşağısı, kayan şeyleri nasıl yakaladığımızı anlatıyor.
 
 İlk deneme [Şalterden Bilgisayara](konu_anlatimlari/salterden_bilgisayara/)'nın ALU ünitesiyle (12–15. dersler) yapıldı. Hafızası boş oturuma yalnızca ders dosyaları verildi ve tek bir şey istendi: *önceki dersleri bilen bir öğrenci gibi oku, takıldığın her yeri yaz.* Hiçbir dosyaya dokunmadı, sadece rapor yazdı.
 
-Raporu olduğu gibi uygulamadık. Her iddia üç yoldan biriyle sınandı:
+İkinci deneme Memory ünitesinin ilk iki dersiyle (16–17) ve onların CWE sayfalarıyla yapıldı. Bu sefer isteğe ilk turda öğrendiklerimiz eklendi: "şart" ve "yeter" cümlelerini bir karşı örnekle sına, oyunla ilgili iddialara "yanlış" değil "oyunda denenmeli" de, sayıları kendin topla, ve bir de şu soruyu sor: *ders bir parçayı neden kullandığını öğretiyor mu, yoksa "bir önceki seviyede kurduk" ezberine mi yaslanıyor?*
+
+Raporu olduğu gibi uygulamadık. Her iddia şu yollardan biriyle sınandı:
 
 - **Derslerle karşılaştırma:** iddia edilen satır gerçekten öyle mi diyor, önceki derslerle çelişiyor mu?
-- **Simülasyon:** devre ya da test iddiası kısa bir programla bütün girişler için denendi.
+- **Simülasyon:** devre ya da test iddiası kısa bir programla bütün girişler için denendi. İkinci turda kapı gecikmelerini de hesaba katan bir Verilog simülatörü (iverilog) eklendi. Betiklerin hepsi [araclar/](araclar/) klasöründe; hangisinin hangi dersin hangi cümlesini sınadığı orada yazıyor.
+- **Kaynakla karşılaştırma:** MITRE'den alınan her alıntı ve örnek kod, sayfasıyla kelime kelime karşılaştırıldı.
 - **Oyunda deney:** NandGame'de seviyeyi açıp ben denedim, ekran görüntüsüyle karar verdik.
 
-#### Sonuç
+#### Sonuç: 12–15
 
 | sonuç | sayı | örnek |
 |---|---|---|
@@ -162,6 +165,16 @@ Raporu olduğu gibi uygulamadık. Her iddia üç yoldan biriyle sınandı:
 | Öneri, uygulandı | 25 / 25 | Sonuncusu x86'da CF'nin "borç" demesiydi. Oyunda denerken ben de tam o tuzağa düştüm, 15'teki kutu şimdi o soruyla açılıyor. |
 | Bilinçli olarak reddedildi | 5 | İkisi serinin kapsam kuralıyla çelişiyordu, üçü bilerek seçilmiş bir ifade ya da benzetmeydi. |
 
+#### Sonuç: 16–17
+
+| sonuç | sayı | örnek |
+|---|---|---|
+| Doğrulandı, hataydı | 24 | 17 "açılışta bir kez `st=1` yapıp bilinen bir `d` yaz" diyordu. Bu, MITRE'nin güvensiz örnek kodunun ta kendisiydi: ilk yazma pencereyi kapatmıyor, pencerenin sonu oluyor. |
+| Oyunda deneyerek karara bağlandı | 2 | Raporun önerisiyle `select`'le SR Latch'siz bir D Latch kurdum. Kara kutu hâli geçti, parçalarına açınca bit kayboldu ve oyun *"did not reach a stable state"* dedi. MITRE'nin donanımdaki yarış için verdiği ilk örnek de aynı devre çıktı. |
+| Raporun kendisi yanılmıştı | 2 | Rapor, D Latch'teki "başlangıç çıkışı tanımsız" notunun oyunda olmadığını düşünüyordu. Oyunun ekranında var. |
+| Öneri, uygulandı | 13 / 15 | 16'ya bir uyarı girdi: oyundaki `r`, veri sayfalarındaki `S̄`'nın işini yapıyor. Claude aynı gün bu isim tuzağına kendisi düştü. |
+| Bilinçli olarak reddedildi | 3 | 1245'teki 606 → 835 zinciri: resmî bir ilişki yok ama MITRE'nin kendi sayfasındaki bir örnek tam bu zinciri kuruyor. |
+
 #### Ne öğrendik
 
 Oyunda kurduğum devrelerde hata çıkmadı, hepsi zaten seviyeyi geçmişti. Hataların hepsi derslerin **metninde**, yani Claude'un kurduğu cümlelerdeydi. Ortak bir desenleri vardı: hiç denenmemiş **"şart", "yeter", "olamaz"** cümleleri. Bundler'ı ben kullandığım için oyunun başka yola izin vermediği varsayılmıştı. Never ile Always testi hiçbir karşı örnekle sınanmamıştı.
@@ -170,11 +183,18 @@ Soğuk okur da her zaman haklı çıkmadı. İki itirazı oyunda denenince çür
 
 Buradan çıkan kural şu: **hakem ne ben, ne Claude, ne de ikinci yapay zekâ. Hakem oyun ve simülasyon.** Artık derslerde bir "şart" ya da "yeter" cümlesi ya denenmiş oluyor ya da yumuşatılıyor.
 
+İkinci turda aynı desen bir kez daha çıktı: "fiziksel olarak imkânsız", "`inv` gerekiyor", "bilgisayarındaki bütün bellek". Bir de yenisi: dersler kapıları gecikmesiz varsayıp "fiziksel" diye konuşmuştu. Gecikme hesaba katılınca bir anlık iğneler, zaman kuralları ve yarışlar ortaya çıktı. Bunlar bir sonraki seviyenin, Data Flip-Flop'un, var olma sebepleri.
+
+Yeni soru da işe yaradı. "SR Latch neden kullanılıyor?" sorusunun cevabı artık "bir önceki seviyede kurduk" değil. `select`'le kurulan latch'in neden biti kaybettiğini görünce asıl sebep ortaya çıktı: SR Latch'te döngüyü tutan kapılar, kapıyı açıp kapayan telden bağımsız. Bu deney bir CWE sayfası da doğurdu: [CWE-1298](konu_anlatimlari/cwe/cwe_1298.md) planlanandan erken yazıldı.
+
 #### İz
 
-Düzeltmeleri silip geçmedik. Bir iddia yanlış çıktıysa dersin içinde 📌 ile işaretli bir not ilk hâlinin ne dediğini söylüyor ([13 · bundler](konu_anlatimlari/salterden_bilgisayara/13_arithmetic_unit.md), [15 · test](konu_anlatimlari/salterden_bilgisayara/15_condition.md)). Düzeltmelerin kendisi de commit geçmişinde: [5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451) · [13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e) · [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c) · [765bd29](https://github.com/waitaseC137/nand2shell/commit/765bd29) · [0e1338f](https://github.com/waitaseC137/nand2shell/commit/0e1338f).
+Düzeltmeleri silip geçmedik. Bir iddia yanlış çıktıysa dersin içinde 📌 ile işaretli bir not ilk hâlinin ne dediğini söylüyor ([13 · bundler](konu_anlatimlari/salterden_bilgisayara/13_arithmetic_unit.md), [15 · test](konu_anlatimlari/salterden_bilgisayara/15_condition.md), [17 · test tablosu](konu_anlatimlari/salterden_bilgisayara/17_d_latch.md)). Düzeltmelerin kendisi de commit geçmişinde:
 
-Sırada Memory ünitesinin ilk iki dersi (16–17) var.
+- 12–15: [5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451) · [13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e) · [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c) · [765bd29](https://github.com/waitaseC137/nand2shell/commit/765bd29) · [0e1338f](https://github.com/waitaseC137/nand2shell/commit/0e1338f) · [7b94374](https://github.com/waitaseC137/nand2shell/commit/7b94374)
+- 16–17: [144d061](https://github.com/waitaseC137/nand2shell/commit/144d061) · [282fdbf](https://github.com/waitaseC137/nand2shell/commit/282fdbf) · [dc754b6](https://github.com/waitaseC137/nand2shell/commit/dc754b6) · [271d06f](https://github.com/waitaseC137/nand2shell/commit/271d06f) · [7552a3b](https://github.com/waitaseC137/nand2shell/commit/7552a3b) · [f726982](https://github.com/waitaseC137/nand2shell/commit/f726982) · [877b16e](https://github.com/waitaseC137/nand2shell/commit/877b16e)
+
+Sınamaların kendisi: [araclar/](araclar/). Sıradaki tur, Memory ünitesi ilerleyince.
 
 ### Claude'dan bir not
 
