@@ -19,7 +19,6 @@
 - [Chains: The Wire Between Two Bugs](#chains-the-wire-between-two-bugs)
 - [The NandGame Tree](#the-nandgame-tree)
 - [On the Way](#on-the-way)
-- [Pages Whose Lessons Were Removed](#pages-whose-lessons-were-removed)
 
 ---
 
@@ -272,17 +271,6 @@ exactly the job reverse engineering does.
 >
 > 697, 1242 and 1298 used to be on this list; they moved into the tree once their
 > lessons were written.
-
----
-
-## Pages Whose Lessons Were Removed
-
-These five pages were born in the OverTheWire lessons. Those lessons were removed
-from the repo; their full versions are kept under the `tam-hali-2026-09-27` tag. The
-pages are still here, but the links to the lessons they were born in no longer open.
-
-[78](./cwe_78.md) · [59](./cwe_59.md) · [367](./cwe_367.md) ·
-[77](./cwe_77.md) · [706](./cwe_706.md)
 
 ---
 

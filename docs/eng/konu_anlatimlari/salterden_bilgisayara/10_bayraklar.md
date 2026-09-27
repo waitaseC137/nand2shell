@@ -307,7 +307,7 @@ something outside choose "which one to do" — that is, the **ALU.** That's the 
 
 ## 🔗 Related Topics
 
-- 👾 **For the curious:** the comparator never errs, the bits you hand it can — a stale copy [CWE-367](../cwe/cwe_367.md) · sign conversion [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
+- 👾 **For the curious:** the comparator never errs, the bits you hand it can — sign conversion [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
 - [09_subtraction.md](./09_subtraction.md) — The circuit that produces the result the flags look at
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — NOR and the family of gates
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Bit numbers and token values

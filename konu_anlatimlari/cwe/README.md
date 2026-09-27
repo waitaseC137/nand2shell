@@ -19,7 +19,6 @@
 - [Zincirler: Hatalar Arasındaki Tel](#zincirler-hatalar-arasındaki-tel)
 - [NandGame Ağacı](#nandgame-ağacı)
 - [Yolda](#yolda)
-- [Kaldırılan Derslerin Sayfaları](#kaldırılan-derslerin-sayfaları)
 
 ---
 
@@ -259,17 +258,6 @@ yaptığı iş tam olarak budur.
 > olmadan çatı kurmak, haritayı müfredatın önüne geçirmek olur.
 >
 > 697, 1242 ve 1298 bu listede duruyordu; dersleri yazıldığı için ağaca taşındılar.
-
----
-
-## Kaldırılan Derslerin Sayfaları
-
-Bu beş sayfa OverTheWire derslerinden doğdu. O dersler repodan kaldırıldı; tam
-hâlleri `tam-hali-2026-09-27` etiketinde duruyor. Sayfalar yerinde, ama doğdukları
-derslere giden bağlantılar artık açılmıyor.
-
-[78](./cwe_78.md) · [59](./cwe_59.md) · [367](./cwe_367.md) ·
-[77](./cwe_77.md) · [706](./cwe_706.md)
 
 ---
 

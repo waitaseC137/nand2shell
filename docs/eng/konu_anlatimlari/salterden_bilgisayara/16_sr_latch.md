@@ -589,11 +589,9 @@ The order in which you press the switches decides the result.
 > a reset, while the latch recovers with the next valid command. The row the
 > designer does not care about is the row the attacker cares about.
 >
-> In software this situation, where nobody chooses the order, is called a
-> **race condition**: [CWE-362](../cwe/cwe_362.md). TOCTOU
-> ([CWE-367](../cwe/cwe_367.md)), where a file changes between the moment a
-> program checks it and the moment it uses it, is the software member of this
-> family. The race when leaving `0 0` is its hardware ancestor.
+> This situation, where nobody chooses the order, is called a **race
+> condition**: [CWE-362](../cwe/cwe_362.md). The race when leaving `0 0` is a
+> member of this family in hardware.
 >
 > The weakness born from signals racing in hardware is called
 > [CWE-1298](../cwe/cwe_1298.md) — *Hardware Logic Contains Race Conditions*.
@@ -671,7 +669,7 @@ bad row can no longer occur at all once the inputs have settled.
 ☐ The "not used" row (0-0) still does something: both outputs are 1, the rule is broken.
 ☐ Leaving 0-0 for 1-1, the RACE between two signals decides the result: the command of the one that rises LAST wins (s first → 1, r first → 0; tried in the game).
 ☐ If the difference is very small: METASTABILITY. The circuit hangs in the forbidden zone; when it will fall is not known.
-☐ 👾 In software, race condition CWE-362, TOCTOU CWE-367. The race when leaving 0-0 is their hardware ancestor.
+☐ 👾 The situation where nobody chooses the order: race condition, CWE-362. The race when leaving 0-0 is its member in hardware.
 ☐ 👾 The latch is a two-state STATE MACHINE; 0-0 is its undefined transition: CWE-1245 (MITRE's needs a reset, the latch recovers with the next command). The row the designer ignores is the row the attacker cares about.
 ☐ 👾 Signal race in hardware: CWE-1298. The documentation says "not used", the circuit still does something.
 ☐ At power-on the latch is undefined: the two stable states are equal, NO DESIGN DECISION chooses which one it falls into; physics does.
@@ -684,7 +682,6 @@ bad row can no longer occur at all once the inputs have settled.
 
 - 👾 **The race itself:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — two jobs reaching for the same resource without synchronisation
 - 👾 **The race in hardware:** [CWE-1298](../cwe/cwe_1298.md) — leaving `0 0` seeded it here, the selector latch grew it in 17
-- 👾 **The grandchild in software:** [CWE-367 — TOCTOU](../cwe/cwe_367.md) — the gap between the check and the use
 - 👾 **This lesson's main CWE:** [CWE-1245 — Improper state machine](../cwe/cwe_1245.md) — the row left as "not used"; why the D Latch exists
 - 👾 **Undefined wake-up:** [CWE-1271](../cwe/cwe_1271.md) — a security bit with no defined value at power-on; the repeated reset attack
 - [15_condition.md](./15_condition.md) — The difference between what a circuit can do and what is described

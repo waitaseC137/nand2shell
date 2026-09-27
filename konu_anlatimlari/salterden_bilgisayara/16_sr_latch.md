@@ -562,11 +562,9 @@ Sonucu, anahtarlara basma sıran belirliyor.
 > reset ile çıkıyor, latch ise bir sonraki geçerli komutla kurtuluyor.
 > Tasarımcının umursamadığı satırı saldırgan umursar.
 >
-> Yazılımda sırayı kimsenin seçmediği bu duruma **yarış koşulu** deniyor:
-> [CWE-362](../cwe/cwe_362.md). TOCTOU ([CWE-367](../cwe/cwe_367.md)), yani
-> programın bir dosyayı kontrol ettiği an ile kullandığı an arasında dosyanın
-> değişmesi, bu ailenin yazılımdaki üyesi. `0 0`'dan çıkıştaki yarış da onun
-> donanımdaki atası.
+> Sırayı kimsenin seçmediği bu duruma **yarış koşulu** deniyor:
+> [CWE-362](../cwe/cwe_362.md). `0 0`'dan çıkıştaki yarış, bu ailenin donanımdaki
+> üyesi.
 >
 > Donanımda sinyallerin yarışmasından doğan zayıflığın adı
 > [CWE-1298](../cwe/cwe_1298.md) — *Hardware Logic Contains Race Conditions*.
@@ -643,7 +641,7 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 ☐ "Kullanılmıyor" satırı (0-0) yine bir şey yapar: iki çıkış da 1, kural bozuk.
 ☐ 0-0'dan 1-1'e çıkarken sonucu iki sinyalin YARIŞI belirler: SON kalkanın komutu kazanır (önce s → 1, önce r → 0; oyunda denendi).
 ☐ Fark çok küçükse METASTABİLİTE: devre yasak bölgede asılı kalır, ne zaman düşeceği belli değildir.
-☐ 👾 Yazılımda yarış koşulu CWE-362, TOCTOU CWE-367. 0-0'dan çıkıştaki yarış onların donanımdaki atası.
+☐ 👾 Sırayı kimsenin seçmediği durum: yarış koşulu, CWE-362. 0-0'dan çıkıştaki yarış onun donanımdaki üyesi.
 ☐ 👾 Latch iki durumlu bir DURUM MAKİNESİ; 0-0 onun tanımsız geçişi: CWE-1245 (MITRE'ninki reset ister, latch sonraki komutla kurtulur). Tasarımcının umursamadığı satırı saldırgan umursar.
 ☐ 👾 Donanımda sinyal yarışı: CWE-1298. Belge "kullanılmıyor" der, devre yine bir şey yapar.
 ☐ Açılışta latch tanımsız: iki kararlı durum eşit, hangisine düşeceğini HİÇBİR TASARIM KARARI seçmez, fizik seçer.
@@ -656,7 +654,6 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 
 - 👾 **Yarışın kendisi:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — aynı kaynağa senkronize olmadan uzanan iki iş
 - 👾 **Donanımdaki yarış:** [CWE-1298](../cwe/cwe_1298.md) — `0 0`'dan çıkış burada tohumlandı, seçicili latch 17'de büyüttü
-- 👾 **Yazılımdaki torun:** [CWE-367 — TOCTOU](../cwe/cwe_367.md) — kontrol ile kullanım arasındaki aralık
 - 👾 **Bu dersin ana CWE'si:** [CWE-1245 — Hatalı durum makinesi](../cwe/cwe_1245.md) — "kullanılmıyor" diye bırakılan satır; D Latch'in neden var olduğu
 - 👾 **Tanımsız uyanış:** [CWE-1271](../cwe/cwe_1271.md) — açılışta değeri belirlenmemiş güvenlik biti; tekrar tekrar reset saldırısı
 - [15_condition.md](./15_condition.md) — Bir devrenin yapabildikleri ile tarif edilenler arasındaki fark
