@@ -586,10 +586,10 @@ The order in which you press the switches decides the result.
 > changed before you opened it", is the software member of this family. The race
 > when leaving `0 0` is its hardware ancestor.
 >
-> The weakness born from signals racing in hardware is called **CWE-1298** —
-> *Hardware Logic Contains Race Conditions*. On the
-> [CWE-362](../cwe/cwe_362.md) page it was waiting
-> next to the clock unit, marked "on the way". Its first seed is here.
+> The weakness born from signals racing in hardware is called
+> [CWE-1298](../cwe/cwe_1298.md) — *Hardware Logic Contains Race Conditions*.
+> Its first seed is here; its page was written together with the selector latch
+> experiment in [17](./17_d_latch.md#why-not-select).
 
 ---
 
@@ -673,7 +673,8 @@ bad row can no longer occur at all once the inputs have settled.
 
 ## 🔗 Related Topics
 
-- 👾 **The race itself:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — two jobs reaching for the same resource without synchronisation; its hardware child CWE-1298 was seeded here
+- 👾 **The race itself:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — two jobs reaching for the same resource without synchronisation
+- 👾 **The race in hardware:** [CWE-1298](../cwe/cwe_1298.md) — leaving `0 0` seeded it here, the selector latch grew it in 17
 - 👾 **The grandchild in software:** [CWE-367 — TOCTOU](../cwe/cwe_367.md) — the gap between the check and the use
 - 👾 **This lesson's main CWE:** [CWE-1245 — Improper state machine](../cwe/cwe_1245.md) — the row left as "not used"; why the D Latch exists
 - 👾 **Undefined wake-up:** [CWE-1271](../cwe/cwe_1271.md) — a security bit with no defined value at power-on; the repeated reset attack

@@ -560,9 +560,10 @@ Sonucu, anahtarlara basma sıran belirliyor.
 > değişti" durumu, bu ailenin yazılımdaki üyesi. `0 0`'dan çıkıştaki yarış da onun
 > donanımdaki atası.
 >
-> Donanımda sinyallerin yarışmasından doğan zayıflığın adı **CWE-1298** —
-> *Hardware Logic Contains Race Conditions*. [CWE-362](../cwe/cwe_362.md)
-> sayfasında saat ünitesinin yanında "yolda" diye bekliyordu. İlk tohumu burada.
+> Donanımda sinyallerin yarışmasından doğan zayıflığın adı
+> [CWE-1298](../cwe/cwe_1298.md) — *Hardware Logic Contains Race Conditions*.
+> İlk tohumu burada; sayfası, [17](./17_d_latch.md#neden-select-değil)'deki
+> seçicili latch deneyiyle birlikte yazıldı.
 
 ---
 
@@ -645,7 +646,8 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 
 ## 🔗 İlgili Konular
 
-- 👾 **Yarışın kendisi:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — aynı kaynağa senkronize olmadan uzanan iki iş; donanım çocuğu CWE-1298 burada tohumlandı
+- 👾 **Yarışın kendisi:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — aynı kaynağa senkronize olmadan uzanan iki iş
+- 👾 **Donanımdaki yarış:** [CWE-1298](../cwe/cwe_1298.md) — `0 0`'dan çıkış burada tohumlandı, seçicili latch 17'de büyüttü
 - 👾 **Yazılımdaki torun:** [CWE-367 — TOCTOU](../cwe/cwe_367.md) — kontrol ile kullanım arasındaki aralık
 - 👾 **Bu dersin ana CWE'si:** [CWE-1245 — Hatalı durum makinesi](../cwe/cwe_1245.md) — "kullanılmıyor" diye bırakılan satır; D Latch'in neden var olduğu
 - 👾 **Tanımsız uyanış:** [CWE-1271](../cwe/cwe_1271.md) — açılışta değeri belirlenmemiş güvenlik biti; tekrar tekrar reset saldırısı

@@ -220,8 +220,9 @@ window.KONULAR = {
         { f: "cwe/cwe_1242.md", n: "1242", t: "Chicken Bits", h: "documented space ⊂ real space · the back-down bit" },
         { f: "cwe/cwe_1254.md", n: "1254", t: "Comparison Granularity", h: "an early exit leaks the time · constant-time comparison" },
         { f: "cwe/cwe_119.md", n: "119", t: "Buffer Bounds (class)", h: "above 787 · four corners: read/write × before/after" },
-        { f: "cwe/cwe_1245.md", n: "1245", t: "Improper State Machine", h: "the smallest state machine · the don't-care row · default" },
-        { f: "cwe/cwe_1271.md", n: "1271", t: "Undefined Lock on Reset", h: "waking up without anyone choosing · reset over and over" }
+        { f: "cwe/cwe_1245.md", n: "1245", t: "Improper State Machine", h: "a two-state state machine · the don't-care row · ① and ② as layers" },
+        { f: "cwe/cwe_1271.md", n: "1271", t: "Undefined Lock on Reset", h: "waking up without anyone choosing · the first write ends the window" },
+        { f: "cwe/cwe_1298.md", n: "1298", t: "Race in Hardware", h: "two paths from one wire · a temporary spike, a permanent fault · MITRE's selector" }
       ]
     }
   ]

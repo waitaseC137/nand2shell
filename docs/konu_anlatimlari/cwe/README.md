@@ -176,6 +176,13 @@ oluşamaz kılıyor ([17](../salterden_bilgisayara/17_d_latch.md#yasak-satır-ar
 | [**CWE-197**](./cwe_197.md) | Numeric Truncation Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#16-bitlik-1-tek-tel-değildir) | [📄](https://cwe.mitre.org/data/definitions/197.html) |
 | [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/480.html) |
 | [**CWE-1271**](./cwe_1271.md) | Uninitialized Value on Reset for Registers Holding Security Settings | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#kimse-seçmeden-uyanmak) | [📄](https://cwe.mitre.org/data/definitions/1271.html) |
+| [**CWE-1298**](./cwe_1298.md) | Hardware Logic Contains Race Conditions | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#kullanılmayan-satır) · [17 · D Latch](../salterden_bilgisayara/17_d_latch.md#neden-select-değil) | [📄](https://cwe.mitre.org/data/definitions/1298.html) |
+
+**1298 neden burada?** D Latch'i kurmak için şart değil, ama SR Latch'li çözümün
+neden seçildiğini ancak bu zayıflık açıklıyor. Seçicili latch oyunda kara kutu
+olarak geçiyor, parçalarına açılınca biti kaybediyor. MITRE'nin bu zayıflık için
+verdiği ilk örnek de aynı seçici. Sayfa aslında saat ünitesine bekletiliyordu;
+yarış iki derste birden işlenince erken geldi.
 
 **Üçü bir zincir.** 09'un Güvenlik Köprüsü'ndeki örnekte aynı sayı üç kez farklı
 sözleşmeyle okunuyor: değişkene girerken [196](./cwe_196.md), kontrolde
@@ -236,7 +243,6 @@ yaptığı iş tam olarak budur.
 |---|---|---|
 | Bellek ünitesi · adresleme | **125** | Out-of-bounds Read |
 | Bellek ünitesi | **416** | Use After Free |
-| Saat (clock) · tohumu [16](../salterden_bilgisayara/16_sr_latch.md#kullanılmayan-satır)'da | **1298** | Hardware Logic Contains Race Conditions |
 | Boru hattı / spekülasyon | **208** | Observable Timing Discrepancy |
 | SMT / paylaşılan birimler | **1303** | Non-Transparent Sharing of Microarchitectural Resources |
 | Yukarıdaki ikisinden sonra | **203** | Observable Discrepancy (çatı) |
@@ -251,7 +257,7 @@ yaptığı iş tam olarak budur.
 > 203, ancak 208 ile 1303 yazıldığında anlamlı hâle gelir — iki çocuğu birden
 > olmadan çatı kurmak, haritayı müfredatın önüne geçirmek olur.
 >
-> 697 ve 1242 bu listede duruyordu; dersleri yazıldığı için ağaca taşındılar.
+> 697, 1242 ve 1298 bu listede duruyordu; dersleri yazıldığı için ağaca taşındılar.
 
 ---
 

@@ -598,6 +598,11 @@ for a moment. This was also simulated with eight different delay patterns: with
 > independently of `st`. Its name is the **Earle latch.** In the same simulation
 > the bit was not lost even with a slow `inv`.
 
+> 👾 The weakness catalogue's name for this race is
+> [CWE-1298](../cwe/cwe_1298.md) — *Hardware Logic Contains Race Conditions*.
+> The first example MITRE gives for this weakness is a selector built from gates.
+> Its fix is the same as the Earle term.
+
 ---
 
 ## While the Gate Is Open
@@ -748,6 +753,7 @@ built as `nand(and(st, r), rst_n)`.
 - 👾 **The CWE this lesson answers:** [CWE-1245 — Improper state machine](../cwe/cwe_1245.md) — making the undefined row structurally unreachable
 - 👾 **Left unsolved:** [CWE-1271](../cwe/cwe_1271.md) — a security bit with no defined value at power-on
 - 👾 **A race while the gate is open:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — a counter built on a transparent latch races instead of taking one step
+- 👾 **The race in the selector:** [CWE-1298](../cwe/cwe_1298.md) — two paths leaving the same wire; MITRE's first example is this selector
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: why it cannot be built with a transparent latch
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Boxing up what you built and climbing on top; the SR Latch is now a single part
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand(x, x)`; that tying one leg to 1 does the same job is in [16](./16_sr_latch.md#count-the-inversions)

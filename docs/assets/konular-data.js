@@ -217,8 +217,9 @@ window.KONULAR = {
         { f: "cwe/cwe_1242.md", n: "1242", t: "Chicken Bits", h: "belgelenen uzay ⊂ gerçek uzay · vazgeçme biti" },
         { f: "cwe/cwe_1254.md", n: "1254", t: "Karşılaştırma Tanecikliği", h: "erken çıkış süreyi sızdırır · sabit zamanlı kıyas" },
         { f: "cwe/cwe_119.md", n: "119", t: "Tampon Sınırları (sınıf)", h: "787'nin üstü · dört köşe: oku/yaz × önce/sonra" },
-        { f: "cwe/cwe_1245.md", n: "1245", t: "Hatalı Durum Makinesi", h: "en küçük durum makinesi · don't care satırı · default" },
-        { f: "cwe/cwe_1271.md", n: "1271", t: "Reset'te Tanımsız Kilit", h: "kimse seçmeden uyanmak · tekrar tekrar reset" }
+        { f: "cwe/cwe_1245.md", n: "1245", t: "Hatalı Durum Makinesi", h: "iki durumlu durum makinesi · don't care satırı · ① ve ② katman" },
+        { f: "cwe/cwe_1271.md", n: "1271", t: "Reset'te Tanımsız Kilit", h: "kimse seçmeden uyanmak · ilk yazma pencerenin sonu" },
+        { f: "cwe/cwe_1298.md", n: "1298", t: "Donanımda Yarış", h: "aynı telden iki yol · geçici iğne, kalıcı hata · MITRE'nin seçicisi" }
       ]
     }
   ]

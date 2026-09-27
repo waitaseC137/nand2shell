@@ -562,6 +562,10 @@ simüle edildi: `d` sabitken `st` inince bit hiçbirinde kaybolmadı.
 > bağımsız tutuyor. Adı **Earle latch.** Aynı simülasyonda, `inv` yavaşken bile bit
 > kaybolmadı.
 
+> 👾 Bu yarışın zayıflık kataloğundaki adı [CWE-1298](../cwe/cwe_1298.md) —
+> *Hardware Logic Contains Race Conditions*. MITRE'nin bu zayıflık için verdiği
+> ilk örnek, kapılardan kurulmuş bir seçici. Düzeltmesi de Earle terimiyle aynı.
+
 ---
 
 ## Kapı Açıkken
@@ -703,6 +707,7 @@ kurulabilir.
 - 👾 **Bu dersin cevap verdiği CWE:** [CWE-1245 — Hatalı durum makinesi](../cwe/cwe_1245.md) — tanımsız satırı yapıyla ulaşılamaz kılmak
 - 👾 **Çözülmeden kalan:** [CWE-1271](../cwe/cwe_1271.md) — açılışta değeri belirlenmemiş güvenlik biti
 - 👾 **Kapı açıkken yarış:** [CWE-362 — Race Condition](../cwe/cwe_362.md) — şeffaf latch'le kurulan sayaç tek adım yerine yarışa girer
+- 👾 **Seçicideki yarış:** [CWE-1298](../cwe/cwe_1298.md) — aynı telden çıkan iki yol; MITRE'nin ilk örneği bu seçici
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: şeffaf latch'le neden kurulamayacağı
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Kurduğun şeyi kapatıp üstüne çıkmak; SR Latch artık tek parça
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — `inv` = `nand(x, x)`; bir ayağı 1'e sabitlemenin de aynı işi gördüğü [16](./16_sr_latch.md#tersleri-say)'da

@@ -180,6 +180,14 @@ construction in the settled state ([17](../salterden_bilgisayara/17_d_latch.md#t
 | [**CWE-197**](./cwe_197.md) | Numeric Truncation Error | [13 · Arithmetic Unit](../salterden_bilgisayara/13_arithmetic_unit.md#a-16-bit-1-is-not-one-wire) | [📄](https://cwe.mitre.org/data/definitions/197.html) |
 | [**CWE-480**](./cwe_480.md) | Use of Incorrect Operator | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/480.html) |
 | [**CWE-1271**](./cwe_1271.md) | Uninitialized Value on Reset for Registers Holding Security Settings | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#waking-up-without-anyone-choosing) | [📄](https://cwe.mitre.org/data/definitions/1271.html) |
+| [**CWE-1298**](./cwe_1298.md) | Hardware Logic Contains Race Conditions | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#the-unused-row) · [17 · D Latch](../salterden_bilgisayara/17_d_latch.md#why-not-select) | [📄](https://cwe.mitre.org/data/definitions/1298.html) |
+
+**Why is 1298 here?** It is not needed to build the D Latch, but only this
+weakness explains why the solution with the SR Latch was chosen. The selector
+latch passes in the game as a black box and loses the bit once it is opened up.
+The first example MITRE gives for this weakness is the same selector. The page
+was being held for the clock unit; it came early because the race was covered in
+two lessons at once.
 
 **The three are a chain.** In the Security Bridge example in lesson 09 the same
 number is read three times under three different contracts: [196](./cwe_196.md) as
@@ -246,7 +254,6 @@ exactly the job reverse engineering does.
 |---|---|---|
 | Memory unit · addressing | **125** | Out-of-bounds Read |
 | Memory unit | **416** | Use After Free |
-| Clock · seeded in [16](../salterden_bilgisayara/16_sr_latch.md#the-unused-row) | **1298** | Hardware Logic Contains Race Conditions |
 | Pipeline / speculation | **208** | Observable Timing Discrepancy |
 | SMT / shared units | **1303** | Non-Transparent Sharing of Microarchitectural Resources |
 | After the two above | **203** | Observable Discrepancy (umbrella) |
@@ -262,8 +269,8 @@ exactly the job reverse engineering does.
 > 203 only becomes meaningful once 208 and 1303 are written — building an umbrella
 > without both of its children would put the map ahead of the curriculum.
 >
-> 697 and 1242 used to be on this list; they moved into the tree once their lessons
-> were written.
+> 697, 1242 and 1298 used to be on this list; they moved into the tree once their
+> lessons were written.
 
 ---
 
