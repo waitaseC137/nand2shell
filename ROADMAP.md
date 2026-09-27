@@ -17,7 +17,7 @@
 > açıksa üst madde 🚧 kalır. Böylece "neredeyse bitti" ile "bitti" karışmaz.
 >
 > **"Bitti"yi Claude değil Rüzgar söyler.** Bir konu anlatıldığı için değil,
-> "oturdu" dendiği için kapanır — bu kural yukarıdaki *Yöntem* bölümünde de var.
+> "oturdu" dendiği için kapanır — bu kural aşağıdaki *Yöntem* bölümünde de var.
 
 > 🗺️ **Bu dosya HARİTA, ders defteri değil.** Adım adım "şunu yap / şu komut"
 > detayı burada TUTULMAZ — o basamağa gelince, tek konu, o oturumda üretilir
@@ -78,13 +78,13 @@
     - [x] konumsal ikili + hex kısaltması
     - [x] ikinin tümleyeni: çıkarma neden ayrı devre değil, toplamanın kendisi
     - [x] taşma (overflow) vs elde (carry): işaretli / işaretsiz ayrımı
-- [ ] 🚧 Aritmetik: kapılardan toplayıcı → ALU (hesabın doğuşu; komutun asıl işi) — *NandGame: Arithmetics + Switching + ALU, 13 seviye*
+- [x] Aritmetik: kapılardan toplayıcı → ALU (hesabın doğuşu; komutun asıl işi) — *NandGame: Arithmetics + Switching + ALU, 13 seviye*
     - [x] yarım toplayıcı → tam toplayıcı → dalgalı elde (ripple-carry)
-    - [ ] 🚧 ALU: toplama + mantık + kaydırma tek blokta
+    - [x] ALU: aritmetik + mantık tek blokta (NandGame'in ALU'sunda kaydırma yok)
     - [x] bayraklar (zero / carry / sign / overflow) — dallanmanın yakıtı
-- [ ] Kendini-tutan latch → hafızanın doğuşu — *NandGame: Memory, 6 seviye*
-    - [ ] SR latch: geri besleme = kendini hatırlayan devre
-    - [ ] D latch → D flip-flop (saat kenarıyla örnekle)
+- [ ] 🚧 Kendini-tutan latch → hafızanın doğuşu — *NandGame: Memory, 6 seviye*
+    - [x] SR latch: geri besleme = kendini hatırlayan devre
+    - [ ] 🚧 D latch → D flip-flop (saat kenarıyla örnekle) — D latch oturdu, sırada flip-flop
     - [ ] register = n flip-flop yan yana
 - [ ] Latch'in karşı kutbu: elektrik kesilince hatırlayan hafıza (floating gate)
     - [ ] latch neden uçucu (volatile): geri besleme akım ister, akım kesilince unutur
@@ -101,9 +101,9 @@
 - [x] Mikro-op: komutun altındaki komut (x86 = arayüz, çipin dili değil)
     - [x] tek x86 komutu → birden çok mikro-op
     - [x] neden: karmaşık ISA'yı basit iç çekirdeğe ayırmak
-- [ ] Pratik: Logisim / Digital Logic Sim sandbox
-    - [ ] elle kurduğun ALU'yu görsel simülatörde doğrula
-- [x] Pratik: x86 assembly kursu (`konu_anlatimlari/x86_assembly`)
+- [ ] 🚧 Pratik: Logisim / Digital Logic Sim sandbox
+    - [ ] 🚧 elle kurduğun ALU'yu görsel simülatörde doğrula — şimdilik yalnız 15'in Condition devreleri Digital'de sınandı ([`araclar/15_condition/digital/`](./araclar/15_condition/digital/))
+- [x] Pratik: x86 assembly kursu (repodan çıktı; `tam-hali-2026-09-27` etiketinde duruyor)
     - [x] register / bellek / komut temeli (`nasm` + `ld`)
     - [x] mikro-op durağına köprü: yazdığın komutun altında ne oluyor
 
@@ -155,7 +155,7 @@
 
 > *Kolaydan zora, yazılımdan donanıma. Mod: binexp çöz-yarış; alt katmanlar sök-anla.*
 
-- [ ] 🚧 Yazılıma saldırı: binary exploitation — OverTheWire
+- [ ] 🚧 Yazılıma saldırı: binary exploitation — OverTheWire (askıda; çözümler `tam-hali-2026-09-27` etiketinde)
 - [ ] Yan-kanal ilkeli: Flush+Reload / Prime+Probe — önbellek zamanlamasıyla sızıntı (Spectre'nin gizli kanalı BUDUR; 1B ölçüm aracının silahlanmış hâli)
 - [ ] 🚧 Köprü: ayrıcalık modeli + mikromimari saldırılar (ring, MMU, SMEP/SMAP, Spectre/Meltdown, TEE)
 - [ ] Gizli ringler: SMM (ring -2, OS'un altında saklı mod) + hypervisor (ring -1, VT/AMD-V) — "gizli katman"ın tam da kendisi; PSP'ye (ring -3 sayılır) inişin ara basamakları
