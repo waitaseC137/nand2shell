@@ -453,6 +453,11 @@ and(gt,·) ────────┘
 İki `or`, üç giriş. Aynı numara dört, beş, yirmi giriş için de çalışır — her yeni
 giriş bir kapı ekler.
 
+> 💡 Yirmi girişe çıkarsan [`10`'daki soruyu](./10_bayraklar.md#ağaç-mı-zincir-mi)
+> sor: bu zincir zorunlu mu? Burada hiçbir vana ötekini beklemiyor, yani ağaç da
+> kurulabilir. Üç girişte fark yok, ikisi de iki kapı derinliğinde. Yirmi girişte
+> zincir 19 kapı derinliğinde, ağaç 5.
+
 ---
 
 ## 🎮 Şimdi Sen Kur

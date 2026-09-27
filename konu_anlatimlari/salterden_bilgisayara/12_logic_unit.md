@@ -214,7 +214,7 @@ birini seçer:
 
 Bir apartman düşün: iki katlı, her katta iki daire. Alt katta and ile or, üst
 katta xor ile inv oturuyor. Bir daireyi bulmak için adresin iki parçası yeter:
-**kat** ve **kapı.**
+**kat** ve **daire numarası.**
 
 ---
 
@@ -267,6 +267,11 @@ invert X →   1     1   ┘  B'nin grubu
 ```
 
 İki grubu birbirinden ayıran op1. **C'nin kolu op1.**
+
+Dikkat: burada iki tel de satırdan satıra değişiyor, kural biraz genişledi. C tek
+tek satırları değil **grupları** ayırt ediyor. Aranan tel, **grubun içinde sabit
+kalan, gruplar arasında değişen** tel. A ile B'de her grup tek satırdı, o yüzden
+iki kural orada aynı şeyi söylüyordu.
 
 > 🔑 İki bitlik emir ikiye bölündü: **op1 grubu**, **op0 grubun içindeki işlemi**
 > seçiyor. Onluk sayılarda da aynısı var: 23'te 2 hangi onlukta olduğunu, 3 o
@@ -388,7 +393,7 @@ gelecek.
 ☐ or ne yapacağını bilmez; bağlantısı onun ne yaptığıdır. Emir sadece SEÇİM olan yerde gerekir.
 ☐ select 16: s = 0 → D0, s = 1 → D1. D1/D0 16'şar tel, s tek tel.
 ☐ 4 seçenek = 2 × 2: iki seçici (A, B) + üstte bir seçici (C).
-☐ Kolu bulmak: ayırt edilecek satırları alt alta koy, DEĞİŞEN tel koldur. A, B ← op0 · C ← op1.
+☐ Kolu bulmak: ayırt edilecek satırları alt alta koy, DEĞİŞEN tel koldur (gruplarda: grup içinde sabit, gruplar arasında değişen). A, B ← op0 · C ← op1.
 ☐ op1 grubu seçer, op0 grubun içinden seçer (23: onluk + birlik).
 ☐ ⚠️ Kol 0 iken geçmesi gereken şey D0'a bağlanır.
 ☐ Hatalı test satırı bir deneydir: beklenen ne, gelen ne, hangi işlem bunu verir → sonra geriye izle.

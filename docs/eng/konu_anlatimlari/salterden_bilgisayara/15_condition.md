@@ -475,6 +475,11 @@ and(gt,·) ────────┘
 Two `or`s, three inputs. The same trick works for four, five or twenty inputs —
 each new input adds one gate.
 
+> 💡 If you go up to twenty inputs, ask [the question from `10`](./10_bayraklar.md#tree-or-chain):
+> is this chain forced? Here no valve waits for another, so a tree works too. With
+> three inputs there is no difference; both are two gates deep. With twenty
+> inputs the chain is 19 gates deep, the tree 5.
+
 ---
 
 ## 🎮 Now You Build It

@@ -17,7 +17,7 @@
 
 - [What Does This Part Do?](#what-does-this-part-do)
 - [Data Bits and Control Bits](#data-bits-and-control-bits)
-- [Floor and Door: Control Bits Are an Address](#floor-and-door-control-bits-are-an-address)
+- [Floor and Flat: Control Bits Are an Address](#floor-and-flat-control-bits-are-an-address)
 - [Same Pair of Wires, Different Contracts](#same-pair-of-wires-different-contracts)
 - [The Flags Change the Material](#the-flags-change-the-material)
 - [Why Two Selectors for One Flag and One for the Other?](#why-two-selectors-for-one-flag-and-one-for-the-other)
@@ -113,20 +113,20 @@ and its name will be **machine instruction**.
 
 ---
 
-## Floor and Door: Control Bits Are an Address
+## Floor and Flat: Control Bits Are an Address
 
 `u`, `op1` and `op0` together form an **address**. Think of an apartment
 building:
 
 ```
 u        →  which floor            1 bit  →  2 floors
-op1 op0  →  which door on it       2 bits →  4 doors
+op1 op0  →  which flat on it       2 bits →  4 flats
 ```
 
-2 floors × 4 doors = **8 apartments**. The eight rows in the table are exactly
+2 floors × 4 flats = **8 flats**. The eight rows in the table are exactly
 that.
 
-| floor (`u`) | doors (`op1 op0`) |
+| floor (`u`) | flats (`op1 op0`) |
 |---|---|
 | `0` — the logic floor | `and` · `or` · `xor` · `invert` |
 | `1` — the arithmetic floor | `X+Y` · `X+1` · `X−Y` · `X−1` |
@@ -134,6 +134,10 @@ that.
 The addressing logic maps straight onto the circuit: `op1` and `op0` go to
 **both units at once**, while `u` sits in the final selector. Both floors prepare
 their answer first, then `u` says which floor the answer is taken from.
+
+> 💡 Remember the building in `12`: there, in a two-storey building, `op1` picked
+> the floor. Here the building has grown. The whole building from `12` is now a
+> single floor, and `u` picks the floor.
 
 ---
 
@@ -176,7 +180,7 @@ something else with the same wires.**
 ## The Flags Change the Material
 
 `zx` and `sw` are not part of the address above. They pick none of the eight
-apartments.
+flats.
 
 Their names say what they do:
 
@@ -545,7 +549,7 @@ there.
 ☐ You build no gate in this level: you JOIN what you built in 12 and 13.
 ☐ Two kinds of bit: DATA (X, Y) and CONTROL (u, op1, op0, zx, sw). The difference is not in the wire but in where it is wired.
 ☐ Five control bits form a CONTROL WORD — in the Processor unit its name becomes "machine instruction".
-☐ u · op1 · op0 are an ADDRESS: 2 floors × 4 doors = the 8 rows in the table.
+☐ u · op1 · op0 are an ADDRESS: 2 floors × 4 flats = the 8 rows in the table.
 ☐ ⚠️ op1/op0 go to both units at once and are read under TWO DIFFERENT CONTRACTS. Same signal, separate meaning.
 ☐ zx and sw pick no operation: they say not "which machine" but "WHAT gets handed to the machine".
 ☐ zx = zero X (make the left operand zero) · sw = swap (exchange X and Y).

@@ -480,11 +480,13 @@ Bu yüzden `+1` ve `−1`, `+Y` kadar meşru bir işlem olarak tabloya girmiş.
 İlerideki **Processor** ünitesinde program sayacı her komutta tam bu işlemi
 yapacak.
 
-> 💡 x86'da aynı gerekçeyle `add`'den ayrı `inc` ve `dec` komutları var. Komik
-> son: modern işlemcilerde `inc` bazen `add reg, 1`'den **yavaş** çalışıyor,
-> çünkü bayrakların hepsini güncellemiyor ve bu eksik güncelleme boru hattında
-> takılmaya yol açıyor. Bir zamanlar hızlandıran şey, mimari değişince yük
-> hâline gelmiş.
+> 💡 x86'da aynı gerekçeyle `add`'den ayrı `inc` ve `dec` komutları var. Hikâyenin
+> iki kıvrımı var. `inc` elde bayrağına (CF) dokunmuyor, CF'yi eski değerinde
+> bırakıyor. Pentium 4 döneminde bu yarım güncelleme boru hattını takıyordu ve
+> `inc`, `add reg, 1`'den **yavaş** kalıyordu. Hızlandırmak için konan komut,
+> mimari değişince yük olmuştu. Sonra mimari yine değişti. Bugünkü işlemcilerin
+> çoğunda ikisi aynı hızda. Ceza ancak `inc`'ten hemen sonra gelen bir komut,
+> `inc`'in dokunmadığı CF'yi de okumak isterse çıkabiliyor.
 
 ### Sırada
 

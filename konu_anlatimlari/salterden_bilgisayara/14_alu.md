@@ -17,7 +17,7 @@
 
 - [Bu Parça Ne Yapıyor?](#bu-parça-ne-yapıyor)
 - [Veri Biti ve Kontrol Biti](#veri-biti-ve-kontrol-biti)
-- [Kat ve Kapı: Kontrol Bitleri Bir Adrestir](#kat-ve-kapı-kontrol-bitleri-bir-adrestir)
+- [Kat ve Daire: Kontrol Bitleri Bir Adrestir](#kat-ve-daire-kontrol-bitleri-bir-adrestir)
 - [Aynı Tel Çifti, Ayrı Sözleşmeler](#aynı-tel-çifti-ayrı-sözleşmeler)
 - [Bayraklar Malzemeyi Değiştirir](#bayraklar-malzemeyi-değiştirir)
 - [Neden Bir Bayrağa Çift, Ötekine Tek Seçici?](#neden-bir-bayrağa-çift-ötekine-tek-seçici)
@@ -110,18 +110,18 @@ olarak alması. `12`'de iki bitlik bir emir vardı, `13`'te yine iki. Burada be�
 
 ---
 
-## Kat ve Kapı: Kontrol Bitleri Bir Adrestir
+## Kat ve Daire: Kontrol Bitleri Bir Adrestir
 
 `u`, `op1` ve `op0` birlikte bir **adres** kuruyor. Apartman gibi düşün:
 
 ```
 u        →  hangi kat            1 bit  →  2 kat
-op1 op0  →  o katta hangi kapı   2 bit  →  4 kapı
+op1 op0  →  o katta hangi daire  2 bit  →  4 daire
 ```
 
-2 kat × 4 kapı = **8 daire**. Tablodaki sekiz satır tam olarak bu.
+2 kat × 4 daire = **8 daire**. Tablodaki sekiz satır tam olarak bu.
 
-| kat (`u`) | kapılar (`op1 op0`) |
+| kat (`u`) | daireler (`op1 op0`) |
 |---|---|
 | `0` — mantık katı | `and` · `or` · `xor` · `invert` |
 | `1` — aritmetik kat | `X+Y` · `X+1` · `X−Y` · `X−1` |
@@ -129,6 +129,9 @@ op1 op0  →  o katta hangi kapı   2 bit  →  4 kapı
 Adres mantığı devreye doğrudan yansıyor: `op1` ve `op0` **iki üniteye birden**
 gidiyor, `u` ise en sondaki seçicide oturuyor. Yani önce iki kat da cevabını
 hazırlıyor, sonra `u` hangi kattan alınacağını söylüyor.
+
+> 💡 `12`'deki apartmanı hatırla: orada iki katlı binada katı `op1` seçiyordu.
+> Burada bina büyüdü. `12`'deki binanın tamamı artık tek bir kat, katı seçen de `u`.
 
 ---
 
@@ -529,7 +532,7 @@ Ve `10`'da verilen taşma bayrağı (OF) sözü orada kapanıyor.
 ☐ Bu seviyede tek kapı kurmuyorsun: 12 ve 13'te kurduklarını BİRLEŞTİRİYORSUN.
 ☐ İki tür bit var: VERİ (X, Y) ve KONTROL (u, op1, op0, zx, sw). Fark telde değil, bağlandığı yerde.
 ☐ Beş kontrol biti bir KONTROL SÖZCÜĞÜ — Processor ünitesinde adı "makine komutu" olacak.
-☐ u · op1 · op0 bir ADRES: 2 kat × 4 kapı = tablodaki 8 satır.
+☐ u · op1 · op0 bir ADRES: 2 kat × 4 daire = tablodaki 8 satır.
 ☐ ⚠️ op1/op0 iki üniteye birden gidiyor ve İKİ FARKLI SÖZLEŞMEYLE okunuyor. Sinyal aynı, anlam ayrı.
 ☐ zx ve sw hiçbir işlem seçmez: "hangi makine" değil, "makineye NE verilecek" derler.
 ☐ zx = zero X (sol operandı sıfırla) · sw = swap (X ile Y'yi takas et).

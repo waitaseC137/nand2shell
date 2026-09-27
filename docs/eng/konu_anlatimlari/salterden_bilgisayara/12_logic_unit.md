@@ -222,7 +222,7 @@ It's the floors trick from `06`: 4 choices became 2 × 2.
 
 Picture a building: two floors, two flats on each. AND and OR live on the ground
 floor, XOR and INV upstairs. To find a flat, a two-part address is enough: the
-**floor** and the **door.**
+**floor** and the **flat number.**
 
 ---
 
@@ -278,6 +278,11 @@ invert X →   1     1   ┘  B's group
 ```
 
 The wire that separates the two groups is op1. **C's lever is op1.**
+
+Careful: here both wires change from row to row, so the rule has stretched a
+little. C is not telling single rows apart but **groups**. The wire you want is
+the one that **stays fixed inside a group and changes between groups.** In A and
+B each group was a single row, so the two rules said the same thing there.
 
 > 🔑 The two-bit order got split in two: **op1 picks the group**, **op0 picks the
 > operation inside the group.** Decimal numbers do the same: in 23, the 2 tells
@@ -404,7 +409,7 @@ promised in `10`.
 ☐ OR doesn't know what to do; its wiring IS what it does. An order is only needed where there is a CHOICE.
 ☐ select 16: s = 0 → D0, s = 1 → D1. D1/D0 are 16 wires each, s is one wire.
 ☐ 4 choices = 2 × 2: two selectors (A, B) + one selector on top (C).
-☐ Finding the lever: put the rows to tell apart under each other; the wire that CHANGES is the lever. A, B ← op0 · C ← op1.
+☐ Finding the lever: put the rows to tell apart under each other; the wire that CHANGES is the lever (for groups: fixed inside a group, changing between groups). A, B ← op0 · C ← op1.
 ☐ op1 picks the group, op0 picks inside the group (23: the ten + the one).
 ☐ ⚠️ Whatever should get through when the lever is 0 goes on D0.
 ☐ A failing test row is an experiment: what was expected, what came out, which operation gives that → then trace back.

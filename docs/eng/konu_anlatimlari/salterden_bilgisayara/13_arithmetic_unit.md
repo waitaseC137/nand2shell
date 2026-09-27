@@ -501,11 +501,14 @@ That is why `+1` and `−1` earned a place in the table as legitimately as `+Y`.
 In the upcoming **Processor** unit, the program counter will do exactly this
 operation on every instruction.
 
-> 💡 x86 has separate `inc` and `dec` instructions for the same reason. The funny
-> ending: on modern processors `inc` is sometimes **slower** than `add reg, 1`,
-> because it does not update all the flags, and that partial update causes stalls
-> in the pipeline. What once made things faster became a burden when the
-> architecture changed.
+> 💡 x86 has separate `inc` and `dec` instructions for the same reason. The story
+> has two twists. `inc` does not touch the carry flag (CF); it leaves CF at its
+> old value. In the Pentium 4 era that partial update stalled the pipeline, and
+> `inc` ended up **slower** than `add reg, 1`. An instruction added to speed
+> things up had become a burden once the architecture changed. Then the
+> architecture changed again. On most of today's processors the two run at the
+> same speed. A penalty can only appear if an instruction right after `inc` also
+> wants to read CF, the flag `inc` did not touch.
 
 ### Next up
 
