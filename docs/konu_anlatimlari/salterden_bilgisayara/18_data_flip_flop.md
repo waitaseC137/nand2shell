@@ -1,8 +1,5 @@
 # 🧮 Şalterden Bilgisayara — Data Flip-Flop: Alıcı ile Vitrin
 
-> Bu ders de öncekiler gibi yazıldı: karşında seni seyreden biri varmış gibi.
-> Sana soru soruyor, sen kurarken bekliyor.
->
 > Bu seviyede ilk deneme düştü. Devrenin iki parçası da doğru yerdeydi, eksik olan
 > tek bir kapıydı. O kapının neden şart olduğu, oyunun hata mesajı satır satır
 > okununca ortaya çıktı. Sonra aynı devre daha az nand'la yeniden kuruldu ve
