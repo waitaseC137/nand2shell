@@ -50,6 +50,7 @@ bağlandı.
 | 17 · D Latch | `select`'li latch gecikmeye göre ne yapar; SR'li çözüm her gecikmede tutar mı; oyundaki kara kutu neden geçti? | `16-17_latch/verilog/select_latch.v` · `sr_dlatch_delays.v` · `kutu_vs_kapi.v` | üç sonuç (bit kaybı · titreme · sorunsuz); SR'li çözüm 8 düzende hatasız; tek adımda karar veren kutu biti tutuyor | "Neden Select Değil?" ([282fdbf](https://github.com/waitaseC137/nand2shell/commit/282fdbf)) |
 | 17 · D Latch · CWE-1271 | İlk yazmayı beklemek pencereyi kapatır mı; reset girişli latch | `16-17_latch/reset_latch_17.py` · `verilog/reset_latch.v` | resetsiz devre ilk yazmaya kadar `x`; reset girişli devre her açılışta 1 | reset doğru anlatıldı ([144d061](https://github.com/waitaseC137/nand2shell/commit/144d061)) |
 | CWE-1298 | MITRE'nin örnek kodu gerçekten iğne üretiyor mu; düzeltme satırı çalışıyor mu? | `16-17_latch/verilog/mitre_1298.v` | hatalı kodda bir tiklik 0; düzeltme satırı yazıldığı gibi geçerli Verilog değil, geçerli hâli çalışıyor | [CWE-1298](../konu_anlatimlari/cwe/cwe_1298.md) sayfası ([877b16e](https://github.com/waitaseC137/nand2shell/commit/877b16e)) |
+| 18 · Data Flip-Flop | `d latch` kutuları çıplak nand'a açılınca yarış çıkıyor mu? | `18_dff/dff_sim.py` | her kapıya 1–3 tik gecikme, 400 deneme: ilk saklamadan sonraki 9 851 adımda yanlış 0, kararsız 0; kararsızlık yalnız ilk saklamadan önce | "Kutular Açılınca" ve "Açılışta Yine Tanımsız" |
 
 Her dosyanın başında sınadığı iddia, beklenen çıktı ve çalıştırma komutu yazıyor.
 
@@ -110,8 +111,9 @@ araclar/
 ├── 14_alu/                  alu_sayim.py (12'nin iki satırı da burada) · sifir_tuzagi.py
 ├── 15_condition/            never_always.py · of_kurali.py · cf_borc.py
 │   └── digital/             uret.py · dig_uretici.py · 15_condition_*.dig
-└── 16-17_latch/             kapi_sim.py (ortak) · sr_latch_16.py · d_latch_17.py · reset_latch_17.py
-    └── verilog/             select_latch.v · sr_dlatch_delays.v · kutu_vs_kapi.v · reset_latch.v · mitre_1298.v
+├── 16-17_latch/             kapi_sim.py (ortak) · sr_latch_16.py · d_latch_17.py · reset_latch_17.py
+│   └── verilog/             select_latch.v · sr_dlatch_delays.v · kutu_vs_kapi.v · reset_latch.v · mitre_1298.v
+└── 18_dff/                  dff_sim.py
 ```
 
 Python dosyaları kendi klasörlerinin içinden çalıştırılır (`cd 16-17_latch && python3 d_latch_17.py`),

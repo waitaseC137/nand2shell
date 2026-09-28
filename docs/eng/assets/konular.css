@@ -170,6 +170,8 @@
 
 .md p { margin: 14px 0; color: var(--fg); }
 .md a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--line-2); transition: border-color .14s; }
+.md img { display: block; max-width: 100%; height: auto; margin: 18px 0 6px; border: 1px solid var(--line-2); border-radius: 8px; }
+.md img + em, .md p > img + em { display: block; font-size: 13px; color: var(--fg-mute); margin-bottom: 18px; }
 .md a:hover { border-bottom-color: var(--green); }
 .md strong { color: var(--fg); font-weight: 700; }
 .md em { color: var(--yellow); font-style: normal; }

@@ -503,7 +503,15 @@ menüsü). İçinde şu var:
 ```
 
 `st=1`, `d=1` ile 1 yazıldı, sonra `st` 0'a indirildi. Tuvalde çıkış **0'a düştü**,
-saklanması gereken 1 kayboldu. Aynı devrede **Check solution** da artık geçmedi:
+saklanması gereken 1 kayboldu:
+
+![Seçici parçalarına açılmış: st=1, d=1, çıkış 1](./gorseller/17_select_acik_yazildi.png)
+*Önce: `st = 1`, `d = 1`. Çıkış 1, bit yazıldı.*
+
+![Aynı devre, st 0'a indirilince çıkış 0'a düşmüş](./gorseller/17_select_acik_bit_kayboldu.png)
+*Sonra: yalnızca `st` 0'a indirildi. `d` hâlâ 1, ama çıkış 0. Saklanması gereken bit kayboldu.*
+
+Aynı devrede **Check solution** da artık geçmedi:
 
 > *"Set d=1. Set st=1: a 1 should be stored and emitted. Change st to 0. Output
 > should not change. **The circuit did not reach a stable state.**"*
@@ -695,4 +703,4 @@ kurulabilir.
 ---
 
 **Önceki konu:** [16_sr_latch.md](./16_sr_latch.md)
-**Sonraki konu:** *(yolda — Data Flip-Flop)*
+**Sonraki konu:** [18_data_flip_flop.md](./18_data_flip_flop.md)

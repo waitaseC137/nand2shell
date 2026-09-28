@@ -210,6 +210,18 @@
         a.addEventListener('click', (e) => { e.preventDefault(); location.hash = '#' + rel; });
       }
     });
+
+    // .md içi görseller: yol, dersin kendi klasörüne göre çözülür (bağlantılar gibi)
+    scope.querySelectorAll('.md img[src]').forEach(img => {
+      const src = img.getAttribute('src');
+      if (/^(https?:|data:)/.test(src)) return;
+      const cur = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+      let basePath = cur.includes('/') ? cur.slice(0, cur.lastIndexOf('/') + 1) : '';
+      let target = src.replace(/^\.\//, '');
+      while (target.startsWith('../')) { target = target.slice(3); basePath = basePath.replace(/[^/]+\/$/, ''); }
+      img.setAttribute('src', encodeURI(BASE + basePath + target));
+      img.setAttribute('loading', 'lazy');
+    });
   }
 
   /* ---------- SEARCH ---------- */
