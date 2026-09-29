@@ -9,7 +9,7 @@ window.KONULAR = {
       id: "salterden_bilgisayara",
       label: "Şalterden Bilgisayara (NAND'dan CPU'ya)",
       accent: "var(--d-low)",
-      tag: "22 ders · 🚧 Memory ünitesi sürüyor",
+      tag: "23 ders · 🚧 Memory ünitesi sürüyor",
       blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10), yönlendirme (11) ve ALU (12–15) üniteleri tamamlandı; Memory ünitesi sürüyor (16 SR Latch, 17 D Latch). Sırada hafızanın geri kalanı ve işlemci.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Buradan Başla",        h: "Kurs haritası; şalterden CPU'ya (🚧 yazılıyor)" },
@@ -33,7 +33,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/15_condition.md",           n: "15",   t: "Condition",            h: "Vana olarak AND · trikotomi · N XOR OF" },
         { f: "salterden_bilgisayara/16_sr_latch.md",            n: "16",   t: "SR Latch",             h: "Geri besleme · çift ters hafıza, tek ters salınım" },
         { f: "salterden_bilgisayara/17_d_latch.md",             n: "17",   t: "D Latch",              h: "Hafızanın kapıcısı · yasak satır zaman kuralına döner · neden select değil · şeffaf latch" },
-        { f: "salterden_bilgisayara/18_data_flip_flop.md",      n: "18",   t: "Data Flip-Flop",       h: "Saat · almak ile göstermeyi ayırmak · alıcı ile vitrin · kutular insan için, nand'lar çip için" }
+        { f: "salterden_bilgisayara/18_data_flip_flop.md",      n: "18",   t: "Data Flip-Flop",       h: "Saat · almak ile göstermeyi ayırmak · alıcı ile vitrin · kutular insan için, nand'lar çip için" },
+        { f: "salterden_bilgisayara/19_register.md",            n: "19",   t: "Register",             h: "Bir sayının hafızası · veri telleri ayrı, kontrol telleri ortak · bitler aynı zilde" }
       ]
     },
     {

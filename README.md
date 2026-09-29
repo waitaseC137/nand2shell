@@ -23,7 +23,7 @@ işaretli:
 
 ## 🔌 Şalterden Bilgisayara
 
-NAND kapısından toplayıcıya, ALU'ya ve hafızaya: [NandGame](https://nandgame.com)'i seviye seviye çözerek yazılan dersler. Aritmetik ve ALU üniteleri tamam (00–15), hafıza ünitesi yazılıyor (16 SR Latch · 17 D Latch · 18 Data Flip-Flop).
+NAND kapısından toplayıcıya, ALU'ya ve hafızaya: [NandGame](https://nandgame.com)'i seviye seviye çözerek yazılan dersler. Aritmetik ve ALU üniteleri tamam (00–15), hafıza ünitesi yazılıyor (16 SR Latch · 17 D Latch · 18 Data Flip-Flop · 19 Register).
 
 → **[Buradan başla](./konu_anlatimlari/salterden_bilgisayara/00_buradan_basla.md)** · [Bütün dersler](./konu_anlatimlari/KONU_ANLATIMLARI.md)
 

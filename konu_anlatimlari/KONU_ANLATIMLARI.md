@@ -34,6 +34,7 @@
 | [16_sr_latch.md](./salterden_bilgisayara/16_sr_latch.md) | SR Latch; geri besleme, ters çevirme sayısı: hafıza mı salınım mı |
 | [17_d_latch.md](./salterden_bilgisayara/17_d_latch.md) | D Latch; SR Latch'in önüne çevirmen, yasak satırın kararlı hâlde imkânsızlaşıp zaman kuralına dönmesi, neden select değil |
 | [18_data_flip_flop.md](./salterden_bilgisayara/18_data_flip_flop.md) | Data Flip-Flop; saat, almak ile göstermeyi ayırmak, iki kapının asla aynı anda açık olmaması, bileşen ile nand sayısı |
+| [19_register.md](./salterden_bilgisayara/19_register.md) | Register; bir sayının hafızası, veri telleri ayrı ve kontrol telleri ortak, bitlerin aynı anda değişmesi |
 
 ---
 

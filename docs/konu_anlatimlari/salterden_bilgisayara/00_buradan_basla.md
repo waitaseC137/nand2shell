@@ -186,6 +186,7 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | 16 | [16_sr_latch](./16_sr_latch.md) | Geri besleme; çift ters hafıza, tek ters salınım | SR Latch |
 | 17 | [17_d_latch](./17_d_latch.md) | Hafızanın kapıcısı; yasak satırı ulaşılamaz kılmak, şeffaf latch | D Latch |
 | 18 | [18_data_flip_flop](./18_data_flip_flop.md) | Saat; almak ile göstermeyi ayırmak, iki kapı asla aynı anda açık değil | Data Flip-Flop |
+| 19 | [19_register](./19_register.md) | Bir sayının hafızası; veri telleri ayrı, kontrol telleri ortak | Register |
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
 > daha hafif, karşılığında bir oyun seviyesi yok. Ama hiçbirini atlama — `03.5`

@@ -479,4 +479,4 @@ zorlanmalı.
 ---
 
 **Önceki konu:** [17_d_latch.md](./17_d_latch.md)
-**Sonraki konu:** *(yolda — Register)*
+**Sonraki konu:** [19_register.md](./19_register.md)
