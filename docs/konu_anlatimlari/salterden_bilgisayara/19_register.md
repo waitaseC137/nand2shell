@@ -172,9 +172,9 @@ Yani zil birine bir an geç ulaşsa bile ikisi de **aynı sabit değeri** alır.
 kimin önce geldiğine bağlı değil. MITRE'nin tarif ettiği yapı oluşmuyor. Oyunda
 ise tel zaten ideal: zil ikisine aynı anda ulaşıyor.
 
-Zil birine bir an geç ulaşırsa çıkışta bir an `11` ya da `00` görünür, ama çıkışa
-bakan devre de değeri ancak bir sonraki zilde alır ve o zamana kadar iki bit
-oturmuş olur.
+Gerçek bir çipte ise zil birine bir an geç ulaşırsa çıkışta bir an `11` ya da `00`
+görünür, ama çıkışa bakan devre de değeri ancak bir sonraki zilde alır ve o
+zamana kadar iki bit oturmuş olur.
 
 ---
 

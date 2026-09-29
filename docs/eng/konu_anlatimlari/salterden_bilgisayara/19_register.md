@@ -180,9 +180,9 @@ steady value.** The result does not depend on who comes first. The structure
 MITRE describes does not arise. And in the game the wire is ideal anyway: the
 bell reaches both at the same moment.
 
-If the bell reaches one of them a moment late, `11` or `00` shows up at the output
-for a moment, but the circuit looking at the output also takes the value only at
-the next bell, and by then both bits have settled.
+On a real chip, if the bell reaches one of them a moment late, `11` or `00` shows
+up at the output for a moment, but the circuit looking at the output also takes
+the value only at the next bell, and by then both bits have settled.
 
 ---
 

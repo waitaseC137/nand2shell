@@ -192,7 +192,8 @@ the showcase through `inc 16` and `select 16` to the receiver.
 - When `cl` falls to 0, the new value is **given** to the output. `inc 16`
   computes the next one, but by the time the result reaches the receiver, the
   receiving gate has closed. That value waits until the next bell. This has one
-  condition too: `inc 16` must finish before `cl` rises to 1 again.
+  condition too: `inc 16` must finish before `cl` rises to 1 again (the note in
+  18: the inputs do not change while `cl = 1`).
 
 The incremented value goes around the loop once and stops at the gate. That is
 what was missing in 17.

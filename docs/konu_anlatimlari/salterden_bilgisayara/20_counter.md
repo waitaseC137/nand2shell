@@ -182,7 +182,8 @@ vitrinden `inc 16` ve `select 16` üzerinden alıcıya dönmesi o andan uzun sü
 - `cl` 0'a inince yeni değer çıkışa **veriliyor.** `inc 16` bir sonrakini
   hesaplıyor, ama sonuç alıcıya varana kadar alıcı kapı kapanmış oluyor. O değer
   bir sonraki zile kadar bekliyor. Bunun da bir şartı var: `inc 16` hesabını
-  `cl` bir daha 1'e çıkmadan bitirmeli.
+  `cl` bir daha 1'e çıkmadan bitirmeli (18'deki not: `cl = 1` iken girişler
+  değişmez).
 
 Artırılmış değer döngüyü bir kez dolaşıyor ve kapıda duruyor. 17'de eksik olan
 buydu.
