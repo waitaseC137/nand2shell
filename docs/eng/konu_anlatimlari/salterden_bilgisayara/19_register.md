@@ -142,10 +142,12 @@ level has **a single `st`.** `st` is the "should it be written" order not for on
 bit but for the whole word.
 
 The source of the mix-up is understandable: there really is a place where `st`
-and `d` come together, but it is **inside the box.** The translator from
-[17](./17_d_latch.md), `nand(st, d)`, sits in the D Latches inside the `dff`. From
-the outside, the `dff`'s legs are separate: `st` is an order, `d` is data.
-Combining them is the box's own job.
+and `d` come together, but it is **inside the box**, and in one place only: the
+translator of the receiver latch from
+[18](./18_data_flip_flop.md#when-is-each-gate-open) (the translator from
+[17](./17_d_latch.md)). Even there `st` does not arrive directly but through
+`and(st, cl)`; the showcase never sees `st`. From the outside, the `dff`'s legs
+are separate: `st` is an order, `d` is data. Combining them is the box's own job.
 
 | leg | where it goes |
 |---|---|
@@ -174,9 +176,13 @@ listens to the other's output. Each takes only its own `d`, and by the game's ru
 those `d`s do not change while `cl = 1`.
 
 So even if the bell reached one of them a moment late, both would take **the same
-steady value.** The result does not depend on who comes first. The condition for
-a race does not arise. And in the game the wire is ideal anyway: the bell reaches
-both at the same moment.
+steady value.** The result does not depend on who comes first. The structure
+MITRE describes does not arise. And in the game the wire is ideal anyway: the
+bell reaches both at the same moment.
+
+If the bell reaches one of them a moment late, `11` or `00` shows up at the output
+for a moment, but the circuit looking at the output also takes the value only at
+the next bell, and by then both bits have settled.
 
 ---
 
@@ -199,7 +205,7 @@ In each step **only one** switch changes:
 | step | change | expected output `d1 d0` | what is being tested |
 |---|---|---|---|
 | 1 | `d0 = 1` | undefined | |
-| 2 | `st = 1` | undefined | nothing is taken while `cl = 0` |
+| 2 | `st = 1` | undefined | |
 | 3 | `cl = 1` | **unchanged** | `01` taken, not shown |
 | 4 | `cl = 0` | `0 1` | both bits shown together |
 | 5 | `d1 = 1` | **`0 1`** | data is not heard while `cl = 0` |
@@ -208,8 +214,8 @@ In each step **only one** switch changes:
 | 8 | `cl = 0` | `1 0` | both bits changed **at the same time** |
 | 9 | `st = 0` | `1 0` | |
 | 10 | `d1 = 0` | `1 0` | |
-| 11 | `cl = 1` | `1 0` | `st = 0`: nothing taken this cycle |
-| 12 | `cl = 0` | **`1 0`** | the old number is kept |
+| 11 | `cl = 1` | `1 0` | the output does not change, the showcase is closed |
+| 12 | `cl = 0` | **`1 0`** | `st = 0`: nothing taken this cycle, the old number is kept |
 
 Look at step 8: both bits changed, and both appeared in the same step.
 
@@ -272,7 +278,7 @@ what you built is closed up and becomes a single part.
 ☐ 🔑 Data wires (d1, d0) are SEPARATE per bit. Control wires (st, cl) are SHARED by the word.
 ☐ There is no physical difference between a control bit and a data bit; the difference is where the wire is connected (14).
 ☐ Why in one operation: if the bits change at different moments, a number nobody wrote appears (01 → 11 or 00 → 10).
-☐ ⚠️ st is not split bit by bit; there is one st. The place where st and d meet is INSIDE the dff box (the translator from 17).
+☐ ⚠️ st is not split bit by bit; there is one st. The place where st and d meet is INSIDE the dff box: only the receiver's translator, and st reaches it through and(st, cl).
 ☐ One cl driving two dffs is not a race: the two paths of cl NEVER MEET at a gate, and each dff takes its own steady d.
 ☐ Solution: 2 components, 26 nands, the simplest. The dff box is 13 nands = the optimum from 18.
 ☐ The game generated a 16-bit register box: 16 dffs, st and cl shared, d0–d15 separate.

@@ -136,10 +136,11 @@ Soru şu: hangileri iki `dff` için **ortak**, hangileri **ayrı**?
 emri.
 
 Karışıklığın kaynağı da anlaşılır: `st` ile `d`'nin birleştiği bir yer gerçekten
-var, ama **kutunun içinde.** [17](./17_d_latch.md)'deki çevirmen, yani
-`nand(st, d)`, `dff`'nin içindeki D Latch'lerde duruyor. Dışarıdan bakınca
-`dff`'nin bacakları ayrı: `st` emir, `d` veri. Onları birleştirmek kutunun kendi
-işi.
+var, ama **kutunun içinde**, ve tek bir yerde: [18](./18_data_flip_flop.md#kapılar-ne-zaman-açık)'deki
+alıcı latch'in çevirmeni ([17](./17_d_latch.md)'deki çevirmen). `st` oraya da
+doğrudan değil, `and(st, cl)` üzerinden ulaşıyor; vitrin `st`'yi hiç görmüyor.
+Dışarıdan bakınca `dff`'nin bacakları ayrı: `st` emir, `d` veri. Onları
+birleştirmek kutunun kendi işi.
 
 | bacak | nereye |
 |---|---|
@@ -168,8 +169,12 @@ dinlemiyor. Her biri yalnızca kendi `d`'sini alıyor, o `d`'ler de oyunun kural
 göre `cl = 1` iken değişmiyor.
 
 Yani zil birine bir an geç ulaşsa bile ikisi de **aynı sabit değeri** alır. Sonuç,
-kimin önce geldiğine bağlı değil. Yarışın şartı oluşmuyor. Oyunda ise tel
-zaten ideal: zil ikisine aynı anda ulaşıyor.
+kimin önce geldiğine bağlı değil. MITRE'nin tarif ettiği yapı oluşmuyor. Oyunda
+ise tel zaten ideal: zil ikisine aynı anda ulaşıyor.
+
+Zil birine bir an geç ulaşırsa çıkışta bir an `11` ya da `00` görünür, ama çıkışa
+bakan devre de değeri ancak bir sonraki zilde alır ve o zamana kadar iki bit
+oturmuş olur.
 
 ---
 
@@ -191,7 +196,7 @@ Her adımda **tek** bir anahtar değişiyor:
 | adım | değişen | beklenen çıkış `d1 d0` | ne sınanıyor |
 |---|---|---|---|
 | 1 | `d0 = 1` | tanımsız | |
-| 2 | `st = 1` | tanımsız | `cl = 0` iken hiçbir şey alınmıyor |
+| 2 | `st = 1` | tanımsız | |
 | 3 | `cl = 1` | **değişmez** | `01` alındı, gösterilmedi |
 | 4 | `cl = 0` | `0 1` | iki bit birlikte gösterildi |
 | 5 | `d1 = 1` | **`0 1`** | `cl = 0` iken veri duyulmuyor |
@@ -200,8 +205,8 @@ Her adımda **tek** bir anahtar değişiyor:
 | 8 | `cl = 0` | `1 0` | iki bit **aynı anda** değişti |
 | 9 | `st = 0` | `1 0` | |
 | 10 | `d1 = 0` | `1 0` | |
-| 11 | `cl = 1` | `1 0` | `st = 0`: bu devirde alınmadı |
-| 12 | `cl = 0` | **`1 0`** | eski sayı tutuluyor |
+| 11 | `cl = 1` | `1 0` | çıkış değişmez, vitrin kapalı |
+| 12 | `cl = 0` | **`1 0`** | `st = 0`: bu devirde alınmadı, eski sayı tutuluyor |
 
 Adım 8'e bak: iki bit de değişti ve ikisi aynı adımda göründü.
 
@@ -262,7 +267,7 @@ kurduğun şey kapatılıp tek parça oluyor.
 ☐ 🔑 Veri telleri (d1, d0) bit bit AYRI. Kontrol telleri (st, cl) sözcüğe ORTAK.
 ☐ Kontrol biti ile veri biti arasında fiziksel fark yok; fark telin nereye bağlandığında (14).
 ☐ Neden tek işlemde: bitler farklı anlarda değişirse kimsenin yazmadığı bir sayı görünür (01 → 11 ya da 00 → 10).
-☐ ⚠️ st bit bit ayrılmaz; tek st var. st ile d'nin birleştiği yer dff kutusunun İÇİ (17'deki çevirmen).
+☐ ⚠️ st bit bit ayrılmaz; tek st var. st ile d'nin birleştiği yer dff kutusunun İÇİ: yalnız alıcının çevirmeni, st oraya and(st, cl) üzerinden ulaşır.
 ☐ Tek cl iki dff'yi yönetince yarış yok: cl'nin iki yolu hiçbir kapıda BULUŞMUYOR, her dff kendi sabit d'sini alıyor.
 ☐ Çözüm: 2 bileşen, 26 nand, en basit. dff kutusu 13 nand = 18'deki optimal.
 ☐ Oyun 16 bitlik register kutusunu üretti: 16 dff, st ve cl ortak, d0–d15 ayrı.

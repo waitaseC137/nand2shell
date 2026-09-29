@@ -5,7 +5,8 @@
 Sınanan iddia (18. ders, "Daha Az Nand"):
   İki d latch kutusu 4'er çıplak nand'a açılınca (çevirmen 2 + çapraz SR 2),
   devre farklı kapı hızlarında da doğru çalışıyor; kararsızlık yalnızca ilk
-  saklamadan ÖNCE, yani seviyenin "tanımsız" dediği aralıkta görülüyor.
+  gösterimden (saklamadan sonraki ilk inişten) ÖNCE, yani seviyenin "tanımsız"
+  dediği aralıkta görülüyor.
 
 Neden gerekli: 17'de select'li latch kara kutu hâliyle geçti, parçalarına
 açılınca bit kaybetti ("did not reach a stable state"). Kutuyu açmak yarışı
@@ -22,8 +23,8 @@ Devre (oyunda 10 bileşen / 13 nand olarak geçen çözüm; burada and ile inv
   her latch: s' = nand(en, d) · r' = nand(en, s') · q = nand(s', q') · q' = nand(r', q)
 
 Beklenen çıktı (sayılar tohuma göre sabit):
-  ilk saklamadan SONRA  yanlış 0 · kararsız 0
-  ilk saklamadan ÖNCE   kararsız > 0   (rastgele açılış durumu, 16'daki titreşim)
+  ilk gösterimden SONRA  yanlış 0 · kararsız 0
+  ilk gösterimden ÖNCE   kararsız > 0   (rastgele açılış durumu, 16'daki titreşim)
 
 Çalıştır:  python3 dff_sim.py
 """
@@ -126,8 +127,8 @@ def main():
                 sonra += 1
                 yanlis += s != b
     print(f'devre: {len(g)} nand (latch\'ler 8 + and 2 + inv 1; oyun and ile inv\'i 5 saydığı için orada 13) · 400 deneme (ilki eşit gecikme, gerisi 1–3 tik) · {adim} adım')
-    print(f'ilk saklamadan SONRA  {sonra} adım · yanlış {yanlis} · kararsız {kararsiz_sonra}')
-    print(f'ilk saklamadan ÖNCE   kararsız {kararsiz_once}  (seviye: "ilk saklamadan önce çıkış tanımsız")')
+    print(f'ilk gösterimden SONRA  {sonra} adım · yanlış {yanlis} · kararsız {kararsiz_sonra}')
+    print(f'ilk gösterimden ÖNCE   kararsız {kararsiz_once}  (seviye: "ilk saklamadan ve ilk saat devrinden önce çıkış tanımsız")')
 
 
 if __name__ == '__main__':

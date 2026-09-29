@@ -4,9 +4,6 @@
 > tek bir kapıydı. O kapının neden şart olduğu, oyunun hata mesajı satır satır
 > okununca ortaya çıktı. Sonra aynı devre daha az nand'la yeniden kuruldu ve
 > kablolar arasında iki kez kaybolundu.
->
-> Denemeler bu yüzden silinmedi. Bu derste ilk kez oyunun kendi ekran görüntüleri
-> de var.
 
 ---
 
@@ -89,7 +86,7 @@ Bu yarışları gördün. [16](./16_sr_latch.md#kullanılmayan-satır)'da `0 0`'
 ## Saat: Herkes Aynı Zile Bakar
 
 `cl`, *clock*, yani **saat.** Durmadan 0, 1, 0, 1 diye gidip gelen bir tel. Oyunda
-onu elle çeviriyorsun. Her gidip gelme bir **tik.**
+onu elle çeviriyorsun. Her gidip gelme bir **saat devri.**
 
 Bu seviyede iki giriş iki ayrı sorunun cevabı:
 
@@ -211,7 +208,7 @@ vitrinin st'si  ←  inv(cl)
 ```
 
 **Alıcı.** Alıcının iki şartı var ve ikisi aynı anda sağlanmalı: `st = 1`
-(yazma izni) **ve** `cl = 1` (zil). İki şart aynı anda 1 olunca 1 veren kapı:
+(yazma izni) **ve** `cl = 1` (saat 1'de). İki şart aynı anda 1 olunca 1 veren kapı:
 
 ```
 alıcının st'si  ←  and(st, cl)
@@ -314,18 +311,18 @@ Her adımda **tek** bir anahtar değişiyor:
 | adım | değişen | beklenen çıkış | ne sınanıyor |
 |---|---|---|---|
 | 1 | `d = 1` | tanımsız | |
-| 2 | `st = 1` | tanımsız | `cl = 0` iken hiçbir şey alınmıyor |
+| 2 | `st = 1` | tanımsız | |
 | 3 | `cl = 1` | **değişmez** | 1 alındı ama gösterilmedi |
 | 4 | `cl = 0` | `1` | devir tamamlandı, gösterildi |
 | 5 | `d = 0` | **`1`** | `cl = 0` iken `d` duyulmuyor |
-| 6 | `cl = 1` | **`1`** | 0 alındı, gösterilmedi (birinci deneme burada düştü) |
+| 6 | `cl = 1` | **`1`** | 0 alındı, gösterilmedi (oyunun denetimi birinci denemeyi bu adımda yakaladı; bu tabloyla birinci deneme 5. adımda düşer) |
 | 7 | `cl = 0` | `0` | gösterildi |
 | 8 | `st = 0` | `0` | |
 | 9 | `d = 1` | `0` | |
-| 10 | `cl = 1` | **`0`** | `st = 0`: bu devirde alınmadı |
-| 11 | `cl = 0` | **`0`** | eski değer tutuluyor |
+| 10 | `cl = 1` | **`0`** | çıkış değişmez, vitrin kapalı |
+| 11 | `cl = 0` | **`0`** | `st = 0`: bu devirde alınmadı, eski değer tutuluyor |
 
-Adım 5, 6 ve 10'a bak. Flip-flop'un kanıtı bu üç satır.
+Adım 5, 6 ve 11'e bak. Flip-flop'un kanıtı bu üç satır.
 
 <details>
 <summary>🔑 Takıldıysan — bağlantı listesi</summary>
@@ -410,9 +407,10 @@ merdiven burada ters yönde de işliyor: yukarıda çalışmak kolay, bedel en a
 
 Kutuları açmanın bir riski daha var. 17'de seçicili latch kara kutu hâliyle
 geçmiş, parçalarına açılınca biti kaybetmişti: kutu içindeki yarışı gizliyordu.
-Aynı soru burada da soruldu. Bu devre kapı düzeyinde, her kapıya 1 ile 3 tik
-arasında farklı gecikmeler verilerek 400 kez simüle edildi. İlk saklamadan sonraki
-9 851 adımın hiçbirinde yanlış ya da kararsız çıkış görülmedi.
+Aynı soru burada da soruldu. Bu devre kapı düzeyinde, her nand'a 1 ile 3 tik
+(simülasyonun zaman birimi) arasında farklı gecikmeler verilerek 400 kez simüle
+edildi. İlk gösterimden (saklamadan sonraki ilk inişten) sonraki 9 851 adımın
+hiçbirinde yanlış ya da kararsız çıkış görülmedi.
 
 Nedeni az önceki kural: iki kapı hiçbir zaman aynı anda açık değil. Yarışın
 sonucu ancak yolun iki ucu birden açıkken çıkışa ulaşabilir.
@@ -421,7 +419,7 @@ sonucu ancak yolun iki ucu birden açıkken çıkışa ulaşabilir.
 
 ## Açılışta Yine Tanımsız
 
-Simülasyonda kararsızlık yalnızca bir yerde görüldü: **ilk saklamadan önce**, bazı
+Simülasyonda kararsızlık yalnızca bir yerde görüldü: **ilk gösterimden önce**, bazı
 açılış durumlarında. İki SR Latch'in her biri [16](./16_sr_latch.md)'daki gibi
 iki eşit kararlı durumdan birine, ya da bazı gecikmelerde bir süre titreyerek
 uyanıyor. Seviyenin notu da bunu söylüyor: *"ilk saklamadan ve ilk saat devrinden
@@ -451,12 +449,12 @@ zorlanmalı.
 ☐ Alındı ama gösterilmedi anında devre İKİ bit tutar: yeni alınan + eski gösterilen → iki D Latch.
 ☐ Alıcı ile vitrin birbirini bilmez: tek yönlü el değiştirme. Alıcının çıkışı → vitrinin d'si.
 ☐ Vitrinin kapısı inv(cl): cl = 0 iken açık.
-☐ Alıcının kapısı and(st, cl): iki şart birden, izin VE zil.
+☐ Alıcının kapısı and(st, cl): iki şart birden, izin VE cl = 1.
 ☐ ⚠️ Birinci deneme: alıcının kapısında yalnız st vardı. cl = 0 iken iki kapı birden açık → d'den çıkışa kesintisiz yol → devre yine şeffaf. Check 6. adımda düştü.
 ☐ 🔑 İki kapı ASLA aynı anda açık olmamalı. İkisinin birden kapalı olması zararsız.
 ☐ st = 1 iken and(st, cl) ile inv(cl) birbirinin tersi; st = 0 iken değil. Kural "hep ters" değil, "asla ikisi birden açık değil".
 ☐ Sonuç: çıkış yalnızca cl'nin 1'den 0'a indiği ANDA değişir. 17'nin istediği "tam şu anda, bir kez".
-☐ Hafıza testi bir SIRA: her adımda tek anahtar. Kanıt satırları: cl = 0'da d değişir çıkış değişmez; cl 1'e çıkınca çıkış hâlâ değişmez.
+☐ Hafıza testi bir SIRA: her adımda tek anahtar. Kanıt satırları: cl = 0'da d değişir çıkış değişmez; cl 1'e çıkınca çıkış hâlâ değişmez; st = 0 iken inişte eski değer kalır.
 ☐ Oyun iki şey sayar: bileşen ve nand. 4 bileşen / 31 nand ≠ 10 bileşen / 13 nand (optimal).
 ☐ d latch kutusu oyunda 13 nand; 17'deki kendi D Latch'in 4. Kutuları açmak nand'ı düşürür.
 ☐ 🔑 Kutular insan için, nand'lar çip için. Zahmetli olan çoğu zaman küçük olandır.

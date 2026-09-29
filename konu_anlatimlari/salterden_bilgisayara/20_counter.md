@@ -40,12 +40,12 @@ Seviyenin tanımı:
 > `X` girişi yeni sayaç değeri olarak kullanılır. `st` 0 ise önceki sayaç değeri
 > 1 artırılır. Sayacın çıkışı `cl` 0'a inince değişir."*
 
-| `st` | `cl` 0'a inince |
+| `st` | register'a yazılan |
 |---|---|
-| 0 | bir sonraki değer = **çıkış + 1** |
-| 1 | bir sonraki değer = **`X`** |
+| 0 | **çıkış + 1** |
+| 1 | **`X`** |
 
-Tabloda iki kelime geçiyor. **output**, o anki çıkış. **next**, bir sonraki
+Oyunun tablosunda iki kelime geçiyor. **output**, o anki çıkış. **next**, bir sonraki
 değer: `cl` 0'a inince çıkışa geçecek olan.
 
 Açılan pencere de şunu söylüyor:
@@ -140,12 +140,12 @@ Seviyenin `st`'si aslında bir **seçim teli.** Adı "store" olsa da burada bir
 
 Tabloya bir daha bakınca cevap çıkıyor:
 
-| seviyenin `st`'si | `cl` 0'a inince |
+| seviyenin `st`'si | register'a yazılan |
 |---|---|
-| 0 | çıkış + 1 **saklanır** |
-| 1 | `X` **saklanır** |
+| 0 | **çıkış + 1** |
+| 1 | **`X`** |
 
-İki satırda da bir şey saklanıyor. "Hiçbir şey saklanmasın" diyen bir satır yok.
+İki satırda da bir şey yazılıyor. "Hiçbir şey yazılmasın" diyen bir satır yok.
 Yani `register` her zilde yazmalı: `st` bacağı hep **1**.
 
 Kutuda hazır bir `1` yok, ama bir `0` ve bir `inv` var. Burada bir öneri daha
@@ -208,10 +208,10 @@ Her adımda **tek** bir anahtar değişiyor:
 | 4 | `cl = 0` | `5` | `X` yüklendi |
 | 5 | `st = 0` | `5` | |
 | 6 | `cl = 1` | **`5`** | 6 alındı, gösterilmedi |
-| 7 | `cl = 0` | `6` | bir artırıldı |
+| 7 | `cl = 0` | `6` | bir artırıldı; `st = 0` iken `X` (5) duyulmadı |
 | 8 | `cl = 1` | `6` | |
 | 9 | `cl = 0` | `7` | yine **bir** artırıldı |
-| 10 | `X = ffff` | **`7`** | `st = 0` iken `X` duyulmuyor |
+| 10 | `X = ffff` | **`7`** | `cl = 0` iken çıkış kıpırdamıyor |
 | 11 | `st = 1` | `7` | |
 | 12 | `cl = 1` | `7` | |
 | 13 | `cl = 0` | `ffff` | yüklendi |
@@ -287,7 +287,7 @@ diyor (`inv(0)`).
 ☐ Aynı tel iki yere gidebilir: register'ın çıkışı hem Output'a hem inc 16'ya.
 ☐ select 16: s ← st, D1 ← X (st = 1), D0 ← inc 16 (st = 0).
 ☐ ⚠️ Aynı ad, farklı görev: seviyenin st'si SEÇİM teli ("hangi aday"), register'ın st'si YAZMA izni ("yazılsın mı").
-☐ İki satırda da bir şey saklanıyor → register her zilde yazmalı → st hep 1.
+☐ İki satırda da bir şey yazılıyor → register her zilde yazmalı → st hep 1.
 ☐ ⚠️ Sabit 0 bağlamak olmaz: st = 0 iken flip-flop yazmaz, sayaç donar. 1 = inv(0).
 ☐ 🔑 Döngü (register → inc → select → register) her zilde bir kez döner, çünkü flip-flop'un iki kapısı asla aynı anda açık değil.
 ☐ Çözüm: 4 bileşen, 996 nand, en basit. 0 sayılmaz: içinde mantık yok.

@@ -181,9 +181,9 @@ Her adımda **tek** bir anahtar değişiyor:
 | 2 | `st = 1` | | |
 | 3 | `cl = 1` | **değişmez** | 5 alındı, gösterilmedi |
 | 4 | `cl = 0` | `5` | 0 numaralı sözcüğe 5 yazıldı |
-| 5 | `ad = 1` | 1 numaralı register'daki değer | okuma zil beklemiyor |
-| 6 | `X = 9` | aynı | |
-| 7 | `cl = 1` | aynı | 9 alındı, gösterilmedi |
+| 5 | `ad = 1` | tanımsız (1 numaralı register'a henüz yazılmadı) | okuma zil beklemiyor |
+| 6 | `X = 9` | tanımsız | |
+| 7 | `cl = 1` | tanımsız | 9 alındı, gösterilmedi |
 | 8 | `cl = 0` | `9` | 1 numaralı sözcüğe 9 yazıldı |
 | 9 | `st = 0` | `9` | |
 | 10 | `ad = 0` | **`5`** | 0 numaralı sözcük bozulmadı |
@@ -243,7 +243,7 @@ Memory bölümünün altı kapısı tek bir yol:
 | ders | ne kuruldu |
 |---|---|
 | [16](./16_sr_latch.md) | iki NAND birbirini tutuyor: bit döngünün içinde |
-| [17](./17_d_latch.md) | önüne bir çevirmen: yasak satır ulaşılamaz |
+| [17](./17_d_latch.md) | önüne bir çevirmen: yasak satır kararlı durumda ulaşılamaz |
 | [18](./18_data_flip_flop.md) | almak ile göstermek ayrıldı: saat |
 | [19](./19_register.md) | bitler yan yana: bir sayının hafızası |
 | [20](./20_counter.md) | her zilde bir adım: `PC ← PC + 1` |

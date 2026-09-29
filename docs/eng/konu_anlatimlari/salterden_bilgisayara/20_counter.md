@@ -43,12 +43,12 @@ The level's definition:
 > `st` is 0, then the previous counter value is incremented by 1. The counter
 > output changes when `cl` (clock signal) changes to 0."*
 
-| `st` | as `cl` falls to 0 |
+| `st` | written to the register |
 |---|---|
-| 0 | the next value = **output + 1** |
-| 1 | the next value = **`X`** |
+| 0 | **output + 1** |
+| 1 | **`X`** |
 
-The table uses two words. **output** is the current output. **next** is the next
+The game's table uses two words. **output** is the current output. **next** is the next
 value: the one that will pass to the output when `cl` falls to 0.
 
 The window that opens also says:
@@ -146,12 +146,12 @@ it does not decide whether something is stored, it decides **what** is stored.
 
 Looking at the table once more gives the answer:
 
-| the level's `st` | as `cl` falls to 0 |
+| the level's `st` | written to the register |
 |---|---|
-| 0 | output + 1 **is stored** |
-| 1 | `X` **is stored** |
+| 0 | **output + 1** |
+| 1 | **`X`** |
 
-Something is stored in both rows. There is no row saying "store nothing". So the
+Something is written in both rows. There is no row saying "write nothing". So the
 register must write on every bell: its `st` leg is always **1**.
 
 There is no ready-made `1` in the toolbox, but there is a `0` and an `inv`. Here
@@ -217,10 +217,10 @@ In each step **only one** switch changes:
 | 4 | `cl = 0` | `5` | `X` loaded |
 | 5 | `st = 0` | `5` | |
 | 6 | `cl = 1` | **`5`** | 6 taken, not shown |
-| 7 | `cl = 0` | `6` | incremented by one |
+| 7 | `cl = 0` | `6` | incremented by one; `X` (5) was not heard while `st = 0` |
 | 8 | `cl = 1` | `6` | |
 | 9 | `cl = 0` | `7` | incremented by **one** again |
-| 10 | `X = ffff` | **`7`** | `X` is not heard while `st = 0` |
+| 10 | `X = ffff` | **`7`** | the output does not move while `cl = 0` |
 | 11 | `st = 1` | `7` | |
 | 12 | `cl = 1` | `7` | |
 | 13 | `cl = 0` | `ffff` | loaded |
@@ -298,7 +298,7 @@ bell" (`inv(0)`).
 ☐ The same wire can go to two places: the register's output goes to both Output and inc 16.
 ☐ select 16: s ← st, D1 ← X (st = 1), D0 ← inc 16 (st = 0).
 ☐ ⚠️ Same name, different job: the level's st is a SELECTION wire ("which candidate"), the register's st is WRITE permission ("should it be written").
-☐ Something is stored in both rows → the register must write on every bell → its st is always 1.
+☐ Something is written in both rows → the register must write on every bell → its st is always 1.
 ☐ ⚠️ Wiring a constant 0 won't do: with st = 0 a flip-flop doesn't write, so the counter freezes. 1 = inv(0).
 ☐ 🔑 The loop (register → inc → select → register) turns once per bell, because the two gates of a flip-flop are never open at the same time.
 ☐ Solution: 4 components, 996 nands, the simplest. 0 isn't counted: it contains no logic.
