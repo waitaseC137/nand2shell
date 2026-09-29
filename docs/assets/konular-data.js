@@ -9,7 +9,7 @@ window.KONULAR = {
       id: "salterden_bilgisayara",
       label: "Şalterden Bilgisayara (NAND'dan CPU'ya)",
       accent: "var(--d-low)",
-      tag: "24 ders · 🚧 Memory ünitesi sürüyor",
+      tag: "25 ders · Memory ünitesi tamam",
       blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10), yönlendirme (11) ve ALU (12–15) üniteleri tamamlandı; Memory ünitesi sürüyor (16 SR Latch, 17 D Latch). Sırada hafızanın geri kalanı ve işlemci.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Buradan Başla",        h: "Kurs haritası; şalterden CPU'ya (🚧 yazılıyor)" },
@@ -35,7 +35,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/17_d_latch.md",             n: "17",   t: "D Latch",              h: "Hafızanın kapıcısı · yasak satır zaman kuralına döner · neden select değil · şeffaf latch" },
         { f: "salterden_bilgisayara/18_data_flip_flop.md",      n: "18",   t: "Data Flip-Flop",       h: "Saat · almak ile göstermeyi ayırmak · alıcı ile vitrin · kutular insan için, nand'lar çip için" },
         { f: "salterden_bilgisayara/19_register.md",            n: "19",   t: "Register",             h: "Bir sayının hafızası · veri telleri ayrı, kontrol telleri ortak · bitler aynı zilde" },
-        { f: "salterden_bilgisayara/20_counter.md",             n: "20",   t: "Counter",              h: "Her zilde bir adım · seçim teli ile yazma izni · PC ← PC + 1 artık bir kez" }
+        { f: "salterden_bilgisayara/20_counter.md",             n: "20",   t: "Counter",              h: "Her zilde bir adım · seçim teli ile yazma izni · PC ← PC + 1 artık bir kez" },
+        { f: "salterden_bilgisayara/21_ram.md",                 n: "21",   t: "RAM",                  h: "Numarası olan sözcükler · register adres bilmez · yazarken dağıt, okurken topla" }
       ]
     },
     {

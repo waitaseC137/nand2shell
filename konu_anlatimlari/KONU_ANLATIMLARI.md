@@ -36,6 +36,7 @@
 | [18_data_flip_flop.md](./salterden_bilgisayara/18_data_flip_flop.md) | Data Flip-Flop; saat, almak ile göstermeyi ayırmak, iki kapının asla aynı anda açık olmaması, bileşen ile nand sayısı |
 | [19_register.md](./salterden_bilgisayara/19_register.md) | Register; bir sayının hafızası, veri telleri ayrı ve kontrol telleri ortak, bitlerin aynı anda değişmesi |
 | [20_counter.md](./salterden_bilgisayara/20_counter.md) | Counter; her zilde bir adım, aynı adı taşıyan iki telin farklı görevi, döngünün neden bir kez döndüğü |
+| [21_ram.md](./salterden_bilgisayara/21_ram.md) | RAM; adres, register'ın adres bilmemesi, yazarken dağıtmak ve okurken toplamak, özyinelemeli büyüme |
 
 ---
 

@@ -309,4 +309,4 @@ diyor (`inv(0)`).
 ---
 
 **Önceki konu:** [19_register.md](./19_register.md)
-**Sonraki konu:** *(yolda — RAM)*
+**Sonraki konu:** [21_ram.md](./21_ram.md)
