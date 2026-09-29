@@ -33,6 +33,10 @@
 | [15_condition.md](./salterden_bilgisayara/15_condition.md) | Condition; AND as a valve, trichotomy and closing the OF debt |
 | [16_sr_latch.md](./salterden_bilgisayara/16_sr_latch.md) | SR Latch; feedback, the number of inversions: memory or oscillation |
 | [17_d_latch.md](./salterden_bilgisayara/17_d_latch.md) | D Latch; a translator in front of the SR Latch, the forbidden row made impossible in the settled state and turned into a timing rule, why not select |
+| [18_data_flip_flop.md](./salterden_bilgisayara/18_data_flip_flop.md) | Data Flip-Flop; the clock, separating taking and showing, the two gates never open at the same time, component count vs nand count |
+| [19_register.md](./salterden_bilgisayara/19_register.md) | Register; the memory of a number, data wires separate and control wires shared, bits changing at the same moment |
+| [20_counter.md](./salterden_bilgisayara/20_counter.md) | Counter; one step per bell, two wires with the same name doing different jobs, why the loop turns once |
+| [21_ram.md](./salterden_bilgisayara/21_ram.md) | RAM; the address, a register not knowing its address, distributing when writing and gathering when reading, recursive growth |
 
 ---
 ## 👾 CWE Map

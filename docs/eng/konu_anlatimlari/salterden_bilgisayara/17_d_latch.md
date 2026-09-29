@@ -530,11 +530,21 @@ output = or( and(st, d),  and(inverse st, output) )
 ```
 
 A 1 was written with `st=1`, `d=1`, then `st` was brought down to 0. On the
-canvas the output **dropped to 0**; the 1 that should have been stored was lost.
+canvas the output **dropped to 0**; the 1 that should have been stored was lost:
+
+![The selector opened up into its parts: st=1, d=1, output 1](./gorseller/17_select_acik_yazildi.png)
+*Before: `st = 1`, `d = 1`. The output is 1, the bit was written.*
+
+![The same circuit with st brought down to 0: the output dropped to 0](./gorseller/17_select_acik_bit_kayboldu.png)
+*After: only `st` was brought down to 0. `d` is still 1, but the output is 0. The bit that should have been stored is lost.*
+
 With the same circuit **Check solution** no longer passed either:
 
 > *"Set d=1. Set st=1: a 1 should be stored and emitted. Change st to 0. Output
 > should not change. **The circuit did not reach a stable state.**"*
+
+![Check solution: with the selector opened up, the circuit cannot reach a stable state](./gorseller/17_select_kararsiz.png)
+*Check solution on the same circuit: `d = 1`, `st = 1`, then `st` falls to 0 and the circuit cannot settle.*
 
 The reason is a race. When `st` falls the write valve closes, but the
 `inverse st` that opens the hold valve arrives one gate later, because it first
@@ -737,4 +747,4 @@ built as `nand(and(st, r), rst_n)`.
 ---
 
 **Previous topic:** [16_sr_latch.md](./16_sr_latch.md)
-**Next topic:** *(on the way — Data Flip-Flop)*
+**Next topic:** [18_data_flip_flop.md](./18_data_flip_flop.md)
