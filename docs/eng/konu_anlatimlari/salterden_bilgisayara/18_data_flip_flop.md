@@ -301,7 +301,15 @@ The real rule is not "always inverse" but something weaker that is still enough:
 
 The result: the output changes only **at the moment `cl` falls from 1 to 0.**
 Apart from that single moment, whatever `d` does, the output does not move. That
-is the "exactly now, once" that 17 asked for.
+is the "exactly now, once" that 17 asked for, but only for **when** the output
+changes.
+
+> 📌 **Which** value is shown is decided by `d` at the end of `cl = 1`. The
+> receiver's gate is open for the whole of `cl = 1`, so during that time it is
+> transparent: if `d` changes then, the receiver follows it and the value at the
+> fall is taken. In the sequence `st = 1`, `d = 1`, `cl = 1`, `d = 0`, `cl = 0` the
+> output becomes 0, while the level's table expects 1. That is why the level has
+> the note *"Assume there will be no changes in input while cl=1."*
 
 ---
 
@@ -469,6 +477,7 @@ be forced to a known value at power-on, while reset is still active.
 ☐ 🔑 The two gates must NEVER be open at the same time. Both being closed at once is harmless.
 ☐ With st = 1, and(st, cl) and inv(cl) are inverses of each other; with st = 0 they are not. The rule is not "always inverse" but "never both open".
 ☐ Result: the output changes only AT THE MOMENT cl falls from 1 to 0. The "exactly now, once" that 17 wanted.
+☐ 📌 Which value is shown is decided by d at the end of cl = 1: the receiver is transparent for the whole of cl = 1. That is why the level assumes the inputs stay fixed while cl = 1.
 ☐ Testing memory is a SEQUENCE: one switch per step. The proof rows: with cl = 0, d changes and the output doesn't; when cl rises to 1, the output still doesn't change; with st = 0 the old value stays at the fall.
 ☐ The game counts two things: components and nands. 4 components / 31 nands ≠ 10 components / 13 nands (optimal).
 ☐ The d latch box counts as 13 nands in the game; your own D Latch from 17 is 4. Opening the boxes lowers the nand count.

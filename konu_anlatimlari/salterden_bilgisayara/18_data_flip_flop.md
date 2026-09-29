@@ -290,7 +290,13 @@ Asıl kural "hep ters" değil, ondan daha zayıf ama yeterli olan şu:
 
 Sonuç: çıkış yalnızca **`cl`'nin 1'den 0'a indiği anda** değişiyor. O tek an
 dışında `d` ne yaparsa yapsın çıkış kıpırdamıyor. 17'nin istediği "tam şu anda,
-bir kez" bu.
+bir kez" bu, ama yalnızca çıkışın **ne zaman** değiştiği için.
+
+> 📌 **Hangi** değerin gösterileceğini ise `cl = 1`'in sonundaki `d` belirliyor.
+> Alıcının kapısı `cl = 1` boyunca açık, yani o süre boyunca şeffaf: `d` o sırada
+> değişirse alıcı onu izler ve inişteki değer alınır. `st = 1`, `d = 1`, `cl = 1`,
+> `d = 0`, `cl = 0` sırasında çıkış 0 oluyor, seviyenin tablosu 1 bekler.
+> Seviyenin *"`cl = 1` iken girişlerin değişmeyeceğini varsay"* notu bu yüzden var.
 
 ---
 
@@ -454,6 +460,7 @@ zorlanmalı.
 ☐ 🔑 İki kapı ASLA aynı anda açık olmamalı. İkisinin birden kapalı olması zararsız.
 ☐ st = 1 iken and(st, cl) ile inv(cl) birbirinin tersi; st = 0 iken değil. Kural "hep ters" değil, "asla ikisi birden açık değil".
 ☐ Sonuç: çıkış yalnızca cl'nin 1'den 0'a indiği ANDA değişir. 17'nin istediği "tam şu anda, bir kez".
+☐ 📌 Hangi değerin gösterileceğini cl = 1'in sonundaki d belirler: alıcı cl = 1 boyunca şeffaf. Seviye bu yüzden cl = 1 iken girişleri sabit varsayar.
 ☐ Hafıza testi bir SIRA: her adımda tek anahtar. Kanıt satırları: cl = 0'da d değişir çıkış değişmez; cl 1'e çıkınca çıkış hâlâ değişmez; st = 0 iken inişte eski değer kalır.
 ☐ Oyun iki şey sayar: bileşen ve nand. 4 bileşen / 31 nand ≠ 10 bileşen / 13 nand (optimal).
 ☐ d latch kutusu oyunda 13 nand; 17'deki kendi D Latch'in 4. Kutuları açmak nand'ı düşürür.
