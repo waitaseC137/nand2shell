@@ -1,8 +1,5 @@
 # 🧮 From Switches to a Computer — D Latch: The Gatekeeper of Memory
 
-> Like the ones before it, this lesson is written as if someone were sitting
-> across from you, watching. It asks you questions and waits while you build.
->
 > In this level the circuit worked on the first try. The places where things got
 > stuck were not in the circuit but in the concepts: it was assumed that "when a
 > 0 arrives there is no data", and that a `nand` with one leg at 1 does not

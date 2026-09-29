@@ -1,8 +1,5 @@
 # 🧮 Şalterden Bilgisayara — SR Latch: Kuyruğunu Tutan Devre
 
-> Bu ders de bir öncekinde olduğu gibi yazıldı: karşında seni seyreden biri
-> varmış gibi. Sana soru soruyor, sen kurarken bekliyor.
->
 > Dersteki yanlış denemeler de uydurma değil, gerçekten bu sırayla yapıldı. Önce
 > iki kapının dört ayağına da iki giriş verildi ve geri dönecek tele yer kalmadı.
 > Sonra yapı doğru kuruldu ama kapılardan biri yanlış seçildi ve devre

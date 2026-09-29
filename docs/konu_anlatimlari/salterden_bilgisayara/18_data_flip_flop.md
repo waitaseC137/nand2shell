@@ -118,14 +118,22 @@ yazıyor. Ama bir şey atlandı, sorunun cevabı da tam orada:
 
 > 🔑 D Latch yazdığı anda **çıkışa da veriyor.**
 
-Burada ise iki ayrı an var:
+Bundan sonra iki kelime sık geçecek:
+
+- **Almak:** `d`'nin değerini içeride saklamak. Değer artık devrenin içinde, ama
+  dışarıdan görünmüyor.
+- **Göstermek:** saklanan değeri çıkış teline vermek. Çıkışa bağlı başka bir devre
+  varsa, değeri ancak o zaman görüyor.
+
+D Latch'te bu ikisi aynı olay: yazdığı anda değer çıkışta da görünüyor. Burada ise
+iki ayrı an var:
 
 | an | D Latch | Data Flip-Flop |
 |---|---|---|
 | alma | `st = 1` iken | `cl` 1'e çıkarken |
 | gösterme | **alırken, aynı anda** | `cl` 0'a inerken, **sonra** |
 
-Almak ile göstermek ayrılmış. D Latch'te bu ikisi tek bir olaydı.
+Almak ile göstermek ayrılmış.
 
 ---
 
@@ -136,6 +144,22 @@ Somut bir örnekle düşün:
 1. Çıkış şu an **0**. Daha önce saklanmış bir değer.
 2. `d = 1`, `st = 1` yapıldı. `cl` 1'e çıktı. Tabloya göre 1 **alındı.**
 3. Ama çıkış henüz **değişmemeli.** Hâlâ 0 göstermeli.
+
+### Çıkış neden beklemeli?
+
+Çünkü çıkışa bakan başka devreler var, ve çoğu zaman onların hesabı bu değerin
+kendisine dayanıyor. [17](./17_d_latch.md#kapı-açıkken)'deki örneği hatırla:
+`PC ← PC + 1`. Artırma devresi PC'nin çıkışını okuyor, sonucunu PC'nin `d`'sine
+geri veriyor. Çıkış, yeni değer alındığı anda değişseydi, artırma devresi yeni
+değeri hemen görür, bir daha artırır, o da hemen alınır. 17'deki durmadan artan
+sayaç geri gelirdi.
+
+Flip-flop bunu iki adıma bölüyor. Önce çıkışa **verilecek değer seçilip** içeride
+bekletiliyor. Bu sırada çıkış eski değeri göstermeye devam ediyor, ona bakan
+devreler de eski değerle işini bitiriyor. Zil çalınca yeni değer tek seferde
+çıkışa veriliyor. Yarış yine yaşanıyor, ama sonucu kimseye ulaşmıyor.
+
+### Bunun bedeli
 
 O an devre iki şeyi birden hatırlamak zorunda: **yeni alınan 1'i** ve **çıkışta
 gösterdiği eski 0'ı.**
@@ -421,7 +445,9 @@ zorlanmalı.
 ☐ st "yazılsın mı", cl "ne zaman". İkisi ayrı sorular.
 ☐ Saat fikri: herkes aynı zile bakar, değişiklik yalnızca zil anında olur. Yarış yine olur ama sonucu görünmez.
 ☐ 🔑 D Latch yazdığı anda çıkışa da verir (şeffaf). Flip-flop almak ile göstermeyi AYIRIR.
+☐ Almak = değeri içeride saklamak. Göstermek = saklanan değeri çıkış teline vermek.
 ☐ cl 1'e çıkarken: st = 1 ise d alınır, çıkış değişmez. cl 0'a inerken: alınan gösterilir.
+☐ 🔑 Çıkış neden bekler: ona bakan devreler (PC + 1 gibi) eski değerle işini bitirsin diye. Yeni değer önce seçilir, zil çalınca tek seferde çıkışa verilir.
 ☐ Alındı ama gösterilmedi anında devre İKİ bit tutar: yeni alınan + eski gösterilen → iki D Latch.
 ☐ Alıcı ile vitrin birbirini bilmez: tek yönlü el değiştirme. Alıcının çıkışı → vitrinin d'si.
 ☐ Vitrinin kapısı inv(cl): cl = 0 iken açık.

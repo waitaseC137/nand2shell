@@ -1,8 +1,5 @@
 # 🧮 Şalterden Bilgisayara — D Latch: Hafızanın Kapıcısı
 
-> Bu ders de bir öncekiler gibi yazıldı: karşında seni seyreden biri varmış gibi.
-> Sana soru soruyor, sen kurarken bekliyor.
->
 > Bu seviyede devre tek seferde çalıştı. Takılınan yerler devrede değil,
 > kavramlardaydı: "0 gelince ortada veri yok" sanıldı, bir ayağı 1 olan `nand`'ın
 > öbür ayağını dinlemediği sanıldı. İkisi de bu dersin en öğretici yerleri oldu,

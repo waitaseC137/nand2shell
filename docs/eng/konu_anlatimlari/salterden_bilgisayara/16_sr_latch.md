@@ -1,8 +1,5 @@
 # 🧮 From Switches to a Computer — SR Latch: The Circuit That Holds Its Own Tail
 
-> Like the previous lesson, this one is written as if someone were sitting across
-> from you, watching. It asks you questions and waits while you build.
->
 > The wrong attempts in this lesson are not invented either; they really happened
 > in this order. First both legs of both gates were given the two inputs, and no
 > leg was left for the wire that has to come back. Then the structure was built
