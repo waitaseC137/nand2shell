@@ -1,10 +1,6 @@
 # 🧮 Şalterden Bilgisayara — Condition: Seçici Değil, Vana
 
-> Bu ders diğerlerinden farklı yazıldı. Karşında oturmuş, seni seyreden biri
-> varmış gibi. Sana sorular soracak, sen kurarken bekleyecek, yanlış bağladığında
-> "dur bir bakalım" diyecek.
->
-> Ve dersteki yanlış denemeler uydurma değil. Gerçekten bu sırayla yapıldı: önce
+> Dersteki yanlış denemeler uydurma değil. Gerçekten bu sırayla yapıldı: önce
 > doğru cümle devreye çevrilirken iki "değil" düştü, sonra doğru parça yanlış tele
 > bağlandı,
 > sonra "çalışıyor ama yanlış sebeple çalışıyor" durumuna girildi. Üçü de

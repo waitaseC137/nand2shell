@@ -1,10 +1,6 @@
 # 🧮 From Switches to a Computer — Condition: A Valve, Not a Selector
 
-> This lesson is written differently from the others. As if someone were sitting
-> across from you, watching. It will ask you questions, wait while you build, and
-> say "hold on, let's look at this" when you wire something wrong.
->
-> And the wrong attempts in this lesson are not invented. They really happened,
+> The wrong attempts in this lesson are not invented. They really happened,
 > in this order: first two "not"s fell out while the right sentence was being
 > turned into a circuit, then the right part was wired to the wrong signal, then the circuit entered the state of
 > "it works, but for the wrong reason". All three were corrected — and each one
