@@ -191,7 +191,7 @@ Read the files in this order. Each lesson leans on the previous one.
 |:---:|---|---|---|
 | 16 | [16_sr_latch](./16_sr_latch.md) | Feedback; even inversions remember, odd inversions oscillate | SR Latch |
 | 17 | [17_d_latch](./17_d_latch.md) | The gatekeeper of memory; making the forbidden row unreachable, the transparent latch | D Latch |
-| 18 | [18_data_flip_flop](./18_data_flip_flop.md) | The clock; separating taking and showing, the two gates never open at once | Data Flip-Flop |
+| 18 | [18_data_flip_flop](./18_data_flip_flop.md) | The clock; separating taking and showing, the two gates never open at once in the stable state | Data Flip-Flop |
 | 19 | [19_register](./19_register.md) | The memory of a number; data wires separate, control wires shared | Register |
 | 20 | [20_counter](./20_counter.md) | One step per bell; selection wire vs write permission, the loop turns once | Counter |
 | 21 | [21_ram](./21_ram.md) | The address; distribute when writing, gather when reading | RAM |

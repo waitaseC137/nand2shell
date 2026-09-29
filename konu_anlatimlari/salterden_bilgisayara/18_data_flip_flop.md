@@ -250,8 +250,9 @@ Sorun şu: `cl = 0` iken **iki kapı birden açıktı.** O an `d`'den çıkışa
 kesintisiz bir yol oluşuyor, devre yine tek bir D Latch gibi davranıyor. Önüne
 konan cam geri gelmiş oluyor.
 
-> 🔑 Flip-flop'un sırrı: **iki kapı hiçbir zaman aynı anda açık olmamalı.**
-> Vitrin `cl = 0` iken açık. O hâlde alıcı `cl = 0` iken kapalı olmak zorunda.
+> 🔑 Flip-flop'un sırrı: **iki kapı kararlı durumda hiçbir zaman aynı anda açık
+> olmamalı.** Vitrin `cl = 0` iken açık. O hâlde alıcı `cl = 0` iken kapalı olmak
+> zorunda.
 
 Alıcının kapısına `and(st, cl)` konunca devre geçti:
 
@@ -285,8 +286,9 @@ tersi değil.
 
 Asıl kural "hep ters" değil, ondan daha zayıf ama yeterli olan şu:
 
-> 🔑 **İkisi aynı anda asla açık olmaz.** Biri açıksa öbürü kesinlikle kapalı.
-> İkisinin birden kapalı olması zararsız: o sırada değer yalnızca korunur.
+> 🔑 **Kararlı durumda ikisi aynı anda asla açık olmaz.** Biri açıksa öbürü
+> kesinlikle kapalı. İkisinin birden kapalı olması zararsız: o sırada değer
+> yalnızca korunur.
 
 Sonuç: çıkış yalnızca **`cl`'nin 1'den 0'a indiği anda** değişiyor. O tek an
 dışında `d` ne yaparsa yapsın çıkış kıpırdamıyor. 17'nin istediği "tam şu anda,
@@ -418,8 +420,12 @@ Aynı soru burada da soruldu. Bu devre kapı düzeyinde, her nand'a 1 ile 3 tik
 edildi. İlk gösterimden (saklamadan sonraki ilk inişten) sonraki 9 851 adımın
 hiçbirinde yanlış ya da kararsız çıkış görülmedi.
 
-Nedeni az önceki kural: iki kapı hiçbir zaman aynı anda açık değil. Yarışın
-sonucu ancak yolun iki ucu birden açıkken çıkışa ulaşabilir.
+Nedeni tek başına az önceki kural değil. Kapı düzeyinde `cl` 1'den 0'a inerken
+alıcının kapısı `and(st, cl)` iki nand'dan geçtiği için geç kapanıyor, vitrininki
+`inv(cl)` tek nand'dan geçtiği için erken açılıyor: kısa bir an iki kapı
+örtüşüyor. O an zararsız, çünkü `d` o sırada sabit (seviyenin notu); çıkışın
+geri döndüğü devrelerde (`PC + 1` gibi) ise dönüş yolunun o kısa andan uzun
+olması gerekiyor.
 
 ---
 
@@ -457,8 +463,8 @@ zorlanmalı.
 ☐ Vitrinin kapısı inv(cl): cl = 0 iken açık.
 ☐ Alıcının kapısı and(st, cl): iki şart birden, izin VE cl = 1.
 ☐ ⚠️ Birinci deneme: alıcının kapısında yalnız st vardı. cl = 0 iken iki kapı birden açık → d'den çıkışa kesintisiz yol → devre yine şeffaf. Check 6. adımda düştü.
-☐ 🔑 İki kapı ASLA aynı anda açık olmamalı. İkisinin birden kapalı olması zararsız.
-☐ st = 1 iken and(st, cl) ile inv(cl) birbirinin tersi; st = 0 iken değil. Kural "hep ters" değil, "asla ikisi birden açık değil".
+☐ 🔑 Kararlı durumda iki kapı ASLA aynı anda açık olmamalı. İkisinin birden kapalı olması zararsız.
+☐ st = 1 iken and(st, cl) ile inv(cl) birbirinin tersi; st = 0 iken değil. Kural "hep ters" değil, "kararlı durumda asla ikisi birden açık değil".
 ☐ Sonuç: çıkış yalnızca cl'nin 1'den 0'a indiği ANDA değişir. 17'nin istediği "tam şu anda, bir kez".
 ☐ 📌 Hangi değerin gösterileceğini cl = 1'in sonundaki d belirler: alıcı cl = 1 boyunca şeffaf. Seviye bu yüzden cl = 1 iken girişleri sabit varsayar.
 ☐ Hafıza testi bir SIRA: her adımda tek anahtar. Kanıt satırları: cl = 0'da d değişir çıkış değişmez; cl 1'e çıkınca çıkış hâlâ değişmez; st = 0 iken inişte eski değer kalır.
@@ -466,7 +472,7 @@ zorlanmalı.
 ☐ d latch kutusu oyunda 13 nand; 17'deki kendi D Latch'in 4. Kutuları açmak nand'ı düşürür.
 ☐ 🔑 Kutular insan için, nand'lar çip için. Zahmetli olan çoğu zaman küçük olandır.
 ☐ ⚠️ Oyunun bir kutuyu kaç nand saydığını tahmin etme, ölç.
-☐ Kutular açılınca yarış doğar mı? Simülasyonda doğmadı: iki kapı asla aynı anda açık olmadığı için.
+☐ Kutular açılınca yarış doğar mı? Simülasyonda doğmadı. Kapı düzeyinde cl inerken iki kapı kısa bir an örtüşür; zararsız, çünkü d o sırada sabit. Çıkışın geri döndüğü devrede dönüş yolu o andan uzun olmalı.
 ☐ 👾 Açılışta hâlâ tanımsız: saat CWE-1271'i çözmez. Güvenlik biti reset sürerken bilinen değere zorlanmalı.
 ```
 

@@ -258,9 +258,9 @@ The problem: while `cl = 0`, **both gates were open.** At that moment there is a
 unbroken path from `d` to the output, and the circuit behaves like a single D
 Latch again. The glass it was meant to cover is back.
 
-> 🔑 The flip-flop's secret: **the two gates must never be open at the same
-> time.** The showcase is open while `cl = 0`. So the receiver has to be closed
-> while `cl = 0`.
+> 🔑 The flip-flop's secret: **in the stable state the two gates must never be
+> open at the same time.** The showcase is open while `cl = 0`. So the receiver
+> has to be closed while `cl = 0`.
 
 With `and(st, cl)` on the receiver's gate, the circuit passed:
 
@@ -295,9 +295,9 @@ always each other's inverse.
 
 The real rule is not "always inverse" but something weaker that is still enough:
 
-> 🔑 **The two are never open at the same time.** If one is open, the other is
-> certainly closed. Both being closed at once is harmless: during that time the
-> value is simply kept.
+> 🔑 **In the stable state the two are never open at the same time.** If one is
+> open, the other is certainly closed. Both being closed at once is harmless:
+> during that time the value is simply kept.
 
 The result: the output changes only **at the moment `cl` falls from 1 to 0.**
 Apart from that single moment, whatever `d` does, the output does not move. That
@@ -435,8 +435,12 @@ gate level 400 times, with each nand given a different delay between 1 and 3
 ticks (the simulation's unit of time). In the 9,851 steps after the first showing
 (the first fall after a store), no wrong or unstable output was seen.
 
-The reason is the rule above: the two gates are never open at the same time. The
-result of a race can only reach the output while both ends of the path are open.
+The rule above is not the whole reason. At gate level, as `cl` falls from 1 to 0,
+the receiver's gate `and(st, cl)` passes through two nands and so closes late,
+while the showcase's `inv(cl)` passes through one nand and so opens early: for a
+short moment the two gates overlap. That moment is harmless because `d` is steady
+at that moment (the level's note); in circuits whose output comes back around
+(like `PC + 1`), the return path has to be longer than that short moment.
 
 ---
 
@@ -474,8 +478,8 @@ be forced to a known value at power-on, while reset is still active.
 ☐ The showcase's gate is inv(cl): open while cl = 0.
 ☐ The receiver's gate is and(st, cl): both conditions at once, permission AND cl = 1.
 ☐ ⚠️ First attempt: the receiver's gate had only st. With cl = 0 both gates were open → an unbroken path from d to the output → the circuit was transparent again. Check failed at step 6.
-☐ 🔑 The two gates must NEVER be open at the same time. Both being closed at once is harmless.
-☐ With st = 1, and(st, cl) and inv(cl) are inverses of each other; with st = 0 they are not. The rule is not "always inverse" but "never both open".
+☐ 🔑 In the stable state the two gates must NEVER be open at the same time. Both being closed at once is harmless.
+☐ With st = 1, and(st, cl) and inv(cl) are inverses of each other; with st = 0 they are not. The rule is not "always inverse" but "in the stable state never both open".
 ☐ Result: the output changes only AT THE MOMENT cl falls from 1 to 0. The "exactly now, once" that 17 wanted.
 ☐ 📌 Which value is shown is decided by d at the end of cl = 1: the receiver is transparent for the whole of cl = 1. That is why the level assumes the inputs stay fixed while cl = 1.
 ☐ Testing memory is a SEQUENCE: one switch per step. The proof rows: with cl = 0, d changes and the output doesn't; when cl rises to 1, the output still doesn't change; with st = 0 the old value stays at the fall.
@@ -483,7 +487,7 @@ be forced to a known value at power-on, while reset is still active.
 ☐ The d latch box counts as 13 nands in the game; your own D Latch from 17 is 4. Opening the boxes lowers the nand count.
 ☐ 🔑 Boxes are for people, nands are for chips. The laborious solution is often the small one.
 ☐ ⚠️ Don't guess how many nands the game counts for a box; measure it.
-☐ Does opening the boxes create a race? Not in the simulation: because the two gates are never open at the same time.
+☐ Does opening the boxes create a race? Not in the simulation. At gate level the two gates overlap for a short moment as cl falls; harmless, because d is steady at that moment. In a circuit whose output comes back around the return path must be longer than that moment.
 ☐ 👾 Still undefined at power-on: the clock doesn't solve CWE-1271. A security bit must be forced to a known value while reset is active.
 ```
 

@@ -172,14 +172,17 @@ register  →  inc 16  →  select 16  →  register
 17'de şeffaf latch'le kurulan döngünün aynısı. O zaman durmadan dönüyordu. Şimdi
 neden bir kez dönüyor?
 
-18'deki kural yüzünden: `register`'ın içindeki her flip-flop'ta **iki kapı
-hiçbir zaman aynı anda açık değil.**
+İki sebepten. Birincisi 18'deki kural: `register`'ın içindeki her flip-flop'ta
+**iki kapı kararlı durumda hiçbir zaman aynı anda açık değil.** İkincisi dönüş
+yolunun uzunluğu: `cl` inerken iki kapı kısa bir an örtüşüyor, ama yeni değerin
+vitrinden `inc 16` ve `select 16` üzerinden alıcıya dönmesi o andan uzun sürüyor.
 
 - `cl` 1'e çıkınca yeni değer **alınıyor**, ama çıkış değişmiyor. `inc 16` hâlâ
   eski sayıya bakıyor, yani alınan değer sabit.
-- `cl` 0'a inince yeni değer çıkışa **veriliyor.** `inc 16` hemen bir sonrakini
-  hesaplıyor, ama alıcı kapı artık kapalı. O değer bir sonraki zile kadar
-  bekliyor.
+- `cl` 0'a inince yeni değer çıkışa **veriliyor.** `inc 16` bir sonrakini
+  hesaplıyor, ama sonuç alıcıya varana kadar alıcı kapı kapanmış oluyor. O değer
+  bir sonraki zile kadar bekliyor. Bunun da bir şartı var: `inc 16` hesabını
+  `cl` bir daha 1'e çıkmadan bitirmeli.
 
 Artırılmış değer döngüyü bir kez dolaşıyor ve kapıda duruyor. 17'de eksik olan
 buydu.
@@ -289,7 +292,7 @@ diyor (`inv(0)`).
 ☐ ⚠️ Aynı ad, farklı görev: seviyenin st'si SEÇİM teli ("hangi aday"), register'ın st'si YAZMA izni ("yazılsın mı").
 ☐ İki satırda da bir şey yazılıyor → register her zilde yazmalı → st hep 1.
 ☐ ⚠️ Sabit 0 bağlamak olmaz: st = 0 iken flip-flop yazmaz, sayaç donar. 1 = inv(0).
-☐ 🔑 Döngü (register → inc → select → register) her zilde bir kez döner, çünkü flip-flop'un iki kapısı asla aynı anda açık değil.
+☐ 🔑 Döngü (register → inc → select → register) her zilde bir kez döner: flip-flop'un iki kapısı kararlı durumda asla aynı anda açık değil, inişteki kısa örtüşmeden de dönüş yolu uzun. inc 16 hesabını cl bir daha 1'e çıkmadan bitirmeli.
 ☐ Çözüm: 4 bileşen, 996 nand, en basit. 0 sayılmaz: içinde mantık yok.
 ☐ Daha iyisi olsaydı oyun söylerdi (18'deki gibi). Alternatifler ya aynı ya daha kötü.
 ```
@@ -299,7 +302,7 @@ diyor (`inv(0)`).
 ## 🔗 İlgili Konular
 
 - [19_register.md](./19_register.md) — Sayıyı tutan parça; kontrol telleri ortak, veri telleri ayrı
-- [18_data_flip_flop.md](./18_data_flip_flop.md) — İki kapı asla aynı anda açık değil; döngünün neden bir kez döndüğü
+- [18_data_flip_flop.md](./18_data_flip_flop.md) — İki kapı kararlı durumda asla aynı anda açık değil; döngünün neden bir kez döndüğü
 - [17_d_latch.md](./17_d_latch.md) — Şeffaf latch'le kurulan sayacın durmadan artması
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`
 - [11_selector_switch.md](./11_selector_switch.md) — Seçici: `s = 1` iken `D1`, `s = 0` iken `D0`
