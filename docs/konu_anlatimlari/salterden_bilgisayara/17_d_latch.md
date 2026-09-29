@@ -513,6 +513,9 @@ Aynı devrede **Check solution** da artık geçmedi:
 > *"Set d=1. Set st=1: a 1 should be stored and emitted. Change st to 0. Output
 > should not change. **The circuit did not reach a stable state.**"*
 
+![Check solution: seçicili latch parçalarına açılınca devre kararlı bir duruma ulaşamıyor](./gorseller/17_select_kararsiz.png)
+*Aynı devrede Check solution: `d = 1`, `st = 1`, sonra `st` 0'a iniyor ve devre durulamıyor.*
+
 Sebep bir yarış. `st` inince yazma vanası kapanıyor, ama tutma vanasını açan
 `ters st` bir kapı geç geliyor, çünkü önce `inv`'den geçmesi gerekiyor. O kısa anda
 iki vana da kapalı. Döngüde 1'i tutan kimse kalmıyor.
