@@ -282,4 +282,4 @@ kurduğun şey kapatılıp tek parça oluyor.
 ---
 
 **Önceki konu:** [18_data_flip_flop.md](./18_data_flip_flop.md)
-**Sonraki konu:** *(yolda — Counter)*
+**Sonraki konu:** [20_counter.md](./20_counter.md)
