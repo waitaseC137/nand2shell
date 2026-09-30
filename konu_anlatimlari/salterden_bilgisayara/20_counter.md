@@ -40,12 +40,12 @@ Seviyenin tanımı:
 > `X` girişi yeni sayaç değeri olarak kullanılır. `st` 0 ise önceki sayaç değeri
 > 1 artırılır. Sayacın çıkışı `cl` 0'a inince değişir."*
 
-| `st` | `cl` 0'a inince |
+| `st` | register'a yazılan |
 |---|---|
-| 0 | bir sonraki değer = **çıkış + 1** |
-| 1 | bir sonraki değer = **`X`** |
+| 0 | **çıkış + 1** |
+| 1 | **`X`** |
 
-Tabloda iki kelime geçiyor. **output**, o anki çıkış. **next**, bir sonraki
+Oyunun tablosunda iki kelime geçiyor. **output**, o anki çıkış. **next**, bir sonraki
 değer: `cl` 0'a inince çıkışa geçecek olan.
 
 Açılan pencere de şunu söylüyor:
@@ -140,12 +140,12 @@ Seviyenin `st`'si aslında bir **seçim teli.** Adı "store" olsa da burada bir
 
 Tabloya bir daha bakınca cevap çıkıyor:
 
-| seviyenin `st`'si | `cl` 0'a inince |
+| seviyenin `st`'si | register'a yazılan |
 |---|---|
-| 0 | çıkış + 1 **saklanır** |
-| 1 | `X` **saklanır** |
+| 0 | **çıkış + 1** |
+| 1 | **`X`** |
 
-İki satırda da bir şey saklanıyor. "Hiçbir şey saklanmasın" diyen bir satır yok.
+İki satırda da bir şey yazılıyor. "Hiçbir şey yazılmasın" diyen bir satır yok.
 Yani `register` her zilde yazmalı: `st` bacağı hep **1**.
 
 Kutuda hazır bir `1` yok, ama bir `0` ve bir `inv` var. Burada bir öneri daha
@@ -172,14 +172,18 @@ register  →  inc 16  →  select 16  →  register
 17'de şeffaf latch'le kurulan döngünün aynısı. O zaman durmadan dönüyordu. Şimdi
 neden bir kez dönüyor?
 
-18'deki kural yüzünden: `register`'ın içindeki her flip-flop'ta **iki kapı
-hiçbir zaman aynı anda açık değil.**
+İki sebepten. Birincisi 18'deki kural: `register`'ın içindeki her flip-flop'ta
+**iki kapı kararlı durumda hiçbir zaman aynı anda açık değil.** İkincisi dönüş
+yolunun uzunluğu: `cl` inerken iki kapı kısa bir an örtüşüyor, ama yeni değerin
+vitrinden `inc 16` ve `select 16` üzerinden alıcıya dönmesi o andan uzun sürüyor.
 
 - `cl` 1'e çıkınca yeni değer **alınıyor**, ama çıkış değişmiyor. `inc 16` hâlâ
   eski sayıya bakıyor, yani alınan değer sabit.
-- `cl` 0'a inince yeni değer çıkışa **veriliyor.** `inc 16` hemen bir sonrakini
-  hesaplıyor, ama alıcı kapı artık kapalı. O değer bir sonraki zile kadar
-  bekliyor.
+- `cl` 0'a inince yeni değer çıkışa **veriliyor.** `inc 16` bir sonrakini
+  hesaplıyor, ama sonuç alıcıya varana kadar alıcı kapı kapanmış oluyor. O değer
+  bir sonraki zile kadar bekliyor. Bunun da bir şartı var: `inc 16` hesabını
+  `cl` bir daha 1'e çıkmadan bitirmeli (18'deki not: `cl = 1` iken girişler
+  değişmez).
 
 Artırılmış değer döngüyü bir kez dolaşıyor ve kapıda duruyor. 17'de eksik olan
 buydu.
@@ -208,10 +212,10 @@ Her adımda **tek** bir anahtar değişiyor:
 | 4 | `cl = 0` | `5` | `X` yüklendi |
 | 5 | `st = 0` | `5` | |
 | 6 | `cl = 1` | **`5`** | 6 alındı, gösterilmedi |
-| 7 | `cl = 0` | `6` | bir artırıldı |
+| 7 | `cl = 0` | `6` | bir artırıldı; `st = 0` iken `X` (5) duyulmadı |
 | 8 | `cl = 1` | `6` | |
 | 9 | `cl = 0` | `7` | yine **bir** artırıldı |
-| 10 | `X = ffff` | **`7`** | `st = 0` iken `X` duyulmuyor |
+| 10 | `X = ffff` | **`7`** | `cl = 0` iken çıkış kıpırdamıyor |
 | 11 | `st = 1` | `7` | |
 | 12 | `cl = 1` | `7` | |
 | 13 | `cl = 0` | `ffff` | yüklendi |
@@ -287,9 +291,9 @@ diyor (`inv(0)`).
 ☐ Aynı tel iki yere gidebilir: register'ın çıkışı hem Output'a hem inc 16'ya.
 ☐ select 16: s ← st, D1 ← X (st = 1), D0 ← inc 16 (st = 0).
 ☐ ⚠️ Aynı ad, farklı görev: seviyenin st'si SEÇİM teli ("hangi aday"), register'ın st'si YAZMA izni ("yazılsın mı").
-☐ İki satırda da bir şey saklanıyor → register her zilde yazmalı → st hep 1.
+☐ İki satırda da bir şey yazılıyor → register her zilde yazmalı → st hep 1.
 ☐ ⚠️ Sabit 0 bağlamak olmaz: st = 0 iken flip-flop yazmaz, sayaç donar. 1 = inv(0).
-☐ 🔑 Döngü (register → inc → select → register) her zilde bir kez döner, çünkü flip-flop'un iki kapısı asla aynı anda açık değil.
+☐ 🔑 Döngü (register → inc → select → register) her zilde bir kez döner: flip-flop'un iki kapısı kararlı durumda asla aynı anda açık değil, inişteki kısa örtüşmeden de dönüş yolu uzun. inc 16 hesabını cl bir daha 1'e çıkmadan bitirmeli.
 ☐ Çözüm: 4 bileşen, 996 nand, en basit. 0 sayılmaz: içinde mantık yok.
 ☐ Daha iyisi olsaydı oyun söylerdi (18'deki gibi). Alternatifler ya aynı ya daha kötü.
 ```
@@ -299,7 +303,7 @@ diyor (`inv(0)`).
 ## 🔗 İlgili Konular
 
 - [19_register.md](./19_register.md) — Sayıyı tutan parça; kontrol telleri ortak, veri telleri ayrı
-- [18_data_flip_flop.md](./18_data_flip_flop.md) — İki kapı asla aynı anda açık değil; döngünün neden bir kez döndüğü
+- [18_data_flip_flop.md](./18_data_flip_flop.md) — İki kapı kararlı durumda asla aynı anda açık değil; döngünün neden bir kez döndüğü
 - [17_d_latch.md](./17_d_latch.md) — Şeffaf latch'le kurulan sayacın durmadan artması
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`
 - [11_selector_switch.md](./11_selector_switch.md) — Seçici: `s = 1` iken `D1`, `s = 0` iken `D0`

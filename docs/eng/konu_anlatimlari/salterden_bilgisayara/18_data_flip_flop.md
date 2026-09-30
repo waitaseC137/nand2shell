@@ -5,9 +5,6 @@
 > became clear when the game's error message was read line by line. Then the same
 > circuit was rebuilt with fewer nands, and the wiring got lost twice along the
 > way.
->
-> That is why the attempts were not deleted. This lesson also has the game's own
-> screenshots for the first time.
 
 ---
 
@@ -92,7 +89,7 @@ window proposes: **a clock signal.**
 ## The Clock: Everyone Listens to the Same Bell
 
 `cl` is the *clock.* A wire that keeps going 0, 1, 0, 1. In the game you flip it
-by hand. Each back-and-forth is one **tick.**
+by hand. Each back-and-forth is one **clock cycle.**
 
 In this level the two inputs answer two different questions:
 
@@ -218,7 +215,7 @@ the showcase's st  ←  inv(cl)
 ```
 
 **The receiver.** The receiver has two conditions, and both must hold at the same
-time: `st = 1` (write permission) **and** `cl = 1` (the bell). The gate that
+time: `st = 1` (write permission) **and** `cl = 1` (the clock at 1). The gate that
 gives 1 only when both conditions are 1:
 
 ```
@@ -261,9 +258,9 @@ The problem: while `cl = 0`, **both gates were open.** At that moment there is a
 unbroken path from `d` to the output, and the circuit behaves like a single D
 Latch again. The glass it was meant to cover is back.
 
-> 🔑 The flip-flop's secret: **the two gates must never be open at the same
-> time.** The showcase is open while `cl = 0`. So the receiver has to be closed
-> while `cl = 0`.
+> 🔑 The flip-flop's secret: **in the stable state the two gates must never be
+> open at the same time.** The showcase is open while `cl = 0`. So the receiver
+> has to be closed while `cl = 0`.
 
 With `and(st, cl)` on the receiver's gate, the circuit passed:
 
@@ -298,13 +295,21 @@ always each other's inverse.
 
 The real rule is not "always inverse" but something weaker that is still enough:
 
-> 🔑 **The two are never open at the same time.** If one is open, the other is
-> certainly closed. Both being closed at once is harmless: during that time the
-> value is simply kept.
+> 🔑 **In the stable state the two are never open at the same time.** If one is
+> open, the other is certainly closed. Both being closed at once is harmless:
+> during that time the value is simply kept.
 
 The result: the output changes only **at the moment `cl` falls from 1 to 0.**
 Apart from that single moment, whatever `d` does, the output does not move. That
-is the "exactly now, once" that 17 asked for.
+is the "exactly now, once" that 17 asked for, but only for **when** the output
+changes.
+
+> 📌 **Which** value is shown is decided by `d` at the end of `cl = 1`. The
+> receiver's gate is open for the whole of `cl = 1`, so during that time it is
+> transparent: if `d` changes then, the receiver follows it and the value at the
+> fall is taken. In the sequence `st = 1`, `d = 1`, `cl = 1`, `d = 0`, `cl = 0` the
+> output becomes 0, while the level's table expects 1. That is why the level has
+> the note *"Assume there will be no changes in input while cl=1."*
 
 ---
 
@@ -327,18 +332,18 @@ In each step **only one** switch changes:
 | step | change | expected output | what is being tested |
 |---|---|---|---|
 | 1 | `d = 1` | undefined | |
-| 2 | `st = 1` | undefined | nothing is taken while `cl = 0` |
+| 2 | `st = 1` | undefined | |
 | 3 | `cl = 1` | **unchanged** | 1 was taken but not shown |
 | 4 | `cl = 0` | `1` | the cycle is complete, it was shown |
 | 5 | `d = 0` | **`1`** | `d` is not heard while `cl = 0` |
-| 6 | `cl = 1` | **`1`** | 0 was taken, not shown (the first attempt failed here) |
+| 6 | `cl = 1` | **`1`** | 0 was taken, not shown (the game's check caught the first attempt at this step; with this table the first attempt fails at step 5) |
 | 7 | `cl = 0` | `0` | it was shown |
 | 8 | `st = 0` | `0` | |
 | 9 | `d = 1` | `0` | |
-| 10 | `cl = 1` | **`0`** | `st = 0`: nothing was taken this cycle |
-| 11 | `cl = 0` | **`0`** | the old value is kept |
+| 10 | `cl = 1` | **`0`** | the output does not change, the showcase is closed |
+| 11 | `cl = 0` | **`0`** | `st = 0`: nothing was taken this cycle, the old value is kept |
 
-Look at steps 5, 6 and 10. Those three rows are the flip-flop's proof.
+Look at steps 5, 6 and 11. Those three rows are the flip-flop's proof.
 
 <details>
 <summary>🔑 Stuck? — connection list</summary>
@@ -426,19 +431,23 @@ working higher up is easy, the price is paid at the very bottom.
 Opening the boxes carries one more risk. In 17 the selector latch passed as a
 black box, and lost the bit once it was opened up: the box had been hiding the
 race inside it. The same question was asked here. This circuit was simulated at
-gate level 400 times, with each gate given a different delay between 1 and 3
-ticks. In the 9,851 steps after the first store, no wrong or unstable output was
-seen.
+gate level 400 times, with each nand given a different delay between 1 and 3
+ticks (the simulation's unit of time). In the 9,851 steps after the first showing
+(the first fall after a store), no wrong or unstable output was seen.
 
-The reason is the rule above: the two gates are never open at the same time. The
-result of a race can only reach the output while both ends of the path are open.
+The rule above is not the whole reason. At gate level, as `cl` falls from 1 to 0,
+the receiver's gate `and(st, cl)` passes through two nands and so closes late,
+while the showcase's `inv(cl)` passes through one nand and so opens early: for a
+short moment the two gates overlap. That moment is harmless because `d` is steady
+at that moment (the level's note); in circuits whose output comes back around
+(like `PC + 1`), the return path has to be longer than that short moment.
 
 ---
 
 ## Undefined at Power-On Again
 
 In the simulation, instability showed up in only one place: **before the first
-store**, for some power-on states. Each of the two SR Latches wakes up in one of
+showing**, for some power-on states. Each of the two SR Latches wakes up in one of
 two equally stable states, as in [16](./16_sr_latch.md), or with some delays
 flickers for a while. The level's note says the same: *"output before the first
 store and clock cycle is unspecified."*
@@ -467,17 +476,18 @@ be forced to a known value at power-on, while reset is still active.
 ☐ At the moment of "taken but not shown", the circuit holds TWO bits: newly taken + old shown → two D Latches.
 ☐ The receiver and the showcase do not know each other: a one-way handover. Receiver's output → showcase's d.
 ☐ The showcase's gate is inv(cl): open while cl = 0.
-☐ The receiver's gate is and(st, cl): both conditions at once, permission AND bell.
+☐ The receiver's gate is and(st, cl): both conditions at once, permission AND cl = 1.
 ☐ ⚠️ First attempt: the receiver's gate had only st. With cl = 0 both gates were open → an unbroken path from d to the output → the circuit was transparent again. Check failed at step 6.
-☐ 🔑 The two gates must NEVER be open at the same time. Both being closed at once is harmless.
-☐ With st = 1, and(st, cl) and inv(cl) are inverses of each other; with st = 0 they are not. The rule is not "always inverse" but "never both open".
+☐ 🔑 In the stable state the two gates must NEVER be open at the same time. Both being closed at once is harmless.
+☐ With st = 1, and(st, cl) and inv(cl) are inverses of each other; with st = 0 they are not. The rule is not "always inverse" but "in the stable state never both open".
 ☐ Result: the output changes only AT THE MOMENT cl falls from 1 to 0. The "exactly now, once" that 17 wanted.
-☐ Testing memory is a SEQUENCE: one switch per step. The proof rows: with cl = 0, d changes and the output doesn't; when cl rises to 1, the output still doesn't change.
+☐ 📌 Which value is shown is decided by d at the end of cl = 1: the receiver is transparent for the whole of cl = 1. That is why the level assumes the inputs stay fixed while cl = 1.
+☐ Testing memory is a SEQUENCE: one switch per step. The proof rows: with cl = 0, d changes and the output doesn't; when cl rises to 1, the output still doesn't change; with st = 0 the old value stays at the fall.
 ☐ The game counts two things: components and nands. 4 components / 31 nands ≠ 10 components / 13 nands (optimal).
 ☐ The d latch box counts as 13 nands in the game; your own D Latch from 17 is 4. Opening the boxes lowers the nand count.
 ☐ 🔑 Boxes are for people, nands are for chips. The laborious solution is often the small one.
 ☐ ⚠️ Don't guess how many nands the game counts for a box; measure it.
-☐ Does opening the boxes create a race? Not in the simulation: because the two gates are never open at the same time.
+☐ Does opening the boxes create a race? Not in the simulation. At gate level the two gates overlap for a short moment as cl falls; harmless, because d is steady at that moment. In a circuit whose output comes back around the return path must be longer than that moment.
 ☐ 👾 Still undefined at power-on: the clock doesn't solve CWE-1271. A security bit must be forced to a known value while reset is active.
 ```
 

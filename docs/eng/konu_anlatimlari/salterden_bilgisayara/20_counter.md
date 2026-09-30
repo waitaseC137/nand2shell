@@ -43,12 +43,12 @@ The level's definition:
 > `st` is 0, then the previous counter value is incremented by 1. The counter
 > output changes when `cl` (clock signal) changes to 0."*
 
-| `st` | as `cl` falls to 0 |
+| `st` | written to the register |
 |---|---|
-| 0 | the next value = **output + 1** |
-| 1 | the next value = **`X`** |
+| 0 | **output + 1** |
+| 1 | **`X`** |
 
-The table uses two words. **output** is the current output. **next** is the next
+The game's table uses two words. **output** is the current output. **next** is the next
 value: the one that will pass to the output when `cl` falls to 0.
 
 The window that opens also says:
@@ -146,12 +146,12 @@ it does not decide whether something is stored, it decides **what** is stored.
 
 Looking at the table once more gives the answer:
 
-| the level's `st` | as `cl` falls to 0 |
+| the level's `st` | written to the register |
 |---|---|
-| 0 | output + 1 **is stored** |
-| 1 | `X` **is stored** |
+| 0 | **output + 1** |
+| 1 | **`X`** |
 
-Something is stored in both rows. There is no row saying "store nothing". So the
+Something is written in both rows. There is no row saying "write nothing". So the
 register must write on every bell: its `st` leg is always **1**.
 
 There is no ready-made `1` in the toolbox, but there is a `0` and an `inv`. Here
@@ -180,15 +180,20 @@ register  →  inc 16  →  select 16  →  register
 The same loop that was built with a transparent latch in 17. Back then it kept
 turning. Why does it turn once now?
 
-Because of the rule from 18: in every flip-flop inside the register, **the two
-gates are never open at the same time.**
+For two reasons. The first is the rule from 18: in every flip-flop inside the
+register, **in the stable state the two gates are never open at the same time.**
+The second is the length of the return path: as `cl` falls, the two gates overlap
+for a short moment, but the new value takes longer than that to come back from
+the showcase through `inc 16` and `select 16` to the receiver.
 
 - When `cl` rises to 1, the new value is **taken**, but the output does not
   change. `inc 16` is still looking at the old number, so the value being taken
   is steady.
 - When `cl` falls to 0, the new value is **given** to the output. `inc 16`
-  immediately computes the next one, but the receiving gate is now closed. That
-  value waits until the next bell.
+  computes the next one, but by the time the result reaches the receiver, the
+  receiving gate has closed. That value waits until the next bell. This has one
+  condition too: `inc 16` must finish before `cl` rises to 1 again (the note in
+  18: the inputs do not change while `cl = 1`).
 
 The incremented value goes around the loop once and stops at the gate. That is
 what was missing in 17.
@@ -217,10 +222,10 @@ In each step **only one** switch changes:
 | 4 | `cl = 0` | `5` | `X` loaded |
 | 5 | `st = 0` | `5` | |
 | 6 | `cl = 1` | **`5`** | 6 taken, not shown |
-| 7 | `cl = 0` | `6` | incremented by one |
+| 7 | `cl = 0` | `6` | incremented by one; `X` (5) was not heard while `st = 0` |
 | 8 | `cl = 1` | `6` | |
 | 9 | `cl = 0` | `7` | incremented by **one** again |
-| 10 | `X = ffff` | **`7`** | `X` is not heard while `st = 0` |
+| 10 | `X = ffff` | **`7`** | the output does not move while `cl = 0` |
 | 11 | `st = 1` | `7` | |
 | 12 | `cl = 1` | `7` | |
 | 13 | `cl = 0` | `ffff` | loaded |
@@ -298,9 +303,9 @@ bell" (`inv(0)`).
 ☐ The same wire can go to two places: the register's output goes to both Output and inc 16.
 ☐ select 16: s ← st, D1 ← X (st = 1), D0 ← inc 16 (st = 0).
 ☐ ⚠️ Same name, different job: the level's st is a SELECTION wire ("which candidate"), the register's st is WRITE permission ("should it be written").
-☐ Something is stored in both rows → the register must write on every bell → its st is always 1.
+☐ Something is written in both rows → the register must write on every bell → its st is always 1.
 ☐ ⚠️ Wiring a constant 0 won't do: with st = 0 a flip-flop doesn't write, so the counter freezes. 1 = inv(0).
-☐ 🔑 The loop (register → inc → select → register) turns once per bell, because the two gates of a flip-flop are never open at the same time.
+☐ 🔑 The loop (register → inc → select → register) turns once per bell: in the stable state the two gates of a flip-flop are never open at the same time, and the return path is longer than the short overlap as cl falls. inc 16 must finish before cl rises to 1 again.
 ☐ Solution: 4 components, 996 nands, the simplest. 0 isn't counted: it contains no logic.
 ☐ If something better existed the game would say so (as in 18). The alternatives are equal or worse.
 ```
@@ -310,7 +315,7 @@ bell" (`inv(0)`).
 ## 🔗 Related Topics
 
 - [19_register.md](./19_register.md) — The part that holds the number; control wires shared, data wires separate
-- [18_data_flip_flop.md](./18_data_flip_flop.md) — The two gates are never open at the same time; why the loop turns once
+- [18_data_flip_flop.md](./18_data_flip_flop.md) — The two gates are never open at the same time in the stable state; why the loop turns once
 - [17_d_latch.md](./17_d_latch.md) — The counter built with a transparent latch that grew without stopping
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`
 - [11_selector_switch.md](./11_selector_switch.md) — The selector: `D1` while `s = 1`, `D0` while `s = 0`

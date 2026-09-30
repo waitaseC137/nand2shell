@@ -185,9 +185,9 @@ In each step **only one** switch changes:
 | 2 | `st = 1` | | |
 | 3 | `cl = 1` | **unchanged** | 5 taken, not shown |
 | 4 | `cl = 0` | `5` | 5 written to word 0 |
-| 5 | `ad = 1` | the value in register 1 | reading doesn't wait for the bell |
-| 6 | `X = 9` | same | |
-| 7 | `cl = 1` | same | 9 taken, not shown |
+| 5 | `ad = 1` | undefined (nothing written to register 1 yet) | reading doesn't wait for the bell |
+| 6 | `X = 9` | undefined | |
+| 7 | `cl = 1` | undefined | 9 taken, not shown |
 | 8 | `cl = 0` | `9` | 9 written to word 1 |
 | 9 | `st = 0` | `9` | |
 | 10 | `ad = 0` | **`5`** | word 0 is intact |
@@ -248,7 +248,7 @@ The six doors of the Memory unit are a single path:
 | lesson | what was built |
 |---|---|
 | [16](./16_sr_latch.md) | two NANDs holding each other: the bit lives in the loop |
-| [17](./17_d_latch.md) | a translator in front: the forbidden row becomes unreachable |
+| [17](./17_d_latch.md) | a translator in front: the forbidden row becomes unreachable in the stable state |
 | [18](./18_data_flip_flop.md) | taking and showing separated: the clock |
 | [19](./19_register.md) | bits side by side: the memory of a number |
 | [20](./20_counter.md) | one step per bell: `PC ← PC + 1` |
