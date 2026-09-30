@@ -136,7 +136,7 @@ Soru şu: hangileri iki `dff` için **ortak**, hangileri **ayrı**?
 emri.
 
 Karışıklığın kaynağı da anlaşılır: `st` ile `d`'nin birleştiği bir yer gerçekten
-var, ama **kutunun içinde**, ve tek bir yerde: [18](./18_data_flip_flop.md#kapılar-ne-zaman-açık)'deki
+var, ama **kutunun içinde** ve tek bir yerde: [18](./18_data_flip_flop.md#kapılar-ne-zaman-açık)'deki
 alıcı latch'in çevirmeni ([17](./17_d_latch.md)'deki çevirmen). `st` oraya da
 doğrudan değil, `and(st, cl)` üzerinden ulaşıyor; vitrin `st`'yi hiç görmüyor.
 Dışarıdan bakınca `dff`'nin bacakları ayrı: `st` emir, `d` veri. Onları
