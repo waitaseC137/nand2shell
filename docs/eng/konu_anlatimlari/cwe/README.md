@@ -108,8 +108,8 @@ moment the wrapped number is used as a memory size. The two-box model explains i
 
 ## The NandGame Tree
 
-This map covers the topics **from the start of NandGame up to the second level of
-the Memory unit (D Latch)**. The rule is simple: **a topic that has not been
+This map covers the topics **from the start of NandGame to the end of the Memory
+unit (RAM)**. The rule is simple: **a topic that has not been
 taught gets no CWE here.** The catalogue mirrors the curriculum; it does not run
 ahead of it.
 
@@ -153,7 +153,7 @@ NandGame?**
 | [**CWE-1245**](./cwe_1245.md) | Improper Finite State Machines (FSMs) in Hardware Logic | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#the-unused-row) | [📄](https://cwe.mitre.org/data/definitions/1245.html) |
 
 **Why is 787 here?** The overflow itself breaks nothing. Without this outcome 190
-would remain a curiosity — this is why it sits at number one in the Top 25.
+would remain a curiosity — this is why 787 always sits near the top of the Top 25.
 
 **Why is 1245 here?** The first CWE of the Memory unit. The SR Latch is a two-state
 **state machine**, and the `0 0 → not used` row in its table is its

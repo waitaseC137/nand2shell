@@ -29,7 +29,7 @@ bağlandı.
 | araç | ne için | kurulum |
 |---|---|---|
 | **Python 3** | bütün `.py` dosyaları; yalnızca standart kütüphane | çoğu sistemde hazır |
-| **gcc** ya da **clang** | `08-09_c/` içindeki `.c` dosyaları | Arch: `pacman -S gcc clang` · Debian/Ubuntu: `apt install gcc clang` |
+| **gcc** ya da **clang** | `08-09_c/` ve `12_c/` içindeki `.c` dosyaları | Arch: `pacman -S gcc clang` · Debian/Ubuntu: `apt install gcc clang` |
 | **iverilog** (Icarus Verilog) | `16-17_latch/verilog/` | Arch: `pacman -S iverilog` · Debian/Ubuntu: `apt install iverilog` |
 | **Digital** | yalnızca `15_condition/digital/` | Java + [Digital](https://github.com/hneemann/Digital); `Digital.jar` yolu `DIGITAL_JAR` ile verilebilir |
 | **yosys** | henüz kullanılmadı | kuruldu, aşağıda neden durduğu yazıyor |
@@ -52,6 +52,7 @@ bağlandı.
 | CWE-1261 | "2'nin kuvveti kadar sapma = tek bit dönmesi" | `08.5_sayac/tasma_kumesi.py` | tek bit dönmesi hep tam 2ᵏ fark yapıyor; ama +4096 sayıların yalnız yarısında tek bit değiştiriyor (4096 + 4096 = 8192: iki bit) | yön düzeldi: sapma bir iz, kanıt değil |
 | 11 · Selector ve Switch | "Her an tam biri açık"; "ikisi aynı anda dolu olamaz" | `16-17_latch/verilog/mitre_1298.v` | MITRE'nin 1298 örneği 11'deki seçicinin birebir aynısı: `s` 1'den 0'a inerken, `d0 = d1 = 1` iken çıkış bir tik 0 | "kararlı durumda" kaydı ve kapı gecikmesi notu |
 | 12 · Logic Unit | `X=0, Y=ffff` satırında `ffff` veren işlemler; `X=Y=6553` girişi dört işlemi ayırt ediyor mu? | `14_alu/alu_sayim.py` | `or`, `xor` **ve `inv X`**; `6553`'te `xor` 0 veriyor, deney ayırt edemiyor | listeye `inv X` eklendi, deney girişi `00FF`/`0F0F` oldu ([13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e), [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
+| 12 · Logic Unit · CWE-480 · 670 | "Derleyici susar"; "derleyici girintiye bakmaz" | `12_c/derleyici_uyarilari.c` | gcc 16 ve clang 22 `-Wall`: koşulda atama, `&`/`==` önceliği ve yanıltıcı girinti uyarı veriyor; gcc'de `-Wextra` eksik `break`'i de yakalıyor. Uyarmayan iki yer: meşru görünen bit maskesi ve fazladan parantezli atama (2003'teki `(current->uid = 0)`) | 480'de "Derleyici Ne Zaman Susar", 670'te "Derleyici Neden Hepsini Yakalayamaz" |
 | 14 · ALU | 32 kombinasyon kaç farklı işlem, belge kaçını yazıyor? | `14_alu/alu_sayim.py` | 19 işlem · 11 belgeli · 8 listelenmemiş | ders "8 belgeli" diyordu, düzeldi ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
 | 14 · ALU | "Sıfırı yanlış bayrağa bağlamak" tuzağı neye benzer? | `14_alu/sifir_tuzagi.py` | aynı belirtiyi veren 60 kurulum; `X=5, Y=3` tablosu | tuzak tam kurulumuyla yeniden yazıldı ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
 | 15 · Condition | "Never ve Always tutarsa aradaki altı satır da tutar" | `15_condition/never_always.py` · `15_condition/digital/` | iki yanlış devre de iki testi geçiyor, 24 satırın 8'inde yanlış | test bölümü tek izinli satırlarla yeniden yazıldı ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
@@ -132,6 +133,7 @@ araclar/
 ├── 06_full_adder/           fa_gecis.py
 ├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
 ├── 08.5_sayac/              tasma_kumesi.py
+├── 12_c/                    derleyici_uyarilari.c
 ├── 14_alu/                  alu_sayim.py (12'nin iki satırı da burada) · sifir_tuzagi.py
 ├── 15_condition/            never_always.py · of_kurali.py · cf_borc.py
 │   └── digital/             uret.py · dig_uretici.py · 15_condition_*.dig

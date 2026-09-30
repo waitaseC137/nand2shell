@@ -107,8 +107,8 @@ bellek boyutu olarak kullanıldığı an. İki kutu modeliyle ayrıntısı →
 
 ## NandGame Ağacı
 
-Bu harita **NandGame'in başından Memory ünitesinin ikinci seviyesine (D Latch)
-kadar** olan konuları kapsıyor. Kural basit: **işlenmemiş konunun CWE'si burada olmaz.** Katalog
+Bu harita **NandGame'in başından Memory ünitesinin sonuna (RAM) kadar** olan
+konuları kapsıyor. Kural basit: **işlenmemiş konunun CWE'si burada olmaz.** Katalog
 müfredatın aynasıdır, önüne geçmez.
 
 ### Ünitenin İki Yarısı
@@ -149,7 +149,8 @@ Kataloğun geri kalanı bu iki sütunun etrafına diziliyor. Aşağıdaki üç k
 | [**CWE-1245**](./cwe_1245.md) | Improper Finite State Machines (FSMs) in Hardware Logic | [16 · SR Latch](../salterden_bilgisayara/16_sr_latch.md#kullanılmayan-satır) | [📄](https://cwe.mitre.org/data/definitions/1245.html) |
 
 **787 neden burada?** Taşmanın kendisi bir şey bozmaz. Sonuç bu olmasaydı 190 bir
-merak konusu olarak kalırdı — Top-25'in birinci sırasında olmasının sebebi bu.
+merak konusu olarak kalırdı — 787'nin Top-25'in hep ilk sıralarında durmasının
+sebebi bu.
 
 **1245 neden burada?** Memory ünitesinin ilk CWE'si. SR Latch iki durumlu bir
 **durum makinesi**, ve tablosundaki `0 0 → kullanılmıyor` satırı onun

@@ -29,7 +29,7 @@ game, and settled with screenshots.
 | tool | used for | setup |
 |---|---|---|
 | **Python 3** | every `.py` file; standard library only | ready on most systems |
-| **gcc** or **clang** | the `.c` files in `08-09_c/` | Arch: `pacman -S gcc clang` · Debian/Ubuntu: `apt install gcc clang` |
+| **gcc** or **clang** | the `.c` files in `08-09_c/` and `12_c/` | Arch: `pacman -S gcc clang` · Debian/Ubuntu: `apt install gcc clang` |
 | **iverilog** (Icarus Verilog) | `16-17_latch/verilog/` | Arch: `pacman -S iverilog` · Debian/Ubuntu: `apt install iverilog` |
 | **Digital** | only `15_condition/digital/` | Java + [Digital](https://github.com/hneemann/Digital); the path to `Digital.jar` can be given with `DIGITAL_JAR` |
 | **yosys** | not used yet | installed; why it is waiting is written below |
@@ -52,6 +52,7 @@ game, and settled with screenshots.
 | CWE-1261 | "A deviation of a power of two = a single bit flip" | `08.5_sayac/tasma_kumesi.py` | a single bit flip always changes the number by exactly 2ᵏ; but +4096 changes a single bit in only half of the numbers (4096 + 4096 = 8192: two bits) | direction fixed: the deviation is a trace, not proof |
 | 11 · Selector and Switch | "Exactly one is open at any moment"; "they can never both be full" | `16-17_latch/verilog/mitre_1298.v` | MITRE's 1298 example is exactly the selector from 11: as `s` falls from 1 to 0 with `d0 = d1 = 1`, the output is 0 for one tick | a "stable state" qualifier and a gate-delay note |
 | 12 · Logic Unit | Which operations give `ffff` on the `X=0, Y=ffff` row; can the input `X=Y=6553` tell the four operations apart? | `14_alu/alu_sayim.py` | `or`, `xor` **and `inv X`**; at `6553`, `xor` gives 0 and the experiment cannot tell them apart | `inv X` added to the list, the experiment input became `00FF`/`0F0F` ([13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e), [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
+| 12 · Logic Unit · CWE-480 · 670 | "The compiler stays quiet"; "the compiler does not look at indentation" | `12_c/derleyici_uyarilari.c` | gcc 16 and clang 22 with `-Wall`: assignment in a condition, `&`/`==` precedence and misleading indentation all warn; in gcc `-Wextra` also catches a missing `break`. Two places with no warning: a bit mask that looks legitimate and an assignment in extra parentheses (2003's `(current->uid = 0)`) | "When the Compiler Stays Quiet" in 480, "Why the Compiler Cannot Catch All of It" in 670 |
 | 14 · ALU | How many distinct operations do the 32 combinations give, and how many does the documentation list? | `14_alu/alu_sayim.py` | 19 operations · 11 documented · 8 unlisted | the lesson said "8 documented"; fixed ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
 | 14 · ALU | What does the "zero on the wrong flag" trap look like? | `14_alu/sifir_tuzagi.py` | 60 setups give the same symptom; the `X=5, Y=3` table | the trap rewritten with its full setup ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
 | 15 · Condition | "If Never and Always hold, the six rows in between hold too" | `15_condition/never_always.py` · `15_condition/digital/` | both wrong circuits pass both tests and are wrong in 8 of 24 rows | the test section rewritten around single-permission rows ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
@@ -137,6 +138,7 @@ araclar/
 ├── 06_full_adder/           fa_gecis.py
 ├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
 ├── 08.5_sayac/              tasma_kumesi.py
+├── 12_c/                    derleyici_uyarilari.c
 ├── 14_alu/                  alu_sayim.py (12's two rows are here too) · sifir_tuzagi.py
 ├── 15_condition/            never_always.py · of_kurali.py · cf_borc.py
 │   └── digital/             uret.py · dig_uretici.py · 15_condition_*.dig
