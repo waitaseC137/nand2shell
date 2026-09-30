@@ -372,6 +372,11 @@ today?"* and lets only one through.
 Which means a processor isn't afraid of doing unnecessary work. **It does all of them and
 picks one.** Choosing is cheaper than waiting.
 
+> 📌 This picture is a first approach. In [13](./13_arithmetic_unit.md#moving-the-selector-to-the-input)
+> you will merge two units that do the same job (`X + Y` and `X + 1`, both additions)
+> into one by moving the selector from the output to the **input**: instead of choosing
+> the result, you choose the number that goes into the calculation.
+
 > 💡 **The bonus we shelved:** `AND` isn't the only valve. `x OR 0 = x` and `x OR 1 = 1` —
 > so `OR` is a valve too, it just emits **`1`** rather than `0` when closed. An equivalent
 > selector comes out of that; but then you merge with `AND` instead of `OR` (because `1` is

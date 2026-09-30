@@ -280,6 +280,10 @@ a == b   →   a − b yap, sonuç SIFIR mı?
 a <  b   →   a − b yap, sonuç NEGATİF mi?
 ```
 
+> 📌 `a < b` satırı her zaman doğru değil: çıkarma taşarsa ya da sayılar işaretsiz
+> okunursa işaret biti yanıltır. Nedenini [10](./10_bayraklar.md#karşılaştırmanın-tamamı)'da
+> göreceksin.
+
 Karşılaştırma diye ayrı bir devre yok. **Çıkar, sonuca bak.** İşlemcinin "eğer"
 diyebilmesi buradan başlıyor.
 

@@ -368,6 +368,11 @@ ALU'nun içinde bütün devreler **aynı anda** çalışır — toplayıcı da t
 Yani bir işlemci, gereksiz hesap yapmaktan korkmaz. **Hepsini yapar, birini
 seçer.** Seçmek, beklemekten ucuzdur.
 
+> 📌 Bu resim ilk yaklaşım. [13](./13_arithmetic_unit.md#seçiciyi-girişe-taşımak)'te aynı
+> işi yapan iki birimi (`X + Y` ile `X + 1`, ikisi de toplama) tek birimde birleştirmek
+> için seçiciyi çıkıştan **girişe** taşıyacaksın: sonucu seçmek yerine, hesaba girecek
+> sayıyı seçmek.
+
 > 💡 **Rafa kaldırdığımız bonus:** `AND` tek vana değil. `x OR 0 = x` ve
 > `x OR 1 = 1` — yani `OR` da vanadır, sadece kapalıyken `0` değil **`1`** yayar.
 > Ondan da eşdeğer bir selector çıkar; ama o zaman birleştirmeyi `OR` ile değil

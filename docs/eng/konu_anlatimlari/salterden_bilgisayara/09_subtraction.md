@@ -283,6 +283,10 @@ a == b   →   do a − b, is the result ZERO?
 a <  b   →   do a − b, is the result NEGATIVE?
 ```
 
+> 📌 The `a < b` row is not always right: if the subtraction overflows, or if the
+> numbers are read as unsigned, the sign bit misleads. You will see why in
+> [10](./10_bayraklar.md#the-whole-of-comparison).
+
 There is no separate comparison circuit. **Subtract, then look at the result.** This is
 where a processor's ability to say "if" begins.
 
