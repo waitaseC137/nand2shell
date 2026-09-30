@@ -6,8 +6,7 @@
 > for gates to form a **team** — and the strange fact that will open the door to the next unit: XOR is, in fact,
 > a secret **adder.**
 
-> XOR is the series' "my brain is fried" stop: the first multi-gate structure. The burn is normal and
-> temporary — this lesson was written for exactly that wall.
+> XOR is the series' "my brain is fried" stop. The burn is normal and temporary.
 
 ---
 
@@ -98,7 +97,7 @@ Run each of the four possibilities through the gates one by one:
 Four rows, four hits. XOR = **AND( OR(a,b), NAND(a,b) )** — but don't memorize this
 formula; remember the story, and the formula rewrites itself.
 
-> 💡 Did you notice: all three gates on the team are from the previous lesson — OR, NAND, AND. XOR
+> 💡 Did you notice: all three gates on the team are from earlier lessons — NAND from 01, OR and AND from 02. XOR
 > isn't "a new invention," it's the **division of labor among old acquaintances.** Number of new parts: zero.
 
 ---
@@ -118,7 +117,7 @@ step by step, in Unit 1). Now look at XOR's table once more:
 | 1 | 0 | 1 | 1 | 1 |
 | 1 | 1 | 2 | **0** | **0** |
 
-Exactly the same column. **XOR is the ones digit of a two-bit addition.** This gate that
+Exactly the same column. **XOR is the ones digit of the sum `a + b`.** This gate that
 plays bouncer at the club door will, two lessons from now, be the heart of the circuit that lets the
 computer do addition.
 
@@ -155,7 +154,7 @@ separate rows — if the table has four rows, two "no"s + two "yes"es is the who
 ☐ One gate isn't enough, because the request is TWO sentences: "at least one" + "not both."
 ☐ The solution team: OR bouncer (eliminates 0,0) + NAND bouncer (eliminates 1,1) + AND approval desk.
 ☐ Design method: split a complex request into sentences, hand out gates to the sentences.
-☐ XOR's secret identity: the ONES DIGIT of a two-bit addition.
+☐ XOR's secret identity: the ONES DIGIT of the sum a + b.
 ```
 
 ---

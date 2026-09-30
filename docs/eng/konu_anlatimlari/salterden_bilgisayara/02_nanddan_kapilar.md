@@ -1,13 +1,12 @@
 # 🧱 From Switches to a Computer — All the Gates from a Single Brick
 
-> Last lesson we said "NAND is universal, everything derives from it." Claims like this
+> In Lesson 01 we said "NAND is universal, everything derives from it." Claims like this
 > shouldn't stay just words. In this lesson **you** will prove the claim: using only NAND,
 > you'll build the NOT, AND and OR gates. When the lesson ends you'll hold a
 > four-word language — and we'll never go back to relays again.
 
 > **From this lesson on, NAND is a closed box for you.** We're done with the relays
-> inside it; from now on NAND has only a **table**. This forgetting is deliberate — we'll
-> talk about exactly why in 03.5.
+> inside it; from now on NAND has only a **table**.
 
 ---
 
@@ -191,7 +190,6 @@ can use invert as a ready-made part in And and Or.)
 
 ## 🔗 Related Topics
 
-- 👾 **For the curious:** [CWE-1247 — Voltage and clock glitches](../cwe/cwe_1247.md) — a momentary disturbance can make a gate produce a wrong result
 - [01_akim_salter_role.md](./01_akim_salter_role.md) — What was inside NAND: relays
 - [03_xor_iki_fedai.md](./03_xor_iki_fedai.md) — The next gate: XOR, the difference detector
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Why the "closed box" idea matters so much

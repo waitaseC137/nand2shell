@@ -2,7 +2,7 @@
 
 > Şu ana kadar teller senin için "var/yok" taşıdı: akım, karar, fedai onayı. Bu
 > derste tellere yepyeni bir anlam biçeceğiz: **sayı.** Bu, serinin en büyük zihinsel
-> sıçramasıdır — ve devre içermeyen tek kavram dersidir. Burayı sağlam döşersen,
+> sıçramasıdır — ve bir devre dersi değil, bir kavram dersi. Burayı sağlam döşersen,
 > toplayıcı dersleri su gibi akar.
 
 > **Bu derste devre yok, oyun yok.** Sadece bir fikir var. Ama Ünite 1'in tamamı bu
@@ -24,13 +24,14 @@
 
 ## Bir Telin Sınırı
 
-01. dersteki temel gerçeği hatırla: **tel anlam bilmez.** Telde ya akım vardır ya
-yoktur. Biz o iki duruma "1" ve "0" adını verdik — bu bizim biçtiğimiz ilk anlamdı.
+01. dersteki temel gerçeği hatırla: **tel anlam bilmez.** Telde iki hâl ayırt
+ediyoruz, var ve yok. Biz o iki hâle "1" ve "0" adını verdik — bu bizim biçtiğimiz
+ilk anlamdı.
 
 Şimdi yeni bir ihtiyaç doğuyor: birazdan devrelerimiz **sayı sayacak** ("kaç tane?"
 sorusuna cevap verecek). Ama tek telin söyleyebileceği en büyük şey "1". Telde
-"2 birim akım" diye bir şey yok — akım ya var ya yok. Peki 2'yi, 3'ü, 500'ü bir
-devre nasıl söyler?
+"2" diye üçüncü bir hâl yok: [01.5](./01.5_yasak_bolge.md)'te telin iki hâlli
+olmasına biz karar verdik. Peki 2'yi, 3'ü, 500'ü bir devre nasıl söyler?
 
 > 🔑 Cevap telin içinde değil, **tel sayısında:** daha büyük sayılar için tel
 > eklersin — ve her tele **farklı bir değer biçersin.** Sayı, tek bir telde değil,
@@ -74,7 +75,10 @@ Aynı fikri elle tutulur yapmak için jetonla düşün. Elinde iki çeşit jeton
 > dediğin şey ya yanar ya yanmaz; "iki kere yanmak" yok. "2 öde" derken iki tane
 > 1'lik verme şansın olmadığından, 2'lik jeton **mecburidir.** Değerlerin 1, 2 (ve
 > birazdan 4, 8...) diye gitmesinin sebebi bu mecburiyettir: her miktar, her jetondan
-> en fazla birer tane kullanılarak **tek bir şekilde** ödenebilsin.
+> en fazla birer tane kullanılarak **arada boşluk kalmadan** ve **tek bir şekilde**
+> ödenebilsin. Bu yüzden yeni jeton, eldekilerin toplamından tam bir fazladır: 1 ve
+> 2'den sonra 1 + 2 + 1 = 4, sonra 1 + 2 + 4 + 1 = 8. Daha küçük olsa bir miktar iki
+> şekilde ödenirdi, daha büyük olsa arada ödenemeyen bir miktar kalırdı.
 
 ---
 
@@ -128,7 +132,7 @@ dolunca soldaki bir artar. Aynı mantık, sadece "dolmak" 9'da değil 1'de oluyo
 Tabloya bir de şu gözle bak: **üç telle en fazla 7'ye kadar sayabildin.** Daha
 büyüğü için dördüncü teli eklemen gerekir.
 
-Her yeni tel, sayabildiğin en büyük sayıyı **ikiye katlar**:
+Her yeni tel, kurabildiğin desen sayısını **ikiye katlar**:
 
 | tel sayısı | kaç farklı desen | sayabildiğin aralık |
 |:-:|:-:|:-:|
@@ -142,9 +146,13 @@ Her yeni tel, sayabildiğin en büyük sayıyı **ikiye katlar**:
 > 🔑 Formül: **n telle 2ⁿ farklı desen** kurulur, en büyük sayı **2ⁿ − 1** olur.
 > Bir eksik, çünkü desenlerden biri sıfıra gidiyor.
 
+> 📌 Tek bir telin taşıdığı 0 ya da 1'e **bit** denir (İngilizce *binary digit*,
+> "ikilik basamak"). 16 tel = 16 bit.
+
 O son satırı aklında tut. İlerideki derslerde `65535` sayısı ısrarla karşına
-çıkacak — bilgisayarların çoğu **16 bitlik** demetlerle çalıştığı için o, bir
-demetin **taşabileceği en son değer.**
+çıkacak — NandGame'in bilgisayarı **16 bitlik** demetlerle çalıştığı için o, bir
+demetin **tutabileceği en büyük değer.** (Bugünkü bilgisayarlar çoğunlukla 64 bitlik
+demetlerle çalışır; fikir aynı, sayı büyür.)
 
 > 💡 Peki 65535'in üstüne bir eklersen ne olur? Kilometre sayacı 999999'dan sonra
 > ne yapıyorsa onu: **başa sarar.** Şimdilik sadece not et: **hane biter, sayaç
@@ -162,11 +170,12 @@ Her şeyi tek satıra sıkıştıralım. Üç telin adı soldan sağa `x h l` ol
 Bu formül, önümüzdeki iki dersin anahtarıdır. Devrelerimiz sana `h l` diye iki tel
 uzattığında paniklemeyeceksin; "2·h + l" diye okuyup geçeceksin.
 
-> 💡 **Aklınıza takılabilir:** *"Peki bilgisayar neden onluk kullanmıyor? İnsanlar
-> onlukla sayıyor sonuçta."* Çünkü telin doğasında iki durum var: akım var/yok.
-> Onluk isteseydik, her telde on farklı akım seviyesini güvenilir biçimde ayırt
-> etmemiz gerekirdi — gürültülü gerçek dünyada bu kırılgan ve pahalı. "Var/yok" ise
-> kaya gibidir. Donanım ikiliği seçmedi; **ikilik, telin doğasından çıktı.**
+> 💡 **Aklına takılabilir:** *"Peki bilgisayar neden onluk kullanmıyor? İnsanlar
+> onlukla sayıyor sonuçta."* [01.5](./01.5_yasak_bolge.md)'teki cevap: telin üstündeki
+> gerilim bir kadran, kaç hâl sayacağımıza biz karar veriyoruz. Onluk isteseydik her
+> telde on farklı gerilim seviyesini güvenilir biçimde ayırt etmemiz gerekirdi; aynı
+> aralığa on bant sığınca her bandın gürültü payı daralır. İki seviye en geniş payı
+> verir. İkilik bir zorunluluk değil, **gürültüye karşı en sağlam seçim.**
 
 ---
 
@@ -175,12 +184,13 @@ uzattığında paniklemeyeceksin; "2·h + l" diye okuyup geçeceksin.
 ```
 ☐ Tek tel en fazla "1" söyler. Daha büyük sayı = TEL EKLE + her tele DEĞER BİÇ.
 ☐ Sayı = yanan tellerin değerleri toplamı. (Jeton benzetmesi: hangi jetonları verdin?)
-☐ Her jetondan en fazla BİR tane → değerler mecburen 1, 2, 4, 8... (ikinin katları).
+☐ Her jetondan en fazla BİR tane, arada boşluk yok → değerler mecburen 1, 2, 4, 8... (ikinin kuvvetleri).
 ☐ İkilik sistem = okuldaki basamak fikri, iki rakamla. `10` (ikilik) = "bir 2'lik" = 2.
 ☐ n telle 2ⁿ desen, en büyük sayı 2ⁿ−1. 16 tel → 0–65535.
+☐ Bit = tek bir telin taşıdığı 0 ya da 1. 16 tel = 16 bit.
 ☐ Hane bitince sayaç BAŞA SARAR — eksi sayıların ve taşmanın tohumu burada.
 ☐ Okuma formülü: sayı = 4x + 2h + 1l. İki dersin anahtarı bu satır.
-☐ Bilgisayar ikiliği seçmedi; ikilik, telin var/yok doğasından çıktı.
+☐ İkilik bir seçim: iki seviye gürültüye karşı en geniş payı verir (01.5).
 ```
 
 ---

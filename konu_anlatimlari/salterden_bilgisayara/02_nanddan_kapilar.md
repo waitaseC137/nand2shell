@@ -1,13 +1,12 @@
 # 🧱 Şalterden Bilgisayara — Tek Tuğladan Bütün Kapılar
 
-> Geçen ders "NAND evrenseldir, her şey ondan türer" dedik. Bu tür iddiaların lafta
+> 01. derste "NAND evrenseldir, her şey ondan türer" dedik. Bu tür iddiaların lafta
 > kalmaması gerekir. Bu derste iddiayı **sen** kanıtlayacaksın: yalnızca NAND
 > kullanarak DEĞİL, VE ve VEYA kapılarını kuracaksın. Ders bittiğinde elinde dört
 > kelimelik bir dil olacak — ve rölelere bir daha hiç dönmeyeceğiz.
 
 > **Bu dersten itibaren NAND senin için kapalı bir kutudur.** İçindeki rölelerle işimiz
-> bitti; artık NAND'ın sadece **tablosu** var. Bu unutuş kasıtlı — sebebini 03.5'te
-> tam olarak konuşacağız.
+> bitti; artık NAND'ın sadece **tablosu** var.
 
 ---
 
@@ -188,7 +187,6 @@ And ve Or'da hazır parça olarak kullanabilirsin.)
 
 ## 🔗 İlgili Konular
 
-- 👾 **Meraklısına:** [CWE-1247 — Voltaj ve saat sıçraması](../cwe/cwe_1247.md) — bir anlık bozulma, kapıya yanlış sonuç ürettirebilir
 - [01_akim_salter_role.md](./01_akim_salter_role.md) — NAND'ın içinde ne vardı: röleler
 - [03_xor_iki_fedai.md](./03_xor_iki_fedai.md) — Sıradaki kapı: farklılık dedektörü XOR
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — "Kapalı kutu" fikri neden bu kadar önemli

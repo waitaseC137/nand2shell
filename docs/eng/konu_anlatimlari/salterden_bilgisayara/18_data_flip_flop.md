@@ -499,6 +499,7 @@ be forced to a known value at power-on, while reset is still active.
 - [16_sr_latch.md](./16_sr_latch.md) — The cross-coupled nand pair built twice in the solution without boxes
 - 👾 **What the clock makes invisible:** [CWE-1298](../cwe/cwe_1298.md) — two paths from the same wire racing
 - 👾 **What the clock does not solve:** [CWE-1271](../cwe/cwe_1271.md) — a security bit whose value is not set at power-on
+- 👾 **The moment the clock captures:** [CWE-1247 — Voltage and clock glitches](../cwe/cwe_1247.md) — if the clock arrives early or the supply dips for an instant, the captured value is half-formed
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Boxes are for people, nands are for chips
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: the line where 17's transparent latch problem came from
 

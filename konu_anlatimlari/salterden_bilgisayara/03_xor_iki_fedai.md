@@ -6,8 +6,7 @@
 > demek — ve bir sonraki ünitenin kapısını açacak olan şu tuhaf gerçek: XOR, aslında
 > gizli bir **toplayıcıdır.**
 
-> XOR, serinin "beynim yandı" durağıdır: ilk çok-kapılı yapı. Yanma normaldir ve
-> geçicidir — bu ders tam o duvar için yazıldı.
+> XOR, serinin "beynim yandı" durağıdır. Yanma normaldir ve geçicidir.
 
 ---
 
@@ -98,7 +97,7 @@ Dört ihtimali tek tek kapıdan geçir:
 Dört satır, dört isabet. XOR = **AND( OR(a,b), NAND(a,b) )** — ama bu formülü
 ezberleme; hikâyeyi hatırla, formül kendini yeniden yazar.
 
-> 💡 Fark ettiysen: takımdaki üç kapının üçü de geçen dersten — OR, NAND, AND. XOR
+> 💡 Fark ettiysen: takımdaki üç kapının üçü de önceki derslerden — NAND 01'den, OR ile AND 02'den. XOR
 > "yeni bir icat" değil, **eski tanıdıkların iş bölümü.** Yeni parça sayısı: sıfır.
 
 ---
@@ -118,7 +117,7 @@ adım adım kuracağız). Şimdi XOR'un tablosuna bir daha bak:
 | 1 | 0 | 1 | 1 | 1 |
 | 1 | 1 | 2 | **0** | **0** |
 
-Birebir aynı sütun. **XOR, iki bitlik toplamanın birler hanesidir.** Kulüp kapısında
+Birebir aynı sütun. **XOR, `a + b` toplamının birler hanesidir.** Kulüp kapısında
 fedailik yapan bu kapı, iki ders sonra bilgisayarın toplama yapmasını sağlayan
 devrenin kalbi olacak.
 
@@ -155,7 +154,7 @@ ayrı satırı öldürüyor — tablo dört satırsa, iki "hayır" + iki "evet" 
 ☐ Tek kapı yetmez, çünkü istek İKİ cümle: "en az biri" + "ikisi birden değil".
 ☐ Çözüm takımı: OR fedaisi (0,0'ı eler) + NAND fedaisi (1,1'i eler) + AND onay masası.
 ☐ Tasarım yöntemi: karmaşık isteği cümlelere böl, cümlelere kapı dağıt.
-☐ XOR'un gizli kimliği: iki bitlik toplamanın BİRLER HANESİ.
+☐ XOR'un gizli kimliği: a + b toplamının BİRLER HANESİ.
 ```
 
 ---

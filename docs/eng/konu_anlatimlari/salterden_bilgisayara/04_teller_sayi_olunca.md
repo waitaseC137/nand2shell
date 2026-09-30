@@ -2,8 +2,8 @@
 
 > Up to now, wires have carried "yes/no" for you: current, a decision, the go-ahead from
 > the ones that do the dirty work. In this lesson we'll give wires a brand-new meaning:
-> **number.** This is the biggest mental leap in the series — and the only concept lesson
-> that contains no circuit. If you lay this groundwork solidly, the adder lessons will
+> **number.** This is the biggest mental leap in the series — and not a circuit lesson but
+> a concept lesson. If you lay this groundwork solidly, the adder lessons will
 > flow like water.
 
 > **No circuit in this lesson, no game.** Just one idea. But the whole of Unit 1 rests on
@@ -25,14 +25,14 @@
 
 ## The Limit of a Single Wire
 
-Recall the basic truth from lesson 01: **a wire knows no meaning.** A wire either has
-current or it doesn't. We named those two states "1" and "0" — that was the first meaning
-we assigned.
+Recall the basic truth from lesson 01: **a wire knows no meaning.** On a wire we tell
+apart two states, on and off. We named those two states "1" and "0" — that was the first
+meaning we assigned.
 
 Now a new need arises: in a moment our circuits will **count** (they'll answer the
 question "how many?"). But the biggest thing a single wire can say is "1". There's no
-"2 units of current" on a wire — the current is either there or not. So how does a circuit
-say 2, 3, or 500?
+third state called "2" on a wire: in [01.5](./01.5_yasak_bolge.md) we decided that a wire
+has two states. So how does a circuit say 2, 3, or 500?
 
 > 🔑 The answer isn't inside the wire, it's in the **number of wires:** for bigger numbers
 > you add wires — and you **assign each wire a different value.** A number doesn't live on
@@ -77,8 +77,11 @@ To make the same idea tangible, think in tokens. You have two kinds of token in 
 > 💡 Note: you can use **at most one** of each kind of token — because a wire either turns
 > on or it doesn't; there's no "turning on twice." Since you don't have the option of
 > handing over two 1's when you "pay 2," the 2's token is **mandatory.** This mandate is
-> why the values go 1, 2 (and, in a moment, 4, 8...): so that every amount can be paid in
-> **exactly one way**, using at most one of each token.
+> why the values go 1, 2 (and, in a moment, 4, 8...): so that every amount can be paid,
+> using at most one of each token, **with no gaps** and in **exactly one way.** That's why
+> the new token is exactly one more than the sum of the ones you have: after 1 and 2 comes
+> 1 + 2 + 1 = 4, then 1 + 2 + 4 + 1 = 8. Any smaller and some amount could be paid two
+> ways; any larger and some amount in between couldn't be paid at all.
 
 ---
 
@@ -131,7 +134,7 @@ the left one goes up by one. Same logic, except "filling up" happens at 1 instea
 Look at the table one more time with this in mind: **with three wires you could count up to
 7 at most.** For anything larger you have to add a fourth wire.
 
-Every new wire **doubles** the largest number you can count to:
+Every new wire **doubles** the number of patterns you can build:
 
 | wire count | how many distinct patterns | the range you can count |
 |:-:|:-:|:-:|
@@ -145,9 +148,13 @@ Every new wire **doubles** the largest number you can count to:
 > 🔑 The formula: **`n` wires build `2ⁿ` distinct patterns**, and the largest number is
 > **`2ⁿ − 1`.** One less, because one of the patterns is spent on zero.
 
+> 📌 The 0 or 1 that a single wire carries is called a **bit** (*binary digit*). 16
+> wires = 16 bits.
+
 Keep that last row in mind. The number `65535` will keep turning up insistently in later
-lessons — because most computers work with **16-bit** bundles, and that is the very last
-value a bundle **can hold before it overflows.**
+lessons — because NandGame's computer works with **16-bit** bundles, and that is the
+largest value a bundle **can hold.** (Today's computers mostly work with 64-bit bundles;
+same idea, bigger number.)
 
 > 💡 So what happens if you add one to 65535? Whatever an odometer does after 999999: it
 > **wraps around.** For now just note it down: **the digits run out, the counter turns
@@ -166,11 +173,11 @@ This formula is the key to the next two lessons. When our circuits hand you two 
 `h l`, you won't panic; you'll just read "2·h + l" and move on.
 
 > 💡 **You might be wondering:** *"So why doesn't a computer use decimal? People count in
-> decimal, after all."* Because the nature of a wire has two states: current on/off. If we
-> wanted decimal, we'd have to reliably tell apart ten different current levels on every
-> wire — in the noisy real world that's fragile and expensive. "On/off," on the other hand,
-> is rock-solid. The hardware didn't choose binary; **binary came out of the nature of the
-> wire.**
+> decimal, after all."* The answer from [01.5](./01.5_yasak_bolge.md): the voltage on a wire
+> is a dial, and we decide how many states to count. If we wanted decimal, we'd have to
+> reliably tell apart ten different voltage levels on every wire; squeeze ten bands into
+> the same range and every band's noise margin shrinks. Two levels give the widest margin.
+> Binary isn't a law of nature, it's **the sturdiest choice against noise.**
 
 ---
 
@@ -179,12 +186,13 @@ This formula is the key to the next two lessons. When our circuits hand you two 
 ```
 ☐ A single wire says "1" at most. A bigger number = ADD A WIRE + ASSIGN each wire a VALUE.
 ☐ Number = the sum of the values of the wires that are on. (Token analogy: which tokens did you hand over?)
-☐ At most ONE of each token → the values must be 1, 2, 4, 8... (powers of two).
+☐ At most ONE of each token, no gaps → the values must be 1, 2, 4, 8... (powers of two).
 ☐ The binary system = the place-value idea from school, with two digits. `10` (binary) = "one 2's" = 2.
 ☐ Reading formula: number = 4x + 2h + 1l. This line is the key to two lessons.
-☐ n wires → 2ⁿ patterns → the range 0 … 2ⁿ−1. Each new wire DOUBLES the ceiling.
+☐ n wires → 2ⁿ patterns → the range 0 … 2ⁿ−1. Each new wire DOUBLES the number of patterns.
+☐ Bit = the 0 or 1 a single wire carries. 16 wires = 16 bits.
 ☐ 16 bits → 0 … 65535. Add one to 65535 and the counter wraps to the start.
-☐ The computer didn't choose binary; binary came out of the on/off nature of the wire.
+☐ Binary is a choice: two levels give the widest margin against noise (01.5).
 ```
 
 ---

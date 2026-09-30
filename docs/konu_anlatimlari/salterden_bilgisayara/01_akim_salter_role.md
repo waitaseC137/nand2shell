@@ -28,7 +28,10 @@
 Bilgisayar anlatımlarının hepsi "birler ve sıfırlar" der ama çoğu, bunların **ne
 olduğunu** söylemez. Söyleyelim:
 
-> **1 = telde akım var. 0 = telde akım yok.** Hepsi bu.
+> **1 = telde akım var. 0 = telde akım yok.**
+
+Rölelerle kuracağın devreler için bu tanım yeter. Gerçek bir çipte telin taşıdığı
+şey aslında **gerilim**; o ayrıntı bir sonraki derste, [01.5](./01.5_yasak_bolge.md)'te.
 
 Duvardaki lamba düğmesini düşün. Düğme açık → telde akım var → lamba yanıyor. Bu
 durumun adına "1" diyoruz. Düğme kapalı → akım yok → "0". Bilgisayarın içindeki
@@ -50,12 +53,15 @@ Burada durup önemli bir şeyin altını çizelim:
 Akımı açıp kesen en basit parça, şalterdir — lamba düğmesinin ta kendisi:
 
 ```
-   Akım kaynağı ───o   o─── lamba        (kol açık:  akım YOK → 0)
+   Akım kaynağı ───o   o─── lamba        (yol kesik: akım YOK → 0)
 
-   Akım kaynağı ───o───o─── lamba        (kol kapalı: akım VAR → 1)
+   Akım kaynağı ───o───o─── lamba        (yol açık:  akım VAR → 1)
 ```
 
-Şalterin tek marifeti var: bir telin yolunu **açmak ya da kapamak.** Ama bir sorunu
+> 📌 Bu seride **açık** hep **geçiriyor** demek, lambayı açmak gibi: açık yoldan
+> akım geçer, kesik yoldan geçmez.
+
+Şalterin tek marifeti var: bir telin yolunu **açmak ya da kesmek.** Ama bir sorunu
 var: kolu **parmakla** itiliyor. Parmakla itilen bir şeyden bilgisayar kuramazsın —
 saniyede milyarlarca kez düğmeye basacak parmak yok.
 
@@ -102,18 +108,13 @@ Röle iki farklı huyla üretilir; ikisi de NandGame'in kutusunda seni bekliyor:
 İki bekçi gibi düşün: biri kapıyı normalde **açık** tutar, emir gelince kapar;
 öbürü normalde **kapalı** tutar, emir gelince açar.
 
-> 💡 **Elektrik panosu görmüş biriysen:** bunlar NC (normally closed) ve NO (normally
-> open) kontakların ta kendisidir — "default on" = NC, "default off" = NO. Kumanda
-> devresi kurduysan, birazdan bilgisayarın da aynı parçalardan doğduğunu göreceksin.
-> Hiç görmediysen de dert değil: "normalde geçiren / normalde kesen" demek yeterli.
-
 ---
 
 ## Transistör: Rölenin Torunu
 
 Gerçek çiplerde röle yoktur — çünkü rölenin kolu **fiziksel olarak hareket eder** ve
 hareket eden şey hem yavaştır hem aşınır. Modern çözüm **transistördür**: aynı işi
-(bir akımın başka bir akımı açıp kesmesini) **hiçbir hareketli parça olmadan** yapan,
+(bir telin, başka bir teldeki akımı açıp kesmesini) **hiçbir hareketli parça olmadan** yapan,
 gözle görülmeyecek kadar küçük bir parça.
 
 Boyut farkının yarattığı sonucu hissetmek için: bu satırları okuduğun cihazın
@@ -209,11 +210,12 @@ Parmak yok, insan yok — akım, akımı yönetti. Geri kalan her şey, bunun te
 ## Özet — Aklında Tut
 
 ```
-☐ 1 = akım var, 0 = akım yok. Başka bir şey değil.
+☐ 1 = akım var, 0 = akım yok. Röleler için yeterli tanım; çipte asıl taşınan gerilim (01.5).
+☐ Bu seride açık = geçiriyor: açık yoldan akım geçer, kesik yoldan geçmez.
 ☐ Tel anlam bilmez; 1/0'a, sayıya, harfe anlamı BİZ biçeriz.
 ☐ Şalter akımı açıp keser — ama kolu parmak ister.
 ☐ Röle = kolu ELEKTRİK itilen şalter → elektrik elektriği yönetir → kararlar zincirlenir.
-☐ İki huy: default on = normalde geçirir (NC), default off = normalde keser (NO).
+☐ İki huy: default on = normalde geçirir, default off = normalde keser.
 ☐ Transistör = rölenin hareketsiz, minicik, milyarlarca kez hızlı torunu. Fikir aynı.
 ☐ NAND: yalnız "1 1"de 0, gerisi 1. Evrensel tuğla — her şey ondan türeyecek.
 ```
@@ -222,7 +224,6 @@ Parmak yok, insan yok — akım, akımı yönetti. Geri kalan her şey, bunun te
 
 ## 🔗 İlgili Konular
 
-- 👾 **Meraklısına:** [CWE-1300 — Fiziksel yan kanal](../cwe/cwe_1300.md) — kapının çektiği akım, içeride ne işlendiğini sızdırabilir
 - [00_buradan_basla.md](./00_buradan_basla.md) — Serinin yol haritası
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — Bu tuğladan bütün kapıları türetmek
 

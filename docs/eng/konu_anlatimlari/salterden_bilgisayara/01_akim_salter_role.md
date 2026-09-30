@@ -29,7 +29,11 @@
 Every explanation of computers says "ones and zeros," but most of them never say what
 these things **are.** Let's say it:
 
-> **1 = there is current in the wire. 0 = there is no current in the wire.** That's all.
+> **1 = there is current in the wire. 0 = there is no current in the wire.**
+
+For the circuits you'll build with relays, this definition is enough. In a real chip,
+what a wire carries is actually **voltage**; that detail comes in the next lesson,
+[01.5](./01.5_yasak_bolge.md).
 
 Think of the light switch on your wall. Switch on → there's current in the wire → the
 lamp is lit. We call this state "1." Switch off → no current → "0." In each of the
@@ -53,12 +57,15 @@ The simplest part that turns current on and off is the switch — the very light
 itself:
 
 ```
-   Current source ───o   o─── lamp        (lever open:   NO current → 0)
+   Current source ───o   o─── lamp        (path cut:  NO current → 0)
 
-   Current source ───o───o─── lamp        (lever closed: current YES → 1)
+   Current source ───o───o─── lamp        (path open: current YES → 1)
 ```
 
-The switch has just one trick: to **open or close** the path of a wire. But it has a
+> 📌 In this series **open** always means **passing**, like switching a lamp on:
+> current flows through an open path and not through a cut one.
+
+The switch has just one trick: to **open or cut** the path of a wire. But it has a
 problem: its lever is pushed by a **finger.** You can't build a computer out of
 something pushed by a finger — there's no finger that can press a button billions of
 times per second.
@@ -109,20 +116,14 @@ box:
 Think of two guards: one keeps the door **open** by default and closes it when the order
 comes; the other keeps it **closed** by default and opens it when the order comes.
 
-> 💡 **If you're someone who's seen an electrical panel:** these are exactly the NC
-> (normally closed) and NO (normally open) contacts — "default on" = NC, "default off" =
-> NO. If you've built a control circuit, you'll soon see that the computer too is born
-> from the same parts. And if you've never seen one, no worries: saying "normally passing
-> / normally cutting" is enough.
-
 ---
 
 ## The Transistor: The Relay's Grandchild
 
 Real chips have no relays — because a relay's lever **physically moves,** and a moving
 thing is both slow and wears out. The modern solution is the **transistor**: a part so
-small it's invisible to the eye, which does the same job (one current turning another
-current on and off) **with no moving parts at all.**
+small it's invisible to the eye, which does the same job (one wire turning the current in
+another wire on and off) **with no moving parts at all.**
 
 To feel the consequence of that size difference: the processor in the device you're
 reading these lines on has **billions** of transistors, and each one can switch on and
@@ -223,11 +224,12 @@ repetition of this.
 ## Summary — Keep in Mind
 
 ```
-☐ 1 = current present, 0 = current absent. Nothing else.
+☐ 1 = current present, 0 = current absent. Enough for relays; in a chip the real carrier is voltage (01.5).
+☐ In this series open = passing: current flows through an open path, not through a cut one.
 ☐ The wire knows no meaning; WE assign the meaning to the 1/0, the number, the letter.
 ☐ The switch turns current on and off — but its lever needs a finger.
 ☐ Relay = a switch whose lever is pushed by ELECTRICITY → electricity manages electricity → decisions chain.
-☐ Two temperaments: default on = normally passes (NC), default off = normally cuts (NO).
+☐ Two temperaments: default on = normally passes, default off = normally cuts.
 ☐ Transistor = the relay's motionless, tiny, billions-of-times-fast grandchild. Same idea.
 ☐ NAND: only "1 1" gives 0, the rest give 1. The universal brick — everything will derive from it.
 ```
@@ -236,7 +238,6 @@ repetition of this.
 
 ## 🔗 Related Topics
 
-- 👾 **For the curious:** [CWE-1300 — Physical side channel](../cwe/cwe_1300.md) — the current a gate draws can leak what is being processed inside
 - [00_buradan_basla.md](./00_buradan_basla.md) — The roadmap of the series
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — Deriving all the gates from this brick
 

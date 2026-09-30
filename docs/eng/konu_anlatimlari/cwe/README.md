@@ -213,10 +213,10 @@ The catalogue was not wrong — it was an honest mirror of the scope at the time
 
 | CWE | Official name | Where it is born | link |
 |---|---|---|---|
-| [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | [01 · Current, the Switch, and NAND](../salterden_bilgisayara/01_akim_salter_role.md) | [📄](https://cwe.mitre.org/data/definitions/1300.html) |
-| [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | [02 · All the Gates from One Brick](../salterden_bilgisayara/02_nanddan_kapilar.md) | [📄](https://cwe.mitre.org/data/definitions/1247.html) |
+| [**CWE-1300**](./cwe_1300.md) | Improper Protection of Physical Side Channels | [01.5 · The Forbidden Zone](../salterden_bilgisayara/01.5_yasak_bolge.md) | [📄](https://cwe.mitre.org/data/definitions/1300.html) |
+| [**CWE-1247**](./cwe_1247.md) | Improper Protection Against Voltage and Clock Glitches | [18 · Data Flip-Flop](../salterden_bilgisayara/18_data_flip_flop.md) | [📄](https://cwe.mitre.org/data/definitions/1247.html) |
 | [**CWE-1261**](./cwe_1261.md) | Improper Handling of Single Event Upsets | [04 · When Wires Become Numbers](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/1261.html) |
-| [**CWE-1384**](./cwe_1384.md) | Improper Handling of Physical or Environmental Conditions — **umbrella** | 01 · 02 · 04 | [📄](https://cwe.mitre.org/data/definitions/1384.html) |
+| [**CWE-1384**](./cwe_1384.md) | Improper Handling of Physical or Environmental Conditions — **umbrella** | 04 · 18 | [📄](https://cwe.mitre.org/data/definitions/1384.html) |
 | [**CWE-704**](./cwe_704.md) | Incorrect Type Conversion or Cast — **umbrella** | [04 · When Wires Become Numbers](../salterden_bilgisayara/04_teller_sayi_olunca.md) | [📄](https://cwe.mitre.org/data/definitions/704.html) |
 | [**CWE-670**](./cwe_670.md) | Always-Incorrect Control Flow Implementation — **umbrella** | [12 · Logic Unit](../salterden_bilgisayara/12_logic_unit.md) | [📄](https://cwe.mitre.org/data/definitions/670.html) |
 | [**CWE-1242**](./cwe_1242.md) | Inclusion of Undocumented Features or Chicken Bits | [14 · ALU](../salterden_bilgisayara/14_alu.md) | [📄](https://cwe.mitre.org/data/definitions/1242.html) |
