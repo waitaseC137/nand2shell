@@ -7,9 +7,9 @@
 > veriyor: evet ya da hayır. İşlemcinin `eğer` diyebilmesi tam olarak buradan başlıyor.
 
 > İki seviyeyi birlikte alıyoruz çünkü ikisi de aynı şeyi üretiyor: **bayrak.**
-> Biri sıfırlığı, diğeri negatifliği bildiriyor. İşlemcinin "eğer" demesi bu tür
-> tellerle olur: x86'da yazdığın bir `if` ya da `while`, çoğu zaman bu bayraklara
-> bakan bir atlamaya dönüşür.
+> Biri sıfırlığı, diğeri negatifliği bildiriyor. [15](./15_condition.md)'te bu iki tel,
+> bir koşulun tutup tutmadığına (`a < b` mi, `a = b` mi) karar veren devrenin girdisi
+> olacak.
 
 ---
 

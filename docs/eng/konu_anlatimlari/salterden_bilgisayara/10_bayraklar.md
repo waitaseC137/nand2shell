@@ -8,9 +8,9 @@
 > exactly here.
 
 > We take the two levels together because both produce the same thing: a **flag.** One
-> reports zero-ness, the other negativeness. This is the kind of wire a processor says
-> "if" with: on x86, an `if` or a `while` you write usually turns into a jump that
-> looks at these flags.
+> reports zero-ness, the other negativeness. In [15](./15_condition.md) these two wires
+> become the inputs of the circuit that decides whether a condition holds (is `a < b`,
+> is `a = b`).
 
 ---
 

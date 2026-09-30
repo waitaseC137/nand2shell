@@ -470,6 +470,8 @@ instruction. This addition happens **on every instruction**, nonstop, as long as
 the machine is on. It is usually done not by the ALU but by a separate incrementer
 sitting next to the program counter: the same circuit you built in
 [08](./08_increment.md). The ALU is busy with the instruction's own work meanwhile.
+You will see this in [20](./20_counter.md) when you build the counter: it uses its own
+`inc 16`, not the ALU.
 
 The `X + 1` in the ALU is for the program's own counting: a loop counter, `i++`,
 moving on to the next element. That is why `+1` and `−1` sit in the table as
@@ -502,7 +504,7 @@ Arithmetic Unit — into a single box.
 ☐ If the constant 1 lands on the wrong bit the circuit computes X + 2048; the 0800 on the wire tells you.
 ☐ A good test = one where you can say "I would have noticed if it were broken". 5 and 3 → all four results differ.
 ☐ A test whose results cannot be told apart is worse than no test: it gives false confidence.
-☐ +1 is the machine's most frequent arithmetic operation: PC ← PC + 1, on every instruction. A separate incrementer usually does it; the ALU's X + 1 is for the program's counting.
+☐ +1 is the machine's most frequent arithmetic operation: PC ← PC + 1, on every instruction. A separate incrementer usually does it (like the counter in 20); the ALU's X + 1 is for the program's counting.
 ```
 
 ---

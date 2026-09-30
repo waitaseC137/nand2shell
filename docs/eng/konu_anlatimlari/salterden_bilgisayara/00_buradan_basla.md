@@ -97,7 +97,7 @@ When you finish the part of the series written so far:
 - You'll see why **overflows** like `65535 + 1 = 0` are unavoidable, and how that gives
   birth to a real **class of security vulnerabilities.**
 - You'll have built with your own hands the **flags** (ZF, SF) that let a processor say
-  `if` — the kind of wire that sits underneath the `if`s you write.
+  `if`.
 - You'll build the wire that tells a circuit **what to do from the outside** (the
   multiplexer) — the root of programmability.
 - You'll have gathered the parts that add, subtract and do logic into a single box, and

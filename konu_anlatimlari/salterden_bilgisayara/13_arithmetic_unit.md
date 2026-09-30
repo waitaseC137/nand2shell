@@ -448,6 +448,8 @@ PC ← PC + 1
 komutta**, makine açık olduğu sürece durmadan yapılır. Onu çoğu zaman ALU değil,
 program sayacının yanında duran ayrı bir artırıcı yapar: [08](./08_increment.md)'de
 kurduğun devrenin aynısı. ALU o sırada komutun kendi işiyle meşgul.
+[20](./20_counter.md)'de sayacı kurarken bunu göreceksin: sayaç kendi `inc 16`'sını
+kullanıyor, ALU'yu değil.
 
 ALU'daki `X + 1` ise programın kendi saymaları için: döngü sayacı, `i++`, bir
 sonraki elemana geçmek. `+1` ve `−1`'in `+Y` kadar meşru bir işlem olarak tabloda
@@ -480,7 +482,7 @@ kutuda birleştirecek.
 ☐ Sabit 1 yanlış bite giderse devre X + 2048 yapar; teldeki 0800 sayısı hatayı söyler.
 ☐ İyi test = "bozuk olsaydı farkederdim" diyebildiğin test. 5 ve 3 → dört sonuç da farklı.
 ☐ Sonuçları ayırt edilemeyen test, hiç test yapmamaktan kötüdür: sahte güven verir.
-☐ +1 makinedeki en sık aritmetik işlem: PC ← PC + 1, her komutta. Onu çoğu zaman ayrı bir artırıcı yapar; ALU'daki X + 1 programın saymaları için.
+☐ +1 makinedeki en sık aritmetik işlem: PC ← PC + 1, her komutta. Onu çoğu zaman ayrı bir artırıcı yapar (20'deki sayaç gibi); ALU'daki X + 1 programın saymaları için.
 ```
 
 ---
