@@ -226,6 +226,13 @@ je   esitse_git    ; ZF = 1 ise atla
 >
 > Gerçek işlemciler bu yüzden bir **overflow flag (OF)** daha tutar ve işaretli
 > karşılaştırmada `SF ≠ OF` koşuluna bakar. Sen bu derste temeli kuruyorsun.
+>
+> Bir de şu: bu tablo sayıları **işaretli** okuyor. 04–08'deki gibi işaretsiz okursan
+> (0–65535) işaret biti yanıltır: `40000 − 1 = 39999`, en üst biti 1, ama 40000,
+> 1'den küçük değil. Tablo aslında yanılmıyor, soruyu işaretli sayılar için
+> cevaplıyor: işaretli okununca 40000'in deseni `−25536` demek, o da gerçekten
+> 1'den küçük. [09](./09_subtraction.md)'un cümlesi burada da geçerli: desen aynı,
+> anlam okuyanın kararı.
 
 ---
 
@@ -287,6 +294,7 @@ gerekiyor; sıradaki dersin konusu tam bu.
 ☐ İşaret biti sonradan eklenmedi — sarma sınırının geçtiği yer orası.
 ☐ İyi tasarım işi devreden alıp TEMSİLE yıkar (ikinin tümleyeni tam bunu yapar).
 ☐ a < b için tek başına SF yetmez; çıkarma taşarsa yanıltır → OF gerekir.
+☐ Tablo sayıları işaretli okur. İşaretsiz okursan işaret biti yanıltır: 40000 − 1'in en üst biti 1, ama 40000 küçük değil.
 ```
 
 ---

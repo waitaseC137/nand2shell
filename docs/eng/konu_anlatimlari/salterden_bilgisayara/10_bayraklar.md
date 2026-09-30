@@ -233,6 +233,13 @@ je   if_equal      ; jump if ZF = 1
 > This is why real processors keep one more flag, the **overflow flag (OF)**, and in signed
 > comparison they check the condition `SF ≠ OF`. You're laying the foundation in this
 > lesson.
+>
+> One more thing: this table reads the numbers as **signed**. Read them as unsigned,
+> as in 04–08 (0–65535), and the sign bit misleads: `40000 − 1 = 39999`, its top bit
+> is 1, yet 40000 is not smaller than 1. The table is not actually wrong; it answers
+> the question for signed numbers: read as signed, the pattern of 40000 means
+> `−25536`, which really is smaller than 1. The sentence from [09](./09_subtraction.md)
+> holds here too: the pattern is the same, the meaning is the reader's decision.
 
 ---
 
@@ -295,6 +302,7 @@ first has to be able to **choose;** that's exactly the next lesson's subject.
 ☐ The sign bit wasn't added afterwards — it's where the wrapping boundary passes.
 ☐ Good design takes work off the circuit and puts it on the REPRESENTATION (two's complement).
 ☐ SF alone isn't enough for a < b; if the subtraction overflows it misleads → you need OF.
+☐ The table reads the numbers as signed. Read them as unsigned and the sign bit misleads: the top bit of 40000 − 1 is 1, yet 40000 is not smaller.
 ```
 
 ---
