@@ -257,9 +257,9 @@ That is because when NandGame connects a 1-bit wire to a 16-bit input, it puts
 that bit on **bit 0** and sets the other fifteen to **0**. It does, silently and
 on your behalf, the job you did by hand with the bundler.
 
-> 📌 This experiment was done after the lesson was first written. The first
-> version said "these do not connect directly" here. Tried in the game, that
-> turned out to be wrong.
+> 📌 The first version of this lesson said that a 1-bit wire cannot be connected
+> directly to a 16-bit input. Tried in the game, that turned out to be wrong: the
+> game accepts the connection. Don't guess what the game allows; try it.
 
 The two ways give the same result, but they are not the same thing:
 

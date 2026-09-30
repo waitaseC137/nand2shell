@@ -246,8 +246,9 @@ Oyun itiraz etmez, seviye yine geçer.
 **bit 0'a** koyar, kalan on beşini **0** yapar. Bundler'la elle yaptığın işi senin
 yerine, sessizce yapar.
 
-> 📌 Bu deney ders ilk yazıldıktan sonra yapıldı. İlk hâlinde burada "bunlar
-> doğrudan birbirine bağlanmaz" yazıyordu. Oyunda denenince yanlış çıktı.
+> 📌 Bu dersin ilk hâli, 1 bitlik bir telin 16 bitlik bir girişe doğrudan
+> bağlanamayacağını söylüyordu. Oyunda denenince yanlış çıktı: oyun bu bağlantıyı
+> kabul ediyor. Oyunun neye izin verdiğini tahmin etme, dene.
 
 İki yol aynı sonucu verir ama aynı şey değildir:
 
