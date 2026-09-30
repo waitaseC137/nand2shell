@@ -135,7 +135,7 @@ are 1,1 → NAND = 0 ✓. All four rows hold — build it and see.
 
 ## A Four-Word Language
 
-Look at your inventory — yesterday it was zero, today you have four gates:
+Look at your inventory — yesterday you had one gate, today you have four:
 
 | Gate | Its sentence | How it's built (all from NAND) |
 |---|---|---|

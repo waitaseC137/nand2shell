@@ -34,9 +34,9 @@ Rölelerle kuracağın devreler için bu tanım yeter. Gerçek bir çipte telin 
 şey aslında **gerilim**; o ayrıntı bir sonraki derste, [01.5](./01.5_yasak_bolge.md)'te.
 
 Duvardaki lamba düğmesini düşün. Düğme açık → telde akım var → lamba yanıyor. Bu
-durumun adına "1" diyoruz. Düğme kapalı → akım yok → "0". Bilgisayarın içindeki
-milyarlarca telin her birinde, her an, bu ikisinden biri geçerlidir: ya akım vardır,
-ya yoktur.
+durumun adına "1" diyoruz. Düğme kapalı → akım yok → "0". Rölelerle kuracağın
+devrelerde her telin, her an, bu ikisinden birinde olduğunu varsayacağız: ya akım
+vardır, ya yoktur.
 
 Burada durup önemli bir şeyin altını çizelim:
 

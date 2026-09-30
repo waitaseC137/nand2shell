@@ -36,9 +36,9 @@ what a wire carries is actually **voltage**; that detail comes in the next lesso
 [01.5](./01.5_yasak_bolge.md).
 
 Think of the light switch on your wall. Switch on → there's current in the wire → the
-lamp is lit. We call this state "1." Switch off → no current → "0." In each of the
-billions of wires inside a computer, at every moment, one of these two holds: either
-there is current, or there isn't.
+lamp is lit. We call this state "1." Switch off → no current → "0." In the relay circuits
+you are about to build, we will assume that every wire, at every moment, is in one of
+these two states: either there is current, or there isn't.
 
 Let's pause here and underline something important:
 

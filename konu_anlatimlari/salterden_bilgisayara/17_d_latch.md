@@ -461,7 +461,8 @@ st=0      →  r = 1               s = nand(0,1) = 1   →  tut    ✓
 bir ayağı 0 olan nand öbür ayağını dinlemiyor.
 
 Toplam: 3 bileşen, 4 `nand`. Aynı tel iki iş yapıyor: `sr latch`'e komut,
-`nand1`'e ters d.
+`nand1`'e ters d. Oyunda denendi: oyun bu çözümü optimal sayıyor, nand sayısında
+bundan azı yok.
 
 </details>
 
@@ -677,7 +678,7 @@ kurulabilir.
 ☐ 🔑 Kararlı hâlde d ile ters d ikisi birden 1 olamaz → s ve r ikisi birden 0 olamaz → YASAK SATIR KARARLI DURUMDA İMKÂNSIZ.
 ☐ ⚠️ Geçişte bir anlık iğne var: ters d bir kapı geç gelir. d değişirken st inerse 16'daki yarış geri gelir.
 ☐ 👾 CWE-1245'e cevap: tanımsız satırı "kullanma" diye rica etmek yerine ulaşılamaz kılmak.
-☐ Çözüm: 4 bileşen, 5 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 4 nand.
+☐ Çözüm: 4 bileşen, 5 nand. Daha azı: inv'i sil, nand1'e r'yi ver (st=1 iken r = ters d) → 3 bileşen, 4 nand (oyuna göre optimal).
 ☐ D Latch SR Latch'e MUHTAÇ DEĞİL: select'le de kurulur ve kara kutu hâli geçer. Açılınca st inerken bit kaybolur / titrer (oyun: "did not reach a stable state").
 ☐ 🔑 SR Latch'in sebebi sıra değil: döngüyü tutan kapılar st'den BAĞIMSIZ. Select'te döngü st'nin vanasından geçer.
 ☐ Hafıza testi bir SIRADIR: yaz → st=0 → d'yi değiştir → çıkış değişmemeli. Her adımda TEK anahtar.

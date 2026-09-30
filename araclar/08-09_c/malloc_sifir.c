@@ -11,7 +11,10 @@
  *   65536 bayt yazılıyor, yazarken hata yok, program çalışmaya devam ediyor.
  *   Bozulma sonra fark ediliyor: sonraki malloc "malloc(): corrupted top size"
  *   deyip programı durduruyor (çıkış kodu 134).
- *   AddressSanitizer ile derlenince ilk taşan baytta durdurur: heap-buffer-overflow.
+ *   AddressSanitizer ile derlenince (gcc 16, clang 22) ilk taşan baytta durdurur:
+ *   heap-buffer-overflow, "0 bytes inside of 1-byte region". gcc 13'ün ASan'ı
+ *   malloc(0) için açtığı 1 baytı kullanılabilir sayıp ikinci baytta durdu
+ *   ("0 bytes after 1-byte region").
  *   C standardı malloc(0) için NULL döndürmeye de izin verir; o zaman ilk yazmada çöker.
  *
  * Çalıştır:  gcc -O0 -o malloc_sifir malloc_sifir.c && ./malloc_sifir; echo "çıkış: $?"

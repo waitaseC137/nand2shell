@@ -8,8 +8,9 @@
 > exactly here.
 
 > We take the two levels together because both produce the same thing: a **flag.** One
-> reports zero-ness, the other negativeness. These two wires sit underneath every `if` and
-> every `while` on your computer.
+> reports zero-ness, the other negativeness. This is the kind of wire a processor says
+> "if" with: on x86, an `if` or a `while` you write usually turns into a jump that
+> looks at these flags.
 
 ---
 
@@ -300,7 +301,7 @@ first has to be able to **choose;** that's exactly the next lesson's subject.
 
 ## 🔗 Related Topics
 
-- 👾 **For the curious:** the comparator never errs, the bits you hand it can — sign conversion [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
+- 👾 **For the curious:** the bits you hand the comparator can be wrong too — sign conversion [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
 - [09_subtraction.md](./09_subtraction.md) — The circuit that produces the result the flags look at
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — The tree's gates: NOT, AND, OR
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Token values: 1, 2, 4, 8 …

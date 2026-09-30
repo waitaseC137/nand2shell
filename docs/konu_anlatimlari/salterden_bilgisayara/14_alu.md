@@ -31,8 +31,8 @@
 
 ## Bu Parça Ne Yapıyor?
 
-ALU = **Arithmetic Logic Unit**, aritmetik ve mantık birimi. İşlemcinin hesap
-yapan tek parçası. Bu seviyede onu kuruyorsun — ve ünitenin üçüncü seviyesinde
+ALU = **Arithmetic Logic Unit**, aritmetik ve mantık birimi. İşlemcinin asıl
+hesap birimi. Bu seviyede onu kuruyorsun — ve ünitenin üçüncü seviyesinde
 olduğun için, iki yarısı da elinde hazır.
 
 Girişler:

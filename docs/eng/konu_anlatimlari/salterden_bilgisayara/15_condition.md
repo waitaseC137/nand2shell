@@ -272,7 +272,7 @@ This is not a saving trick, it is a **rule**. Its name is **De Morgan** and you
 saw it back in `02`:
 
 ```
-(NOT A) AND (NOT B)   ≡   NOT (A OR B)
+(NOT A) AND (NOT B)   ⟺   NOT (A OR B)
 ```
 
 They are the same circuit. Which one you build depends on the parts in your hand
@@ -686,7 +686,7 @@ This is why real processors carry separate jump instructions for signed and
 unsigned comparison.
 
 The same two numbers, the same subtraction, **two different right answers** —
-which one you want depends on how you read the numbers. The sentence from `04`
+which one you want depends on how you read the numbers. The sentence from `09`
 and from [CWE-681](../cwe/cwe_681.md) applies here too: the pattern is the same,
 the meaning is the reader's decision.
 
@@ -720,7 +720,7 @@ itself** and making a circuit *remember* something.
 ☐ ⚠️ The sentence can be right while its translation is incomplete: two "not"s fall out, is zero and is neg go into an and, the output is 0 FOREVER.
 ☐ The symptom: in the stable state two mutually exclusive things are never 1 at once. and can never combine them.
 ☐ The "not"s sit INSIDE the parentheses in the sentence → so inv comes BEFORE the combining. Move the NOT to the input.
-☐ De Morgan: (NOT A) AND (NOT B) ≡ NOT (A OR B). inv+inv+and = or+inv. Two parts instead of three.
+☐ De Morgan: (NOT A) AND (NOT B) ⟺ NOT (A OR B). inv+inv+and = or+inv. Two parts instead of three.
 ☐ ⚠️ !(a || b) and !a || !b are NOT the same — in De Morgan the gate changes too (and ↔ or).
 ☐ Here xor gives the same result as or, because the "both are 1" row never occurs.
 ☐ 🔑 But xor gives THE RIGHT ANSWER FOR THE WRONG REASON. Working is not enough; a circuit must state its INTENT.

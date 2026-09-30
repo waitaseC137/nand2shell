@@ -260,7 +260,7 @@ Bu bir tasarruf numarası değil, bir **kural**. Adı **De Morgan** ve `02`'de
 görmüştün:
 
 ```
-(A değil) VE (B değil)   ≡   (A VEYA B) değil
+(A değil) VE (B değil)   ⟺   (A VEYA B) değil
 ```
 
 İkisi aynı devre. Hangisini kuracağın elindeki parçalara bağlı — ama ikisinin
@@ -653,7 +653,7 @@ Gerçek işlemciler bu yüzden işaretli ve işaretsiz karşılaştırma için a
 komutları taşır.
 
 Aynı iki sayı, aynı çıkarma, **iki farklı doğru cevap** — hangisini istediğin
-sayıları nasıl okuduğuna bağlı. `04`'ün ve
+sayıları nasıl okuduğuna bağlı. `09`'un ve
 [CWE-681](../cwe/cwe_681.md)'in cümlesi burada da geçerli: desen aynı, anlam
 okuyanın kararı.
 
@@ -687,7 +687,7 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ ⚠️ Cümle doğru, çeviri eksik olabilir: iki "değil" düşünce is zero ile is neg and'e girer, çıkış SONSUZA KADAR 0.
 ☐ Belirtisi: birbirini dışlayan iki şey kararlı durumda aynı anda 1 olmaz. and onları hiç birleştiremez.
 ☐ "Değil"ler cümlede parantezin İÇİNDE → inv de birleştirmeden ÖNCE gelir. Değili girişe taşı.
-☐ De Morgan: (A değil) VE (B değil) ≡ (A VEYA B) değil. inv+inv+and = or+inv. Üç parça yerine iki.
+☐ De Morgan: (A değil) VE (B değil) ⟺ (A VEYA B) değil. inv+inv+and = or+inv. Üç parça yerine iki.
 ☐ ⚠️ !(a || b) ile !a || !b AYNI DEĞİL — De Morgan'da kapı da değişir (and ↔ or).
 ☐ xor burada or ile aynı sonucu verir, çünkü "ikisi de 1" satırı hiç oluşmuyor.
 ☐ 🔑 Ama xor DOĞRU CEVABI YANLIŞ SEBEPLE verir. Devrenin çalışması yetmez, NİYETİNİ söylemesi gerekir.

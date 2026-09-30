@@ -31,8 +31,8 @@
 
 ## What Does This Part Do?
 
-ALU = **Arithmetic Logic Unit**. The only part of a processor that does the
-arithmetic. In this level you build it — and because you are on the third level
+ALU = **Arithmetic Logic Unit**. The processor's main
+calculating unit. In this level you build it — and because you are on the third level
 of the unit, both of its halves are already in your hands.
 
 Inputs:

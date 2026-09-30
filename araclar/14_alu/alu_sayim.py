@@ -7,7 +7,7 @@ Yöntem: her kombinasyonu 200 rastgele (X, Y) çiftinde çalıştırır; aynı s
 kombinasyonlar aynı işlem sayılır.
 Beklenen çıktı: 19 farklı işlem · 11 belgelenmiş kombinasyon · 11 belgelenmiş, 8 belgelenmemiş işlem.
 Ayrıca 12 · Logic Unit'in iki satırını sınar: X=0, Y=ffff'te ffff verenler (or, xor, inv X)
-ve X=Y=6553 girişinin xor'da 0 verdiği için dört işlemi ayırt edemediği.
+ve X=Y=6553 girişinin dört işlemi ayırt edemediği: and ile or aynı sonucu veriyor, xor da 0.
 Çalıştır: python3 alu_sayim.py
 """
 import random

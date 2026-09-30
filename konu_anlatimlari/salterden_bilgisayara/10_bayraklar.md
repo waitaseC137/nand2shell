@@ -7,8 +7,9 @@
 > veriyor: evet ya da hayır. İşlemcinin `eğer` diyebilmesi tam olarak buradan başlıyor.
 
 > İki seviyeyi birlikte alıyoruz çünkü ikisi de aynı şeyi üretiyor: **bayrak.**
-> Biri sıfırlığı, diğeri negatifliği bildiriyor. Bu iki tel, bilgisayarındaki her
-> `if` ve her `while`'ın altında duruyor.
+> Biri sıfırlığı, diğeri negatifliği bildiriyor. İşlemcinin "eğer" demesi bu tür
+> tellerle olur: x86'da yazdığın bir `if` ya da `while`, çoğu zaman bu bayraklara
+> bakan bir atlamaya dönüşür.
 
 ---
 
@@ -292,7 +293,7 @@ gerekiyor; sıradaki dersin konusu tam bu.
 
 ## 🔗 İlgili Konular
 
-- 👾 **Meraklısına:** Karşılaştırıcı yanılmaz, ona verilen bitler yanılabilir — işaret dönüşümü [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
+- 👾 **Meraklısına:** Karşılaştırıcıya verilen bitler de yanılabilir — işaret dönüşümü [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
 - [09_subtraction.md](./09_subtraction.md) — Bayrakların baktığı sonucu üreten devre
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — Ağacın kapıları: NOT, AND, OR
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Jeton değerleri: 1, 2, 4, 8 …

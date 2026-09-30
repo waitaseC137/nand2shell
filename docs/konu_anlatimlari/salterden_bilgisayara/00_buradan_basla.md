@@ -93,7 +93,7 @@ Serinin bugüne kadar yazılmış bölümünü bitirdiğinde:
 - `65535 + 1 = 0` gibi **taşmaların** neden kaçınılmaz olduğunu ve bunun gerçek bir
   **güvenlik açığı sınıfını** nasıl doğurduğunu göreceksin.
 - İşlemcinin `eğer` diyebilmesini sağlayan **bayrakları** (ZF, SF) kendi elinle
-  kurmuş olacaksın — yazdığın her `if`'in altındaki tel.
+  kurmuş olacaksın — yazdığın `if`'lerin altında duran türden teller.
 - Bir devreye **ne yapacağını dışarıdan söyleyen** teli kuracaksın (multiplexer) —
   programlanabilirliğin kökü.
 - Toplayan, çıkaran ve mantık işlemi yapan parçaları tek kutuda toplayıp bir **emir

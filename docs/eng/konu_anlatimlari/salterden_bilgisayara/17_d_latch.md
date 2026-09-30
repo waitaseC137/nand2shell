@@ -491,7 +491,8 @@ st=0      →  r = 1               s = nand(0,1) = 1   →  hold     ✓
 nand with one leg at 0 does not listen to its other leg.
 
 Total: 3 components, 4 `nand`s. One wire does two jobs: a command for the
-`sr latch`, the inverse of d for `nand1`.
+`sr latch`, the inverse of d for `nand1`. It was tried in the game: the game counts
+this solution as optimal, there is none with fewer nands.
 
 </details>
 
@@ -721,7 +722,7 @@ built as `nand(and(st, r), rst_n)`.
 ☐ 🔑 In the settled state d and inverse d cannot both be 1 → s and r cannot both be 0 → THE FORBIDDEN ROW IS IMPOSSIBLE IN THE SETTLED STATE.
 ☐ ⚠️ A transition has an instant spike: inverse d arrives one gate late. If st falls while d is changing, the race from 16 is back.
 ☐ 👾 An answer to CWE-1245: instead of asking people not to use the undefined row, make it unreachable.
-☐ Solution: 4 components, 5 nands. Fewer: delete the inv, give r to nand1 (while st=1, r = inverse d) → 3 components, 4 nands.
+☐ Solution: 4 components, 5 nands. Fewer: delete the inv, give r to nand1 (while st=1, r = inverse d) → 3 components, 4 nands (optimal according to the game).
 ☐ The D Latch is NOT DEPENDENT on the SR Latch: it can be built with select, and the black box passes. Opened up, the bit is lost / oscillates when st falls (game: "did not reach a stable state").
 ☐ 🔑 The reason for the SR Latch is not the order of levels: the gates holding the loop are INDEPENDENT of st. In select the loop runs through st's valve.
 ☐ Testing memory is a SEQUENCE: write → st=0 → change d → the output must not change. ONE switch per step.

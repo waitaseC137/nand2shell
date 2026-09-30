@@ -133,7 +133,7 @@ Doğrula (a=0, b=1 için): tersleri 1 ve 0 → NAND(1,0) = 1 ✓. (a=0, b=0): te
 
 ## Dört Kelimelik Dil
 
-Envanterine bak — dün sıfırdı, bugün dört kapın var:
+Envanterine bak — dün tek kapın vardı, bugün dört kapın var:
 
 | Kapı | Cümlesi | Kuruluşu (hepsi NAND'dan) |
 |---|---|---|

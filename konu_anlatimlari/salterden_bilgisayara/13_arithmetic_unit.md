@@ -434,8 +434,8 @@ ayırmak** istiyorsun.
 
 ## Her Komutta Çalışan Devre
 
-Tablodaki `X + 1` satırı masum duruyor. Aslında makinedeki **en sık yapılan
-aritmetik işlem** o.
+Tablodaki `X + 1` satırı masum duruyor. Ama `+1`, makinedeki **en sık yapılan
+aritmetik işlem**.
 
 İşlemci bir komutu bitirdiğinde "sıradaki komut nerede?" diye sorar. Cevap:
 
@@ -444,9 +444,13 @@ PC ← PC + 1
 ```
 
 `PC` = program sayacı, sıradaki komutun adresini tutan kayıt. Bu toplama **her
-komutta**, makine açık olduğu sürece durmadan yapılır.
+komutta**, makine açık olduğu sürece durmadan yapılır. Onu çoğu zaman ALU değil,
+program sayacının yanında duran ayrı bir artırıcı yapar: [08](./08_increment.md)'de
+kurduğun devrenin aynısı. ALU o sırada komutun kendi işiyle meşgul.
 
-Bu yüzden `+1` ve `−1`, `+Y` kadar meşru bir işlem olarak tabloya girmiş.
+ALU'daki `X + 1` ise programın kendi saymaları için: döngü sayacı, `i++`, bir
+sonraki elemana geçmek. `+1` ve `−1`'in `+Y` kadar meşru bir işlem olarak tabloda
+durmasının sebebi bu: sayma, programların en sık yaptığı işlerden biri.
 
 ### Sırada
 
@@ -475,7 +479,7 @@ kutuda birleştirecek.
 ☐ Sabit 1 yanlış bite giderse devre X + 2048 yapar; teldeki 0800 sayısı hatayı söyler.
 ☐ İyi test = "bozuk olsaydı farkederdim" diyebildiğin test. 5 ve 3 → dört sonuç da farklı.
 ☐ Sonuçları ayırt edilemeyen test, hiç test yapmamaktan kötüdür: sahte güven verir.
-☐ X + 1 makinedeki en sık aritmetik işlem: PC ← PC + 1, her komutta.
+☐ +1 makinedeki en sık aritmetik işlem: PC ← PC + 1, her komutta. Onu çoğu zaman ayrı bir artırıcı yapar; ALU'daki X + 1 programın saymaları için.
 ```
 
 ---

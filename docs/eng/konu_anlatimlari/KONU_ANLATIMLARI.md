@@ -6,7 +6,7 @@
 
 ## 🔌 From Switches to a Computer (NAND to CPU)
 
-> 🚧 **This course is still being written** — it grew out of the NandGame journey; the **arithmetic, routing and ALU units are complete, and the Memory unit is in progress** (21 files: 00–17, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF), data routing (the multiplexer), the calculation core (ALU) and the first memory circuits (SR Latch, D Latch). The rest (the remainder of memory, clock, control unit) will be added as the journey continues.
+> 🚧 **This course is still being written** — it grew out of the NandGame journey; the **arithmetic, routing, ALU and Memory units are complete** (25 files: 00–21, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF), data routing (the multiplexer), the calculation core (ALU) and memory (latch, flip-flop, register, counter, RAM). The rest (the processor and the control unit) will be added as the journey continues.
 >
 > 🧭 **New to this?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — for people who want to learn the processor not by asking "what is it?" but by **building it from its parts**. Here you build the worker from transistors: the circuit underneath every order written in assembly.
 
@@ -15,7 +15,7 @@
 | [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) | Course map; the journey from switches to a CPU |
 | [01_akim_salter_role.md](./salterden_bilgisayara/01_akim_salter_role.md) | Current, switch, relay — the first "logic" |
 | [01.5_yasak_bolge.md](./salterden_bilgisayara/01.5_yasak_bolge.md) | **Interlude:** voltage and the noise margin, the forbidden zone, MOSFET and CMOS, `P ≈ C·V²·f` |
-| [02_nanddan_kapilar.md](./salterden_bilgisayara/02_nanddan_kapilar.md) | NAND is universal: deriving NOT/AND/OR/XOR |
+| [02_nanddan_kapilar.md](./salterden_bilgisayara/02_nanddan_kapilar.md) | NAND is universal: deriving NOT/AND/OR |
 | [03_xor_iki_fedai.md](./salterden_bilgisayara/03_xor_iki_fedai.md) | Building XOR — "the two workhorses" (OR + NAND + AND) |
 | [03.5_soyutlama_merdiveni.md](./salterden_bilgisayara/03.5_soyutlama_merdiveni.md) | A gate = a closed box; climbing one floor up |
 | [04_teller_sayi_olunca.md](./salterden_bilgisayara/04_teller_sayi_olunca.md) | Assigning value to wires; the token logic |
@@ -33,7 +33,7 @@
 | [15_condition.md](./salterden_bilgisayara/15_condition.md) | Condition; AND as a valve, trichotomy and closing the OF debt |
 | [16_sr_latch.md](./salterden_bilgisayara/16_sr_latch.md) | SR Latch; feedback, the number of inversions: memory or oscillation |
 | [17_d_latch.md](./salterden_bilgisayara/17_d_latch.md) | D Latch; a translator in front of the SR Latch, the forbidden row made impossible in the settled state and turned into a timing rule, why not select |
-| [18_data_flip_flop.md](./salterden_bilgisayara/18_data_flip_flop.md) | Data Flip-Flop; the clock, separating taking and showing, the two gates never open at the same time, component count vs nand count |
+| [18_data_flip_flop.md](./salterden_bilgisayara/18_data_flip_flop.md) | Data Flip-Flop; the clock, separating taking and showing, the two gates never open at the same time in the stable state, component count vs nand count |
 | [19_register.md](./salterden_bilgisayara/19_register.md) | Register; the memory of a number, data wires separate and control wires shared, bits changing at the same moment |
 | [20_counter.md](./salterden_bilgisayara/20_counter.md) | Counter; one step per bell, two wires with the same name doing different jobs, why the loop turns once |
 | [21_ram.md](./salterden_bilgisayara/21_ram.md) | RAM; the address, a register not knowing its address, distributing when writing and gathering when reading, recursive growth |

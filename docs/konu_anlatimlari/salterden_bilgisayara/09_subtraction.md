@@ -305,6 +305,7 @@ diyebilmesi buradan başlıyor.
 ## 🔗 İlgili Konular
 
 - 👾 **Meraklısına:** Güvenlik Köprüsü'ndeki örneğin üç CWE'si — [CWE-196](../cwe/cwe_196.md) (dönüşüm) → [CWE-839](../cwe/cwe_839.md) (yarım kontrol) → [CWE-195](../cwe/cwe_195.md) (geri dönüşüm)
+- 👾 **Meraklısına:** Sıfırın altına sarma, `0 − 1 = 65535` — [CWE-191](../cwe/cwe_191.md)
 - [08_increment.md](./08_increment.md) — Sarma ve carry-in'in ucuzluğu
 - [08.5_sayac_basa_donunce.md](./08.5_sayac_basa_donunce.md) — Sarmanın matematiği: `ℤ/2ⁿℤ`
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — "Sayı, okuma biçimindedir"
