@@ -195,7 +195,8 @@ And you **know** this:
 one of them carries the data  ·  the other is CERTAINLY 0
 ```
 
-Certainly, because if one valve is open the other is closed. They can never both be full.
+Certainly, because in the stable state, if one valve is open the other is closed. They
+can never both be full.
 
 To collapse two wires into one, `OR`:
 
@@ -231,6 +232,13 @@ output = (d0 AND inv s)  OR  (d1 AND s)
 ```
 
 This circuit is called a **multiplexer**, **mux** for short. Yours is a 2→1 mux.
+
+> 📌 The "stable state" qualifier is there for a reason. At the gate level `inv(s)`
+> changes one gate later than `s` (the delay from [10](./10_bayraklar.md#tree-or-chain)).
+> As `s` falls from 1 to 0, for a short moment **both valves are closed**: if
+> `d0 = d1 = 1`, the output drops to 0 for that moment and then goes back to 1. It
+> doesn't change the result the selector arrives at, but it leaves a momentary spike
+> on the output.
 
 ---
 
@@ -427,7 +435,8 @@ picks one.** Choosing is cheaper than waiting.
 ☐ The proof of selection: a 1 being present and yet UNABLE TO AFFECT the output (rows 2 and 3).
 ☐ Two opposite commands from one wire → inv. Fan-out is free; wires don't run out.
 ☐ A closed valve emits 0; 0 is OR's identity → OR becomes a merger.
-☐ The two branches can never both be full → OR is safe (the same proof as in 06).
+☐ In the stable state the two branches can never both be full → OR is safe (the same proof as in 06).
+☐ At the gate level inv(s) lags by one gate: as s falls from 1 to 0 with d0 = d1 = 1, the output drops to 0 for a moment.
 ☐ Selector: output = (d0 AND inv s) OR (d1 AND s) — a 2→1 multiplexer.
 ☐ Switch:  c1 = d AND s · c0 = d AND inv s — NO merging, the outputs stay apart.
 ☐ A two-way switch (SPDT) is the same circuit; reverse it and it becomes a Selector.

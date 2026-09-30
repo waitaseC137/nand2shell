@@ -193,7 +193,8 @@ Ve şunu **biliyorsun**:
 biri veriyi taşıyor  ·  diğeri KESİN 0
 ```
 
-Kesin, çünkü bir vana açıksa diğeri kapalıdır. İkisi aynı anda dolu olamaz.
+Kesin, çünkü kararlı durumda bir vana açıksa diğeri kapalıdır. İkisi aynı anda
+dolu olamaz.
 
 İki teli tek tele indirmek için `OR`:
 
@@ -229,6 +230,12 @@ Tek satırda:
 ```
 
 Bu devrenin adı **multiplexer**, kısaca **mux**. Seninki 2→1 mux.
+
+> 📌 "Kararlı durumda" kaydı boşuna değil. Kapı düzeyinde `inv(s)`, `s`'den bir kapı
+> geç değişir ([10](./10_bayraklar.md#ağaç-mı-zincir-mi)'daki gecikme). `s` 1'den 0'a
+> inerken kısa bir an **iki vana birden kapalı** kalır: `d0 = d1 = 1` ise çıkış o an
+> 0'a düşer, sonra yine 1 olur. Seçicinin vardığı sonucu değiştirmez, ama çıkışta bir
+> anlık bir iğne bırakır.
 
 ---
 
@@ -423,7 +430,8 @@ seçer.** Seçmek, beklemekten ucuzdur.
 ☐ Seçmenin kanıtı: bir 1'in orada olup çıkışa ETKİ EDEMEMESİ (2. ve 3. satır).
 ☐ Tek telden iki zıt komut → inv. Fan-out serbest, tel tükenmez.
 ☐ Kapalı vana 0 yayar; 0 OR'un etkisiz elemanı → OR birleştirici olur.
-☐ İki dal aynı anda dolu olamaz → OR güvenli (06'daki ispatın aynısı).
+☐ Kararlı durumda iki dal aynı anda dolu olamaz → OR güvenli (06'daki ispatın aynısı).
+☐ Kapı düzeyinde inv(s) bir kapı geç kalır: s 1'den 0'a inerken d0 = d1 = 1 ise çıkış bir an 0'a düşer.
 ☐ Selector: çıkış = (d0 AND inv s) OR (d1 AND s)  — 2→1 multiplexer.
 ☐ Switch:  c1 = d AND s · c0 = d AND inv s  — birleştirme YOK, çıkışlar ayrı.
 ☐ Vaviyen (SPDT) birebir aynı devre; ters çevirince Selector olur.
