@@ -46,6 +46,9 @@ bağlandı.
 | CWE-190 | "Derleyici taşma kontrolünü siler" | `08-09_c/ub_silme.c` | `a + 1 < a` siliniyor, fonksiyon hep 0 döndürüyor; `a + b < a` silinmiyor, `b < 0`'a iniyor | örnek `a + 1 < a` oldu, `a + b` için not |
 | CWE-191 | "Sonradan sormak işe yaramaz" | `08-09_c/c_iddialar.c` | `a − b < 0` işe yaramıyor; `r = a − b; r > a` sarmayı yakalıyor | cümle `a − b < 0` sorusuna daraltıldı |
 | CWE-787 | `malloc(0)`'dan sonra 65536 bayt yazınca ne olur? | `08-09_c/malloc_sifir.c` | glibc 2.44: adres veriyor (24 bayt), yazma sessiz geçiyor, sonraki `malloc` "corrupted top size" deyip durduruyor; AddressSanitizer ilk taşan baytta yakalıyor | "Bozulma ancak sonra fark edilebiliyor" paragrafı |
+| 08.5 · Sayaç Başa Dönünce · CWE-190 · 191 | "Toplamada taşmak için iki büyük sayı gerekir"; "hata kümesi dar" | `08.5_sayac/tasma_kumesi.py` | 16 bitte çiftlerin %49,9992'si taşıyor; ikisi de 32768'den küçükse hiç taşmıyor, `65535 + 1` taşıyor; çarpmada %99,98; 0–1000 arası sayılarla hiç taşma yok | "en az bir büyük sayı"; "`H` çiftlerin yarısı, testler küçük sayılarla yazılır" |
+| CWE-190 | "Saat 137 yıl geri gider" | `08.5_sayac/tasma_kumesi.py` | 2038-01-19 03:14:07 → 1901-12-13 20:45:52: 136,1 yıl | 136 yıl |
+| CWE-1261 | "2'nin kuvveti kadar sapma = tek bit dönmesi" | `08.5_sayac/tasma_kumesi.py` | tek bit dönmesi hep tam 2ᵏ fark yapıyor; ama +4096 sayıların yalnız yarısında tek bit değiştiriyor (4096 + 4096 = 8192: iki bit) | yön düzeldi: sapma bir iz, kanıt değil |
 | 12 · Logic Unit | `X=0, Y=ffff` satırında `ffff` veren işlemler; `X=Y=6553` girişi dört işlemi ayırt ediyor mu? | `14_alu/alu_sayim.py` | `or`, `xor` **ve `inv X`**; `6553`'te `xor` 0 veriyor, deney ayırt edemiyor | listeye `inv X` eklendi, deney girişi `00FF`/`0F0F` oldu ([13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e), [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
 | 14 · ALU | 32 kombinasyon kaç farklı işlem, belge kaçını yazıyor? | `14_alu/alu_sayim.py` | 19 işlem · 11 belgeli · 8 listelenmemiş | ders "8 belgeli" diyordu, düzeldi ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
 | 14 · ALU | "Sıfırı yanlış bayrağa bağlamak" tuzağı neye benzer? | `14_alu/sifir_tuzagi.py` | aynı belirtiyi veren 60 kurulum; `X=5, Y=3` tablosu | tuzak tam kurulumuyla yeniden yazıldı ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
@@ -125,6 +128,7 @@ gerek kalmadı. Gerektiği gün buraya eklenecek.
 ```
 araclar/
 ├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
+├── 08.5_sayac/              tasma_kumesi.py
 ├── 14_alu/                  alu_sayim.py (12'nin iki satırı da burada) · sifir_tuzagi.py
 ├── 15_condition/            never_always.py · of_kurali.py · cf_borc.py
 │   └── digital/             uret.py · dig_uretici.py · 15_condition_*.dig

@@ -46,6 +46,9 @@ game, and settled with screenshots.
 | CWE-190 | "The compiler deletes the overflow check" | `08-09_c/ub_silme.c` | `a + 1 < a` is deleted, the function always returns 0; `a + b < a` is not deleted, it becomes `b < 0` | the example became `a + 1 < a`, a note for `a + b` |
 | CWE-191 | "Asking afterwards is useless" | `08-09_c/c_iddialar.c` | `a − b < 0` is useless; `r = a − b; r > a` catches the wrap | the sentence narrowed to the `a − b < 0` question |
 | CWE-787 | What happens when 65536 bytes are written after `malloc(0)`? | `08-09_c/malloc_sifir.c` | glibc 2.44: gives an address (24 bytes), the writes pass silently, the next `malloc` stops with "corrupted top size"; AddressSanitizer catches it at the first overflowing byte | the "The damage is only noticed later" paragraph |
+| 08.5 · When the Counter Wraps · CWE-190 · 191 | "Overflowing an addition needs two large numbers"; "the error set is narrow" | `08.5_sayac/tasma_kumesi.py` | in 16 bits 49.9992% of the pairs overflow; if both are below 32768 none do, `65535 + 1` does; 99.98% for multiplication; no overflow at all with numbers from 0 to 1000 | "at least one large number"; "the set is half of the pairs, tests are written with small numbers" |
+| CWE-190 | "The clock goes 137 years back" | `08.5_sayac/tasma_kumesi.py` | 2038-01-19 03:14:07 → 1901-12-13 20:45:52: 136.1 years | 136 years |
+| CWE-1261 | "A deviation of a power of two = a single bit flip" | `08.5_sayac/tasma_kumesi.py` | a single bit flip always changes the number by exactly 2ᵏ; but +4096 changes a single bit in only half of the numbers (4096 + 4096 = 8192: two bits) | direction fixed: the deviation is a trace, not proof |
 | 12 · Logic Unit | Which operations give `ffff` on the `X=0, Y=ffff` row; can the input `X=Y=6553` tell the four operations apart? | `14_alu/alu_sayim.py` | `or`, `xor` **and `inv X`**; at `6553`, `xor` gives 0 and the experiment cannot tell them apart | `inv X` added to the list, the experiment input became `00FF`/`0F0F` ([13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e), [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
 | 14 · ALU | How many distinct operations do the 32 combinations give, and how many does the documentation list? | `14_alu/alu_sayim.py` | 19 operations · 11 documented · 8 unlisted | the lesson said "8 documented"; fixed ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
 | 14 · ALU | What does the "zero on the wrong flag" trap look like? | `14_alu/sifir_tuzagi.py` | 60 setups give the same symptom; the `X=5, Y=3` table | the trap rewritten with its full setup ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
@@ -130,6 +133,7 @@ will be added here the day it is.
 ```
 araclar/
 ├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
+├── 08.5_sayac/              tasma_kumesi.py
 ├── 14_alu/                  alu_sayim.py (12's two rows are here too) · sifir_tuzagi.py
 ├── 15_condition/            never_always.py · of_kurali.py · cf_borc.py
 │   └── digital/             uret.py · dig_uretici.py · 15_condition_*.dig
