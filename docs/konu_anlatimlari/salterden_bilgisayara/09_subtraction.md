@@ -7,8 +7,8 @@
 > çıkarma donanımı yoktur.
 
 > Ama önce şu soruyu cevaplaman lazım, felsefi duruyor ama tamamen mühendislik:
-> **bir telde eksi sayı neye benzer?** Telde ya gerilim vardır ya yoktur — eksi
-> işareti diye bir hâli yok.
+> **bir telde eksi sayı neye benzer?** Telin iki hâli var, 0 ve 1 — eksi işareti
+> diye üçüncü bir hâli yok.
 
 ---
 
@@ -121,9 +121,11 @@ O da geçti.
 Seviyenin kendi cümlesi de bunun formülü: *"If the result is less than zero it is
 represented as **65536 plus the result**."* Yani `−1` → `65536 + (−1)` = `65535`.
 
-> 🔑 Bu gösterimin adı **ikinin tümleyeni** (two's complement). Kimse masaya oturup
-> "eksi sayıları böyle yazalım" demedi — **sarmadan kendiliğinden çıktı.** Toplayıcı
-> zaten böyle davranıyordu; biz sadece ona bir isim verdik.
+> 🔑 Bu gösterimin adı **ikinin tümleyeni** (two's complement). Tek seçenek değildi:
+> eski makinelerin bir kısmı eksi sayıları başka türlü yazdı (IBM 7090 ayrı bir işaret
+> hanesiyle, CDC 6600 birin tümleyeniyle). Ama **aynı toplayıcıyı çıkarmada da
+> kullanmak istersen** gösterim bu çıkar: toplayıcı sararken zaten böyle davranıyordu,
+> biz sadece ona bir isim verdik. Bugünkü işlemcilerin neredeyse hepsi bunu kullanır.
 
 ---
 
@@ -290,7 +292,7 @@ diyebilmesi buradan başlıyor.
 ☐ Tellerde eksi işareti yok. Eksi sayı SAKLANMAZ, bir desenle TEMSİL EDİLİR.
 ☐ 0'ın bir altındaki desen 1111111111111111 → o yüzden −1.
 ☐ İspat: 65535 + 1 = 0. −1'in tanımı zaten budur.
-☐ Bu gösterimin adı ikinin tümleyeni; kimse tasarlamadı, SARMADAN çıktı.
+☐ Bu gösterimin adı ikinin tümleyeni. Tek seçenek değildi; aynı toplayıcıyı çıkarmada da kullanmak isteyince SARMADAN çıkar.
 ☐ −B = inc16(inv16(B)) — ters çevir, 1 ekle.
 ☐ İspatı: inv16(B) = 65535 − B, +1 → 65536 − B = seviyenin kendi kuralı.
 ☐ Gerçek ALU inc kullanmaz: A + ~B ve carry-in = 1. Aynı sonuç, tek geçiş.

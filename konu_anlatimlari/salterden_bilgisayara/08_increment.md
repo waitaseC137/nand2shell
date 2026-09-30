@@ -64,8 +64,9 @@ kutu **senin geçen ders kurduğun devre:**
 | `c` (üstte) | `c` (üstte) | **carry out** |
 
 > ⚠️ Aynı kutunun **altında ve üstünde** birer `c` var ve bunlar zıt şeyler:
-> alttaki **giren**, üstteki **çıkan** elde. 07. dersteki "aynı telin iki adı"
-> meselesi burada tek bileşenin üstünde gözle görülüyor.
+> alttaki **giren**, üstteki **çıkan** elde. 07. dersteki durumun tersi: orada **tek
+> telin iki adı** vardı, burada **iki ayrı telin tek adı** var. İkisinin de adı `c`,
+> çünkü ikisi de elde.
 
 Oyun senin kurduğun zinciri alıp 16 basamağa uzattı ve tek bir kutuya sığdırdı.
 Kurduğun şeyi geri veriyor — merdivenin bir üst basamağı.
@@ -98,7 +99,7 @@ tek telle işi bitirmeyi gerektiriyor.
 
 > 🔑 **Elde girişi, bir devreye "1" sokmanın en ucuz yeridir.** Zaten oradadır,
 > zaten tek bittir, zaten toplama işlemine dahildir. Donanım tasarımında bu tür
-> "bedava kapı"ları görmek, iyi devre ile şişkin devre arasındaki farktır.
+> "bedava giriş"leri görmek, iyi devre ile şişkin devre arasındaki farktır.
 
 `c`'ye 1 verirsen `B` 0 olmalı — çünkü `giriş + 0 + 1 = giriş + 1`.
 
@@ -159,9 +160,10 @@ Evet. Devre onu üretti, bacakta duruyor, değeri 1. Sadece sen bağlamadın.
 
 > 🔑 **Bilgi kaybolmuyor — kimse bakmıyor.**
 
-Gerçek işlemcide de tam olarak böyle olur. Toplama yapılır, taşma bir bayrağa
-yazılır — adı **carry flag (CF)** — ve orada bekler. Program o bayrağa bakmazsa
-(x86'da `jc` / `jnc` komutlarıyla) taşma **hiç olmamış** sayılır.
+x86 gibi işlemcilerde de böyle olur. Toplama yapılır, taşma bir bayrağa yazılır —
+adı **carry flag (CF)** — ve orada bekler. Program o bayrağa bakmazsa (`jc` / `jnc`
+komutlarıyla) taşma **hiç olmamış** sayılır. (Her işlemcide bu bayrak yok: RISC-V'de
+taşmayı görmek isteyen program onu ayrıca hesaplar.)
 
 Donanım sana söylüyor. Yazılım dinlemiyor.
 
@@ -221,7 +223,8 @@ nereye?
 
 1. `add 16`'nın **`A`** bacağına 16-bitlik girişi bağla.
 2. **`B`** bacağı 0 kalmalı. (Bağlamazsan NandGame onu zaten 0 okur — ama bunu
-   bilerek yap, tesadüf sanma.)
+   bilerek yap, tesadüf sanma. Gerçek bir devrede boşta kalan giriş 0 değil,
+   [01.5](./01.5_yasak_bolge.md)'teki yasak banda da düşebilen tanımsız bir değerdir.)
 3. Sabit **`0`** → **`inv`** → çıkan **`1`**'i `add 16`'nın alttaki **`c`** bacağına.
 4. **`S`** → çıkışa.
 5. Üstteki **`c`** → **hiçbir yere.** Bu, dersin kendisi.

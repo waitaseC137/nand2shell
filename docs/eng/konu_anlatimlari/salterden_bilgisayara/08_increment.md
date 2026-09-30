@@ -65,9 +65,9 @@ that box is **the circuit you built last lesson:**
 | `c` (top) | `c` (top) | **carry out** |
 
 > ⚠️ The same box has a `c` on the **bottom and on the top**, and they are opposites: the
-> bottom one is the carry coming **in**, the top one the carry going **out**. The "one wire,
-> two names" business from lesson 07 is visible here on a single component, with your own
-> eyes.
+> bottom one is the carry coming **in**, the top one the carry going **out**. It's the
+> reverse of lesson 07: there it was **one wire with two names,** here it's **two separate
+> wires with one name.** Both are called `c` because both are carries.
 
 The game took the chain you built, stretched it to 16 digits and packed it into one box.
 It's handing back what you built — one more rung up the ladder.
@@ -101,7 +101,7 @@ other finishes the job with a single wire.
 
 > 🔑 **The carry input is the cheapest place to inject a "1" into a circuit.** It's already
 > there, it's already a single bit, it's already part of the addition. Spotting these "free
-> doors" in hardware design is the difference between a good circuit and a bloated one.
+> inputs" in hardware design is the difference between a good circuit and a bloated one.
 
 If you feed `c` a 1, then `B` must be 0 — because `input + 0 + 1 = input + 1`.
 
@@ -163,9 +163,11 @@ connect it.
 
 > 🔑 **The information isn't lost — nobody is looking at it.**
 
-The same thing happens in a real processor. An addition runs, the overflow is written into a
-flag — it's called the **carry flag (CF)** — and it waits there. If the program doesn't look
-at that flag (with `jc` / `jnc` on x86), the overflow is treated as if it **never happened.**
+The same thing happens in processors like x86. An addition runs, the overflow is written into
+a flag — it's called the **carry flag (CF)** — and it waits there. If the program doesn't look
+at that flag (with `jc` / `jnc`), the overflow is treated as if it **never happened.** (Not
+every processor has this flag: on RISC-V a program that wants to see the overflow computes
+it separately.)
 
 The hardware is telling you. The software isn't listening.
 
@@ -225,7 +227,9 @@ from and where does it go? Where does the carry output go?
 
 1. Wire the 16-bit input to `add 16`'s **`A`** pin.
 2. The **`B`** pin must stay 0. (If you leave it unconnected NandGame reads it as 0 anyway —
-   but do it knowingly, don't take it for a coincidence.)
+   but do it knowingly, don't take it for a coincidence. In a real circuit an unconnected
+   input isn't 0 but an undefined value that can even land in the forbidden band of
+   [01.5](./01.5_yasak_bolge.md).)
 3. Constant **`0`** → **`inv`** → feed the resulting **`1`** into `add 16`'s bottom **`c`** pin.
 4. **`S`** → to the output.
 5. The top **`c`** → **nowhere.** That is the lesson itself.

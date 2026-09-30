@@ -21,7 +21,7 @@
 - [🎮 Şimdi Sen Kur — Selector](#-şimdi-sen-kur--selector)
 - [Switch: Aynadaki Yansıma](#switch-aynadaki-yansıma)
 - [🎮 Şimdi Sen Kur — Switch](#-şimdi-sen-kur--switch)
-- [Vaviyen Anahtar — ve Benzetmenin Kırıldığı Yer](#vaviyen-anahtar--ve-benzetmenin-kırıldığı-yer)
+- [Merdiven Anahtarı — ve Benzetmenin Kırıldığı Yer](#merdiven-anahtarı--ve-benzetmenin-kırıldığı-yer)
 - [Kapanış: Kararın Tele Dönüşmesi](#kapanış-kararın-tele-dönüşmesi)
 
 ---
@@ -110,9 +110,12 @@ x AND 1 = x        1, AND'in etkisiz elemanı
 x OR  0 = x        0, OR'un  etkisiz elemanı
 ```
 
-> 🔑 **Bir kapıyı vana yapan şey, etkisiz elemanının olmasıdır.** Etkisiz
-> elemanını verirsen geçirir, karşıtını verirsen bloke eder. Ezberlenecek değil,
-> türetilecek bir şey — ve türetmek için doğruluk tablosuna bakmak yetiyor.
+> 🔑 **Bir kapıyı vana yapan şey iki elemandır:** geçirmek için bir **etkisiz
+> eleman**, kesmek için bir **yutan eleman.** AND'de 1 etkisiz, 0 yutan:
+> `x AND 1 = x`, `x AND 0 = 0`, `x` ne olursa olsun. XOR'un da etkisiz elemanı var
+> (`x XOR 0 = x`) ama yutanı yok: `x XOR 1`, `x`'i yutmaz, tersine çevirir. O yüzden
+> XOR vana olamaz. Ezberlenecek değil, türetilecek bir şey — ve türetmek için
+> doğruluk tablosuna bakmak yetiyor.
 
 ---
 
@@ -177,8 +180,8 @@ d1'in vanası  ←  s
 Kontrol et: `s = 0` iken `inv(s) = 1` → d0'ın vanası açık, d1'inki kapalı.
 Spec ne diyordu? `s = 0 → d0`. **Uyuyor.**
 
-> 💡 Bir teli iki yere birden bağlamak (fan-out) yeni bir şey değil — `06`'da
-> `add₁`'in `l` çıkışını hem bir yere hem başka bir yere göndermiştin. Tel
+> 💡 Bir teli iki yere birden bağlamak (fan-out) yeni bir şey değil — `03`'te XOR'u
+> kurarken `a` ile `b`'yi hem OR'a hem NAND'a birden vermiştin. Mantıkta tel
 > tükenmez; okunması sinyali yok etmez.
 
 ---
@@ -326,51 +329,49 @@ kullanılması gerekmez.
 
 ---
 
-## Vaviyen Anahtar — ve Benzetmenin Kırıldığı Yer
+## Merdiven Anahtarı — ve Benzetmenin Kırıldığı Yer
 
-Switch'in elektrikte birebir karşılığı var: **vaviyen anahtar** (teknik adı
-**SPDT** — tek kutuplu, çift yönlü). Merdiven boşluğunda ışığı iki ayrı yerden
-yakıp söndüren o anahtar.
-
-Uçları eşleştir:
+Switch'in gündelik hayatta bir karşılığı var: merdiven boşluğunda ışığı hem
+aşağıdan hem yukarıdan yakıp söndürebildiğin anahtar. İçinde tek bir giriş ve iki
+çıkış yolu var; kol hangi yöndeyse akım o yola gider.
 
 ```
-ortak uç (C)       →  d       tek giriş
-gidiş ucu 1 (L1)   →  c1
-gidiş ucu 2 (L2)   →  c0
+anahtarın girişi   →  d       tek giriş
+birinci yol        →  c1
+ikinci yol         →  c0
 kolun konumu       →  s
 ```
 
-Kol bir yerdeyken akım oraya gider, öbür uç **ölüdür.** Bizim vanaların yaptığı
+Kol bir yerdeyken akım oraya gider, öbür yol **ölüdür.** Bizim vanaların yaptığı
 şeyin aynısı.
 
-Ve güzel kısım: **vaviyeni ters çevir.** İki gidiş ucundan besle, ortak uçtan al
-— iki giriş, tek çıkış, kol hangisinin geçeceğini seçiyor. **Selector.**
+Ve güzel kısım: **anahtarı ters bağla.** İki yoldan besle, girişten al — iki
+giriş, tek çıkış, kol hangisinin geçeceğini seçiyor. **Selector.**
 
 ```
 düz  :  1 giriş → 2 çıkış     Switch
 ters :  2 giriş → 1 çıkış     Selector
 ```
 
-Aynı parça, iki yön. `07`'deki *"aynı telin iki adı"* meselesinin kardeşi.
+Aynı parça, iki yön.
 
 ### Ama benzetme bir yerde kopuyor
 
 Mekanik anahtar **çift yönlüdür** — metal parçadır, akım iki yöne de akar. Tek
-parçayı çevirip iki iş yaptırabilirsin.
+parçayı ters bağlayıp iki iş yaptırabilirsin.
 
 Mantık kapıları **öyle değil.** `AND`'in girişi giriştir, çıkışı çıkıştır;
 ters çeviremezsin. Bu yüzden Selector ve Switch'i **ayrı ayrı kurmak**
-zorundasın — oyunun bunları iki seviye yapmasının sebebi tam olarak bu.
+zorundasın.
 
 > 🔑 Benzetmenin kırıldığı yer, benzetmenin kendisi kadar öğretici:
-> **elektrikte simetri var, mantıkta yön var.**
+> **anahtarda simetri var, mantık kapısında yön var.**
 
 ---
 
 ## Kapanış: Kararın Tele Dönüşmesi
 
-Vaviyen benzetmesinde bir uç açıkta kalıyor: **`s` neye karşılık geliyor?**
+Merdiven anahtarı benzetmesinde bir uç açıkta kalıyor: **`s` neye karşılık geliyor?**
 
 Hiçbir tele. `s`, kolun **fiziksel konumu** — ve o konumu belirleyen şey bir **el.**
 
@@ -384,7 +385,7 @@ Bütün mesele burada:
 > 🔑 Karar bir tele dönüştüğü anda, o tel **başka bir devrenin çıkışı** olabilir.
 > Yani makine kendi anahtarını **kendi çevirebilir.**
 
-Vaviyende ışığı yakmak için birinin gelip kola dokunması gerekir. Devrede `s`
+Merdivende ışığı yakmak için birinin gelip kola dokunması gerekir. Devrede `s`
 telini bir karşılaştırma devresinin çıkışına bağlarsan, anahtar **kendi kendine**
 çevrilir. Otomasyon tam olarak bu.
 
@@ -424,7 +425,7 @@ seçer.** Seçmek, beklemekten ucuzdur.
 ☐ Veri teli ≠ kontrol teli. Fizik aynı, ANLAM farklı. s hesaba girmez, hesabı SEÇER.
 ☐ AND bir vanadır: x AND 1 = x (açık), x AND 0 = 0 (kapalı).
 ☐ Bunlar denklem değil ÖZDEŞLİK — her x için ne ettiğini söyler. x'in 2 hâli var, ikisini de dene.
-☐ Bir kapıyı vana yapan şey ETKİSİZ ELEMANIDIR (AND için 1, OR için 0).
+☐ Bir kapıyı vana yapan şey iki elemandır: geçiren ETKİSİZ eleman + kesen YUTAN eleman (AND'de 1 ve 0, OR'da 0 ve 1). XOR'da yutan yok, vana olamaz.
 ☐ ⚠️ Vana açık olması, verinin 1 olması DEMEK DEĞİL. Musluk açık, boru boş olabilir.
 ☐ "selected" = sözü geçiyor. Seçilmiş giriş 0 da olabilir.
 ☐ Seçmenin kanıtı: bir 1'in orada olup çıkışa ETKİ EDEMEMESİ (2. ve 3. satır).
@@ -434,8 +435,8 @@ seçer.** Seçmek, beklemekten ucuzdur.
 ☐ Kapı düzeyinde inv(s) bir kapı geç kalır: s 1'den 0'a inerken d0 = d1 = 1 ise çıkış bir an 0'a düşer.
 ☐ Selector: çıkış = (d0 AND inv s) OR (d1 AND s)  — 2→1 multiplexer.
 ☐ Switch:  c1 = d AND s · c0 = d AND inv s  — birleştirme YOK, çıkışlar ayrı.
-☐ Vaviyen (SPDT) birebir aynı devre; ters çevirince Selector olur.
-☐ Benzetme yönde kırılır: elektrikte simetri var, mantıkta YÖN var.
+☐ Merdiven anahtarı birebir aynı iş; ters bağlayınca Selector olur.
+☐ Benzetme yönde kırılır: anahtarda simetri var, mantık kapısında YÖN var.
 ☐ Mekanikte kararı EL verir, devrede TEL verir → tel başka devrenin çıkışı olabilir.
 ☐ ALU: bütün devreler aynı anda çalışır, selector birini geçirir. Seçmek beklemekten ucuz.
 ```

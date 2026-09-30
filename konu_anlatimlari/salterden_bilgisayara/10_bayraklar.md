@@ -56,7 +56,7 @@ ikili çalışıyor, "dördü birden" diye bir şey bilmiyorlar.
 O yüzden soruyu çevir:
 
 ```
-"bütün bitler 0"     ≡     "hiçbir bit 1 DEĞİL"
+"bütün bitler 0"     ⟺     "hiçbir bit 1 DEĞİL"
 ```
 
 İki cümle aynı şeyi söylüyor. Ama ikincisinin içinde kurabileceğin bir soru saklı:
@@ -76,7 +76,7 @@ değil" birbirinin zıddı. Sonuna bir `inv` koyarsın.
 
 ## Ağaç mı, Zincir mi?
 
-OR ikili çalışıyor, senin dört bitin var. Üç OR gerekiyor — ama **nasıl dizeceksin?**
+OR iki girişli, senin dört bitin var. Üç OR gerekiyor — ama **nasıl dizeceksin?**
 İki geçerli şekil var ve ikisi de doğru cevabı verir:
 
 ```
@@ -106,11 +106,14 @@ bu gecikmeler **üst üste biner.** Dört bitte fark önemsiz. Ama:
 Ağaç **logaritmik** büyüyor, zincir **doğrusal.** Gerçek işlemcilerde bu seçim
 doğrudan saat hızını belirler.
 
-> ⚠️ 07. dersteki ripple-carry ile karıştırma. Orada zincir **zorunluydu**: her
-> basamak sağındakinin eldesini beklemek zorundaydı. Burada öyle bir bağımlılık
-> yok — bitlerin hepsi aynı anda hazır, hiçbiri diğerini beklemiyor.
+> ⚠️ 07. dersteki ripple-carry ile karıştırma. Oradaki zincirin gerçek bir sebebi
+> vardı: her basamak sağındakinin eldesine **bağlıydı.** (Bu bağımlılık bile zinciri
+> tek yol yapmıyor; 07'nin sonundaki carry-lookahead eldeyi önceden hesaplıyor. Ama
+> bağımlılık gerçek.) Burada öyle bir bağımlılık yok — bitlerin hepsi aynı anda
+> hazır, hiçbiri diğerini beklemiyor.
 >
-> 🔑 **Zorunlu zincir ile alışkanlıktan kurulan zincir farklı şeylerdir.** Bir
+> 🔑 **Gerçek bir bağımlılıktan doğan zincir ile alışkanlıktan kurulan zincir farklı
+> şeylerdir.** Bir
 > devrede sıra görürsen sor: bu gerçekten bir bağımlılık mı, yoksa öylesine mi
 > böyle dizildi?
 
@@ -125,11 +128,16 @@ Yazdığın her `if (x == 0)` bu telden geçiyor.
 
 Ve asıl güzeli, 09. dersle birleşince ortaya çıkıyor:
 
-> 🔑 **Eşitlik diye ayrı bir devre yoktur.** `a == b` sorusunu makine şöyle
-> cevaplıyor: `a − b` hesapla, **sonuç sıfır mı** diye sor.
+> 🔑 **Eşitlik için ayrı bir devre gerekmiyor.** `a == b` sorusunu makine şöyle
+> cevaplayabilir: `a − b` hesapla, **sonuç sıfır mı** diye sor. x86'nın karşılaştırma
+> komutu `cmp` tam bunu yapar.
 >
 > Sıfırsa ZF = 1: eşit. Sıfır değilse (1 de olsa, 1000 de olsa) ZF = 0: eşit değil.
 > Hangisinin büyük olduğunu ZF söylemez; onu birazdan işaret biti söyleyecek.
+>
+> (Ayrı bir eşitlik devresi de kurulabilir: iki sayının bitlerini tek tek XOR'la
+> karşılaştır, sonucun sıfır olup olmadığına bak. [03](./03_xor_iki_fedai.md)'teki
+> farklılık dedektörü, 16 kez.)
 
 Çıkarıcı + sıfır dedektörü = karşılaştırma. İki dersin çarpımı.
 
@@ -141,14 +149,17 @@ Ve asıl güzeli, 09. dersle birleşince ortaya çıkıyor:
 
 Kapı arama. Cevap zaten hazır bekliyor.
 
-09. derste gördün: ikinin tümleyeninde desenler tam ortadan ikiye bölünüyor. Bir
-sayının negatif olup olmadığı **en soldaki bite bakılarak** anlaşılıyor.
+09'da `−1`'in `65535`, `−2`'nin `65534` olduğunu gördün. Aynı kuralla devam edersen
+desenler tam ortadan ikiye bölünür: en soldaki biti 0 olan yarı (0–32767) sıfır ve
+artılar, 1 olan yarı (32768–65535) eksiler. Bir sayının negatif olup olmadığı **en
+soldaki bite bakılarak** anlaşılıyor.
 
 Yani bütün seviye tek bir telden ibaret: 16'lık demeti aç, **bit 15**'i çıkışa bağla.
 
-> 💡 Bu, iyi bir gösterimin gücü. Eğer eksi sayıları başka türlü temsil etseydik
-> (örneğin ayrı bir "işaret hanesi" ve mutlak değer), negatiflik testi ayrı bir
-> devre isterdi. İkinin tümleyeni işi **gösterimin içine** gömdü, geriye tek tel kaldı.
+> 💡 Bu, iyi bir gösterimin gücü. Ayrı bir "işaret hanesi" ve mutlak değerle yazsaydık
+> da işaret en soldaki telde dururdu, ama bir tuzakla: `−0` diye ikinci bir sıfır olurdu
+> ve tek tele bakan test ona "negatif" derdi. İkinin tümleyeninde tek bir sıfır var; iş
+> **gösterimin içine** gömüldü, geriye tek tel kaldı.
 >
 > İyi tasarım, işi devreden alıp temsile yıkar.
 
@@ -178,7 +189,7 @@ demetin **en solundaki**, en pahalı jeton.
 65536 desenin tam **yarısı** (bit 15 = 0) sıfır ve pozitifler, diğer **yarısı**
 (bit 15 = 1) negatifler.
 
-> 🔑 Kimse oturup "şu biti işaret biti yapalım" demedi. 0'dan yukarı sayarken bit 15
+> 🔑 İkinin tümleyeninde işaret biti ayrıca seçilmiş bir bit değil. 0'dan yukarı sayarken bit 15
 > kapalı kalır, 0'dan aşağı inince anında açılır. **İşaret biti, sarma sınırının
 > geçtiği yerdir** — sonradan eklenmiş bir etiket değil.
 
@@ -252,12 +263,13 @@ Hepsi bu. Kapı yok. Zorluk devrede değil, **neden bit 15 olduğunu bilmekte.**
 ## Kapanış: Bayrakları Kendin Kurdun
 
 Yazılımdan bakınca bayraklar **verilmiş** şeylerdir: işlemcinin bir yerinde duran,
-komutların ayarladığı gizemli bitler. Bugün onları **kendin kurdun.** ZF, dört OR
+komutların ayarladığı gizemli bitler. Bugün onları **kendin kurdun.** ZF, üç OR
 ile bir inv'in çıkışı. SF, bir demetten çekilen tek tel. Assembly'de "sonuç sıfır
 mı?" diye soran her `jz`, bugün kurduğun bu devreye bakıyor.
 
 Aradaki boşlukta ne kaldı? Bütün bu işlemleri tek bir kutuya toplayıp "hangisini
-yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
+yapacağını" dışarıdan seçtirmek — yani **ALU.** Bunun için önce devrenin **seçebilmesi**
+gerekiyor; sıradaki dersin konusu tam bu.
 
 ---
 
@@ -266,10 +278,10 @@ yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
 ```
 ☐ Bayrak = tek bitlik cevap. Hesaplayan devre sayı verir, dedektör KARAR verir.
 ☐ Kurulması zor soruyu ZIDDINA çevir, sonucu inv ile döndür. (en verimli numara)
-☐ "hepsi 0" ≡ "hiçbiri 1 değil" → OR ağacı + inv = NOR = ZF
+☐ "hepsi 0" ⟺ "hiçbiri 1 değil" → OR ağacı + inv = NOR = ZF
 ☐ Ağaç logaritmik, zincir doğrusal derinlik. 64 bitte 7'ye karşı 64.
-☐ Zorunlu zincir (ripple-carry) ile alışkanlıktan kurulan zincir aynı şey değildir.
-☐ Eşitlik devresi YOKTUR: a − b yap, ZF'ye bak.
+☐ Gerçek bağımlılıktan doğan zincir (ripple-carry) ile alışkanlıktan kurulan zincir aynı şey değildir.
+☐ Eşitlik için ayrı devre GEREKMEZ: a − b yap, ZF'ye bak (x86'nın cmp'si böyle). Ayrısı da kurulabilir: XOR'lar + sıfır dedektörü.
 ☐ Negatiflik testi tek tel: bit 15. Kapı gerekmiyor.
 ☐ İşaret biti sonradan eklenmedi — sarma sınırının geçtiği yer orası.
 ☐ İyi tasarım işi devreden alıp TEMSİLE yıkar (ikinin tümleyeni tam bunu yapar).
@@ -282,8 +294,8 @@ yapacağını" dışarıdan seçtirmek — yani **ALU.** Sıradaki durak orası.
 
 - 👾 **Meraklısına:** Karşılaştırıcı yanılmaz, ona verilen bitler yanılabilir — işaret dönüşümü [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
 - [09_subtraction.md](./09_subtraction.md) — Bayrakların baktığı sonucu üreten devre
-- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — NOR ve kapı ailesi
-- [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Bit numaraları ve jeton değerleri
+- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — Ağacın kapıları: NOT, AND, OR
+- [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Jeton değerleri: 1, 2, 4, 8 …
 
 ---
 

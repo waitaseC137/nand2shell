@@ -59,7 +59,7 @@ what you have works in pairs, and knows nothing about "all four at once".
 So flip the question:
 
 ```
-"every bit is 0"     ≡     "no bit is 1"
+"every bit is 0"     ⟺     "no bit is 1"
 ```
 
 The two sentences say the same thing. But hidden inside the second one is a question you
@@ -81,7 +81,7 @@ and "none is 1" are each other's negation. So you put an `inv` on the end.
 
 ## Tree or Chain?
 
-OR works in pairs and you have four bits. Three ORs are needed — but **how will you arrange
+OR takes two inputs and you have four bits. Three ORs are needed — but **how will you arrange
 them?** There are two valid shapes and both give the right answer:
 
 ```
@@ -111,11 +111,14 @@ those delays **stack up.** At four bits the difference is negligible. But:
 The tree grows **logarithmically**, the chain **linearly.** In real processors this choice
 directly determines the clock speed.
 
-> ⚠️ Don't confuse this with the ripple-carry from lesson 07. There the chain was
-> **mandatory**: every digit had to wait for its right neighbour's carry. Here there's no
-> such dependency — all the bits are ready at the same time, none of them waits for another.
+> ⚠️ Don't confuse this with the ripple-carry from lesson 07. That chain had a real reason:
+> every digit **depended** on its right neighbour's carry. (Even that dependency doesn't
+> make the chain the only way; the carry-lookahead at the end of 07 computes the carry in
+> advance. But the dependency is real.) Here there's no such dependency — all the bits are
+> ready at the same time, none of them waits for another.
 >
-> 🔑 **A mandatory chain and a chain built out of habit are different things.** If you see a
+> 🔑 **A chain born of a real dependency and a chain built out of habit are different
+> things.** If you see a
 > sequence in a circuit, ask: is this really a dependency, or was it just laid out that way?
 
 ---
@@ -129,11 +132,16 @@ Every `if (x == 0)` you've ever written passes through this wire.
 
 And the best part surfaces when you combine it with lesson 09:
 
-> 🔑 **There is no separate circuit for equality.** The machine answers the question
-> `a == b` like this: compute `a − b`, then ask **is the result zero?**
+> 🔑 **Equality doesn't need a separate circuit.** The machine can answer the question
+> `a == b` like this: compute `a − b`, then ask **is the result zero?** x86's compare
+> instruction `cmp` does exactly this.
 >
 > If it is, ZF = 1: equal. If it isn't (whether it's 1 or 1000), ZF = 0: not equal.
 > ZF doesn't say which one is bigger; the sign bit will tell you that in a moment.
+>
+> (A separate equality circuit can be built too: compare the two numbers bit by bit with
+> XOR and check whether the result is zero. The difference detector from
+> [03](./03_xor_iki_fedai.md), 16 times over.)
 
 Subtractor + zero detector = comparison. The product of two lessons.
 
@@ -145,16 +153,19 @@ The second task: *"is this 16-bit number negative?"*
 
 Don't go looking for a gate. The answer is already sitting there waiting.
 
-You saw it in lesson 09: in two's complement the patterns split exactly down the middle.
+In lesson 09 you saw that `−1` is `65535` and `−2` is `65534`. Keep going by the same rule
+and the patterns split exactly down the middle: the half whose leftmost bit is 0 (0–32767)
+is zero and the positives, the half whose leftmost bit is 1 (32768–65535) the negatives.
 Whether a number is negative is determined **by looking at the leftmost bit.**
 
 So the entire level is a single wire: open up the 16-bundle and connect **bit 15** to the
 output.
 
-> 💡 This is the power of a good representation. If we had represented negative numbers some
-> other way (a separate "sign digit" plus a magnitude, say), the negativity test would need
-> a circuit of its own. Two's complement buried the job **inside the representation**, and
-> what's left is a single wire.
+> 💡 This is the power of a good representation. With a separate "sign digit" plus a
+> magnitude, the sign would also sit on the leftmost wire, but with a trap: there would be a
+> second zero, `−0`, and a test that looks at one wire would call it "negative". Two's
+> complement has a single zero; the job is buried **inside the representation**, and what's
+> left is a single wire.
 >
 > Good design takes work away from the circuit and dumps it on the representation.
 
@@ -184,7 +195,7 @@ Now why it's the one that announces the sign:
 Exactly **half** of the 65536 patterns (bit 15 = 0) are zero and the positives; the other
 **half** (bit 15 = 1) are the negatives.
 
-> 🔑 Nobody sat down and said "let's make that bit the sign bit". Counting upward from 0,
+> 🔑 In two's complement the sign bit isn't a bit picked out separately. Counting upward from 0,
 > bit 15 stays off; go one step below 0 and it turns on instantly. **The sign bit is where
 > the wrapping boundary passes** — not a label attached afterwards.
 
@@ -261,11 +272,12 @@ That's all. No gates. The difficulty isn't in the circuit, it's in **knowing why
 
 Seen from software, the flags are things **handed to you**: mysterious bits sitting
 somewhere in the processor that instructions set. Today you built them **yourself.** ZF is
-the output of four ORs and an inv. SF is a single wire pulled out of a bundle. Every `jz`
+the output of three ORs and an inv. SF is a single wire pulled out of a bundle. Every `jz`
 in assembly that asks "is the result zero?" looks at the circuit you built today.
 
 What's left in the gap? Gathering all these operations into a single box and letting
-something outside choose "which one to do" — that is, the **ALU.** That's the next stop.
+something outside choose "which one to do" — that is, the **ALU.** For that, the circuit
+first has to be able to **choose;** that's exactly the next lesson's subject.
 
 ---
 
@@ -274,10 +286,10 @@ something outside choose "which one to do" — that is, the **ALU.** That's the 
 ```
 ☐ A flag = a one-bit answer. A computing circuit gives a number, a detector DECIDES.
 ☐ Turn a hard-to-build question into its OPPOSITE and flip the result with inv. (best trick)
-☐ "all 0" ≡ "none is 1" → an OR tree + inv = NOR = ZF
+☐ "all 0" ⟺ "none is 1" → an OR tree + inv = NOR = ZF
 ☐ Tree depth is logarithmic, chain depth linear. At 64 bits it's 7 versus 64.
-☐ A mandatory chain (ripple-carry) and a chain built out of habit are not the same thing.
-☐ There is NO equality circuit: do a − b and look at ZF.
+☐ A chain born of a real dependency (ripple-carry) and a chain built out of habit are not the same thing.
+☐ Equality NEEDS no separate circuit: do a − b and look at ZF (x86's cmp does this). A separate one can be built too: XORs + a zero detector.
 ☐ The negativity test is one wire: bit 15. No gate needed.
 ☐ The sign bit wasn't added afterwards — it's where the wrapping boundary passes.
 ☐ Good design takes work off the circuit and puts it on the REPRESENTATION (two's complement).
@@ -290,8 +302,8 @@ something outside choose "which one to do" — that is, the **ALU.** That's the 
 
 - 👾 **For the curious:** the comparator never errs, the bits you hand it can — sign conversion [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
 - [09_subtraction.md](./09_subtraction.md) — The circuit that produces the result the flags look at
-- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — NOR and the family of gates
-- [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Bit numbers and token values
+- [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — The tree's gates: NOT, AND, OR
+- [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Token values: 1, 2, 4, 8 …
 
 ---
 

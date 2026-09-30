@@ -7,8 +7,8 @@
 > separate subtraction hardware either.
 
 > But first you have to answer this question. It sounds philosophical and it's entirely
-> engineering: **what does a negative number look like on a wire?** A wire either has voltage
-> or it doesn't — there is no "minus sign" state.
+> engineering: **what does a negative number look like on a wire?** A wire has two states, 0
+> and 1 — there is no third "minus sign" state.
 
 ---
 
@@ -122,9 +122,11 @@ That passed too.
 The level's own sentence is the formula for this: *"If the result is less than zero it is
 represented as **65536 plus the result**."* So `−1` → `65536 + (−1)` = `65535`.
 
-> 🔑 This representation is called **two's complement**. Nobody sat down at a table and said
-> "let's write negative numbers like this" — **it fell out of the wrapping by itself.** The
-> adder was already behaving this way; we just gave it a name.
+> 🔑 This representation is called **two's complement**. It wasn't the only option: some
+> older machines wrote negative numbers differently (the IBM 7090 with a separate sign digit,
+> the CDC 6600 with ones' complement). But **if you want the same adder to do subtraction
+> too,** this is the representation you get: the adder was already behaving this way when it
+> wrapped; we just gave it a name. Almost every processor today uses it.
 
 ---
 
@@ -293,7 +295,7 @@ where a processor's ability to say "if" begins.
 ☐ No minus sign on the wires. A negative number isn't STORED, it's REPRESENTED by a pattern.
 ☐ The pattern one below 0 is 1111111111111111 → that's why it's −1.
 ☐ Proof: 65535 + 1 = 0. That is already the definition of −1.
-☐ This representation is two's complement; nobody designed it, it FELL OUT of the wrap.
+☐ This representation is two's complement. It wasn't the only option; it FALLS OUT of the wrap once you want the same adder to subtract too.
 ☐ −B = inc16(inv16(B)) — invert, add 1.
 ☐ Its proof: inv16(B) = 65535 − B, +1 → 65536 − B = the level's own rule.
 ☐ A real ALU doesn't use inc: A + ~B with carry-in = 1. Same result, single pass.

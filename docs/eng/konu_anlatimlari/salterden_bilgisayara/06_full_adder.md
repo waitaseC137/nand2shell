@@ -3,12 +3,12 @@
 > Last lesson you built a box, but it earned a "half" stamp: it produced a carry,
 > but it couldn't accept one. In this lesson you'll complete the missing input. The box
 > you build will be called a **full adder** — and, no exaggeration, this is the **brick**
-> of the arithmetic inside a modern processor: line up 64 of them side by side and you've
-> built the hardware that adds 64-bit numbers.
+> of addition: line up 64 of them side by side and you've built a circuit that adds
+> 64-bit numbers.
 
 > This is the most demanding build in the series so far. The difficulty isn't in the parts —
-> they're all familiar — it's in the **way of thinking.** We'll walk the path together,
-> the wrong turn included.
+> they're all familiar — it's in the **way of thinking.** Before the right way, you'll
+> also see a wrong one.
 
 ---
 
@@ -173,9 +173,9 @@ You place a third half adder, feed it the two carries, and take its **`l` output
 | 0 | 0 | 0 | 0 |
 | 0 | 1 | 1 | 1 |
 | 1 | 0 | 1 | 1 |
-| ~~1~~ | ~~1~~ | ~~1~~ | ~~0~~ | ← proved above: never happens |
+| ~~1~~ | ~~1~~ | ~~1~~ | ~~0~~ |
 
-Because the **one row** where they differ is never visited, the two circuits behave
+The struck-through row, as proved above, never happens. Because the **one row** where they differ is never visited, the two circuits behave
 identically.
 
 > 🔑 The real lesson here: a circuit's correctness depends not only on its gates but also on
@@ -193,7 +193,7 @@ comes up in three different places here and the three have nothing to do with ea
 | # | where | what |
 |:-:|---|---|
 | 1 | **inside XOR** | `XOR = (A OR B) AND (A NAND B)` — from lesson 03. Nothing to do with the full adder. |
-| 2 | **while reading the table** | on the `a = 1` floor, `h = OR(b, c)` comes out. That's an **observation**, not a gate to build. |
+| 2 | **while reading the table** | set apart the four rows where `a = 1` and `h = OR(b, c)` comes out. That's an **observation**, not a gate to build. |
 | 3 | **in the circuit** | `OR(h₁, h₂)` — the one that combines the two carries. **This is the real one.** |
 
 > ⚠️ The second is especially dangerous: after splitting the table into floors and making
@@ -248,9 +248,10 @@ becomes the c of the one to its left:
 ```
 
 Each box is one digit; the carry flows from right to left, just like on paper. Line up 8 of
-them and you've built the hardware that adds 8-bit numbers; line up 64 and it's the hardware
-that adds 64-bit numbers. If a program on your computer just ran an `add` instruction, it
-went through exactly this chain — through 64 copies of **the box you built today.**
+them and you've built a circuit that adds 8-bit numbers; line up 64 and it adds 64-bit
+numbers. The processor in your computer adds with the same arithmetic, but not with this
+plain chain: it uses an arrangement that finds the carry faster. You'll see why in the
+next lesson.
 
 Building this chain yourself is the job of the next lesson (and the next level in NandGame):
 **Multi-bit Adder.** See you there.
@@ -271,7 +272,7 @@ Building this chain yourself is the job of the next lesson (and the next level i
 ☐ A circuit's correctness depends on which inputs are POSSIBLE, not only on its gates.
 ☐ Three separate ORs: inside XOR / the table observation / the real one in the circuit.
 ☐ Never wire b and c into an OR — that observation only describes the a=1 floor.
-☐ The h output plugs into the neighbor's c input → the chain of 64 = the hardware of the processor's `add`.
+☐ The h output plugs into the neighbor's c input → a chain of 64 adds 64-bit numbers.
 ```
 
 ---

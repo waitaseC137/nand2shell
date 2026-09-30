@@ -22,7 +22,6 @@
 - [The Big Picture: Why Do We Start From the Switch?](#the-big-picture-why-do-we-start-from-the-switch)
 - [Roadmap — Lesson by Lesson](#roadmap--lesson-by-lesson)
 - [How Should You Study?](#how-should-you-study)
-- [The Other End of the Ladder](#the-other-end-of-the-ladder)
 
 ---
 
@@ -69,8 +68,8 @@ Throughout the whole series we'll use one single tool: **[nandgame.com](https://
 - **Free.** No sign-up, no installation, no ads. It opens in the browser, you play.
 - **Like a game but real:** each level gives you a task ("build the circuit that satisfies
   this table"), you drag parts from the boxes on the left and connect them with wires, then
-  you click **Check solution**. The game tries all the combinations for you; if they all
-  pass, the level is done.
+  you click **Check solution**. The game tests your circuit for you with a series of
+  inputs; if they all pass, the level is done.
 - **Its order is the same as this series' order:** the game's levels follow the construction
   layers of a real computer. At the end of each lesson, the "now you build it" section sends
   you to exactly that level of the game.
@@ -87,25 +86,29 @@ Throughout the whole series we'll use one single tool: **[nandgame.com](https://
 
 When you finish the part of the series written so far:
 
-- You'll know what "1 and 0" **physically** is — not a metaphor, but wire and current.
+- You'll know what "1 and 0" **physically** is — not a metaphor, but the voltage on a wire.
 - You'll have **derived yourself** all the logic gates from a single kind of part (NAND).
 - You'll be able to explain how the computer **counts** and how it **adds**, because you
   built the adding circuit yourself.
 - You'll have built an **adder-subtractor** that works on real 16-bit numbers.
 - You'll be able to explain how a computer holds **negative numbers** (two's complement) —
-  not from memory, but knowing why it could not have been any other way.
+  not from memory, but knowing why this representation falls out once you want the same
+  adder to subtract too.
 - You'll see why **overflows** like `65535 + 1 = 0` are unavoidable, and how that gives
   birth to a real **class of security vulnerabilities.**
 - You'll have built with your own hands the **flags** (ZF, SF) that let a processor say
   `if` — the wire underneath every `if` you have ever written.
 - You'll build the wire that tells a circuit **what to do from the outside** (the
   multiplexer) — the root of programmability.
+- You'll have gathered the parts that add, subtract and do logic into a single box, and
+  built the compute unit (ALU) that picks one of them with an **instruction number.**
+- You'll give birth to **memory** from feedback: from a latch that holds one bit to a
+  clocked flip-flop, then a register, a counter and addressed memory (RAM).
 - The phrase "billions of transistors" won't scare you — because you'll have seen how the
   floors stack on top of one another.
 
-The series keeps growing as the game advances: next up are data routing (Switching), the
-compute core (ALU), memory, and finally **a real processor that executes instructions.**
-All from the same bricks.
+The series keeps growing as the game advances: next up is **a real processor that executes
+instructions.** All from the same bricks.
 
 ---
 
@@ -159,7 +162,7 @@ Read the files in this order. Each lesson leans on the previous one.
 | 4 | [04_teller_sayi_olunca](./04_teller_sayi_olunca.md) | Loading number-meaning onto wires; binary counting | — *(concept lesson)* |
 | 5 | [05_half_adder](./05_half_adder.md) | The first adder: 1 + 1 = 10 | Half Adder |
 | 6 | [06_full_adder](./06_full_adder.md) | The carry chain: the brick for adding numbers of unlimited size | Full Adder |
-| 7 | [07_multibit_adder](./07_multibit_adder.md) | Building the chain; carry-in and carry-out are **one wire** | Multi-bit Adder |
+| 7 | [07_multibit_adder](./07_multibit_adder.md) | Building the chain; between two neighbouring boxes, carry-in and carry-out are **one wire** | Multi-bit Adder |
 
 ### 🔁 Unit 2 — The Limit of a Number, and Negative Numbers
 
@@ -217,14 +220,6 @@ Read the files in this order. Each lesson leans on the previous one.
 4. **Keep a screenshot archive.** Toss the screenshot of every level you solve into a folder.
    You'll both see your progress and have concrete proof to say "I built this."
 5. **Slow = fast.** A gate you rush past will stop you three levels later.
-
----
-
-## The Other End of the Ladder
-
-This series builds the worker (the processor) **from parts**: "what is this machine made
-of?" An `add` order written in assembly ends up at the adder you build here with your own
-hands.
 
 ---
 

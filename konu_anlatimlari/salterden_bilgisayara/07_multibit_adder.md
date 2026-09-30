@@ -71,6 +71,10 @@ Sağdaki kutuya göre bu telin adı **carry out**. Soldaki kutuya göre aynı te
 > 🔑 **Carry-in ile carry-out iki farklı şey değildir — aynı telin iki ucudur.**
 > İsim, telin kendisiyle ilgili değil; **hangi kutunun içinden baktığınla** ilgili.
 
+> 📌 Bu, iki komşu kutunun **arasındaki** tel için geçerli. Seviyenin kendi `c` girişi
+> (en sağdaki kutuya gelen elde) ile `c` çıkışı (en soldakinden çıkan elde) ise **ayrı
+> teller**; ikisinin de adı `c`, çünkü ikisi de elde.
+
 Bu ayrımı öğrenmenin neden bu kadar zor olduğunu fark ettin mi: ortada **ayırt
 edilecek iki şey yok ki.** Beynin iki isim duyunca iki nesne arıyor, bulamıyor,
 kilitleniyor. Nesne bir tane; bakış açısı iki tane.
@@ -94,7 +98,8 @@ Yani şu ana kadar aynı iki tele üç ayrı isim gördün:
 
 > ⚠️ Bu dört kelime (`h`, `l`, `sum`, `carry`) **iki** kavramdır, dört değil.
 > Bir metinde "sum" görürsen kafanda `l` de; "carry" görürsen `h` de. Ders
-> kitapları ikinci sütunu, oyun birinci sütunu kullanıyor — devre aynı devre.
+> kitapları ikinci sütunu kullanıyor; oyun önceki seviyelerde birinciyi kullandı, bu
+> seviyede çıkışlara `s` diyerek ikinciye geçti — devre aynı devre.
 
 ---
 
@@ -117,11 +122,13 @@ Cevap `42`, senin yazdığın `32`'ydi ve düzeltmek için **geri dönmek** zoru
 Sebebi tek cümle:
 
 > 🔑 **Elde sadece sola gider. Hiçbir zaman sağa gitmez.** Yani bilgi tek yönlü
-> akıyor. Bir sütunu doğru hesaplayabilmen için **sağındaki sütunun bitmiş olması**
+> akıyor. Bir sütunu doğru hesaplayabilmen için **sağından gelecek eldeyi** bilmen
 > gerekiyor.
 
-Soldan başlarsan, henüz var olmayan bir bilgiyi kullanmış oluyorsun. Devrede "geri
-dönüp silmek" diye bir şey yok — o yüzden zincir baştan doğru yönde kurulmalı.
+Soldan başlarsan, henüz var olmayan bir bilgiyi kullanmış oluyorsun. Kâğıtta bunun
+bedeli geri dönüp silmek. Devrede de benzeri olur: eldesi henüz gelmemiş bir kutu
+önce yanlış bir sonuç gösterir, elde gelince düzeltir (bu bekleyişin bedeli dersin
+sonunda). O yüzden elde teli sağdan sola bağlanır.
 
 ---
 
@@ -193,7 +200,7 @@ oyun onu sana hazır parça olarak geri verdi (03.5, yine iş başında).
 > isimleri** — devrendeki `a1`, `b1` sinyalleriyle aynı harfi taşımaları tesadüf.
 > Kutu sana "bana `a` diye bir sinyal getir" demiyor, "bana iki tel getir, ben
 > içeride onlara `A` ve `B` diyeceğim" diyor. Hangi teli hangi bacağa taktığın
-> serbest — toplayıcı iki girişine göre simetriktir (05. ders).
+> serbest — toplayıcı iki girişine göre simetriktir (06. ders).
 
 <details>
 <summary>🔒 Çözüm şeması — önce kendin dene, sonra aç</summary>
@@ -222,8 +229,9 @@ tıpkı bir domino sırası gibi.
 
 Bu düzenin adı **ripple-carry adder** (dalgalanan-eldeli toplayıcı) ve bedeli var:
 sayı ne kadar genişse, sonuç o kadar geç hazır olur. Gerçek işlemcilerde bu gecikme
-doğrudan **saat hızını** sınırlar — o yüzden mühendisler eldeyi tahmin eden
-(carry-lookahead) daha karmaşık devreler kurar.
+doğrudan **saat hızını** sınırlar — o yüzden mühendisler eldeyi zincirde beklemeden,
+doğrudan girişlerden **önceden hesaplayan** (carry-lookahead) daha karmaşık devreler
+kurar.
 
 Sen şu an en dürüst, en anlaşılır olanı kurdun. Hızlısını anlamak için önce bunu
 kurman gerekiyordu.
@@ -239,9 +247,10 @@ zafiyet sınıflarından birinin kapısını açacak.
 
 ```
 ☐ Sayının her basamağı için bir full adder. Zincir = kâğıttaki sütunlar.
-☐ carry-out ile carry-in AYNI TELDİR; isim, hangi kutudan baktığına göre değişir.
+☐ İki komşu kutu arasında carry-out ile carry-in AYNI TELDİR; isim, hangi kutudan baktığına göre değişir.
+☐ Seviyenin c girişi ile c çıkışı ise AYRI teller; adları aynı, ikisi de elde.
 ☐ h/l ile sum/carry aynı iki telin iki sözlüğü. Dört kelime, iki kavram.
-☐ Elde sadece SOLA gider → hesap sağdan sola olmak ZORUNDA.
+☐ Elde sadece SOLA gider → her sütun, sağından gelecek eldeyi bilmek ZORUNDA.
 ☐ Soldan hesaplarsan geri dönüp yazdığını silmek zorunda kalırsın (17+25).
 ☐ Analiz yönü serbest (sondan başa bakabilirsin); HESAP yönü zorunlu.
 ☐ Gidecek yeri olmayan elde, sonucun en yüksek hanesi olur.

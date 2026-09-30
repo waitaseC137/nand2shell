@@ -21,7 +21,7 @@
 - [🎮 Now You Build It — Selector](#-now-you-build-it--selector)
 - [Switch: The Mirror Image](#switch-the-mirror-image)
 - [🎮 Now You Build It — Switch](#-now-you-build-it--switch)
-- [The Two-Way Switch — and Where the Analogy Breaks](#the-two-way-switch--and-where-the-analogy-breaks)
+- [The Stairwell Switch — and Where the Analogy Breaks](#the-stairwell-switch--and-where-the-analogy-breaks)
 - [Closing: When a Decision Becomes a Wire](#closing-when-a-decision-becomes-a-wire)
 
 ---
@@ -111,9 +111,12 @@ x AND 1 = x        1 is AND's identity element
 x OR  0 = x        0 is OR's  identity element
 ```
 
-> 🔑 **What makes a gate a valve is having an identity element.** Feed it the identity and it
-> passes; feed it the opposite and it blocks. Not something to memorise, something to derive
-> — and deriving it only takes a look at the truth table.
+> 🔑 **What makes a gate a valve is two elements:** an **identity element** to pass and an
+> **absorbing element** to block. In AND, 1 is the identity and 0 absorbs: `x AND 1 = x`,
+> `x AND 0 = 0`, whatever `x` is. XOR has an identity too (`x XOR 0 = x`) but nothing that
+> absorbs: `x XOR 1` doesn't swallow `x`, it flips it. That's why XOR can't be a valve. Not
+> something to memorise, something to derive — and deriving it only takes a look at the
+> truth table.
 
 ---
 
@@ -179,9 +182,9 @@ d1's valve  ←  s
 Check it: when `s = 0`, `inv(s) = 1` → d0's valve is open, d1's is closed. What did the spec
 say? `s = 0 → d0`. **It matches.**
 
-> 💡 Wiring one wire into two places (fan-out) isn't new — in `06` you sent `add₁`'s `l`
-> output to one place and elsewhere at the same time. Wires don't run out; reading a signal
-> doesn't consume it.
+> 💡 Wiring one wire into two places (fan-out) isn't new — in `03`, building XOR, you gave
+> `a` and `b` to both the OR and the NAND at once. In logic, wires don't run out; reading a
+> signal doesn't consume it.
 
 ---
 
@@ -329,52 +332,49 @@ part has to be used.
 
 ---
 
-## The Two-Way Switch — and Where the Analogy Breaks
+## The Stairwell Switch — and Where the Analogy Breaks
 
-The Switch has an exact counterpart in electrical wiring: the **two-way switch** (its
-technical name is **SPDT** — single pole, double throw). The switch in a stairwell that
-turns the same light on and off from two different places.
-
-Match up the terminals:
+The Switch has an everyday counterpart: the switch in a stairwell that lets you turn the
+same light on and off from both the bottom and the top. Inside it there's one input and two
+output paths; whichever way the lever points, the current goes down that path.
 
 ```
-common terminal (C)   →  d       the single input
-traveler 1 (L1)       →  c1
-traveler 2 (L2)       →  c0
+the switch's input    →  d       the single input
+first path            →  c1
+second path           →  c0
 the lever's position  →  s
 ```
 
-While the lever is on one side the current goes there and the other terminal is **dead.**
+While the lever is on one side the current goes there and the other path is **dead.**
 Exactly what our valves do.
 
-And the lovely part: **turn the two-way switch around.** Feed it from the two travelers and
-take the output from the common terminal — two inputs, one output, the lever choosing which
-one passes. **A Selector.**
+And the lovely part: **wire the switch the other way round.** Feed it from the two paths and
+take the output from the input — two inputs, one output, the lever choosing which one
+passes. **A Selector.**
 
 ```
 forward  :  1 input → 2 outputs     Switch
 reversed :  2 inputs → 1 output     Selector
 ```
 
-The same part, two directions. A sibling of the *"one wire, two names"* business from `07`.
+The same part, two directions.
 
 ### But the analogy breaks somewhere
 
 A mechanical switch is **bidirectional** — it's a piece of metal, current flows both ways.
-You can turn one part around and get two jobs out of it.
+You can wire one part the other way round and get two jobs out of it.
 
 Logic gates are **not.** `AND`'s input is an input and its output is an output; you cannot
-reverse it. That's why you have to build the Selector and the Switch **separately** — and
-it's exactly why the game makes them two levels.
+reverse it. That's why you have to build the Selector and the Switch **separately.**
 
-> 🔑 Where the analogy breaks teaches as much as the analogy itself: **electricity has
-> symmetry, logic has direction.**
+> 🔑 Where the analogy breaks teaches as much as the analogy itself: **the switch has
+> symmetry, the logic gate has direction.**
 
 ---
 
 ## Closing: When a Decision Becomes a Wire
 
-One end is left hanging in the two-way-switch analogy: **what does `s` correspond to?**
+One end is left hanging in the stairwell-switch analogy: **what does `s` correspond to?**
 
 To no wire at all. `s` is the lever's **physical position** — and what sets that position is
 a **hand.**
@@ -429,7 +429,7 @@ picks one.** Choosing is cheaper than waiting.
 ☐ Data wire ≠ control wire. Same physics, different MEANING. s doesn't enter the sum, it PICKS it.
 ☐ AND is a valve: x AND 1 = x (open), x AND 0 = 0 (closed).
 ☐ These are IDENTITIES, not equations — what the expression equals for every x. x has 2 states; try both.
-☐ What makes a gate a valve is its IDENTITY ELEMENT (1 for AND, 0 for OR).
+☐ What makes a gate a valve is two elements: the IDENTITY that passes + the ABSORBING one that blocks (1 and 0 in AND, 0 and 1 in OR). XOR has no absorbing element, so it can't be a valve.
 ☐ ⚠️ An open valve does NOT mean the data is 1. The tap can be open and the pipe empty.
 ☐ "selected" = the one being listened to. The selected input can be 0.
 ☐ The proof of selection: a 1 being present and yet UNABLE TO AFFECT the output (rows 2 and 3).
@@ -439,8 +439,8 @@ picks one.** Choosing is cheaper than waiting.
 ☐ At the gate level inv(s) lags by one gate: as s falls from 1 to 0 with d0 = d1 = 1, the output drops to 0 for a moment.
 ☐ Selector: output = (d0 AND inv s) OR (d1 AND s) — a 2→1 multiplexer.
 ☐ Switch:  c1 = d AND s · c0 = d AND inv s — NO merging, the outputs stay apart.
-☐ A two-way switch (SPDT) is the same circuit; reverse it and it becomes a Selector.
-☐ The analogy breaks on direction: electricity has symmetry, logic has DIRECTION.
+☐ A stairwell switch does the same job; wire it the other way round and it becomes a Selector.
+☐ The analogy breaks on direction: the switch has symmetry, the logic gate has DIRECTION.
 ☐ Mechanically a HAND decides, in a circuit a WIRE does → and a wire can be another circuit's output.
 ☐ ALU: every circuit runs at once, a selector lets one through. Choosing is cheaper than waiting.
 ```

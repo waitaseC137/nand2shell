@@ -73,6 +73,10 @@ left-hand box's point of view the very same wire is called **carry in**.
 > wire.** The name has nothing to do with the wire itself; it has to do with **which box
 > you're looking out from.**
 
+> 📌 This holds for the wire **between** two neighbouring boxes. The level's own `c` input
+> (the carry coming into the rightmost box) and its `c` output (the carry leaving the
+> leftmost box) are **separate wires**; both are called `c` because both are carries.
+
 Did you notice why this distinction is so hard to learn? Because there **aren't two things
 to distinguish.** Your brain hears two names, goes looking for two objects, doesn't find
 them, and locks up. There is one object and two points of view.
@@ -97,7 +101,8 @@ So by now you've seen three different names for the same two wires:
 
 > ⚠️ These four words (`h`, `l`, `sum`, `carry`) are **two** concepts, not four. If you see
 > "sum" in a text, think `l`; if you see "carry", think `h`. Textbooks use the second
-> column, the game uses the first — the circuit is the same circuit.
+> column; the game used the first in earlier levels and switches to the second here by
+> calling the outputs `s` — the circuit is the same circuit.
 
 ---
 
@@ -120,12 +125,14 @@ The answer is `42`, you had written `32`, and to fix it you were forced to **go 
 The reason is one sentence:
 
 > 🔑 **A carry only ever goes left. It never goes right.** Which means information flows in
-> one direction only. For you to compute a column correctly, **the column to its right must
-> already be finished.**
+> one direction only. For you to compute a column correctly, you need **the carry coming
+> from its right.**
 
-If you start from the left, you're using information that doesn't exist yet. In a circuit
-there's no such thing as "going back and erasing" — so the chain has to be built in the
-right direction from the start.
+If you start from the left, you're using information that doesn't exist yet. On paper the
+price is going back and erasing. A circuit does something similar: a box whose carry hasn't
+arrived yet first shows a wrong result, then corrects it when the carry arrives (the price
+of that wait comes at the end of the lesson). That's why the carry wire is connected from
+right to left.
 
 ---
 
@@ -198,7 +205,7 @@ Place two of them. Then answer the one question: **where does the right-hand box
 > the fact that they share letters with the `a1`, `b1` signals in your circuit is a
 > coincidence. The box isn't saying "bring me a signal called `a`", it's saying "bring me two
 > wires, and inside I'll call them `A` and `B`." Which wire goes to which pin is up to you —
-> the adder is symmetric in its two inputs (lesson 05).
+> the adder is symmetric in its two inputs (lesson 06).
 
 <details>
 <summary>🔒 Solution schematic — try it yourself first, then open</summary>
@@ -228,8 +235,9 @@ order — exactly like a row of dominoes.
 
 This arrangement is called a **ripple-carry adder**, and it has a price: the wider the
 number, the later the result is ready. In real processors this delay directly limits the
-**clock speed** — which is why engineers build more complicated circuits that *predict* the
-carry (carry-lookahead).
+**clock speed** — which is why engineers build more complicated circuits that *compute* the
+carry **in advance**, straight from the inputs, without waiting along the chain
+(carry-lookahead).
 
 What you just built is the most honest and most understandable one. To understand the fast
 one, you had to build this one first.
@@ -245,9 +253,10 @@ productive vulnerability classes in computer security.
 
 ```
 ☐ One full adder per digit of the number. The chain = the columns on paper.
-☐ carry-out and carry-in are THE SAME WIRE; the name depends on which box you look from.
+☐ Between two neighbouring boxes, carry-out and carry-in are THE SAME WIRE; the name depends on which box you look from.
+☐ The level's c input and c output, though, are SEPARATE wires; same name, both are carries.
 ☐ h/l and sum/carry are two vocabularies for the same two wires. Four words, two concepts.
-☐ A carry only goes LEFT → computation MUST run right to left.
+☐ A carry only goes LEFT → every column MUST know the carry coming from its right.
 ☐ Compute from the left and you'll have to go back and erase what you wrote (17+25).
 ☐ Direction of analysis is free (you may look backwards); direction of COMPUTATION is not.
 ☐ A carry with nowhere to go becomes the highest digit of the result.

@@ -2,11 +2,11 @@
 
 > Geçen ders bir kutu kurdun ama "yarım" damgası yedi: elde üretiyor, elde kabul
 > edemiyordu. Bu derste eksik ağzı tamamlayacaksın. Kurduğun kutunun adı **full adder**
-> olacak — ve abartısız, modern işlemcideki aritmetiğin **tuğlası** budur: bundan 64
-> tanesini yan yana dizen, 64-bitlik sayıları toplayan donanımı kurmuş olur.
+> olacak — ve abartısız, toplamanın **tuğlası** budur: bundan 64 tanesini yan yana
+> dizen, 64-bitlik sayıları toplayan bir devre kurmuş olur.
 
 > Bu ders serinin bugüne kadarki en zorlu kurulumudur. Zorluk parçalarda değil —
-> hepsi tanıdık — **düşünme biçiminde.** Yanlış yol da dahil, yolu birlikte yürüyeceğiz.
+> hepsi tanıdık — **düşünme biçiminde.** Doğru yoldan önce bir yanlış yol da göreceksin.
 
 ---
 
@@ -108,7 +108,7 @@ arttıkça çözüme değil, tel kalabalığına yaklaşırsın.
 
 2 + 3 + 4'ü kafandan topla ve **ne yaptığına** dikkat et: "2+3 = 5... 5+4 = 9."
 Bütün çiftleri aynı anda toplamadın; **ikisini topladın, çıkan sonucun üstüne
-üçüncüyü eklettin.** Toplama sıralıdır — bir toplamanın **cevabı**, sonrakinin
+üçüncüyü ekledin.** Toplama sıralıdır — bir toplamanın **cevabı**, sonrakinin
 **girişi** olur.
 
 Bu cümleyi 03.5'ten tanıyorsun: *bir katın cevabı, üst katın sinyalidir.* O halde:
@@ -168,9 +168,9 @@ bacağı boşta kalır — hiç kullanılmaz, çünkü hiç 1 olmaz.
 | 0 | 0 | 0 | 0 |
 | 0 | 1 | 1 | 1 |
 | 1 | 0 | 1 | 1 |
-| ~~1~~ | ~~1~~ | ~~1~~ | ~~0~~ | ← yukarıda kanıtladık: hiç olmuyor |
+| ~~1~~ | ~~1~~ | ~~1~~ | ~~0~~ |
 
-Ayrıştıkları **tek satır** ziyaret edilmediği için iki devre birebir aynı davranır.
+Üstü çizili satır, yukarıda kanıtladığımız gibi hiç olmuyor. Ayrıştıkları **tek satır** ziyaret edilmediği için iki devre birebir aynı davranır.
 
 > 🔑 Buradaki asıl ders şu: bir devrenin doğruluğu sadece kapılarına değil,
 > **hangi girişlerin mümkün olduğuna** da bağlıdır. "İmkânsız durum" bilgisi,
@@ -187,7 +187,7 @@ konuda üç ayrı yerde geçiyor ve üçü birbiriyle alakasız:
 | # | nerede | ne |
 |:-:|---|---|
 | 1 | **XOR'un içinde** | `XOR = (A OR B) AND (A NAND B)` — 03. dersten. Full adder'la ilgisi yok. |
-| 2 | **Tabloyu okurken** | `a = 1` katında `h = OR(b, c)` çıkıyor. Bu bir **gözlem**, kurulacak kapı değil. |
+| 2 | **Tabloyu okurken** | `a = 1` olan dört satırı ayırırsan `h = OR(b, c)` çıkıyor. Bu bir **gözlem**, kurulacak kapı değil. |
 | 3 | **Devrede** | `OR(h₁, h₂)` — iki eldeyi birleştiren. **Gerçek olan bu.** |
 
 > ⚠️ İkincisi özellikle tehlikeli: tabloyu katlara ayırıp `h = OR(b, c)` gözlemini
@@ -241,9 +241,9 @@ solundakinin c'si olur:
 ```
 
 Her kutu bir basamak; elde, kâğıttaki gibi sağdan sola akar. 8 tanesini dizersen
-8-bitlik, 64 tanesini dizersen 64-bitlik sayıları toplayan donanımı kurdun demektir.
-Bilgisayarında şu an bir programın `add` komutu çalıştıysa, işte tam bu zincirden
-geçti — **senin bugün kurduğun kutunun** 64 kopyasından.
+8-bitlik, 64 tanesini dizersen 64-bitlik sayıları toplayan bir devre kurdun demektir.
+Bilgisayarının işlemcisi de toplamayı aynı hesapla yapar, ama bu düz zinciri değil,
+eldeyi daha hızlı bulan bir düzeni kullanır; nedenini bir sonraki derste göreceksin.
 
 Bu zinciri bizzat kurmak, bir sonraki dersin (ve NandGame'de sıradaki seviyenin) işi:
 **Multi-bit Adder.** Orada görüşürüz.
@@ -263,7 +263,7 @@ Bu zinciri bizzat kurmak, bir sonraki dersin (ve NandGame'de sıradaki seviyenin
 ☐ OR yerine üçüncü bir half adder'ın l çıkışı da kullanılabilir — ispatı KULLANAN çözüm.
 ☐ Devrenin doğruluğu kapılara değil, hangi girişlerin MÜMKÜN olduğuna da bağlıdır.
 ☐ Bu derste 'OR' üç ayrı şeye deniyor. Hangisinden bahsettiğini her seferinde söyle.
-☐ h çıkışı komşunun c girişine takılır → 64'lü zincir = işlemcideki `add`in donanımı.
+☐ h çıkışı komşunun c girişine takılır → 64'lü zincir 64 bitlik sayıları toplar.
 ```
 
 ---

@@ -21,7 +21,6 @@
 - [Büyük Resim: Neden Şalterden Başlıyoruz?](#büyük-resim-neden-şalterden-başlıyoruz)
 - [Yol Haritası — Ders Ders](#yol-haritası--ders-ders)
 - [Nasıl Çalışmalısın?](#nasıl-çalışmalısın)
-- [Merdivenin Öbür Ucu](#merdivenin-öbür-ucu)
 
 ---
 
@@ -66,7 +65,7 @@ Bütün seri boyunca tek bir araç kullanacağız: **[nandgame.com](https://nand
 - **Bedava.** Kayıt yok, kurulum yok, reklam yok. Tarayıcıda açılır, oynanır.
 - **Oyun gibi ama gerçek:** her seviye sana bir görev verir ("şu tabloyu sağlayan
   devreyi kur"), sen soldaki kutulardan parçaları sürükleyip tellerle bağlarsın,
-  **Check solution** dersin. Oyun bütün kombinasyonları senin yerine dener; hepsi
+  **Check solution** dersin. Oyun devreni senin yerine bir dizi girişle sınar; hepsi
   geçerse seviye biter.
 - **Sırası bu serinin sırasıyla aynı:** oyunun seviyeleri, gerçek bir bilgisayarın
   kuruluş katmanlarını izler. Her dersin sonunda "şimdi sen kur" bölümü, seni oyunun
@@ -83,25 +82,29 @@ Bütün seri boyunca tek bir araç kullanacağız: **[nandgame.com](https://nand
 
 Serinin bugüne kadar yazılmış bölümünü bitirdiğinde:
 
-- "1 ve 0" lafının **fiziksel olarak** ne olduğunu bileceksin — mecaz değil, tel ve akım olarak.
+- "1 ve 0" lafının **fiziksel olarak** ne olduğunu bileceksin — mecaz değil, telin üstündeki gerilim olarak.
 - Tek çeşit parçadan (NAND) bütün mantık kapılarını **kendin türetmiş** olacaksın.
 - Bilgisayarın nasıl **saydığını** ve nasıl **topladığını**, toplayan devreyi bizzat
   kurduğun için anlatabileceksin.
 - 16 bitlik gerçek sayılarla çalışan bir **toplayıcı-çıkarıcı** kurmuş olacaksın.
 - Bilgisayarın **eksi sayıları** nasıl tuttuğunu (ikinin tümleyeni) ezberden değil,
-  neden başka türlü olamayacağını bilerek anlatabileceksin.
+  aynı toplayıcıyı çıkarmada da kullanmak isteyince bu gösterimin neden çıktığını
+  bilerek anlatabileceksin.
 - `65535 + 1 = 0` gibi **taşmaların** neden kaçınılmaz olduğunu ve bunun gerçek bir
   **güvenlik açığı sınıfını** nasıl doğurduğunu göreceksin.
 - İşlemcinin `eğer` diyebilmesini sağlayan **bayrakları** (ZF, SF) kendi elinle
   kurmuş olacaksın — yazdığın her `if`'in altındaki tel.
 - Bir devreye **ne yapacağını dışarıdan söyleyen** teli kuracaksın (multiplexer) —
   programlanabilirliğin kökü.
+- Toplayan, çıkaran ve mantık işlemi yapan parçaları tek kutuda toplayıp bir **emir
+  sayısıyla** aralarından birini seçen hesap birimini (ALU) kurmuş olacaksın.
+- Geri beslemeden **hafıza** doğuracaksın: bir biti tutan latch'ten saatli
+  flip-flop'a, oradan register'a, sayaca ve adresli belleğe (RAM).
 - "Milyarlarca transistör" lafı seni korkutmayacak — çünkü katların nasıl üst üste
   bindiğini görmüş olacaksın.
 
-Seri, oyun ilerledikçe büyümeye devam ediyor: sırada veri yönlendirme (Switching),
-hesap çekirdeği (ALU), hafıza ve en sonunda **komut işleyen gerçek bir işlemci** var.
-Hepsi aynı tuğlalardan.
+Seri, oyun ilerledikçe büyümeye devam ediyor: sırada **komut işleyen gerçek bir
+işlemci** var. Hepsi aynı tuğlalardan.
 
 ---
 
@@ -153,7 +156,7 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | 4 | [04_teller_sayi_olunca](./04_teller_sayi_olunca.md) | Tellere sayı anlamı yüklemek; ikilik sayma | — *(kavram dersi)* |
 | 5 | [05_half_adder](./05_half_adder.md) | İlk toplayıcı: 1 + 1 = 10 | Half Adder |
 | 6 | [06_full_adder](./06_full_adder.md) | Elde zinciri: sınırsız büyüklükte toplamanın tuğlası | Full Adder |
-| 7 | [07_multibit_adder](./07_multibit_adder.md) | Zinciri kurmak; carry-in ile carry-out **aynı teldir** | Multi-bit Adder |
+| 7 | [07_multibit_adder](./07_multibit_adder.md) | Zinciri kurmak; iki komşu kutu arasında carry-in ile carry-out **aynı teldir** | Multi-bit Adder |
 
 ### 🔁 Ünite 2 — Sayının Sınırı ve Eksi Sayılar
 
@@ -211,14 +214,6 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 4. **Ekran görüntüsü arşivi tut.** Her çözdüğün seviyenin görüntüsünü bir klasöre at.
    Hem ilerlemeni görürsün hem de "ben bunu kurmuştum" demenin somut kanıtı olur.
 5. **Yavaş = hızlı.** Aceleyle geçilen kapı, üç seviye sonra seni durdurur.
-
----
-
-## Merdivenin Öbür Ucu
-
-Bu seri işçiyi (işlemciyi) **parçalardan kurar**: "bu makine neyden yapılmış?"
-Assembly'de `add` diye yazılan bir emir, sonunda burada kendi elinle kurduğun
-toplayıcıya gider.
 
 ---
 
