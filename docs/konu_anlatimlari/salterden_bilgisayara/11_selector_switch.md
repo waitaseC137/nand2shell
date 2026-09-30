@@ -21,7 +21,6 @@
 - [🎮 Şimdi Sen Kur — Selector](#-şimdi-sen-kur--selector)
 - [Switch: Aynadaki Yansıma](#switch-aynadaki-yansıma)
 - [🎮 Şimdi Sen Kur — Switch](#-şimdi-sen-kur--switch)
-- [Merdiven Anahtarı — ve Benzetmenin Kırıldığı Yer](#merdiven-anahtarı--ve-benzetmenin-kırıldığı-yer)
 - [Kapanış: Kararın Tele Dönüşmesi](#kapanış-kararın-tele-dönüşmesi)
 
 ---
@@ -329,54 +328,13 @@ kullanılması gerekmez.
 
 ---
 
-## Merdiven Anahtarı — ve Benzetmenin Kırıldığı Yer
-
-Switch'in gündelik hayatta bir karşılığı var: merdiven boşluğunda ışığı hem
-aşağıdan hem yukarıdan yakıp söndürebildiğin anahtar. İçinde tek bir giriş ve iki
-çıkış yolu var; kol hangi yöndeyse akım o yola gider.
-
-```
-anahtarın girişi   →  d       tek giriş
-birinci yol        →  c1
-ikinci yol         →  c0
-kolun konumu       →  s
-```
-
-Kol bir yerdeyken akım oraya gider, öbür yol **ölüdür.** Bizim vanaların yaptığı
-şeyin aynısı.
-
-Ve güzel kısım: **anahtarı ters bağla.** İki yoldan besle, girişten al — iki
-giriş, tek çıkış, kol hangisinin geçeceğini seçiyor. **Selector.**
-
-```
-düz  :  1 giriş → 2 çıkış     Switch
-ters :  2 giriş → 1 çıkış     Selector
-```
-
-Aynı parça, iki yön.
-
-### Ama benzetme bir yerde kopuyor
-
-Mekanik anahtar **çift yönlüdür** — metal parçadır, akım iki yöne de akar. Tek
-parçayı ters bağlayıp iki iş yaptırabilirsin.
-
-Mantık kapıları **öyle değil.** `AND`'in girişi giriştir, çıkışı çıkıştır;
-ters çeviremezsin. Bu yüzden Selector ve Switch'i **ayrı ayrı kurmak**
-zorundasın.
-
-> 🔑 Benzetmenin kırıldığı yer, benzetmenin kendisi kadar öğretici:
-> **anahtarda simetri var, mantık kapısında yön var.**
-
----
-
 ## Kapanış: Kararın Tele Dönüşmesi
 
-Merdiven anahtarı benzetmesinde bir uç açıkta kalıyor: **`s` neye karşılık geliyor?**
-
-Hiçbir tele. `s`, kolun **fiziksel konumu** — ve o konumu belirleyen şey bir **el.**
+[01](./01_akim_salter_role.md)'deki şaltere dön: kolunu bir parmak itiyordu, karar
+devrenin **dışından** geliyordu. Seçicide kararı `s` veriyor, ve `s` bir **tel.**
 
 ```
-mekanik anahtar :  kararı  EL  verir      (devrenin DIŞINDAN)
+şalter          :  kararı  EL  verir      (devrenin DIŞINDAN)
 mantık devresi  :  kararı  TEL verir      (devrenin İÇİNDEN)
 ```
 
@@ -385,9 +343,9 @@ Bütün mesele burada:
 > 🔑 Karar bir tele dönüştüğü anda, o tel **başka bir devrenin çıkışı** olabilir.
 > Yani makine kendi anahtarını **kendi çevirebilir.**
 
-Merdivende ışığı yakmak için birinin gelip kola dokunması gerekir. Devrede `s`
-telini bir karşılaştırma devresinin çıkışına bağlarsan, anahtar **kendi kendine**
-çevrilir. Otomasyon tam olarak bu.
+Şalterde birinin gelip kola dokunması gerekir. Devrede `s` telini bir karşılaştırma
+devresinin çıkışına bağlarsan, seçim **kendi kendine** yapılır. Otomasyon tam olarak
+bu.
 
 Ve programlanabilirlik de: `s`'i bir **komut**tan beslersen, makineye ne yapacağını
 yazıyla söylemiş olursun.
@@ -435,9 +393,7 @@ seçer.** Seçmek, beklemekten ucuzdur.
 ☐ Kapı düzeyinde inv(s) bir kapı geç kalır: s 1'den 0'a inerken d0 = d1 = 1 ise çıkış bir an 0'a düşer.
 ☐ Selector: çıkış = (d0 AND inv s) OR (d1 AND s)  — 2→1 multiplexer.
 ☐ Switch:  c1 = d AND s · c0 = d AND inv s  — birleştirme YOK, çıkışlar ayrı.
-☐ Merdiven anahtarı birebir aynı iş; ters bağlayınca Selector olur.
-☐ Benzetme yönde kırılır: anahtarda simetri var, mantık kapısında YÖN var.
-☐ Mekanikte kararı EL verir, devrede TEL verir → tel başka devrenin çıkışı olabilir.
+☐ Şalterde kararı EL verir, devrede TEL verir → tel başka devrenin çıkışı olabilir.
 ☐ ALU: bütün devreler aynı anda çalışır, selector birini geçirir. Seçmek beklemekten ucuz.
 ```
 

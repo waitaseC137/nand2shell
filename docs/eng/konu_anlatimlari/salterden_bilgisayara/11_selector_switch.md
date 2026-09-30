@@ -21,7 +21,6 @@
 - [🎮 Now You Build It — Selector](#-now-you-build-it--selector)
 - [Switch: The Mirror Image](#switch-the-mirror-image)
 - [🎮 Now You Build It — Switch](#-now-you-build-it--switch)
-- [The Stairwell Switch — and Where the Analogy Breaks](#the-stairwell-switch--and-where-the-analogy-breaks)
 - [Closing: When a Decision Becomes a Wire](#closing-when-a-decision-becomes-a-wire)
 
 ---
@@ -332,56 +331,15 @@ part has to be used.
 
 ---
 
-## The Stairwell Switch — and Where the Analogy Breaks
-
-The Switch has an everyday counterpart: the switch in a stairwell that lets you turn the
-same light on and off from both the bottom and the top. Inside it there's one input and two
-output paths; whichever way the lever points, the current goes down that path.
-
-```
-the switch's input    →  d       the single input
-first path            →  c1
-second path           →  c0
-the lever's position  →  s
-```
-
-While the lever is on one side the current goes there and the other path is **dead.**
-Exactly what our valves do.
-
-And the lovely part: **wire the switch the other way round.** Feed it from the two paths and
-take the output from the input — two inputs, one output, the lever choosing which one
-passes. **A Selector.**
-
-```
-forward  :  1 input → 2 outputs     Switch
-reversed :  2 inputs → 1 output     Selector
-```
-
-The same part, two directions.
-
-### But the analogy breaks somewhere
-
-A mechanical switch is **bidirectional** — it's a piece of metal, current flows both ways.
-You can wire one part the other way round and get two jobs out of it.
-
-Logic gates are **not.** `AND`'s input is an input and its output is an output; you cannot
-reverse it. That's why you have to build the Selector and the Switch **separately.**
-
-> 🔑 Where the analogy breaks teaches as much as the analogy itself: **the switch has
-> symmetry, the logic gate has direction.**
-
----
-
 ## Closing: When a Decision Becomes a Wire
 
-One end is left hanging in the stairwell-switch analogy: **what does `s` correspond to?**
-
-To no wire at all. `s` is the lever's **physical position** — and what sets that position is
-a **hand.**
+Go back to the light switch in [01](./01_akim_salter_role.md): a finger pushed its
+lever, and the decision came from **outside** the circuit. In the selector the decision
+comes from `s`, and `s` is a **wire.**
 
 ```
-mechanical switch :  the decision comes from a HAND    (OUTSIDE the circuit)
-logic circuit     :  the decision comes from a WIRE    (INSIDE the circuit)
+light switch   :  the decision comes from a HAND    (OUTSIDE the circuit)
+logic circuit  :  the decision comes from a WIRE    (INSIDE the circuit)
 ```
 
 Everything is in that difference:
@@ -389,9 +347,9 @@ Everything is in that difference:
 > 🔑 The moment a decision becomes a wire, that wire can be **another circuit's output.**
 > Which means the machine can throw its own switch.
 
-In a stairwell, someone has to come and touch the lever for the light to come on. In a
-circuit, connect the `s` wire to the output of a comparison circuit and the switch throws
-**itself.** That is precisely what automation is.
+With a light switch, someone has to come and touch the lever. In a circuit, connect the
+`s` wire to the output of a comparison circuit and the choice makes **itself.** That is
+precisely what automation is.
 
 And so is programmability: feed `s` from an **instruction** and you've told the machine what
 to do in writing.
@@ -439,9 +397,7 @@ picks one.** Choosing is cheaper than waiting.
 ☐ At the gate level inv(s) lags by one gate: as s falls from 1 to 0 with d0 = d1 = 1, the output drops to 0 for a moment.
 ☐ Selector: output = (d0 AND inv s) OR (d1 AND s) — a 2→1 multiplexer.
 ☐ Switch:  c1 = d AND s · c0 = d AND inv s — NO merging, the outputs stay apart.
-☐ A stairwell switch does the same job; wire it the other way round and it becomes a Selector.
-☐ The analogy breaks on direction: the switch has symmetry, the logic gate has DIRECTION.
-☐ Mechanically a HAND decides, in a circuit a WIRE does → and a wire can be another circuit's output.
+☐ With a light switch a HAND decides, in a circuit a WIRE does → and a wire can be another circuit's output.
 ☐ ALU: every circuit runs at once, a selector lets one through. Choosing is cheaper than waiting.
 ```
 
