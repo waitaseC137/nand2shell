@@ -439,7 +439,7 @@ it by testing: set `s=1 r=0`, which gate gives `1`?
 
 The reason is in the previous section: `nand` passes the value inverted. The
 gate of `s` now holds the **inverse** of the stored bit. The two gates (except
-at `0 0`) carry opposite values, and that is why real latches have two outputs:
+at `0 0`) carry opposite values in the stable state, and that is why real latches have two outputs:
 `Q` and `Q̄`.
 
 The bar here does not mean the same thing as the bar on `S̄`

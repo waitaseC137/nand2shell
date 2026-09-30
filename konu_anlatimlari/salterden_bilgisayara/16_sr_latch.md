@@ -418,8 +418,8 @@ Parça listesi: **2 × `nand`**. Başka bir şey yok.
 yap, hangi kapı `1` veriyor?
 
 Sebebi de bir önceki bölümde: `nand` değeri ters geçiriyor. `s`'nin kapısı artık
-saklanan bitin **tersini** tutuyor. İki kapı (`0 0` dışında) hep birbirinin zıddını
-taşıyor, ve gerçek latch'ler bu yüzden iki çıkış verir: `Q` ve `Q̄`.
+saklanan bitin **tersini** tutuyor. İki kapı (`0 0` dışında) kararlı durumda birbirinin
+zıddını taşıyor, ve gerçek latch'ler bu yüzden iki çıkış verir: `Q` ve `Q̄`.
 
 Buradaki üst çizgi, [yukarıdaki](#komut-sıfırdır) `S̄`'daki çizgiyle aynı anlamda
 değil. `S̄`'daki çizgi "0 olduğunda iş yapar" (aktif düşük) diyor, `Q̄`'daki ise

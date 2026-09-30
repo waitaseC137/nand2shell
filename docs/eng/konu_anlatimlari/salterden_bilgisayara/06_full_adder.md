@@ -148,10 +148,10 @@ your `h` output's question is: "**is there a pair inside?**" It doesn't care who
 But let's be meticulous; OR's table also has a `(1,1) → 1` row. What if both shout at once?
 Two pairs = 4 apples would be needed; three inputs give 3 at most. Still, prove it on paper:
 for h₁=1 you'd need a=b=1 → then l₁ = 0 → 0 and c enter the second box → the second box can
-**never** find a pair. **Two shouts at the same time are impossible.** OR's one suspect row
-will never be visited — use it with confidence.
+**never** find a pair. **In the stable state, two shouts at the same time are impossible.** OR's one
+suspect row will never be visited there — use it with confidence.
 
-> 💡 A subtle bonus: since the (1,1) case never occurs, **XOR** — which differs from OR only
+> 💡 A subtle bonus: since the (1,1) case never occurs in the stable state, **XOR** — which differs from OR only
 > on that very row — would do the same job. Both pass. That two different gates can do the
 > same task in a circuit feels strange at first — the secret is that they live in a world
 > where their difference is never tested.
@@ -175,8 +175,17 @@ You place a third half adder, feed it the two carries, and take its **`l` output
 | 1 | 0 | 1 | 1 |
 | ~~1~~ | ~~1~~ | ~~1~~ | ~~0~~ |
 
-The struck-through row, as proved above, never happens. Because the **one row** where they differ is never visited, the two circuits behave
-identically.
+The struck-through row, as proved above, never happens in the stable state.
+Because the **one row** where they differ is not visited there, the two circuits
+reach the same result.
+
+> 📌 The "stable state" qualifier is not idle here ([03.5](./03.5_soyutlama_merdiveni.md)).
+> Let `b = c = 1` and raise `a` from 0 to 1. For `h₁` to become 1, passing through a
+> single box is enough. For `h₂` to fall, `l₁` must fall first and then that change
+> must pass through the second box: a longer path. For a short moment both are 1, and
+> the struck-through row is visited. The OR circuit's output stays 1 meanwhile, as it
+> should. The XOR circuit's output drops to 0 for a moment, then returns to 1.
+> They arrive at the same place; what they show on the way is not the same.
 
 > 🔑 The real lesson here: a circuit's correctness depends not only on its gates but also on
 > **which inputs are possible.** Knowing that a state is impossible buys you freedom in
@@ -227,8 +236,8 @@ sentence not by rote but knowing the "why" of each of its wires — that's the d
 
 **Alternative (without using an OR gate):** instead of the OR in step 3, place a third
 `add`, feed `h₁` and `h₂` into its inputs, and wire its **`l` output** to the box's `h`.
-Leave `h₃` dangling. The fact you proved above — that the two carries can never be 1 at the
-same time — makes this circuit valid too. Both solutions are correct; the second is the one
+Leave `h₃` dangling. The fact you proved above — that in the stable state the two carries can never
+be 1 at the same time — makes this circuit valid too. Both solutions are correct; the second is the one
 that *uses* the proof.
 
 </details>
@@ -267,8 +276,9 @@ Building this chain yourself is the job of the next lesson (and the next level i
 ☐ Wrong-way lesson: adding parts isn't progress. Build it the way you do it by hand.
 ☐ Addition is SEQUENTIAL: add → then add onto the result. (A floor's answer, the floor above's signal.)
 ☐ The wire added to c is l (both in 1-token units); the h's are 2-token, waiting off to the side.
-☐ Two h's can never be 1 at once (paper proof) → OR is enough to combine (XOR would pass too).
+☐ In the stable state two h's can never be 1 at once (paper proof) → OR is enough to combine (XOR would pass too).
 ☐ A half adder's l output IS an XOR → a third `add` can replace the OR entirely.
+☐ During a change both can be 1 for a moment: the OR output stays 1, the XOR output drops to 0 for a moment.
 ☐ A circuit's correctness depends on which inputs are POSSIBLE, not only on its gates.
 ☐ Three separate ORs: inside XOR / the table observation / the real one in the circuit.
 ☐ Never wire b and c into an OR — that observation only describes the a=1 floor.

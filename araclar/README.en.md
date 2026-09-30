@@ -40,6 +40,7 @@ game, and settled with screenshots.
 
 | lesson | claim tested | file | result | effect on the lesson |
 |---|---|---|---|---|
+| 06 · Full Adder | "The OR and XOR solutions behave identically"; "the two carries can never be 1 at the same time" | `06_full_adder/fa_gecis.py` | true in the stable state; but in the `abc` 011 → 111 and 101 → 111 transitions `h1 = h2 = 1` lasts three ticks: the OR output stays 1, the XOR output drops to 0 for three ticks | "in the stable state" qualifier and a transition note; the same note for the `xor` in 15 (`X` 0000 → 8000) |
 | 08 · Increment · CWE-680 | With `n = 65535`, does `malloc(n + 1)` wrap? | `08-09_c/c_iddialar.c` | it doesn't: C widens the 16-bit `n` to `int`, `n + 1 = 65536`; the wrap happens when the result is put into a 16-bit variable | the example is written with `uint16_t boyut = n + 1` |
 | 08.5 · When the Counter Wraps | "`a + b > MAX` never fires" | `08-09_c/c_iddialar.c` | with 16-bit types it fires in C (widening to `int`); with a 32-bit `unsigned int` it never fires | `MAX` defined, a C note added |
 | 09 · Subtraction · CWE-195 · 196 · 839 | How many bytes does a signed `−1` become in `memcpy`? Is `−1 > MAX` always false? | `08-09_c/c_iddialar.c` | 18446744073709551615 (2⁶⁴ − 1), not 65535; if `MAX` is unsigned (`sizeof`) the check holds by accident | the example and the chain tables fixed, a note on unsigned `MAX` in 839 |
@@ -133,6 +134,7 @@ will be added here the day it is.
 
 ```
 araclar/
+├── 06_full_adder/           fa_gecis.py
 ├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
 ├── 08.5_sayac/              tasma_kumesi.py
 ├── 14_alu/                  alu_sayim.py (12's two rows are here too) · sifir_tuzagi.py

@@ -167,7 +167,7 @@ d0 ──[valve]──
 d1 ──[valve]──
 ```
 
-What you want is clear: **at any moment exactly one open, the other closed.**
+What you want is clear: **exactly one open, the other closed.**
 
 But you only have **one `s`**. When `s = 1` you have to tell one valve "open" and the other,
 **at the same instant**, "close".

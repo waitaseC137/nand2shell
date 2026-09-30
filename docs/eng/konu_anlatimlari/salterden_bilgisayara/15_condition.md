@@ -214,9 +214,9 @@ So the circuit says either **always 1** or **always 0** — it distinguishes
 nothing.
 
 The real cause is that the two "not"s we wrote above never made it into the
-circuit. What you see on the screen is its symptom: `is zero` and `is neg` **can
-never be 1 at the same time.** A number cannot be both zero and negative. Feed an
-AND gate two mutually exclusive things and its output stays `0` forever.
+circuit. What you see on the screen is its symptom: in the stable state `is zero` and
+`is neg` **cannot be 1 at the same time.** A number cannot be both zero and
+negative. Feed an AND gate two mutually exclusive things and its output stays `0`.
 
 > ⚠️ What you learn here is not about picking a gate. **The sentence can be right
 > while its translation into a circuit is incomplete** — and from the outside the
@@ -310,7 +310,7 @@ toolbox too. Try it — it **works**:
 | `X < 0` | `0` | `1` | `1` | `1` |
 
 The two columns are identical. Because `or` and `xor` only diverge when **both
-inputs are 1** — and that row never occurs in this circuit.
+inputs are 1** — and in the stable state that row never occurs in this circuit.
 
 > 🔑 Here `xor` gives **the right answer for the wrong reason.** If you mean "at
 > least one", write `or`. It is not enough for a circuit to work correctly; it
@@ -328,12 +328,20 @@ merely surfaces years later.
 > 💡 [06](./06_full_adder.md) said the opposite: there the solution that used `xor`
 > instead of `or` was praised as "the solution that *uses* the proof". The two
 > lessons do not contradict each other; the difference is **the gain.** In 06, the
-> fact that the two carries can never be 1 at the same time was proven inside the
+> fact that in the stable state the two carries can never be 1 at the same time was proven inside the
 > same circuit, and the `xor` was already the output of a half adder you had: it
 > let you build the circuit without an `or` gate. Here `or` sits ready in the
 > toolbox; `xor` gains you nothing and only carries an assumption. Leaning on an
 > assumption has a price. That price is worth paying only if you gain something
 > in return.
+
+> 📌 In both lessons the assumption holds only **in the stable state**. When `X`
+> goes from `0000` to `8000`, `is neg` becomes 1 at once, because it is a single
+> wire; `is zero` has to pass the sixteen bits through the tree of
+> [10](./10_bayraklar.md#tree-or-chain) and falls a little later. For that short
+> moment both are 1. The `or` version stays 1 meanwhile. The `xor` version drops to
+> 0 for a moment, and the "X > 0" detection wrongly becomes 1. That is what the two
+> carries went through in 06.
 
 ---
 
@@ -383,7 +391,7 @@ asked "is the eq flag zero" when it should have asked "is X zero".
 ## AND as a Valve
 
 Now the real work. You have three detections in hand, and they are **about X**.
-Exactly one of them is `1` at any moment:
+In the stable state exactly one of them is `1`:
 
 ```
 is neg        →  X < 0
@@ -423,8 +431,8 @@ itself.
 
 > 🔑 In `11` you built the selector. Look inside and it was made of valves too: two
 > `and`s and an `or`. The difference is in **the permissions.** In the selector
-> the two permissions came from a single wire: `s` and the inverse of `s`. When
-> one was open the other was necessarily closed; that is why the selector asked a
+> the two permissions came from a single wire: `s` and the inverse of `s`. In the
+> stable state, when one was open the other was closed; that is why the selector asked a
 > single question: "which one shall I hand over?"
 >
 > Here the three permissions are **independent of each other.** You can open all
@@ -710,13 +718,14 @@ itself** and making a circuit *remember* something.
 ☐ On x86, cmp a,b does exactly a−b and THROWS THE RESULT AWAY, keeping only the flags.
 ☐ There is no "is pos" in the toolbox: NOT negative and NOT zero → positive. The three outcomes exclude each other.
 ☐ ⚠️ The sentence can be right while its translation is incomplete: two "not"s fall out, is zero and is neg go into an and, the output is 0 FOREVER.
-☐ The symptom: two mutually exclusive things are never 1 at once. and can never combine them.
+☐ The symptom: in the stable state two mutually exclusive things are never 1 at once. and can never combine them.
 ☐ The "not"s sit INSIDE the parentheses in the sentence → so inv comes BEFORE the combining. Move the NOT to the input.
 ☐ De Morgan: (NOT A) AND (NOT B) ≡ NOT (A OR B). inv+inv+and = or+inv. Two parts instead of three.
 ☐ ⚠️ !(a || b) and !a || !b are NOT the same — in De Morgan the gate changes too (and ↔ or).
 ☐ Here xor gives the same result as or, because the "both are 1" row never occurs.
 ☐ 🔑 But xor gives THE RIGHT ANSWER FOR THE WRONG REASON. Working is not enough; a circuit must state its INTENT.
 ☐ A circuit resting on an assumption quietly does something else the day the assumption breaks. The bug is born when it is written.
+☐ During a change the assumption breaks for a moment: at X 0000 → 8000 is neg and is zero are both 1; or stays 1, xor drops to 0.
 ☐ ⚠️ is zero / is neg inputs go to X. Wire them to a flag and NandGame does NOT object — it silently widens 1 bit to 16.
 ☐ 👾 The number is valid, the meaning is wrong. The software counterpart is an implicit type conversion, CWE-704: the conversion SUCCEEDS, no warning.
 ☐ The game widens with zeros (0000…0001). Had it copied the sign bit, the name would be CWE-194 (sign extension).

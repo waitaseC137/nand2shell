@@ -143,10 +143,11 @@ kimin bulduğu umurunda değil.
 Ama titiz davranalım; OR'un tablosunda bir de `(1,1) → 1` satırı var. Ya ikisi
 birden bağırırsa? İki çift = 4 elma gerekir; üç girişten en fazla 3 çıkar. Yine de
 kanıtla, kâğıtta: h₁=1 olması için a=b=1 gerekir → o zaman l₁ = 0 olur → ikinci
-kutuya 0 ve c girer → ikinci kutu **asla** çift bulamaz. **İki bağırış aynı anda
-imkânsız.** OR'un tek şüpheli satırı hiç ziyaret edilmeyecek — güvenle kullan.
+kutuya 0 ve c girer → ikinci kutu **asla** çift bulamaz. **Kararlı durumda iki bağırış
+aynı anda imkânsız.** OR'un tek şüpheli satırı o durumda hiç ziyaret edilmeyecek —
+güvenle kullan.
 
-> 💡 İnce bir bonus: madem (1,1) durumu hiç yaşanmıyor, OR ile yalnızca o satırda
+> 💡 İnce bir bonus: madem (1,1) durumu kararlı durumda hiç yaşanmıyor, OR ile yalnızca o satırda
 > ayrışan **XOR da** aynı işi görürdü. İkisi de geçer. Bir devrede iki farklı
 > kapının aynı görevi yapabilmesi ilk başta tuhaf gelir — sırrı, farklarının hiç
 > test edilmediği bir dünyada yaşıyor olmalarıdır.
@@ -170,7 +171,17 @@ bacağı boşta kalır — hiç kullanılmaz, çünkü hiç 1 olmaz.
 | 1 | 0 | 1 | 1 |
 | ~~1~~ | ~~1~~ | ~~1~~ | ~~0~~ |
 
-Üstü çizili satır, yukarıda kanıtladığımız gibi hiç olmuyor. Ayrıştıkları **tek satır** ziyaret edilmediği için iki devre birebir aynı davranır.
+Üstü çizili satır, yukarıda kanıtladığımız gibi kararlı durumda hiç olmuyor.
+Ayrıştıkları **tek satır** o durumda ziyaret edilmediği için iki devre aynı sonuca
+varır.
+
+> 📌 "Kararlı durumda" kaydı burada boşuna değil ([03.5](./03.5_soyutlama_merdiveni.md)).
+> `b = c = 1` iken `a` 0'dan 1'e çıksın. `h₁`'in 1 olması için tek bir kutudan geçmek
+> yeter. `h₂`'nin inmesi içinse önce `l₁`'in inmesi, sonra bu değişikliğin ikinci
+> kutudan geçmesi gerekir: yol daha uzun. Kısa bir an ikisi birden 1'dir, üstü çizili
+> satır o an ziyaret edilir. OR'lu devrenin çıkışı bu sırada 1'de kalır, zaten 1
+> olması gerekiyordu. XOR'lu devreninki bir an 0'a düşer, sonra yine 1 olur.
+> Vardıkları yer aynı, yolda gösterdikleri değil.
 
 > 🔑 Buradaki asıl ders şu: bir devrenin doğruluğu sadece kapılarına değil,
 > **hangi girişlerin mümkün olduğuna** da bağlıdır. "İmkânsız durum" bilgisi,
@@ -221,7 +232,7 @@ olarak değil, her telinin "neden"ini bilerek söylüyorsun — fark budur.
 
 **Alternatif (OR kapısı kullanmadan):** 3. adımdaki OR yerine üçüncü bir `add` koy,
 girişlerine `h₁` ve `h₂`'yi ver, **`l` çıkışını** kutunun `h`'sine bağla. `h₃`'ü
-boşta bırak. Yukarıda kanıtladığın "iki elde aynı anda 1 olamaz" gerçeği bu devreyi
+boşta bırak. Yukarıda kanıtladığın "kararlı durumda iki elde aynı anda 1 olamaz" gerçeği bu devreyi
 de geçerli kılıyor. İki çözüm de doğrudur — ikincisi, ispatı *kullanan* çözümdür.
 
 </details>
@@ -259,8 +270,9 @@ Bu zinciri bizzat kurmak, bir sonraki dersin (ve NandGame'de sıradaki seviyenin
 ☐ Yanlış yol dersi: parça eklemek ilerleme değil. Elle nasıl yapıyorsan öyle kur.
 ☐ Toplama SIRALIDIR: topla → sonucun üstüne ekle. (Katın cevabı, üst katın sinyali.)
 ☐ c ile toplanacak tel l'dir (ikisi de 1'lik cinsinden); h'ler 2'lik, kenarda bekler.
-☐ İki h asla aynı anda 1 olamaz (kâğıt ispatı) → birleştirmeye OR yeter (XOR da geçerdi).
+☐ Kararlı durumda iki h aynı anda 1 olamaz (kâğıt ispatı) → birleştirmeye OR yeter (XOR da geçerdi).
 ☐ OR yerine üçüncü bir half adder'ın l çıkışı da kullanılabilir — ispatı KULLANAN çözüm.
+☐ Geçişte bir an ikisi birden 1 olabilir: OR'lu çıkış 1'de kalır, XOR'lu çıkış bir an 0'a düşer.
 ☐ Devrenin doğruluğu kapılara değil, hangi girişlerin MÜMKÜN olduğuna da bağlıdır.
 ☐ Bu derste 'OR' üç ayrı şeye deniyor. Hangisinden bahsettiğini her seferinde söyle.
 ☐ h çıkışı komşunun c girişine takılır → 64'lü zincir 64 bitlik sayıları toplar.

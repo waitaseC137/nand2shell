@@ -165,7 +165,7 @@ d0 ──[vana]──
 d1 ──[vana]──
 ```
 
-İstediğin şey belli: **her an tam olarak biri açık, diğeri kapalı.**
+İstediğin şey belli: **tam olarak biri açık, diğeri kapalı.**
 
 Ama elinde **tek bir `s`** var. `s = 1` olduğunda bir vanaya "aç", diğerine
 **aynı anda** "kapa" demen lazım.

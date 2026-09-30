@@ -204,9 +204,9 @@ verilen:             is zero        ve   is neg
 1** ya **hep 0** diyor — hiçbir şey ayırt etmiyor.
 
 Asıl sebep, yukarıda yazdığımız iki "değil"in devreye hiç girmemiş olması.
-Ekranda gördüğün ise onun belirtisi: `is zero` ile `is neg` **asla aynı anda 1
-olamaz.** Bir sayı hem sıfır hem negatif olamaz. `and` kapısına birbirini
-dışlayan iki şey verirsen çıkış sonsuza kadar `0` kalır.
+Ekranda gördüğün ise onun belirtisi: kararlı durumda `is zero` ile `is neg`
+**aynı anda 1 olamaz.** Bir sayı hem sıfır hem negatif olamaz. `and` kapısına
+birbirini dışlayan iki şey verirsen çıkış hep `0` kalır.
 
 > ⚠️ Burada öğrenilecek şey kapı seçimi değil. **Cümle doğru, devreye çevirisi
 > eksik** olabiliyor — ve ikisi dışarıdan aynı görünüyor. Devre kurulmuş, teller bağlı,
@@ -297,7 +297,7 @@ kutuda o da duruyor. Denersen — **çalışır**:
 | `X < 0` | `0` | `1` | `1` | `1` |
 
 İki sütun birebir aynı. Çünkü `or` ile `xor` sadece **ikisi de 1 olduğunda**
-ayrışır — ve o satır bu devrede hiç oluşmuyor.
+ayrışır — ve o satır bu devrede kararlı durumda hiç oluşmuyor.
 
 > 🔑 `xor` burada **doğru cevabı yanlış sebeple** verir. "En az biri" demek
 > istiyorsan `or` yaz. Devrenin doğru çalışması yetmez; **niyetini söylemesi**
@@ -313,11 +313,18 @@ Hata o gün doğmaz. Hata, `xor` yazıldığı gün doğar; sadece yıllar sonra
 
 > 💡 [06](./06_full_adder.md)'da bunun tersi söylenmişti: orada `or` yerine `xor`
 > kullanan çözüm "ispatı kullanan çözüm" diye övülmüştü. İki ders çelişmiyor, fark
-> **kazançta.** 06'da iki eldenin aynı anda 1 olamayacağı aynı devrenin içinde
+> **kazançta.** 06'da iki eldenin kararlı durumda aynı anda 1 olamayacağı aynı devrenin içinde
 > kanıtlanmıştı, ve `xor` zaten elindeki half adder'ın çıkışıydı: devreyi `or`
 > kapısı olmadan kurmayı sağlıyordu. Burada `or` kutuda hazır; `xor` hiçbir şey
 > kazandırmıyor, sadece bir varsayım taşıyor. Varsayıma yaslanmanın bir bedeli
 > var. O bedel, karşılığında bir şey kazanıyorsan ödenir.
+
+> 📌 İki derste de varsayım yalnız **kararlı durumda** tutuyor. `X` `0000`'dan
+> `8000`'e geçerken `is neg` tek bir tel olduğu için hemen 1 olur; `is zero` ise on
+> altı biti [10](./10_bayraklar.md#ağaç-mı-zincir-mi)'daki ağaçtan geçirip biraz geç
+> iner. O kısa anda ikisi birden 1'dir. `or` sürümü bu sırada 1'de kalır. `xor`
+> sürümü bir an 0'a düşer, ve "X > 0" tespiti o an yanlışlıkla 1 olur. 06'daki iki
+> eldenin geçişte yaşadığı da buydu.
 
 ---
 
@@ -364,8 +371,8 @@ sıfır mı" diye sordu, oysa sorması gereken "X sıfır mı".
 
 ## Vana Olarak and
 
-Şimdi asıl iş. Elinde üç tespit var ve bunlar **X hakkında**. Her an tam olarak
-biri `1`:
+Şimdi asıl iş. Elinde üç tespit var ve bunlar **X hakkında**. Kararlı durumda tam
+olarak biri `1`:
 
 ```
 is neg        →  X < 0
@@ -402,7 +409,7 @@ Bir **vana**. Açıksa akıtır, kapalıysa tutar. Kendi başına bir şeye kara
 
 > 🔑 `11`'de seçiciyi kurmuştun. İçine bakarsan o da vanalardan yapılmıştı: iki
 > `and` ve bir `or`. Fark **izinlerde.** Seçicide iki izin tek bir telden
-> türüyordu: `s` ve `s`'nin tersi. Biri açıkken öbürü mutlaka kapalıydı; seçici bu
+> türüyordu: `s` ve `s`'nin tersi. Kararlı durumda biri açıkken öbürü kapalıydı; seçici bu
 > yüzden tek bir soru soruyordu: "hangisini vereyim?"
 >
 > Burada üç izin **birbirinden bağımsız.** İstersen üçünü birden açarsın, istersen
@@ -678,13 +685,14 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ x86'da cmp a,b tam olarak a−b yapar ve SONUCU ATAR, sadece bayrakları tutar.
 ☐ Kutuda "is pos" yok: negatif DEĞİL ve sıfır DEĞİL → pozitif. Üç sonuç birbirini dışlar.
 ☐ ⚠️ Cümle doğru, çeviri eksik olabilir: iki "değil" düşünce is zero ile is neg and'e girer, çıkış SONSUZA KADAR 0.
-☐ Belirtisi: birbirini dışlayan iki şey asla aynı anda 1 olmaz. and onları hiç birleştiremez.
+☐ Belirtisi: birbirini dışlayan iki şey kararlı durumda aynı anda 1 olmaz. and onları hiç birleştiremez.
 ☐ "Değil"ler cümlede parantezin İÇİNDE → inv de birleştirmeden ÖNCE gelir. Değili girişe taşı.
 ☐ De Morgan: (A değil) VE (B değil) ≡ (A VEYA B) değil. inv+inv+and = or+inv. Üç parça yerine iki.
 ☐ ⚠️ !(a || b) ile !a || !b AYNI DEĞİL — De Morgan'da kapı da değişir (and ↔ or).
 ☐ xor burada or ile aynı sonucu verir, çünkü "ikisi de 1" satırı hiç oluşmuyor.
 ☐ 🔑 Ama xor DOĞRU CEVABI YANLIŞ SEBEPLE verir. Devrenin çalışması yetmez, NİYETİNİ söylemesi gerekir.
 ☐ Varsayıma yaslanan devre, varsayım bozulduğu gün sessizce başka şey yapar. Hata o gün değil, yazıldığı gün doğar.
+☐ Geçişte varsayım bir an bozulur: X 0000 → 8000 iken is neg ile is zero birlikte 1; or 1'de kalır, xor 0'a düşer.
 ☐ ⚠️ is zero / is neg girişleri X'e bağlanır. Bayrağa bağlarsan NandGame itiraz ETMEZ — 1 biti 16 bite sessizce genişletir.
 ☐ 👾 Sayı geçerli, anlam yanlış. Yazılımdaki karşılığı örtük tip dönüşümü, CWE-704: dönüşüm BAŞARILI olur, uyarı çıkmaz.
 ☐ Oyun sıfırla genişletir (0000…0001). İşaret bitini kopyalasaydı adı CWE-194 (işaret uzatması) olurdu.

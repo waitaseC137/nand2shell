@@ -40,6 +40,7 @@ bağlandı.
 
 | ders | sınanan iddia | dosya | sonuç | derse etkisi |
 |---|---|---|---|---|
+| 06 · Full Adder | "OR'lu ve XOR'lu çözüm birebir aynı davranır"; "iki elde aynı anda 1 olamaz" | `06_full_adder/fa_gecis.py` | kararlı durumda doğru; ama `abc` 011 → 111 ve 101 → 111 geçişlerinde `h1 = h2 = 1` üç tik sürüyor: OR'lu çıkış 1'de kalıyor, XOR'lu çıkış üç tik 0'a düşüyor | "kararlı durumda" kaydı ve geçiş notu; aynı not 15'teki `xor`'a da (`X` 0000 → 8000) |
 | 08 · Increment · CWE-680 | `n = 65535` iken `malloc(n + 1)` sarar mı? | `08-09_c/c_iddialar.c` | sarmaz: C 16 bitlik `n`'yi `int`'e büyütür, `n + 1 = 65536`; sarma sonuç 16 bitlik bir değişkene konunca oluyor | örnek `uint16_t boyut = n + 1` ile yazıldı |
 | 08.5 · Sayaç Başa Dönünce | "`a + b > MAX` hiçbir zaman tetiklenmez" | `08-09_c/c_iddialar.c` | 16 bitlik tiplerle C'de tetikleniyor (`int`'e büyütme); 32 bitlik `unsigned int`'te hiç tetiklenmiyor | `MAX` tanımlandı, C notu eklendi |
 | 09 · Subtraction · CWE-195 · 196 · 839 | İşaretli `−1` `memcpy`'ye kaç bayt olarak gider? `−1 > MAX` her zaman mı yanlış? | `08-09_c/c_iddialar.c` | 18446744073709551615 (2⁶⁴ − 1), 65535 değil; `MAX` işaretsizse (`sizeof`) kontrol tesadüfen tutuyor | örnek ve zincir tabloları düzeldi, 839'a işaretsiz `MAX` notu |
@@ -128,6 +129,7 @@ gerek kalmadı. Gerektiği gün buraya eklenecek.
 
 ```
 araclar/
+├── 06_full_adder/           fa_gecis.py
 ├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
 ├── 08.5_sayac/              tasma_kumesi.py
 ├── 14_alu/                  alu_sayim.py (12'nin iki satırı da burada) · sifir_tuzagi.py
