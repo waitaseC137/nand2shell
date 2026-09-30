@@ -215,15 +215,19 @@ Bir uzunluk değeri düşün. Ağdan `65535` geliyor. Program onu **işaretli** 
 değişkene koyuyor — artık değeri **−1**.
 
 ```c
-if (len > MAX)          //  −1 > MAX  →  YANLIŞ  →  kontrol geçiyor
+short len = uzunluk_oku();   //  ağdan 65535 geldi; işaretli 16 bitte bu desen −1
+if (len > MAX)               //  MAX = 1024:  −1 > 1024  →  YANLIŞ  →  kontrol geçiyor
     return HATA;
-memcpy(buf, src, len);  //  burada len UNSIGNED kullanılıyor → 65535 bayt
+memcpy(buf, src, len);       //  memcpy uzunluğu işaretsiz 64 bit (size_t) okur:
+                             //  −1  →  18446744073709551615 bayt
 ```
 
-Kontrol `−1` gördü ve "küçük, sorun yok" dedi. Kopyalama `65535` gördü.
+Kontrol `−1` gördü ve "küçük, sorun yok" dedi. Kopyalama ise aynı `−1`'i işaretsiz
+okudu: 64 bitlik bir bilgisayarda bu, tipin tutabildiği **en büyük** sayı. (65535
+değil: C, `−1`'i önce 64 bite genişletir, sonra işaretsiz okur.)
 
-> ⚠️ 08. dersteki kalıbın kardeşi: **kontrol var, ama kontrolün baktığı sayı ile
-> kullanılan sayı aynı değil.** Orada taşma deviriyordu, burada işaret yorumu.
+> ⚠️ 08. dersteki kalıbın kardeşi: **bakılan sayı ile kullanılan sayı aynı değil.**
+> Orada taşma deviriyordu, burada işaret yorumu.
 
 İkisinin ortak kökü aynı cümle: **desen aynı, anlam okuyanın kararı.**
 

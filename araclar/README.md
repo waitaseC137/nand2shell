@@ -29,6 +29,7 @@ bağlandı.
 | araç | ne için | kurulum |
 |---|---|---|
 | **Python 3** | bütün `.py` dosyaları; yalnızca standart kütüphane | çoğu sistemde hazır |
+| **gcc** ya da **clang** | `08-09_c/` içindeki `.c` dosyaları | Arch: `pacman -S gcc clang` · Debian/Ubuntu: `apt install gcc clang` |
 | **iverilog** (Icarus Verilog) | `16-17_latch/verilog/` | Arch: `pacman -S iverilog` · Debian/Ubuntu: `apt install iverilog` |
 | **Digital** | yalnızca `15_condition/digital/` | Java + [Digital](https://github.com/hneemann/Digital); `Digital.jar` yolu `DIGITAL_JAR` ile verilebilir |
 | **yosys** | henüz kullanılmadı | kuruldu, aşağıda neden durduğu yazıyor |
@@ -39,6 +40,12 @@ bağlandı.
 
 | ders | sınanan iddia | dosya | sonuç | derse etkisi |
 |---|---|---|---|---|
+| 08 · Increment · CWE-680 | `n = 65535` iken `malloc(n + 1)` sarar mı? | `08-09_c/c_iddialar.c` | sarmaz: C 16 bitlik `n`'yi `int`'e büyütür, `n + 1 = 65536`; sarma sonuç 16 bitlik bir değişkene konunca oluyor | örnek `uint16_t boyut = n + 1` ile yazıldı |
+| 08.5 · Sayaç Başa Dönünce | "`a + b > MAX` hiçbir zaman tetiklenmez" | `08-09_c/c_iddialar.c` | 16 bitlik tiplerle C'de tetikleniyor (`int`'e büyütme); 32 bitlik `unsigned int`'te hiç tetiklenmiyor | `MAX` tanımlandı, C notu eklendi |
+| 09 · Subtraction · CWE-195 · 196 · 839 | İşaretli `−1` `memcpy`'ye kaç bayt olarak gider? `−1 > MAX` her zaman mı yanlış? | `08-09_c/c_iddialar.c` | 18446744073709551615 (2⁶⁴ − 1), 65535 değil; `MAX` işaretsizse (`sizeof`) kontrol tesadüfen tutuyor | örnek ve zincir tabloları düzeldi, 839'a işaretsiz `MAX` notu |
+| CWE-190 | "Derleyici taşma kontrolünü siler" | `08-09_c/ub_silme.c` | `a + 1 < a` siliniyor, fonksiyon hep 0 döndürüyor; `a + b < a` silinmiyor, `b < 0`'a iniyor | örnek `a + 1 < a` oldu, `a + b` için not |
+| CWE-191 | "Sonradan sormak işe yaramaz" | `08-09_c/c_iddialar.c` | `a − b < 0` işe yaramıyor; `r = a − b; r > a` sarmayı yakalıyor | cümle `a − b < 0` sorusuna daraltıldı |
+| CWE-787 | `malloc(0)`'dan sonra 65536 bayt yazınca ne olur? | `08-09_c/malloc_sifir.c` | glibc 2.44: adres veriyor (24 bayt), yazma sessiz geçiyor, sonraki `malloc` "corrupted top size" deyip durduruyor; AddressSanitizer ilk taşan baytta yakalıyor | "Bozulma ancak sonra fark edilebiliyor" paragrafı |
 | 12 · Logic Unit | `X=0, Y=ffff` satırında `ffff` veren işlemler; `X=Y=6553` girişi dört işlemi ayırt ediyor mu? | `14_alu/alu_sayim.py` | `or`, `xor` **ve `inv X`**; `6553`'te `xor` 0 veriyor, deney ayırt edemiyor | listeye `inv X` eklendi, deney girişi `00FF`/`0F0F` oldu ([13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e), [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
 | 14 · ALU | 32 kombinasyon kaç farklı işlem, belge kaçını yazıyor? | `14_alu/alu_sayim.py` | 19 işlem · 11 belgeli · 8 listelenmemiş | ders "8 belgeli" diyordu, düzeldi ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
 | 14 · ALU | "Sıfırı yanlış bayrağa bağlamak" tuzağı neye benzer? | `14_alu/sifir_tuzagi.py` | aynı belirtiyi veren 60 kurulum; `X=5, Y=3` tablosu | tuzak tam kurulumuyla yeniden yazıldı ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
@@ -81,6 +88,12 @@ gösteriyor. 1271'deki "pencere" böylece çıktıda görünür oldu. Üçüncü
 örnek kodu Verilog'da yazılı. Kodu doğrudan çalıştırınca düzeltme satırının geçerli
 Verilog olmadığı ortaya çıktı.
 
+**gcc ve clang — C gerçekte ne yapıyor?** Derslerdeki C örnekleri 16 bitlik bir
+makineyi düşünerek yazılmıştı. Ama C o makine değil: 16 bitlik sayıları toplamadan
+önce `int`'e büyütür, işaretli bir sayıyı `size_t`'ye çevirirken 64 bite genişletir,
+işaretli taşmayı tanımsız sayar. Bu yüzden her örnek derlenip çalıştırıldı, gerekince
+derleyicinin ürettiği koda bakıldı.
+
 **NandGame — oyunla ilgili her şey.** Oyunun ne yaptığı yalnızca oyunda
 sınanabiliyor, ve bu iş elle yapıldı. Bu klasörde dosyası yok ama derslerde izi
 var. 1 bitlik telin 16 bite nasıl genişletildiği, `add 16`'nın elde çıkışı, SR
@@ -101,6 +114,9 @@ gerek kalmadı. Gerektiği gün buraya eklenecek.
 - Bir latch'in iki değer arasında bir süre asılı kalmasını hiçbiri göstermiyor.
 - "Oyun kutuyu tek adımda hesaplıyor" bir **çıkarım.** Oyunun kodu okunmadı.
   `kutu_vs_kapi.v` yalnızca bu çıkarımın oyunda görülenle uyuştuğunu gösteriyor.
+- C sonuçları derleyiciye, kütüphaneye ve makineye bağlı: gcc 16.2, clang 22.1,
+  glibc 2.44, x86-64 (`int` 32 bit, `size_t` 64 bit). `int`'i 16 bit olan eski ya da
+  gömülü bir sistemde `malloc(n + 1)` gerçekten sarar.
 
 ---
 
@@ -108,6 +124,7 @@ gerek kalmadı. Gerektiği gün buraya eklenecek.
 
 ```
 araclar/
+├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
 ├── 14_alu/                  alu_sayim.py (12'nin iki satırı da burada) · sifir_tuzagi.py
 ├── 15_condition/            never_always.py · of_kurali.py · cf_borc.py
 │   └── digital/             uret.py · dig_uretici.py · 15_condition_*.dig

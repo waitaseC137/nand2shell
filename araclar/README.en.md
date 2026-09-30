@@ -29,6 +29,7 @@ game, and settled with screenshots.
 | tool | used for | setup |
 |---|---|---|
 | **Python 3** | every `.py` file; standard library only | ready on most systems |
+| **gcc** or **clang** | the `.c` files in `08-09_c/` | Arch: `pacman -S gcc clang` · Debian/Ubuntu: `apt install gcc clang` |
 | **iverilog** (Icarus Verilog) | `16-17_latch/verilog/` | Arch: `pacman -S iverilog` · Debian/Ubuntu: `apt install iverilog` |
 | **Digital** | only `15_condition/digital/` | Java + [Digital](https://github.com/hneemann/Digital); the path to `Digital.jar` can be given with `DIGITAL_JAR` |
 | **yosys** | not used yet | installed; why it is waiting is written below |
@@ -39,6 +40,12 @@ game, and settled with screenshots.
 
 | lesson | claim tested | file | result | effect on the lesson |
 |---|---|---|---|---|
+| 08 · Increment · CWE-680 | With `n = 65535`, does `malloc(n + 1)` wrap? | `08-09_c/c_iddialar.c` | it doesn't: C widens the 16-bit `n` to `int`, `n + 1 = 65536`; the wrap happens when the result is put into a 16-bit variable | the example is written with `uint16_t boyut = n + 1` |
+| 08.5 · When the Counter Wraps | "`a + b > MAX` never fires" | `08-09_c/c_iddialar.c` | with 16-bit types it fires in C (widening to `int`); with a 32-bit `unsigned int` it never fires | `MAX` defined, a C note added |
+| 09 · Subtraction · CWE-195 · 196 · 839 | How many bytes does a signed `−1` become in `memcpy`? Is `−1 > MAX` always false? | `08-09_c/c_iddialar.c` | 18446744073709551615 (2⁶⁴ − 1), not 65535; if `MAX` is unsigned (`sizeof`) the check holds by accident | the example and the chain tables fixed, a note on unsigned `MAX` in 839 |
+| CWE-190 | "The compiler deletes the overflow check" | `08-09_c/ub_silme.c` | `a + 1 < a` is deleted, the function always returns 0; `a + b < a` is not deleted, it becomes `b < 0` | the example became `a + 1 < a`, a note for `a + b` |
+| CWE-191 | "Asking afterwards is useless" | `08-09_c/c_iddialar.c` | `a − b < 0` is useless; `r = a − b; r > a` catches the wrap | the sentence narrowed to the `a − b < 0` question |
+| CWE-787 | What happens when 65536 bytes are written after `malloc(0)`? | `08-09_c/malloc_sifir.c` | glibc 2.44: gives an address (24 bytes), the writes pass silently, the next `malloc` stops with "corrupted top size"; AddressSanitizer catches it at the first overflowing byte | the "The damage is only noticed later" paragraph |
 | 12 · Logic Unit | Which operations give `ffff` on the `X=0, Y=ffff` row; can the input `X=Y=6553` tell the four operations apart? | `14_alu/alu_sayim.py` | `or`, `xor` **and `inv X`**; at `6553`, `xor` gives 0 and the experiment cannot tell them apart | `inv X` added to the list, the experiment input became `00FF`/`0F0F` ([13bf01e](https://github.com/waitaseC137/nand2shell/commit/13bf01e), [f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
 | 14 · ALU | How many distinct operations do the 32 combinations give, and how many does the documentation list? | `14_alu/alu_sayim.py` | 19 operations · 11 documented · 8 unlisted | the lesson said "8 documented"; fixed ([5d7c451](https://github.com/waitaseC137/nand2shell/commit/5d7c451)) |
 | 14 · ALU | What does the "zero on the wrong flag" trap look like? | `14_alu/sifir_tuzagi.py` | 60 setups give the same symptom; the `X=5, Y=3` table | the trap rewritten with its full setup ([f4eb49c](https://github.com/waitaseC137/nand2shell/commit/f4eb49c)) |
@@ -84,6 +91,13 @@ wire whose value is not known shows `x`. That is how the "window" from 1271 beca
 visible in the output. Third, MITRE's example code is written in Verilog. Running
 the code directly showed that the fix line is not valid Verilog.
 
+**gcc and clang — what does C really do?** The C examples in the lessons were
+written with a 16-bit machine in mind. But C is not that machine: it widens 16-bit
+numbers to `int` before adding them, it widens a signed number to 64 bits when
+converting it to `size_t`, and it treats signed overflow as undefined. So every
+example was compiled and run, and where needed the code the compiler produced was
+inspected.
+
 **NandGame — everything about the game.** What the game does can only be tested
 in the game, and that was done by hand. It has no file in this folder but it left
 its mark in the lessons: how a 1-bit wire is widened to 16 bits, the carry output
@@ -105,6 +119,9 @@ will be added here the day it is.
 - "The game computes the box in a single step" is an **inference**. The game's
   code was not read. `kutu_vs_kapi.v` only shows that this inference agrees with
   what was seen in the game.
+- The C results depend on the compiler, the library and the machine: gcc 16.2,
+  clang 22.1, glibc 2.44, x86-64 (`int` is 32 bits, `size_t` 64 bits). On an old or
+  embedded system where `int` is 16 bits, `malloc(n + 1)` really does wrap.
 
 ---
 
@@ -112,6 +129,7 @@ will be added here the day it is.
 
 ```
 araclar/
+├── 08-09_c/                 c_iddialar.c · ub_silme.c · malloc_sifir.c
 ├── 14_alu/                  alu_sayim.py (12's two rows are here too) · sifir_tuzagi.py
 ├── 15_condition/            never_always.py · of_kurali.py · cf_borc.py
 │   └── digital/             uret.py · dig_uretici.py · 15_condition_*.dig

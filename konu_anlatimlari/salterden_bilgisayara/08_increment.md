@@ -182,15 +182,21 @@ Donanım sana söylüyor. Yazılım dinlemiyor.
 derste kurduğun `+1` devresinden geçiyor:
 
 ```c
-n   = 65535;
-buf = malloc(n + 1);        // n+1 SARIYOR → malloc(0), sıfır bayt ayrıldı
-for (i = 0; i <= n; i++)
+uint16_t n     = 65535;
+uint16_t boyut = n + 1;     // 65536 16 bite sığmaz → boyut = 0
+buf = malloc(boyut);        // malloc(0): sıfır bayt ayrıldı
+for (int i = 0; i <= n; i++)
     buf[i] = ...;           // 65536 kez yazıyor → buffer overflow
 ```
 
-> ⚠️ Buradaki incelik şu: **sınır kontrolü yok değil, VAR.** Programcı `n + 1`
-> kadar yer ayırdı, doğru düşündü. Ama *kontrolün kendisi* taştığı için küçük bir
-> sayı görüp geçti. Taşma, kontrolü **devirdi.**
+> 📌 `uint16_t`, 16 bitlik sayı demek. Sarma, `boyut`'a yazılan satırda oluyor: C,
+> `n + 1`'i hesaplarken `n`'yi önce 32 bitlik `int`'e büyütür ve 65536 bulur; sonuç
+> 16 bitlik `boyut`'a sığmayınca 0 olur. Tek satırda `malloc(n + 1)` yazılsaydı
+> sarma olmazdı.
+
+> ⚠️ Buradaki incelik şu: **programcının hesabı doğru.** `n + 1` kadar yer ayırmak
+> istedi, tam gereken kadar. Ama *hesabın kendisi* taştı ve ortaya 0 çıktı. Taşma,
+> doğru düşünülmüş hesabı **devirdi.**
 
 Bu zincirin resmî adı var: **CWE-190** (integer overflow) → **CWE-787**
 (out-of-bounds write). Yıllardır en verimli zafiyet sınıflarından biri.

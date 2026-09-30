@@ -216,16 +216,20 @@ Imagine a length value. `65535` arrives from the network. The program puts it in
 **signed** variable — its value is now **−1**.
 
 ```c
-if (len > MAX)          //  −1 > MAX  →  FALSE  →  the check passes
+short len = uzunluk_oku();   //  65535 arrived from the network; in signed 16 bits this pattern is −1
+if (len > MAX)               //  MAX = 1024:  −1 > 1024  →  FALSE  →  the check passes
     return ERROR;
-memcpy(buf, src, len);  //  here len is used as UNSIGNED → 65535 bytes
+memcpy(buf, src, len);       //  memcpy reads the length as unsigned 64 bits (size_t):
+                             //  −1  →  18446744073709551615 bytes
 ```
 
-The check saw `−1` and said "small, no problem". The copy saw `65535`.
+The check saw `−1` and said "small, no problem". The copy read the same `−1` as
+unsigned: on a 64-bit computer that is the **largest** number the type can hold. (Not
+65535: C first widens `−1` to 64 bits, then reads it as unsigned.)
 
-> ⚠️ A sibling of the pattern from lesson 08: **the check exists, but the number the check
-> looks at and the number that gets used are not the same.** There it was the overflow that
-> toppled it, here it's the sign interpretation.
+> ⚠️ A sibling of the pattern from lesson 08: **the number looked at and the number used
+> are not the same.** There it was the overflow that toppled it, here it's the sign
+> interpretation.
 
 The shared root of both is the same sentence: **the pattern is the same, the meaning is the
 reader's decision.**

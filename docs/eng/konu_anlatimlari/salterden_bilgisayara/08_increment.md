@@ -186,15 +186,21 @@ First a distinction, because these get mixed up constantly:
 runs exactly through the `+1` circuit you built in this lesson:
 
 ```c
-n   = 65535;
-buf = malloc(n + 1);        // n+1 WRAPS → malloc(0), zero bytes allocated
-for (i = 0; i <= n; i++)
+uint16_t n     = 65535;
+uint16_t boyut = n + 1;     // 65536 doesn't fit in 16 bits → boyut = 0
+buf = malloc(boyut);        // malloc(0): zero bytes allocated
+for (int i = 0; i <= n; i++)
     buf[i] = ...;           // writes 65536 times → buffer overflow
 ```
 
-> ⚠️ The subtlety here: **it isn't that there's no bounds check — there IS one.** The
-> programmer allocated `n + 1` bytes and thought correctly. But because *the check itself*
-> overflowed, it saw a small number and waved it through. The overflow **toppled the check.**
+> 📌 `uint16_t` means a 16-bit number. The wrap happens on the line that writes to
+> `boyut` ("size"): while computing `n + 1`, C first widens `n` to a 32-bit `int` and
+> gets 65536; the result doesn't fit in the 16-bit `boyut` and becomes 0. Written as a
+> single `malloc(n + 1)`, there would be no wrap.
+
+> ⚠️ The subtlety here: **the programmer's arithmetic is right.** They wanted `n + 1`
+> bytes, exactly as many as needed. But *the calculation itself* overflowed and produced
+> 0. The overflow **toppled a correctly reasoned calculation.**
 
 This chain has an official name: **CWE-190** (integer overflow) → **CWE-787** (out-of-bounds
 write). For years it has been one of the most productive vulnerability classes there is.
