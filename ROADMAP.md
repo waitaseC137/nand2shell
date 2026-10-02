@@ -82,10 +82,10 @@
     - [x] yarım toplayıcı → tam toplayıcı → dalgalı elde (ripple-carry)
     - [x] ALU: aritmetik + mantık tek blokta (NandGame'in ALU'sunda kaydırma yok)
     - [x] bayraklar (zero / carry / sign / overflow) — dallanmanın yakıtı
-- [ ] 🚧 Kendini-tutan latch → hafızanın doğuşu — *NandGame: Memory, 6 seviye*
+- [x] Kendini-tutan latch → hafızanın doğuşu — *NandGame: Memory, 6 seviye*
     - [x] SR latch: geri besleme = kendini hatırlayan devre
-    - [ ] 🚧 D latch → D flip-flop (saat kenarıyla örnekle) — D latch oturdu, sırada flip-flop
-    - [ ] register = n flip-flop yan yana
+    - [x] D latch → D flip-flop (saat kenarıyla örnekle)
+    - [x] register = n flip-flop yan yana
 - [ ] Latch'in karşı kutbu: elektrik kesilince hatırlayan hafıza (floating gate)
     - [ ] latch neden uçucu (volatile): geri besleme akım ister, akım kesilince unutur
     - [ ] floating gate transistör: yalıtılmış kapıya hapsedilen elektron = kalıcı hatırlama
