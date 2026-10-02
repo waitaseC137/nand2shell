@@ -395,6 +395,7 @@ X + Y, X − Y, X + 1, X − 1.
 ## 🔗 Related Topics
 
 - 👾 **For the curious:** [CWE-480 — Use of incorrect operator](../cwe/cwe_480.md) — mixing up the bitwise `&` you built in this lesson with the logical `&&`. The most famous case in the same family: a single missing `=` someone tried to slip into the Linux kernel in 2003
+- 👾 **For the curious:** [CWE-670 — Always-incorrect control flow](../cwe/cwe_670.md) — the parent of 480: the path is wrong not sometimes but every time it is taken
 - [11_selector_switch.md](./11_selector_switch.md) — The selector itself; "it does them all, then picks one"
 - [06_full_adder.md](./06_full_adder.md) — The floors trick
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` wires → `2ⁿ` patterns

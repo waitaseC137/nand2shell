@@ -200,6 +200,9 @@ This formula is the key to the next two lessons. When our circuits hand you two 
 ## 🔗 Related Topics
 
 - 👾 **For the curious:** [CWE-1261 — Single event upset](../cwe/cwe_1261.md) — one bit flipping: Belgium's 4096 votes, Mario's teleport
+- 👾 **For the curious:** [CWE-681 — Incorrect numeric conversion](../cwe/cwe_681.md) — the same `n` wires read as another type: data is lost or the meaning changes in the conversion
+- 👾 **For the curious:** [CWE-704 — Incorrect type conversion](../cwe/cwe_704.md) — wires claim nothing; a type is a contract about how to read the pattern
+- 👾 **For the curious:** [CWE-1384 — Physical conditions](../cwe/cwe_1384.md) — the parent of 1261: when the physical world leaves the range the circuit assumes
 - [01_akim_salter_role.md](./01_akim_salter_role.md) — Where the principle "a wire knows no meaning" was born
 - [05_half_adder.md](./05_half_adder.md) — The fruit of this lesson: a circuit that ADDS numbers
 

@@ -513,6 +513,7 @@ Arithmetic Unit — into a single box.
 
 - 👾 **For the curious:** [CWE-193 — Off-by-one](../cwe/cwe_193.md) — this lesson's `X + 1` landing one unit off: is it `<` or `<=`
 - 👾 **The width axis:** [CWE-194 — Sign extension](../cwe/cwe_194.md) (narrow → wide) and [CWE-197 — Truncation](../cwe/cwe_197.md) (wide → narrow) — the security counterpart of the bundler section
+- 👾 **The column:** [CWE-682 — Incorrect calculation](../cwe/cwe_682.md) — the level above 193: a wrong calculation only does harm once it feeds a decision
 - [15_condition.md](./15_condition.md) — The trap of the game's silent widening: wiring a flag into a 16-bit input
 - [01.5_yasak_bolge.md](./01.5_yasak_bolge.md) — Why the voltage of a pin left unconnected is undefined
 - [12_logic_unit.md](./12_logic_unit.md) — The same idea with logic operations; the order, the choice, "they all run, one gets picked"

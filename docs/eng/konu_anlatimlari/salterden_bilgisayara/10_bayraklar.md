@@ -310,6 +310,7 @@ first has to be able to **choose;** that's exactly the next lesson's subject.
 ## 🔗 Related Topics
 
 - 👾 **For the curious:** the bits you hand the comparator can be wrong too — sign conversion [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
+- 👾 **For the curious:** [CWE-1023 — Incomplete comparison](../cwe/cwe_1023.md) — comparison = subtraction + looking at the flags; skipping a flag you should have checked
 - [09_subtraction.md](./09_subtraction.md) — The circuit that produces the result the flags look at
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — The tree's gates: NOT, AND, OR
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Token values: 1, 2, 4, 8 …

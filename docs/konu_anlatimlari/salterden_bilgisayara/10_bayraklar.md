@@ -302,6 +302,7 @@ gerekiyor; sıradaki dersin konusu tam bu.
 ## 🔗 İlgili Konular
 
 - 👾 **Meraklısına:** Karşılaştırıcıya verilen bitler de yanılabilir — işaret dönüşümü [CWE-196](../cwe/cwe_196.md), [CWE-195](../cwe/cwe_195.md)
+- 👾 **Meraklısına:** [CWE-1023 — Eksik karşılaştırma](../cwe/cwe_1023.md) — karşılaştırma = çıkarma + bayraklara bakmak; bakılması gereken bayrağı atlamak
 - [09_subtraction.md](./09_subtraction.md) — Bayrakların baktığı sonucu üreten devre
 - [02_nanddan_kapilar.md](./02_nanddan_kapilar.md) — Ağacın kapıları: NOT, AND, OR
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Jeton değerleri: 1, 2, 4, 8 …

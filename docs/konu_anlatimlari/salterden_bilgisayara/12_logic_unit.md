@@ -379,6 +379,7 @@ X + 1, X − 1.
 ## 🔗 İlgili Konular
 
 - 👾 **Meraklısına:** [CWE-480 — Yanlış işleç kullanımı](../cwe/cwe_480.md) — bu derste kurduğun bit bit `&` ile mantıksal `&&`'i karıştırmak. Aynı ailenin en ünlü vakası, 2003'te Linux çekirdeğine sokulmak istenen tek bir eksik `=`
+- 👾 **Meraklısına:** [CWE-670 — Her seferinde yanlış akış](../cwe/cwe_670.md) — 480'in çatısı: yol bazen değil, her geçildiğinde yanlış
 - [11_selector_switch.md](./11_selector_switch.md) — Seçicinin kendisi; "hepsini yapar, birini seçer"
 - [06_full_adder.md](./06_full_adder.md) — Katlara ayırma numarası
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — `n` tel → `2ⁿ` desen

@@ -485,6 +485,7 @@ zorlanmalı.
 - 👾 **Saatin görünmez kıldığı:** [CWE-1298](../cwe/cwe_1298.md) — aynı telden çıkan iki yolun yarışı
 - 👾 **Saatin çözmediği:** [CWE-1271](../cwe/cwe_1271.md) — açılışta değeri belirlenmemiş güvenlik biti
 - 👾 **Saatin yakaladığı an:** [CWE-1247 — Voltaj ve saat sıçraması](../cwe/cwe_1247.md) — saat erken gelirse ya da besleme bir an çökerse, yakalanan değer yarım kalır
+- 👾 **Fiziksel dünyanın çatısı:** [CWE-1384](../cwe/cwe_1384.md) — 1247 ile 1261'i birleştiren sınıf: saldırı da olsa kaza da olsa devre için aynı olay, bir bit beklenenden farklı çıktı
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Kutular insan için, nand'lar çip için
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: 17'deki şeffaf latch sorununun çıktığı satır
 

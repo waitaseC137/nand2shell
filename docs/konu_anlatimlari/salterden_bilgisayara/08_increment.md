@@ -270,6 +270,8 @@ konuşacağız. Ardından aynı sarma davranışı, **eksi sayıların kendisini
 ## 🔗 İlgili Konular
 
 - 👾 **Meraklısına:** Taşma kontrolü devirince — [CWE-190](../cwe/cwe_190.md) → [CWE-680](../cwe/cwe_680.md) → [CWE-787](../cwe/cwe_787.md)
+- 👾 **Meraklısına:** [CWE-682 — Hatalı hesap](../cwe/cwe_682.md) — taşmanın ait olduğu aile; bozan taşan sayı değil, o sayıyla verilen karar
+- 👾 **Meraklısına:** [CWE-119 — Tamponun dışına çıkmak](../cwe/cwe_119.md) — taşan sayının vardığı yer, 787'nin çatısı
 - [07_multibit_adder.md](./07_multibit_adder.md) — `add 16`'nın içindeki zincir
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Demet = telin üst katı
 - [04_teller_sayi_olunca.md](./04_teller_sayi_olunca.md) — Hane bitince ne olur

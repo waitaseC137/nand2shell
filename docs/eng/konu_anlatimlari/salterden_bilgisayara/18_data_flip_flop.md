@@ -500,6 +500,7 @@ be forced to a known value at power-on, while reset is still active.
 - 👾 **What the clock makes invisible:** [CWE-1298](../cwe/cwe_1298.md) — two paths from the same wire racing
 - 👾 **What the clock does not solve:** [CWE-1271](../cwe/cwe_1271.md) — a security bit whose value is not set at power-on
 - 👾 **The moment the clock captures:** [CWE-1247 — Voltage and clock glitches](../cwe/cwe_1247.md) — if the clock arrives early or the supply dips for an instant, the captured value is half-formed
+- 👾 **The physical world's parent:** [CWE-1384](../cwe/cwe_1384.md) — the class joining 1247 and 1261: attack or accident, to the circuit it is the same event, a bit came out different than expected
 - [03.5_soyutlama_merdiveni.md](./03.5_soyutlama_merdiveni.md) — Boxes are for people, nands are for chips
 - [13_arithmetic_unit.md](./13_arithmetic_unit.md) — `PC ← PC + 1`: the line where 17's transparent latch problem came from
 

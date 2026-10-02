@@ -491,6 +491,7 @@ kutuda birleştirecek.
 
 - 👾 **Meraklısına:** [CWE-193 — Off-by-one](../cwe/cwe_193.md) — bu dersteki `X + 1`'in bir birim yanlış yere düşmesi: `<` mi `<=` mi
 - 👾 **Genişlik ekseni:** [CWE-194 — İşaret uzatması](../cwe/cwe_194.md) (dar → geniş) ve [CWE-197 — Kırpma](../cwe/cwe_197.md) (geniş → dar) — bundler bölümünün güvenlik karşılığı
+- 👾 **Sütun:** [CWE-682 — Hatalı hesap](../cwe/cwe_682.md) — 193'ün üst kademesi: yanlış hesap ancak bir karara gidince zarar verir
 - [15_condition.md](./15_condition.md) — Oyunun sessiz genişletmesinin tuzağı: bayrağı 16 bitlik girişe bağlamak
 - [01.5_yasak_bolge.md](./01.5_yasak_bolge.md) — Boşta kalan bir bacağın voltajı neden tanımsızdır
 - [12_logic_unit.md](./12_logic_unit.md) — Aynı fikrin mantık işlemleriyle hâli; emir, seçim, "hepsi çalışır biri seçilir"
