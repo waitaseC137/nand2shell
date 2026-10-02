@@ -172,10 +172,10 @@ düşerse çıkış 0.
 
 | st | d | s | r | olması gereken |
 |---|---|---|---|---|
-| 0 | 0 | ? | ? | dokunma |
-| 0 | 1 | ? | ? | dokunma |
-| 1 | 0 | ? | ? | 0 yaz |
-| 1 | 1 | ? | ? | 1 yaz |
+| 0 | 0 |   |   | dokunma |
+| 0 | 1 |   |   | dokunma |
+| 1 | 0 |   |   | 0 yaz |
+| 1 | 1 |   |   | 1 yaz |
 
 Kendin doldur, sonra devam et.
 
@@ -705,3 +705,5 @@ kurulabilir.
 
 **Önceki konu:** [16_sr_latch.md](./16_sr_latch.md)
 **Sonraki konu:** [18_data_flip_flop.md](./18_data_flip_flop.md)
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

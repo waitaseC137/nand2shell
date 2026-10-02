@@ -206,7 +206,7 @@ Bunu bir önceki bölümde bulduğunla yan yana koy:
 
 ```
 s düşünce  →  çıkış 0 olmalı   →  zorla 0 veren: and ✓
-r düşünce  →  çıkış 1 olmalı   →  zorla 1 veren: ?
+r düşünce  →  çıkış 1 olmalı   →  zorla 1 veren: x
 ```
 
 `and` işin yarısını kusursuz yapıyor. `s`'yi bir `and`'e verirsen, `s` düştüğü an
@@ -633,3 +633,5 @@ kötü satır da böylece, girişler durulduğunda, hiç oluşamaz hâle geliyor
 
 **Önceki konu:** [15_condition.md](./15_condition.md)
 **Sonraki konu:** [17_d_latch.md](./17_d_latch.md)
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

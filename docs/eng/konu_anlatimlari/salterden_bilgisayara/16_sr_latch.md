@@ -216,7 +216,7 @@ Put this next to what you found in the previous section:
 
 ```
 s drops  →  output must be 0   →  the one that forces 0: and ✓
-r drops  →  output must be 1   →  the one that forces 1: ?
+r drops  →  output must be 1   →  the one that forces 1: x
 ```
 
 `and` does half the job perfectly. Give `s` to an `and`, and the moment `s`
@@ -661,3 +661,5 @@ bad row can no longer occur at all once the inputs have settled.
 
 **Previous topic:** [15_condition.md](./15_condition.md)
 **Next topic:** [17_d_latch.md](./17_d_latch.md)
+
+*This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

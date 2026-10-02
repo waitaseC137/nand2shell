@@ -736,3 +736,5 @@ bir şeyi *hatırlamasını* sağlamak.
 
 **Önceki konu:** [14_alu.md](./14_alu.md)
 **Sonraki konu:** [16_sr_latch.md](./16_sr_latch.md)
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

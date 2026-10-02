@@ -58,9 +58,6 @@ birkaç teli yan yana koyup onları **tek bir sayı** gibi okumayı öğrendin. 
 Pencerede geçen **sözcük** (*word*) kelimesi de bu bütünün adı: birlikte taşınan,
 birlikte saklanan bitler.
 
-Assembly'de adını duyduğun `AX` gibi işlemci register'ları, bu yapının daha geniş
-hâli.
-
 > 📌 Burada iki kelime karışmasın. **Bit** bir birim: bir telin taşıyabildiği en
 > küçük bilgi, 0 ya da 1. **Veri** o birimlerden oluşan içerik. Tek bir bit de
 > veri olabilir, 16 bitlik bir sayı da. "SR Latch bir veri tutar" belirsiz kalır.
@@ -288,3 +285,5 @@ kurduğun şey kapatılıp tek parça oluyor.
 
 **Önceki konu:** [18_data_flip_flop.md](./18_data_flip_flop.md)
 **Sonraki konu:** [20_counter.md](./20_counter.md)
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

@@ -290,3 +290,5 @@ Tek bir kapıdan, adresle okunup yazılan bir hafızaya.
 
 **Önceki konu:** [20_counter.md](./20_counter.md)
 **Sonraki konu:** *(yolda — Processor ünitesi)*
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

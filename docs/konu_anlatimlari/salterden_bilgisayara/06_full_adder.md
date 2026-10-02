@@ -126,7 +126,7 @@ da 1 elma). Onunla aynı teraziye konacak tel de 1'lik cinsinden olmalı: **`l`.
    b ──► [  1  ] l₁ ──► [ add ] h₂ ──────┤  (2'lik — bekliyor)
                   c ──► [  2  ] l₂ ──────►│──► l  ✓ (birler hanesi bitti)
                                           ▼
-                                    son tel: h = ?
+                                    son tel: h = x
 ```
 
 ---

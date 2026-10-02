@@ -314,3 +314,5 @@ diyor (`inv(0)`).
 
 **Önceki konu:** [19_register.md](./19_register.md)
 **Sonraki konu:** [21_ram.md](./21_ram.md)
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

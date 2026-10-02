@@ -326,3 +326,5 @@ bell" (`inv(0)`).
 
 **Previous topic:** [19_register.md](./19_register.md)
 **Next topic:** [21_ram.md](./21_ram.md)
+
+*This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

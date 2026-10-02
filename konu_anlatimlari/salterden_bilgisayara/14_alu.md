@@ -566,3 +566,5 @@ belgelenmiş — o işin en küçük hâli.
 
 **Önceki konu:** [13_arithmetic_unit.md](./13_arithmetic_unit.md)
 **Sonraki konu:** [15_condition.md](./15_condition.md)
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

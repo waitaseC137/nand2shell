@@ -492,3 +492,5 @@ zorlanmalı.
 
 **Önceki konu:** [17_d_latch.md](./17_d_latch.md)
 **Sonraki konu:** [19_register.md](./19_register.md)
+
+*Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

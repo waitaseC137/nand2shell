@@ -77,7 +77,7 @@ Turn your 16-bit counter one click back from 0:
    0000000000000010  =  2
    0000000000000001  =  1
    0000000000000000  =  0
-   1111111111111111  =  ?     ← one click back: it lands here
+   1111111111111111  =  x     ← one click back: it lands here
 ```
 
 The pattern **one below** zero is `1111111111111111`. And "one below zero" means, by

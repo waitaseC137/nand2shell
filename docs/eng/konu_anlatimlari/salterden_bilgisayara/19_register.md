@@ -59,9 +59,6 @@ number.** In the ALU you carried 16 wires together.
 one whole. The word **word** in the window is the name of that whole: bits that
 are carried together and stored together.
 
-Processor registers like `AX`, which you may have heard of in assembly, are a
-wider version of this structure.
-
 > 📌 Don't mix up two words here. A **bit** is a unit: the smallest piece of
 > information a wire can carry, 0 or 1. **Data** is the content made of those
 > units. A single bit can be data, and so can a 16-bit number. "The SR Latch holds
@@ -299,3 +296,5 @@ what you built is closed up and becomes a single part.
 
 **Previous topic:** [18_data_flip_flop.md](./18_data_flip_flop.md)
 **Next topic:** [20_counter.md](./20_counter.md)
+
+*This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

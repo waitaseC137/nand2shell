@@ -76,7 +76,7 @@ Kilometre sayacını hatırla (08. ders): 999999'dan sonra 000000 gelir. Peki
    0000000000000010  =  2
    0000000000000001  =  1
    0000000000000000  =  0
-   1111111111111111  =  ?     ← bir tık geri: buraya düşüyor
+   1111111111111111  =  x     ← bir tık geri: buraya düşüyor
 ```
 
 Sıfırın **bir altındaki** desen `1111111111111111`. Ve "sıfırın bir altı" demek,

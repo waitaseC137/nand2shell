@@ -132,7 +132,7 @@ wait off to the side.)
    b ──► [  1  ] l₁ ──► [ add ] h₂ ──────┤  (2-token — waiting)
                   c ──► [  2  ] l₂ ──────►│──► l  ✓ (ones place done)
                                           ▼
-                                    last wire: h = ?
+                                    last wire: h = x
 ```
 
 ---

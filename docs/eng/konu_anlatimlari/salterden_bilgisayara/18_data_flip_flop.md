@@ -507,3 +507,5 @@ be forced to a known value at power-on, while reset is still active.
 
 **Previous topic:** [17_d_latch.md](./17_d_latch.md)
 **Next topic:** [19_register.md](./19_register.md)
+
+*This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

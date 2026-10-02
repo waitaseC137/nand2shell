@@ -184,10 +184,10 @@ rule: **the command is 0, the circuit rests at 1-1.** If `r` drops the output is
 
 | st | d | s | r | what should happen |
 |---|---|---|---|---|
-| 0 | 0 | ? | ? | leave it alone |
-| 0 | 1 | ? | ? | leave it alone |
-| 1 | 0 | ? | ? | write 0 |
-| 1 | 1 | ? | ? | write 1 |
+| 0 | 0 |   |   | leave it alone |
+| 0 | 1 |   |   | leave it alone |
+| 1 | 0 |   |   | write 0 |
+| 1 | 1 |   |   | write 1 |
 
 Fill it in yourself, then continue.
 
@@ -749,3 +749,5 @@ built as `nand(and(st, r), rst_n)`.
 
 **Previous topic:** [16_sr_latch.md](./16_sr_latch.md)
 **Next topic:** [18_data_flip_flop.md](./18_data_flip_flop.md)
+
+*This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

@@ -295,3 +295,5 @@ From a single gate to a memory that is read and written by address.
 
 **Previous topic:** [20_counter.md](./20_counter.md)
 **Next topic:** *(on the way — the Processor unit)*
+
+*This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*
