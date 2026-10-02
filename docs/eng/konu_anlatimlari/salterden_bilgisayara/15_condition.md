@@ -163,7 +163,7 @@ You need to detect three outcomes. Let's look at the toolbox:
 ```
 is zero   →  is X = 0 ?        ✅ ready
 is neg    →  is X < 0 ?        ✅ ready
-   ?      →  is X > 0 ?        ❌ MISSING
+   —      →  is X > 0 ?        ❌ MISSING
 ```
 
 Two are given, the third is not. But the third one is in your hands too — because
@@ -714,7 +714,7 @@ itself** and making a circuit *remember* something.
 ☐ A comparison has exactly three outcomes: less · equal · greater. There is no fourth (trichotomy).
 ☐ 8 rows = the subsets of three outcomes (2³). Never = the empty set, Always = all of them.
 ☐ You do not build a gate called ≥: you open the eq and gt permissions together and ≥ is born there.
-☐ Everything is relative to zero because A COMPARISON IS A SUBTRACTION: a ? b → X = a − b → where X sits vs zero.
+☐ Everything is relative to zero because A COMPARISON IS A SUBTRACTION: compare a with b → X = a − b → where X sits vs zero.
 ☐ On x86, cmp a,b does exactly a−b and THROWS THE RESULT AWAY, keeping only the flags.
 ☐ There is no "is pos" in the toolbox: NOT negative and NOT zero → positive. The three outcomes exclude each other.
 ☐ ⚠️ The sentence can be right while its translation is incomplete: two "not"s fall out, is zero and is neg go into an and, the output is 0 FOREVER.

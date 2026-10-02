@@ -155,7 +155,7 @@ yazılım tarafı; bu derste kuracağın devre donanım tarafı.
 ```
 is zero   →  X = 0 mı?        ✅ hazır
 is neg    →  X < 0 mı?        ✅ hazır
-   ?      →  X > 0 mı?        ❌ YOK
+   —      →  X > 0 mı?        ❌ YOK
 ```
 
 İki tanesi verilmiş, üçüncüsü verilmemiş. Ama üçüncüsü de aslında elinde —
@@ -681,7 +681,7 @@ bir şeyi *hatırlamasını* sağlamak.
 ☐ Karşılaştırmanın sonucu tam üç tanedir: küçük · eşit · büyük. Dördüncüsü yok (trikotomi).
 ☐ 8 satır = üç sonucun alt kümeleri (2³). Never = boş küme, Always = hepsi.
 ☐ ≥ diye bir kapı kurmuyorsun: eq ve gt izinlerini birlikte açıyorsun, ≥ oradan doğuyor.
-☐ Her şey sıfıra göre çünkü KARŞILAŞTIRMA ZATEN ÇIKARMADIR: a ? b → X = a − b → X'in sıfıra göre yeri.
+☐ Her şey sıfıra göre çünkü KARŞILAŞTIRMA ZATEN ÇIKARMADIR: a'yı b ile kıyasla → X = a − b → X'in sıfıra göre yeri.
 ☐ x86'da cmp a,b tam olarak a−b yapar ve SONUCU ATAR, sadece bayrakları tutar.
 ☐ Kutuda "is pos" yok: negatif DEĞİL ve sıfır DEĞİL → pozitif. Üç sonuç birbirini dışlar.
 ☐ ⚠️ Cümle doğru, çeviri eksik olabilir: iki "değil" düşünce is zero ile is neg and'e girer, çıkış SONSUZA KADAR 0.
