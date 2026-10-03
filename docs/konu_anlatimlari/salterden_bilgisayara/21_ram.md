@@ -253,7 +253,7 @@ Tek bir kapıdan, adresle okunup yazılan bir hafızaya.
 
 ### Sırada
 
-**Processor ünitesi.**
+Kısa bir ara ders: [21.5](./21.5_sayi_mi_komut_mu.md), kontrol telleri nereden gelir ve bir sayı nasıl komut olur. Sonra **Processor ünitesi.**
 
 ---
 
@@ -289,6 +289,6 @@ Tek bir kapıdan, adresle okunup yazılan bir hafızaya.
 ---
 
 **Önceki konu:** [20_counter.md](./20_counter.md)
-**Sonraki konu:** *(yolda — Processor ünitesi)*
+**Sonraki konu:** [21.5_sayi_mi_komut_mu.md](./21.5_sayi_mi_komut_mu.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

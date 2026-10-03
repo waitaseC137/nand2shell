@@ -6,7 +6,7 @@
 
 ## 🔌 Şalterden Bilgisayara (NAND'dan CPU'ya)
 
-> 🚧 **Bu kurs yazım aşamasında** — NandGame yolculuğundan doğdu; **aritmetik, yönlendirme, ALU ve Memory üniteleri tamamlandı** (25 dosya: 00–21, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF), veri yönlendirmeye (multiplexer), hesap çekirdeğine (ALU) ve hafızaya (latch, flip-flop, register, sayaç, RAM) kadar. Devamı (işlemci ve kontrol birimi) NandGame ilerledikçe eklenecek.
+> 🚧 **Bu kurs yazım aşamasında** — NandGame yolculuğundan doğdu; **aritmetik, yönlendirme, ALU ve Memory üniteleri tamamlandı** (26 dosya: 00–21, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF), veri yönlendirmeye (multiplexer), hesap çekirdeğine (ALU) ve hafızaya (latch, flip-flop, register, sayaç, RAM) kadar. Devamı (işlemci ve kontrol birimi) NandGame ilerledikçe eklenecek.
 >
 > 🧭 **Yeni mi başlıyorsun?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — işlemciyi "nedir?" diye değil, **parçalarından kurarak** öğrenmek isteyenler için. Burası işçiyi transistörden kurar: assembly'de yazılan her emrin altındaki devreyi.
 
@@ -37,6 +37,7 @@
 | [19_register.md](./salterden_bilgisayara/19_register.md) | Register; bir sayının hafızası, veri telleri ayrı ve kontrol telleri ortak, bitlerin aynı anda değişmesi |
 | [20_counter.md](./salterden_bilgisayara/20_counter.md) | Counter; her zilde bir adım, aynı adı taşıyan iki telin farklı görevi, döngünün neden bir kez döndüğü |
 | [21_ram.md](./salterden_bilgisayara/21_ram.md) | RAM; adres, register'ın adres bilmemesi, yazarken dağıtmak ve okurken toplamak, özyinelemeli büyüme |
+| [21.5_sayi_mi_komut_mu.md](./salterden_bilgisayara/21.5_sayi_mi_komut_mu.md) | **Ara ders:** kontrol telleri nereden gelir, zil, döngü, sayı komut olunca (saklanmış program) |
 
 ---
 

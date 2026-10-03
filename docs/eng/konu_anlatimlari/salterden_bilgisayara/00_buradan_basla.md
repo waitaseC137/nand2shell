@@ -198,6 +198,7 @@ Read the files in this order. Each lesson leans on the previous one.
 | 19 | [19_register](./19_register.md) | The memory of a number; data wires separate, control wires shared | Register |
 | 20 | [20_counter](./20_counter.md) | One step per bell; selection wire vs write permission, the loop turns once | Counter |
 | 21 | [21_ram](./21_ram.md) | The address; distribute when writing, gather when reading | RAM |
+| 21.5 | [21.5_sayi_mi_komut_mu](./21.5_sayi_mi_komut_mu.md) | *(interlude)* Where control wires come from; the loop; when a number becomes a command | — |
 
 > 💡 Files whose number ends in `.5` are short **interludes**: on the side of the main road,
 > lighter, with no game level to go with them. But don't skip any of them — `03.5` carries

@@ -13,7 +13,7 @@ window.KONULAR = {
       id: "salterden_bilgisayara",
       label: "From Switches to a Computer (NAND to CPU)",
       accent: "var(--d-low)",
-      tag: "25 lessons · Memory unit complete",
+      tag: "26 lessons · Memory unit complete",
       blurb: "A course born from the NandGame journey — from switch/relay to NAND, from NAND to logic gates, from gates to the adder (half/full adder). Learn the processor not by asking 'what is it' but by building it from its parts yourself. The arithmetic, routing and ALU units are complete (00–15): adder, subtractor, flags, the multiplexer and the ALU. The Memory unit is complete too (16–21): latches, flip-flop, register, counter and RAM. The CPU is next.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Start Here",              h: "Course map; from switches to a CPU (🚧 in progress)" },
@@ -40,7 +40,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/18_data_flip_flop.md",      n: "18",   t: "Data Flip-Flop",          h: "The clock · separating taking and showing · receiver and showcase · boxes are for people, nands are for chips" },
         { f: "salterden_bilgisayara/19_register.md",            n: "19",   t: "Register",                h: "The memory of a number · data wires separate, control wires shared · bits on the same bell" },
         { f: "salterden_bilgisayara/20_counter.md",             n: "20",   t: "Counter",                 h: "One step per bell · selection wire vs write permission · PC ← PC + 1 now once" },
-        { f: "salterden_bilgisayara/21_ram.md",                 n: "21",   t: "RAM",                     h: "Words with numbers · a register doesn't know its address · distribute when writing, gather when reading" }
+        { f: "salterden_bilgisayara/21_ram.md",                 n: "21",   t: "RAM",                     h: "Words with numbers · a register doesn't know its address · distribute when writing, gather when reading" },
+        { f: "salterden_bilgisayara/21.5_sayi_mi_komut_mu.md",  n: "21.5", t: "A Number or a Command?",  h: "Interlude: where control wires come from · the bell · the loop · stored program" }
       ]
     },
     {

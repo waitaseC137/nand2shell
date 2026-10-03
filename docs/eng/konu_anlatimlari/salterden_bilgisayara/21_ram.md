@@ -258,7 +258,7 @@ From a single gate to a memory that is read and written by address.
 
 ### Next up
 
-**The Processor unit.**
+A short interlude: [21.5](./21.5_sayi_mi_komut_mu.md), where control wires come from and how a number becomes a command. Then **the Processor unit.**
 
 ---
 
@@ -294,6 +294,6 @@ From a single gate to a memory that is read and written by address.
 ---
 
 **Previous topic:** [20_counter.md](./20_counter.md)
-**Next topic:** *(on the way — the Processor unit)*
+**Next topic:** [21.5_sayi_mi_komut_mu.md](./21.5_sayi_mi_komut_mu.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*
