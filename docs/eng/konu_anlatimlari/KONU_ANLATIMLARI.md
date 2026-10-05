@@ -6,7 +6,7 @@
 
 ## 🔌 From Switches to a Computer (NAND to CPU)
 
-> 🚧 **This course is still being written** — it grew out of the NandGame journey; the **arithmetic, routing, ALU and Memory units are complete** (26 files: 00–21, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF), data routing (the multiplexer), the calculation core (ALU) and memory (latch, flip-flop, register, counter, RAM). The rest (the processor and the control unit) will be added as the journey continues.
+> 🚧 **This course is still being written** — it grew out of the NandGame journey; the **arithmetic, routing, ALU and Memory units are complete, and the Processor unit has begun** (27 files: 00–22, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF), data routing (the multiplexer), the calculation core (ALU) and memory (latch, flip-flop, register, counter, RAM). The rest (the processor and the control unit) will be added as the journey continues.
 >
 > 🧭 **New to this?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — for people who want to learn the processor not by asking "what is it?" but by **building it from its parts**. Here you build the worker from transistors: the circuit underneath every order written in assembly.
 
@@ -38,6 +38,7 @@
 | [20_counter.md](./salterden_bilgisayara/20_counter.md) | Counter; one step per bell, two wires with the same name doing different jobs, why the loop turns once |
 | [21_ram.md](./salterden_bilgisayara/21_ram.md) | RAM; the address, a register not knowing its address, distributing when writing and gathering when reading, recursive growth |
 | [21.5_sayi_mi_komut_mu.md](./salterden_bilgisayara/21.5_sayi_mi_komut_mu.md) | **Interlude:** where control wires come from, the bell, the loop, when a number becomes a command (stored program) |
+| [22_combined_memory.md](./salterden_bilgisayara/22_combined_memory.md) | Combined Memory; a flag being an `st` wire, A being both data and address, RAM writing at the old address on the same bell |
 
 ---
 ## 👾 CWE Map

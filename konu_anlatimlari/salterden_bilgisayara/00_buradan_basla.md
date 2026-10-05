@@ -194,6 +194,12 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | 21 | [21_ram](./21_ram.md) | Adres; yazarken dağıt, okurken topla | RAM |
 | 21.5 | [21.5_sayi_mi_komut_mu](./21.5_sayi_mi_komut_mu.md) | *(ara ders)* Kontrol telleri nereden gelir; döngü; sayı komut olunca | — |
 
+### ⚙️ Ünite 6 — İşlemci
+
+| # | Dosya | Ne öğretir | NandGame seviyesi |
+|:---:|---|---|---|
+| 22 | [22_combined_memory](./22_combined_memory.md) | Bayrak bir `st` telidir; A hem veri hem adres; zil boyunca herkes eski değere bakar | Combined Memory |
+
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
 > daha hafif, karşılığında bir oyun seviyesi yok. Ama hiçbirini atlama — `03.5`
 > serinin en önemli fikrini taşıyor, `08.5` kurduğun devrenin altındaki matematiği

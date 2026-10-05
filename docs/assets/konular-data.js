@@ -9,7 +9,7 @@ window.KONULAR = {
       id: "salterden_bilgisayara",
       label: "Şalterden Bilgisayara (NAND'dan CPU'ya)",
       accent: "var(--d-low)",
-      tag: "26 ders · Memory ünitesi tamam",
+      tag: "27 ders · Processor ünitesi başladı",
       blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10), yönlendirme (11), ALU (12–15) ve Memory (16–21) üniteleri tamamlandı. Sırada işlemci.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Buradan Başla",        h: "Kurs haritası; şalterden CPU'ya (🚧 yazılıyor)" },
@@ -37,7 +37,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/19_register.md",            n: "19",   t: "Register",             h: "Bir sayının hafızası · veri telleri ayrı, kontrol telleri ortak · bitler aynı zilde" },
         { f: "salterden_bilgisayara/20_counter.md",             n: "20",   t: "Counter",              h: "Her zilde bir adım · seçim teli ile yazma izni · PC ← PC + 1 artık bir kez" },
         { f: "salterden_bilgisayara/21_ram.md",                 n: "21",   t: "RAM",                  h: "Numarası olan sözcükler · register adres bilmez · yazarken dağıt, okurken topla" },
-        { f: "salterden_bilgisayara/21.5_sayi_mi_komut_mu.md",  n: "21.5", t: "Sayı mı, Komut mu?",   h: "Ara ders: kontrol telleri nereden gelir · zil · döngü · saklanmış program" }
+        { f: "salterden_bilgisayara/21.5_sayi_mi_komut_mu.md",  n: "21.5", t: "Sayı mı, Komut mu?",   h: "Ara ders: kontrol telleri nereden gelir · zil · döngü · saklanmış program" },
+        { f: "salterden_bilgisayara/22_combined_memory.md",     n: "22",   t: "Combined Memory",      h: "Bayrak bir st telidir · A hem veri hem adres · zil boyunca herkes eski değere bakar" }
       ]
     },
     {
