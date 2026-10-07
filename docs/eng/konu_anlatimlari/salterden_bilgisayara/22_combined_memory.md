@@ -387,6 +387,6 @@ make the "where should `X` be written" decision.
 ---
 
 **Previous topic:** [21.5_sayi_mi_komut_mu.md](./21.5_sayi_mi_komut_mu.md)
-**Next topic:** *(on the way — the second level of the Processor unit)*
+**Next topic:** [23_alu_instruction.md](./23_alu_instruction.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

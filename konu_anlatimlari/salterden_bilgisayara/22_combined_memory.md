@@ -378,6 +378,6 @@ sayının bitleri bu tellere bağlansa "`X`'i nereye yaz" kararını o sayı ver
 ---
 
 **Önceki konu:** [21.5_sayi_mi_komut_mu.md](./21.5_sayi_mi_komut_mu.md)
-**Sonraki konu:** *(yolda — Processor ünitesinin ikinci seviyesi)*
+**Sonraki konu:** [23_alu_instruction.md](./23_alu_instruction.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

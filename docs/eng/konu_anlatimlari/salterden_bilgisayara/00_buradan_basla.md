@@ -205,6 +205,7 @@ Read the files in this order. Each lesson leans on the previous one.
 | # | File | What it teaches | NandGame level |
 |:---:|---|---|---|
 | 22 | [22_combined_memory](./22_combined_memory.md) | A flag is an `st` wire; A is both data and address; during the bell everyone looks at the old value | Combined Memory |
+| 23 | [23_alu_instruction](./23_alu_instruction.md) | A command's bits are spread onto wires; a bit's number is a contract; a passing test doesn't prove the circuit right | ALU Instruction |
 
 > 💡 Files whose number ends in `.5` are short **interludes**: on the side of the main road,
 > lighter, with no game level to go with them. But don't skip any of them — `03.5` carries
