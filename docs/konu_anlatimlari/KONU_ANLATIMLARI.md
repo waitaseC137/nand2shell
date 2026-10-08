@@ -6,7 +6,7 @@
 
 ## 🔌 Şalterden Bilgisayara (NAND'dan CPU'ya)
 
-> 🚧 **Bu kurs yazım aşamasında** — NandGame yolculuğundan doğdu; **aritmetik, yönlendirme, ALU ve Memory üniteleri tamamlandı, Processor ünitesi başladı** (28 dosya: 00–23, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF), veri yönlendirmeye (multiplexer), hesap çekirdeğine (ALU) ve hafızaya (latch, flip-flop, register, sayaç, RAM) kadar. Devamı (işlemci ve kontrol birimi) NandGame ilerledikçe eklenecek.
+> 🚧 **Bu kurs yazım aşamasında** — NandGame yolculuğundan doğdu; **aritmetik, yönlendirme, ALU ve Memory üniteleri tamamlandı, Processor ünitesi başladı** (29 dosya: 00–24, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF), veri yönlendirmeye (multiplexer), hesap çekirdeğine (ALU) ve hafızaya (latch, flip-flop, register, sayaç, RAM) kadar. Devamı (işlemci ve kontrol birimi) NandGame ilerledikçe eklenecek.
 >
 > 🧭 **Yeni mi başlıyorsun?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — işlemciyi "nedir?" diye değil, **parçalarından kurarak** öğrenmek isteyenler için. Burası işçiyi transistörden kurar: assembly'de yazılan her emrin altındaki devreyi.
 
@@ -40,6 +40,7 @@
 | [21.5_sayi_mi_komut_mu.md](./salterden_bilgisayara/21.5_sayi_mi_komut_mu.md) | **Ara ders:** kontrol telleri nereden gelir, zil, döngü, sayı komut olunca (saklanmış program) |
 | [22_combined_memory.md](./salterden_bilgisayara/22_combined_memory.md) | Combined Memory; bayrağın bir `st` teli olması, A'nın hem veri hem adres olması, aynı zilde RAM'in eski adrese yazması |
 | [23_alu_instruction.md](./salterden_bilgisayara/23_alu_instruction.md) | ALU Instruction; komutun bitlerinin tellere dağılması, bitin numarasının bir sözleşme olması, testin geçmesinin devrenin doğru olduğunu göstermemesi |
+| [24_control_selector.md](./salterden_bilgisayara/24_control_selector.md) | Control Selector; bir kolun iki paketten birini bütün olarak geçirmesi, telin `s`'yi duymaması, telin genişliğinin seçicinin boyunu belirlemesi |
 
 ---
 

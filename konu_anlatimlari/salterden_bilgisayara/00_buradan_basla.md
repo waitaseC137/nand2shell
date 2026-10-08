@@ -200,6 +200,7 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 |:---:|---|---|---|
 | 22 | [22_combined_memory](./22_combined_memory.md) | Bayrak bir `st` telidir; A hem veri hem adres; zil boyunca herkes eski değere bakar | Combined Memory |
 | 23 | [23_alu_instruction](./23_alu_instruction.md) | Komutun bitleri tellere dağılır; bitin numarası bir sözleşmedir; testin geçmesi devrenin doğru olduğunu göstermez | ALU Instruction |
+| 24 | [24_control_selector](./24_control_selector.md) | Tek kol iki paketten birini bütün olarak geçirir; tel `s`'yi duymaz; telin genişliği seçicinin boyunu belirler | Control Selector |
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
 > daha hafif, karşılığında bir oyun seviyesi yok. Ama hiçbirini atlama — `03.5`

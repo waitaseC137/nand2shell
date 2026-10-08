@@ -470,6 +470,6 @@ ve 3.
 ---
 
 **Önceki konu:** [22_combined_memory.md](./22_combined_memory.md)
-**Sonraki konu:** *(yolda — Processor ünitesinin üçüncü seviyesi)*
+**Sonraki konu:** [24_control_selector.md](./24_control_selector.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

@@ -487,6 +487,6 @@ those bits became known: 5, 4 and 3.
 ---
 
 **Previous topic:** [22_combined_memory.md](./22_combined_memory.md)
-**Next topic:** *(on the way — the third level of the Processor unit)*
+**Next topic:** [24_control_selector.md](./24_control_selector.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*
