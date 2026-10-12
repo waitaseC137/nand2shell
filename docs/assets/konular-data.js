@@ -40,7 +40,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/21.5_sayi_mi_komut_mu.md",  n: "21.5", t: "Sayı mı, Komut mu?",   h: "Ara ders: kontrol telleri nereden gelir · zil · döngü · saklanmış program" },
         { f: "salterden_bilgisayara/22_combined_memory.md",     n: "22",   t: "Combined Memory",      h: "Bayrak bir st telidir · A hem veri hem adres · zil boyunca herkes eski değere bakar" },
         { f: "salterden_bilgisayara/23_alu_instruction.md",     n: "23",   t: "ALU Instruction",      h: "Komut tellere dağılır · bitin numarası bir sözleşme · testin geçmesi doğruluk değildir" },
-        { f: "salterden_bilgisayara/24_control_selector.md",    n: "24",   t: "Control Selector",     h: "Tek kol, iki paket · tel s'yi duymaz · telin genişliği seçicinin boyu" }
+        { f: "salterden_bilgisayara/24_control_selector.md",    n: "24",   t: "Control Selector",     h: "Tek kol, iki paket · tel s'yi duymaz · telin genişliği seçicinin boyu" },
+        { f: "salterden_bilgisayara/25_control_unit.md",        n: "25",   t: "Control Unit",         h: "Bir bit, iki tür komut · sayı teldedir, bacakta değil · aranan teli tarif et · oyunun kaçırdığı hata" }
       ]
     },
     {

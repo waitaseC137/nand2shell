@@ -41,6 +41,7 @@
 | [22_combined_memory.md](./salterden_bilgisayara/22_combined_memory.md) | Combined Memory; bayrağın bir `st` teli olması, A'nın hem veri hem adres olması, aynı zilde RAM'in eski adrese yazması |
 | [23_alu_instruction.md](./salterden_bilgisayara/23_alu_instruction.md) | ALU Instruction; komutun bitlerinin tellere dağılması, bitin numarasının bir sözleşme olması, testin geçmesinin devrenin doğru olduğunu göstermemesi |
 | [24_control_selector.md](./salterden_bilgisayara/24_control_selector.md) | Control Selector; bir kolun iki paketten birini bütün olarak geçirmesi, telin `s`'yi duymaması, telin genişliğinin seçicinin boyunu belirlemesi |
+| [25_control_unit.md](./salterden_bilgisayara/25_control_unit.md) | Control Unit; bit 15'in veri komutunu ALU komutundan ayırması, sayının bacakta değil telde olması, aranan teli önce tarif etmek, oyunun kaçırdığı hatayı kendi testiyle bulmak |
 
 ---
 

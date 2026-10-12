@@ -207,6 +207,7 @@ Read the files in this order. Each lesson leans on the previous one.
 | 22 | [22_combined_memory](./22_combined_memory.md) | A flag is an `st` wire; A is both data and address; during the bell everyone looks at the old value | Combined Memory |
 | 23 | [23_alu_instruction](./23_alu_instruction.md) | A command's bits are spread onto wires; a bit's number is a contract; a passing test doesn't prove the circuit right | ALU Instruction |
 | 24 | [24_control_selector](./24_control_selector.md) | One lever passes one of two packages as a whole; a wire doesn't hear `s`; the width of the wire sets the size of the selector | Control Selector |
+| 25 | [25_control_unit](./25_control_unit.md) | Bit 15 tells the instruction's type; the number is in the wire, not in a leg; describe the wire you need first; a passing game test doesn't make the circuit right | Control Unit |
 
 > 💡 Files whose number ends in `.5` are short **interludes**: on the side of the main road,
 > lighter, with no game level to go with them. But don't skip any of them — `03.5` carries

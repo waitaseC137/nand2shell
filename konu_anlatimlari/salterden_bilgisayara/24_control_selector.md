@@ -308,6 +308,6 @@ Control Selector  →  iki paketten birini seçer:
 ---
 
 **Önceki konu:** [23_alu_instruction.md](./23_alu_instruction.md)
-**Sonraki konu:** *(yolda — Processor ünitesinin dördüncü seviyesi)*
+**Sonraki konu:** [25_control_unit.md](./25_control_unit.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

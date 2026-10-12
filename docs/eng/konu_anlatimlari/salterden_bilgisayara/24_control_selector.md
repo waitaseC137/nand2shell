@@ -317,6 +317,6 @@ Control Selector  →  picks one of two packages:
 ---
 
 **Previous topic:** [23_alu_instruction.md](./23_alu_instruction.md)
-**Next topic:** *(on the way — the fourth level of the Processor unit)*
+**Next topic:** [25_control_unit.md](./25_control_unit.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*
