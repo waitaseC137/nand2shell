@@ -311,10 +311,24 @@ to the outputs of `alu instruction`. The first Check failed on `d`:
 ![Check: in the I = 04d2 row d came out 1, expected 0](./gorseller/25_d_hatasi.png)
 *`I` = `04d2` (1234), a data instruction. R and `a` are right; `d` is 1 where it should be 0.*
 
-`alu instruction` reads the data instruction as if it were an ALU instruction too;
-in `04d2`, bit 4, which sits where `d` is read from, is 1. The rule from
-[24](./24_control_selector.md#a-wire-doesnt-hear-s): a wire doesn't hear `s`. A
-selector was put in front of `d`, and Check passed:
+`alu instruction` doesn't look at bit 15. It reads every `I` it gets as an ALU
+instruction and spreads its bits out as in
+[23](./23_alu_instruction.md#when-a-command-is-spread-onto-wires): bit 5 → `a`,
+**bit 4 → `d`**, bit 3 → `*a`. But `04d2` is really just a plain number, 1234:
+
+```
+04d2  →  0000 0100 1101 0010
+                      ↑ bit 4 = 1  →  alu's d is 1
+```
+
+Bit 4 of 1234 happens to be 1, so `alu instruction` says `d` = 1. Since the `d`
+output was wired straight to it, that 1 went out as it was.
+
+This is the rule from [24](./24_control_selector.md#a-wire-doesnt-hear-s): a wire
+doesn't hear `s`. A plain wire knows nothing about bit 15 and carries whatever
+comes; the part that looks at bit 15 and decides is the selector. A selector was
+put in front of `d`. With bit 15 = 0 it now passes `d0` instead of the 1 from
+`alu instruction`, and `d0` holds 0. Check passed:
 
 ![The first Check that passed: five test rows, 5 components, 3908 nands](./gorseller/25_ilk_basari.png)
 *5 components, 3908 nands. All five rows green.*
@@ -337,9 +351,9 @@ table: look at the first hex digit of the five rows. `04d2`, `e590`, `e018`,
 
 ```
 04d2  →  0000 0100 1101 0010
-                         ↑ bit 3 = 0  →  alu's *a is 0  (right by chance)
+                        ↑ bit 3 = 0  →  alu's *a is 0  (right by chance)
 000F  →  0000 0000 0000 1111
-                         ↑ bit 3 = 1  →  alu's *a is 1  (wrong)
+                        ↑ bit 3 = 1  →  alu's *a is 1  (wrong)
 ```
 
 For `j`, `alu instruction` reads the last three bits as the condition

@@ -291,9 +291,22 @@ Bit 15'i bağlamak hem bedava hem gerçek bir devrede de doğru.
 ![Check: I = 04d2 satırında d 1 çıktı, beklenen 0](./gorseller/25_d_hatasi.png)
 *`I` = `04d2` (1234), veri komutu. R ve `a` doğru, `d` 0 olmalıyken 1.*
 
-`alu instruction` veri komutunu da ALU komutu sanıp okuyor; `04d2`'de `d`'nin yerine
-denk gelen bit 4, 1. [24](./24_control_selector.md#tel-syi-duymaz)'teki kural: tel
-`s`'yi duymaz. `d`'ye seçici kondu ve Check geçti:
+`alu instruction` bit 15'e bakmıyor. Gelen her `I`'yı ALU komutu sanıp okuyor ve
+bitlerini [23](./23_alu_instruction.md#komut-tellere-dağılınca)'teki gibi dağıtıyor:
+bit 5 → `a`, **bit 4 → `d`**, bit 3 → `*a`. `04d2` ise aslında düz bir sayı, 1234:
+
+```
+04d2  →  0000 0100 1101 0010
+                      ↑ bit 4 = 1  →  alu'nun d'si 1
+```
+
+1234'ün bit 4'ü tesadüfen 1, `alu instruction` da `d` = 1 diyor. `d` çıkışı doğrudan
+ona bağlı olduğu için bu 1 olduğu gibi dışarı çıktı.
+
+[24](./24_control_selector.md#tel-syi-duymaz)'teki kural burada: tel `s`'yi duymaz.
+Düz tel bit 15'ten habersiz, ne gelirse taşır; bit 15'e bakıp karar veren parça
+seçici. `d`'nin önüne seçici kondu. Bit 15 = 0 iken seçici artık
+`alu instruction`'ın 1'ini değil `d0`'ı geçiriyor, `d0`'da da 0 var. Check geçti:
 
 ![İlk geçen Check: beş test satırı, 5 bileşen, 3908 nand](./gorseller/25_ilk_basari.png)
 *5 bileşen, 3908 nand. Beş satırın hepsi yeşil.*
@@ -314,9 +327,9 @@ komutu.** O tek satırda da `*a` ile `j` tesadüfen 0 çıkıyor:
 
 ```
 04d2  →  0000 0100 1101 0010
-                         ↑ bit 3 = 0  →  alu'nun *a'sı 0  (tesadüfen doğru)
+                        ↑ bit 3 = 0  →  alu'nun *a'sı 0  (tesadüfen doğru)
 000F  →  0000 0000 0000 1111
-                         ↑ bit 3 = 1  →  alu'nun *a'sı 1  (yanlış)
+                        ↑ bit 3 = 1  →  alu'nun *a'sı 1  (yanlış)
 ```
 
 `j` için `alu instruction` son üç biti koşul olarak okuyor
