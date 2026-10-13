@@ -42,6 +42,7 @@
 | [23_alu_instruction.md](./salterden_bilgisayara/23_alu_instruction.md) | ALU Instruction; a command's bits being spread onto wires, a bit's number being a contract, a passing test not proving the circuit right |
 | [24_control_selector.md](./salterden_bilgisayara/24_control_selector.md) | Control Selector; one lever passing one of two packages as a whole, a wire not hearing `s`, the width of the wire setting the size of the selector |
 | [25_control_unit.md](./salterden_bilgisayara/25_control_unit.md) | Control Unit; bit 15 separating a data instruction from an ALU instruction, the number living in the wire rather than in a leg, describing the wire you need first, catching the bug the game missed with your own test |
+| [26_computer.md](./salterden_bilgisayara/26_computer.md) | Computer; a machine with no inputs reading its instructions from rom, the counter holding the PC, the j → st and X ← A connections, telling A from *A, running the game's program test step by step |
 
 ---
 ## 👾 CWE Map

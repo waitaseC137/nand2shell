@@ -493,6 +493,6 @@ büyük sayı kaç? Negatif bir sayı yazılabilir mi?
 ---
 
 **Önceki konu:** [24_control_selector.md](./24_control_selector.md)
-**Sonraki konu:** *(yolda — Processor ünitesinin beşinci seviyesi)*
+**Sonraki konu:** [26_computer.md](./26_computer.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

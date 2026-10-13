@@ -42,6 +42,7 @@
 | [23_alu_instruction.md](./salterden_bilgisayara/23_alu_instruction.md) | ALU Instruction; komutun bitlerinin tellere dağılması, bitin numarasının bir sözleşme olması, testin geçmesinin devrenin doğru olduğunu göstermemesi |
 | [24_control_selector.md](./salterden_bilgisayara/24_control_selector.md) | Control Selector; bir kolun iki paketten birini bütün olarak geçirmesi, telin `s`'yi duymaması, telin genişliğinin seçicinin boyunu belirlemesi |
 | [25_control_unit.md](./salterden_bilgisayara/25_control_unit.md) | Control Unit; bit 15'in veri komutunu ALU komutundan ayırması, sayının bacakta değil telde olması, aranan teli önce tarif etmek, oyunun kaçırdığı hatayı kendi testiyle bulmak |
+| [26_computer.md](./salterden_bilgisayara/26_computer.md) | Computer; girişi olmayan makinenin komutu rom'dan okuması, PC'yi counter'ın tutması, j → st ve X ← A bağlantıları, A ile *A ayrımı, oyunun programla yaptığı testi adım adım çalıştırmak |
 
 ---
 

@@ -523,6 +523,6 @@ bit is always 0.
 ---
 
 **Previous topic:** [24_control_selector.md](./24_control_selector.md)
-**Next topic:** *(on the way — the fifth level of the Processor unit)*
+**Next topic:** [26_computer.md](./26_computer.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*
