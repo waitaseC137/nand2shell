@@ -13,7 +13,7 @@ window.KONULAR = {
       tag: "33 ders · tamamlandı",
       blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10), yönlendirme (11), ALU (12–15), Memory (16–21) ve Processor (22–27) üniteleri tamamlandı: Bölüm 1 bitti, sırada Bölüm 1.1 (Bit-shifts). Bölümlerin haritası 27.5'te.",
       files: [
-        { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Buradan Başla",        h: "Kurs haritası; şalterden CPU'ya (🚧 yazılıyor)" },
+        { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Buradan Başla",        h: "Kurs haritası; şalterden bilgisayara, ders ders" },
         { f: "salterden_bilgisayara/01_akim_salter_role.md",     n: "01",   t: "Akım · Şalter · Röle", h: "Elektrik → şalter → röle = ilk mantık" },
         { f: "salterden_bilgisayara/01.5_yasak_bolge.md", n: "01.5", t: "Yasak Bölge", h: "ara ders: gerilim · gürültü payı · MOSFET · CMOS · P ≈ C·V²·f" },
         { f: "salterden_bilgisayara/02_nanddan_kapilar.md",      n: "02",   t: "NAND'dan Kapılar",     h: "NAND evrensel: NOT/AND/OR/XOR türet" },

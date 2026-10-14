@@ -627,6 +627,11 @@ body { animation: pageIn .45s ease both; }
   font-size: 11px; color: var(--fg-mute);
   border-top: 1px solid var(--line);
 }
+/* dar ekranda kilitli satırların açıklaması gizlenir: tek açık bölüm (Bölüm 1) ilk ekrana sığsın */
+@media (max-width: 760px) {
+  .tree-row.locked .ds { display: none; }
+  .tree-row.locked .cnt .birim { display: none; }  /* "11 seviye · 🔒" → "11 · 🔒": ada yer açılsın */
+}
 
 /* framed paneller: NieR köşe çentikleri */
 .term, .tree, .wg, .res, .tree-side, .wg-card {

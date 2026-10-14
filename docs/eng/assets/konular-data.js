@@ -18,7 +18,7 @@ window.KONULAR = {
       tag: "33 lessons · complete",
       blurb: "A course born from the NandGame journey — from switch/relay to NAND, from NAND to logic gates, from gates to the adder (half/full adder). Learn the processor not by asking 'what is it' but by building it from its parts yourself. The arithmetic, routing and ALU units are complete (00–15): adder, subtractor, flags, the multiplexer and the ALU. The Memory unit is complete too (16–21): latches, flip-flop, register, counter and RAM, and so is the Processor unit (22–27). Part 1 is done; next is Part 1.1 (Bit-shifts). The map of the parts is in 27.5.",
       files: [
-        { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Start Here",              h: "Course map; from switches to a CPU (🚧 in progress)" },
+        { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Start Here",              h: "Course map; from switches to a computer, lesson by lesson" },
         { f: "salterden_bilgisayara/01_akim_salter_role.md",     n: "01",   t: "Current · Switch · Relay", h: "Electricity → switch → relay = the first logic" },
         { f: "salterden_bilgisayara/01.5_yasak_bolge.md", n: "01.5", t: "The Forbidden Zone", h: "interlude: voltage · noise margin · MOSFET · CMOS · P ≈ C·V²·f" },
         { f: "salterden_bilgisayara/02_nanddan_kapilar.md",      n: "02",   t: "Gates from NAND",         h: "NAND is universal: derive NOT/AND/OR/XOR" },
