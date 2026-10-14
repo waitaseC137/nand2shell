@@ -8,19 +8,6 @@
 
 ---
 
-## 🧭 Yol Haritası — nereye gidiyoruz?
-
-Bu repo rastgele büyümüyor; voltajdan işletim sistemine uzanan tek bir merdiveni takip
-ediyor. Hangi basamaktayız, neyi bitirdik, sırada ne var — hepsi tek dosyada,
-işaretli:
-
-→ **[ROADMAP.md — Voltajdan İşletim Sistemine](./ROADMAP.md)**
-
-> `[x]` oturdu · `[ ]` 🚧 başlandı, yarım · `[ ]` henüz başlanmadı.
-> Bir basamak, konu anlatıldığı için değil, **"oturdu" dendiği için** kapanır.
-
----
-
 ## 🔌 Şalterden Bilgisayara
 
 NAND kapısından toplayıcıya, ALU'ya ve hafızaya: [NandGame](https://nandgame.com)'i seviye seviye çözerek yazılan dersler. Aritmetik ve ALU üniteleri tamam (00–15), hafıza ünitesi tamam (16 SR Latch · 17 D Latch · 18 Data Flip-Flop · 19 Register · 20 Counter · 21 RAM).
