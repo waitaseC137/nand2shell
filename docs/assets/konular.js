@@ -9,6 +9,8 @@
   const INTRO = DATA.intro || 'NandGame ile şalterden bilgisayara giden dersler ve bu derslerde karşına çıkan zayıflıklar. Bir kategoriden başla — ya da soldaki ağaçtan / aramadan istediğin konuya git. Hepsi site içinde.';
   const UNIT = DATA.unit || 'dosya';
   const REPO_BLOB = 'https://github.com/waitaseC137/nand2shell/blob/main/';
+  // Dosyanın repodaki yolu: TR'de base ile aynı, EN dosyaları docs/eng altında (DATA.repoPath)
+  const REPO_PATH = DATA.repoPath || BASE;
 
   // düz sıralı dosya listesi (prev/next için)
   const FLAT = [];
@@ -121,7 +123,7 @@
       elContent.innerHTML =
         '<div class="reader"><div class="state">' +
         'Dosya yüklenemedi (' + e.message + ').<br><br>' +
-        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(BASE + rel) + '" target="_blank" rel="noopener">GitHub\'da aç ↗</a>' +
+        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(REPO_PATH + rel) + '" target="_blank" rel="noopener">GitHub\'da aç ↗</a>' +
         '</div></div>';
       return;
     }
@@ -143,7 +145,7 @@
         '<a href="#">' + ROOT_LABEL + '</a><span class="sep">/</span>' +
         (cat ? '<span style="color:' + cat.accent + '">' + cat.id + '</span><span class="sep">/</span>' : '') +
         '<span class="cur">' + rel.split('/').pop() + '</span>' +
-        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(BASE + rel) + '" target="_blank" rel="noopener">GitHub ↗</a>' +
+        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(REPO_PATH + rel) + '" target="_blank" rel="noopener">GitHub ↗</a>' +
       '</div>';
 
     elContent.innerHTML =

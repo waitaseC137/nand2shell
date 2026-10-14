@@ -1,9 +1,10 @@
 /* ============================================================
    Konu Anlatımları — içerik ağacı
-   base: konu_anlatimlari/
+   base: nandgame/konu_anlatimlari/
    ============================================================ */
 window.KONULAR = {
-  base: "konu_anlatimlari/",
+  base: "nandgame/konu_anlatimlari/",
+  rootLabel: "nandgame/konu_anlatimlari",
   categories: [
     {
       id: "salterden_bilgisayara",

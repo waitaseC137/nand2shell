@@ -3,8 +3,8 @@
 # sync-docs.sh — docs/ içerik aynasını KAYNAKTAN yeniden üretir.
 #
 # Neden var? Repo'da içerik iki yerde tutuluyor:
-#   - Kaynak (kanonik):  konu_anlatimlari/
-#   - Yayın aynası:       docs/konu_anlatimlari/
+#   - Kaynak (kanonik):  nandgame/konu_anlatimlari/
+#   - Yayın aynası:       docs/nandgame/konu_anlatimlari/
 # Elle iki yeri güncellemeye çalışmak sürüklenmeye (drift) yol açıyordu
 # (eski TOCTOU metni, "suncuya" yazım hatası, docs'a hiç eklenmeyen 00a...).
 # Bu script kaynağı TEK GERÇEK kabul edip docs aynasını birebir eşitler.
@@ -23,7 +23,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 # Aynalanacak içerik dizinleri (kaynak → docs)
-DIRS=(konu_anlatimlari)
+DIRS=(nandgame/konu_anlatimlari)
 
 for d in "${DIRS[@]}"; do
   if [[ ! -d "$d" ]]; then

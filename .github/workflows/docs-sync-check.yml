@@ -1,19 +1,19 @@
 name: docs-sync-check
 
-# Kaynak içerik (konu_anlatimlari) değiştiğinde docs/ aynasının
+# Kaynak içerik (nandgame/konu_anlatimlari) değiştiğinde docs/ aynasının
 # senkron olduğunu doğrular. Senkron değilse CI HATA verir → "sync-docs.sh unutuldu".
 # Otomatik düzeltmez; sadece bekçilik eder (auto-commit yok = token/döngü derdi yok).
 
 on:
   push:
     paths:
-      - 'konu_anlatimlari/**'
+      - 'nandgame/konu_anlatimlari/**'
       - 'scripts/sync-docs.sh'
-      - 'docs/konu_anlatimlari/**'
+      - 'docs/nandgame/konu_anlatimlari/**'
   pull_request:
     paths:
-      - 'konu_anlatimlari/**'
-      - 'docs/konu_anlatimlari/**'
+      - 'nandgame/konu_anlatimlari/**'
+      - 'docs/nandgame/konu_anlatimlari/**'
   workflow_dispatch:
 
 jobs:

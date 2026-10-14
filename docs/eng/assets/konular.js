@@ -9,6 +9,8 @@
   const INTRO = DATA.intro || 'Komutların ve kavramların wargame-bağımsız referansı. Bir kategoriden başla — ya da soldaki ağaçtan / aramadan istediğin konuya git. Hepsi site içinde.';
   const UNIT = DATA.unit || 'dosya';
   const REPO_BLOB = 'https://github.com/waitaseC137/nand2shell/blob/main/';
+  // Dosyanın repodaki yolu: TR'de base ile aynı, EN dosyaları docs/eng altında (DATA.repoPath)
+  const REPO_PATH = DATA.repoPath || BASE;
 
   // dil — <html lang="en"> ise İngilizce arayüz metinleri
   const EN = document.documentElement.lang === 'en';
@@ -133,7 +135,7 @@
       elContent.innerHTML =
         '<div class="reader"><div class="state">' +
         T.loadErr(e.message) + '<br><br>' +
-        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(BASE + rel) + '" target="_blank" rel="noopener">' + T.ghOpen + '</a>' +
+        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(REPO_PATH + rel) + '" target="_blank" rel="noopener">' + T.ghOpen + '</a>' +
         '</div></div>';
       return;
     }
@@ -155,7 +157,7 @@
         '<a href="#">' + ROOT_LABEL + '</a><span class="sep">/</span>' +
         (cat ? '<span style="color:' + cat.accent + '">' + cat.id + '</span><span class="sep">/</span>' : '') +
         '<span class="cur">' + rel.split('/').pop() + '</span>' +
-        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(BASE + rel) + '" target="_blank" rel="noopener">GitHub ↗</a>' +
+        '<a class="gh-view" href="' + REPO_BLOB + encodeURI(REPO_PATH + rel) + '" target="_blank" rel="noopener">GitHub ↗</a>' +
       '</div>';
 
     elContent.innerHTML =

@@ -160,4 +160,4 @@ Python dosyaları kendi klasörlerinin içinden çalıştırılır (`cd 16-17_la
 
 ---
 
-*Bu klasör [Şalterden Bilgisayara](../konu_anlatimlari/salterden_bilgisayara/) serisinin parçası. Lisans: kod MIT, metin CC BY-SA 4.0 ([ana README](../README.md)).*
+*Bu klasör [Şalterden Bilgisayara](../konu_anlatimlari/salterden_bilgisayara/) serisinin parçası. Lisans: kod MIT, metin CC BY-SA 4.0 ([ana README](../../README.md)).*

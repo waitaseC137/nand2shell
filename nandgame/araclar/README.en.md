@@ -1,7 +1,7 @@
 # 🧰 Tools — For Testing the Claims in the Lessons
 
 > Every file in this folder was written to test **one specific sentence** in the
-> [From Switches to a Computer](../docs/eng/konu_anlatimlari/salterden_bilgisayara/)
+> [From Switches to a Computer](../../docs/eng/nandgame/konu_anlatimlari/salterden_bilgisayara/)
 > series. They are not general-purpose tools. When a lesson says "required",
 > "enough", "impossible" or "was simulated", the test behind that sentence lives
 > here, and anyone can repeat it on their own machine.
@@ -62,7 +62,7 @@ game, and settled with screenshots.
 | 17 · D Latch | "The forbidden row is physically impossible"; the test table; the `select` latch | `16-17_latch/d_latch_17.py` | a one-tick `s = r = 0` spike; `st` falling 1 tick after `d` makes it oscillate; flipping `d` first makes a correct circuit look broken | "A spike that lasts an instant", a one-switch-per-step test table ([271d06f](https://github.com/waitaseC137/nand2shell/commit/271d06f)) |
 | 17 · D Latch | What does the `select` latch do under different delays; does the SR solution hold under every delay; why did the game's black box pass? | `16-17_latch/verilog/select_latch.v` · `sr_dlatch_delays.v` · `kutu_vs_kapi.v` | three outcomes (lost bit · oscillation · fine); the SR solution has no error in 8 patterns; a box that decides in one step holds the bit | "Why Not Select?" ([282fdbf](https://github.com/waitaseC137/nand2shell/commit/282fdbf)) |
 | 17 · D Latch · CWE-1271 | Does waiting for the first write close the window; a latch with a reset input | `16-17_latch/reset_latch_17.py` · `verilog/reset_latch.v` | without reset the circuit shows `x` until the first write; with a reset input it is 1 on every power-on | reset explained correctly ([144d061](https://github.com/waitaseC137/nand2shell/commit/144d061)) |
-| CWE-1298 | Does MITRE's example code really produce a spike; does the fix line work? | `16-17_latch/verilog/mitre_1298.v` | a one-tick 0 in the buggy code; the fix line is not valid Verilog as written, its valid form works | the [CWE-1298](../docs/eng/konu_anlatimlari/cwe/cwe_1298.md) page ([877b16e](https://github.com/waitaseC137/nand2shell/commit/877b16e)) |
+| CWE-1298 | Does MITRE's example code really produce a spike; does the fix line work? | `16-17_latch/verilog/mitre_1298.v` | a one-tick 0 in the buggy code; the fix line is not valid Verilog as written, its valid form works | the [CWE-1298](../../docs/eng/nandgame/konu_anlatimlari/cwe/cwe_1298.md) page ([877b16e](https://github.com/waitaseC137/nand2shell/commit/877b16e)) |
 | 18 · Data Flip-Flop | Does opening the `d latch` boxes into bare nands bring out a race? | `18_dff/dff_sim.py` | 1–3 tick delay per nand, 400 runs: in the 9,851 steps after the first showing (the first fall after a store), 0 wrong and 0 unstable; instability only before the first showing | "When the Boxes Are Opened" and "Undefined at Power-On Again" |
 
 The top of every file states the claim it tests, the expected output and the
@@ -168,4 +168,4 @@ next to them.
 
 ---
 
-*This folder is part of the [From Switches to a Computer](../docs/eng/konu_anlatimlari/salterden_bilgisayara/) series. License: code MIT, text CC BY-SA 4.0 ([main README](../README.md)).*
+*This folder is part of the [From Switches to a Computer](../../docs/eng/nandgame/konu_anlatimlari/salterden_bilgisayara/) series. License: code MIT, text CC BY-SA 4.0 ([main README](../../README.md)).*

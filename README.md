@@ -12,11 +12,11 @@
 
 NAND kapısından toplayıcıya, ALU'ya ve hafızaya: [NandGame](https://nandgame.com)'i seviye seviye çözerek yazılan dersler. Aritmetik ve ALU üniteleri tamam (00–15), hafıza ünitesi tamam (16 SR Latch · 17 D Latch · 18 Data Flip-Flop · 19 Register · 20 Counter · 21 RAM).
 
-→ **[Buradan başla](./konu_anlatimlari/salterden_bilgisayara/00_buradan_basla.md)** · [Bütün dersler](./konu_anlatimlari/KONU_ANLATIMLARI.md)
+→ **[Buradan başla](./nandgame/konu_anlatimlari/salterden_bilgisayara/00_buradan_basla.md)** · [Bütün dersler](./nandgame/konu_anlatimlari/KONU_ANLATIMLARI.md)
 
-> 👾 **Derslerde karşına çıkan zayıflıklar:** [CWE Haritası](./konu_anlatimlari/cwe/README.md) — 28 zayıflık, her biri doğduğu derse bağlı.
+> 👾 **Derslerde karşına çıkan zayıflıklar:** [CWE Haritası](./nandgame/konu_anlatimlari/cwe/README.md) — 28 zayıflık, her biri doğduğu derse bağlı.
 
-> 🧰 **Derslerdeki iddiaların sınamaları:** [araclar/](./araclar/) — hangi dosyanın hangi dersin hangi cümlesini sınadığıyla birlikte.
+> 🧰 **Derslerdeki iddiaların sınamaları:** [araclar/](./nandgame/araclar/) — hangi dosyanın hangi dersin hangi cümlesini sınadığıyla birlikte.
 
 ---
 

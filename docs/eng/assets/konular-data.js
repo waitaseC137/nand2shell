@@ -1,10 +1,12 @@
 /* ============================================================
    Topic Guides — content tree (English)
-   base: konu_anlatimlari/
+   base: nandgame/konu_anlatimlari/
    ============================================================ */
 window.KONULAR = {
-  base: "konu_anlatimlari/",
-  rootLabel: "konu_anlatimlari",
+  base: "nandgame/konu_anlatimlari/",
+  rootLabel: "nandgame/konu_anlatimlari",
+  // GitHub bağlantısı İngilizce dosyaya gitsin (base sitedeki yol, repoPath repodaki yol)
+  repoPath: "docs/eng/nandgame/konu_anlatimlari/",
   title: "Topic Guides",
   unit: "files",
   intro: "The lessons that go from switches to a computer with NandGame, and the weaknesses you meet in them. Start from a category — or jump to any topic from the tree / search on the left. All readable inside the site.",
