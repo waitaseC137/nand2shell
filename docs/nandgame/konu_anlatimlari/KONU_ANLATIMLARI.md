@@ -44,6 +44,7 @@
 | [25_control_unit.md](./salterden_bilgisayara/25_control_unit.md) | Control Unit; bit 15'in veri komutunu ALU komutundan ayırması, sayının bacakta değil telde olması, aranan teli önce tarif etmek, oyunun kaçırdığı hatayı kendi testiyle bulmak |
 | [26_computer.md](./salterden_bilgisayara/26_computer.md) | Computer; girişi olmayan makinenin komutu rom'dan okuması, PC'yi counter'ın tutması, j → st ve X ← A bağlantıları, A ile *A ayrımı, oyunun programla yaptığı testi adım adım çalıştırmak |
 | [27_input_and_output.md](./salterden_bilgisayara/27_input_and_output.md) | Input and Output; lamba ile düğmenin ters yönleri, splitter ile bundler, st VE cl izni ve vana olarak and, "X = 1" tuzağı, işlemcinin dış dünyaya bir adres üzerinden dokunması; Processor ünitesinin sonu |
+| [27.5_bu_makine_neyi_yapamiyor.md](./salterden_bilgisayara/27.5_bu_makine_neyi_yapamiyor.md) | **Ara ders:** kurulan makinenin eksikleri; her eksik bir soru, her soru NandGame'de bir dal; bölüm haritası ve numaraların okunuşu; Bölüm 1'in kapanışı |
 
 ---
 

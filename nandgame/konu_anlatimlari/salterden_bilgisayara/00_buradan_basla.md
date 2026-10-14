@@ -100,11 +100,15 @@ Serinin bugüne kadar yazılmış bölümünü bitirdiğinde:
   sayısıyla** aralarından birini seçen hesap birimini (ALU) kurmuş olacaksın.
 - Geri beslemeden **hafıza** doğuracaksın: bir biti tutan latch'ten saatli
   flip-flop'a, oradan register'a, sayaca ve adresli belleğe (RAM).
+- Komutları bellekten okuyup çalıştıran bir **işlemci** ve programını kendi kendine
+  okuyan bir **bilgisayar** kurmuş olacaksın; o bilgisayar bir adres üzerinden dış
+  dünyaya da dokunacak.
 - "Milyarlarca transistör" lafı seni korkutmayacak — çünkü katların nasıl üst üste
   bindiğini görmüş olacaksın.
 
-Seri, oyun ilerledikçe büyümeye devam ediyor: sırada **komut işleyen gerçek bir
-işlemci** var. Hepsi aynı tuğlalardan.
+Bölüm 1 burada bitiyor ama NandGame bitmiyor: kurduğun makinenin eksikleri ve sıradaki
+bölümlerin haritası [27.5](./27.5_bu_makine_neyi_yapamiyor.md)'te. Hepsi aynı
+tuğlalardan.
 
 ---
 
@@ -204,6 +208,7 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | 25 | [25_control_unit](./25_control_unit.md) | Bit 15 komutun türünü söyler; sayı teldedir, bacakta değil; aranan teli önce tarif et; oyunun testi geçti diye devre doğru değildir | Control Unit |
 | 26 | [26_computer](./26_computer.md) | Bilgisayarın girişi yok, programı var; rom yalnızca okunur, PC satır numarasını tutar; j → st, X ← A (*A değil); oyun bir programla sınar, adım adım çalıştır | Computer |
 | 27 | [27_input_and_output](./27_input_and_output.md) | Lamba dışarı, düğme içeri, aralarında tel yok; "ikisi de 1" bir and'dir, seçici değil; X = 1 bit 0'ı yakar; işlemci dış dünyaya bir adres üzerinden dokunur | Input and Output |
+| 27.5 | [27.5_bu_makine_neyi_yapamiyor](./27.5_bu_makine_neyi_yapamiyor.md) | *(ara ders)* Kurduğun makinenin eksikleri; her eksik bir soru, her soru NandGame'de bir dal; sıradaki bölümlerin haritası | — |
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
 > daha hafif, karşılığında bir oyun seviyesi yok. Ama hiçbirini atlama — `03.5`

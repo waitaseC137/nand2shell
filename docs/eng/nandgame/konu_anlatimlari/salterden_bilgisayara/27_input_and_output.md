@@ -450,6 +450,6 @@ Output ← bundler
 ---
 
 **Previous topic:** [26_computer.md](./26_computer.md)
-**Next topic:** *(on the way)*
+**Next topic:** [27.5_bu_makine_neyi_yapamiyor.md](./27.5_bu_makine_neyi_yapamiyor.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

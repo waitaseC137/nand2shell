@@ -430,6 +430,6 @@ Output ← bundler
 ---
 
 **Önceki konu:** [26_computer.md](./26_computer.md)
-**Sonraki konu:** *(yolda)*
+**Sonraki konu:** [27.5_bu_makine_neyi_yapamiyor.md](./27.5_bu_makine_neyi_yapamiyor.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

@@ -44,7 +44,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/24_control_selector.md",    n: "24",   t: "Control Selector",     h: "Tek kol, iki paket · tel s'yi duymaz · telin genişliği seçicinin boyu" },
         { f: "salterden_bilgisayara/25_control_unit.md",        n: "25",   t: "Control Unit",         h: "Bir bit, iki tür komut · sayı teldedir, bacakta değil · aranan teli tarif et · oyunun kaçırdığı hata" },
         { f: "salterden_bilgisayara/26_computer.md",            n: "26",   t: "Computer",             h: "Girişi yok, programı var · iki bellek · j → st, X ← A · A mı, *A mı · programı adım adım çalıştır" },
-        { f: "salterden_bilgisayara/27_input_and_output.md",    n: "27",   t: "Input and Output",     h: "Lamba dışarı, düğme içeri · splitter açar, bundler toplar · \"ikisi de 1\" bir and'dir · X = 1 söndürür · adres gibi görünen lamba" }
+        { f: "salterden_bilgisayara/27_input_and_output.md",    n: "27",   t: "Input and Output",     h: "Lamba dışarı, düğme içeri · splitter açar, bundler toplar · \"ikisi de 1\" bir and'dir · X = 1 söndürür · adres gibi görünen lamba" },
+        { f: "salterden_bilgisayara/27.5_bu_makine_neyi_yapamiyor.md", n: "27.5", t: "Bu Makine Neyi Yapamıyor?", h: "Ara ders: makinenin eksikleri · her eksik bir soru, her soru NandGame'de bir dal · bölüm haritası" }
       ]
     },
     {
