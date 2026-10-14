@@ -4,9 +4,9 @@
 
 ---
 
-## 🔌 Şalterden Bilgisayara (NAND'dan CPU'ya)
+## 🔌 Bölüm 1 · Şalterden Bilgisayara (NAND'dan CPU'ya)
 
-> 🚧 **Bu kurs yazım aşamasında** — NandGame yolculuğundan doğdu; **aritmetik, yönlendirme, ALU ve Memory üniteleri tamamlandı, Processor ünitesi başladı** (29 dosya: 00–24, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF), veri yönlendirmeye (multiplexer), hesap çekirdeğine (ALU) ve hafızaya (latch, flip-flop, register, sayaç, RAM) kadar. Devamı (işlemci ve kontrol birimi) NandGame ilerledikçe eklenecek.
+> ✅ **Bölüm 1 tamamlandı** — NandGame'in "Computer" kutusu, 30 seviye, 33 dosya (00–27, ara dersler dâhil): şalter/röleden toplayıcıya, çıkarıcıya, bayraklara (ZF/SF), veri yönlendirmeye (multiplexer), hesap çekirdeğine (ALU), hafızaya (latch, flip-flop, register, sayaç, RAM) ve işlemciye (kontrol birimi, bilgisayar, giriş-çıkış) kadar. Sıradaki bölüm **1.1 Bit-shifts**; bütün bölümlerin haritası [27.5](./salterden_bilgisayara/27.5_bu_makine_neyi_yapamiyor.md)'te.
 >
 > 🧭 **Yeni mi başlıyorsun?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — işlemciyi "nedir?" diye değil, **parçalarından kurarak** öğrenmek isteyenler için. Burası işçiyi transistörden kurar: assembly'de yazılan her emrin altındaki devreyi.
 

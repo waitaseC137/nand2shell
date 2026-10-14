@@ -3,20 +3,77 @@
 > **NAND'dan shell'e.** En altta tek bir mantık kapısı var, en üstte kendi açtığın kabuk.
 > Aradaki her basamağı kendin kuruyorsun.
 >
-> Şu an repoda ilk basamak var: **NandGame** ile şalterden işlemciye.
+> Şu an repo **NandGame**'in bütün ağacını bölüm bölüm izliyor: Bölüm 1, şalterden
+> bilgisayara, bitti; sırada Bölüm 1.1.
 > Bilgisayarı **katman katman, en alttan** öğren — oyun oynayarak, deneye yanıla.
 
 ---
 
-## 🔌 Şalterden Bilgisayara
+## 🗺️ Bölümler
 
-NAND kapısından toplayıcıya, ALU'ya ve hafızaya: [NandGame](https://nandgame.com)'i seviye seviye çözerek yazılan dersler. Aritmetik ve ALU üniteleri tamam (00–15), hafıza ünitesi tamam (16 SR Latch · 17 D Latch · 18 Data Flip-Flop · 19 Register · 20 Counter · 21 RAM).
+Her bölüm NandGame'de bir kutu. Numara, bölümün haritadaki yerini ve okuma sırasını
+söylüyor:
+
+```
+🔒 1.7    High-level language
+   │
+🔒 1.6    Native Functions
+   │
+🔒 1.5    Stack Machine ──────────── 🔒 1.5|1   Hardware drivers
+   │
+🔒 1.4    Assembler ─────────────┬── 🔒 1.4|1   Display
+   │                             │      └── 🔒 1.4|1.1  Network
+   │                             └── 🔒 1.4|2   Robotics
+   │
+   ┄┄┄┄┄┄┄┄  yukarısı program yazmak, aşağısı devre kurmak  ┄┄┄┄┄┄┄┄
+   │
+🔒 1.3    Multitasking CPU
+   │
+🔒 1.2    Advanced Arithmetics + FP
+   │
+🔒 1.1    Bit-shifts
+   │
+✅ 1      Şalterden Bilgisayara ──── 🔒 1|1     Functional completeness
+   │
+🔒 -1     Transistor level
+```
+
+> `1.x` yukarı, yazılıma doğru · `-x` aşağı, nand'ın içine · `x|y` yan dal ·
+> ✅ yazıldı · 🔒 henüz yazılmadı. Bölüm adları NandGame'deki gibi, dalı oyunda kolayca bulasın diye.
+
+| Bölüm | Ad | Seviye | Durum | Not |
+|---|---|:-:|:-:|---|
+| 1 | [Şalterden Bilgisayara](./nandgame/konu_anlatimlari/salterden_bilgisayara/00_buradan_basla.md) | 30 | ✅ | 33 ders; kapanışı ve haritanın nereden çıktığı [27.5](./nandgame/konu_anlatimlari/salterden_bilgisayara/27.5_bu_makine_neyi_yapamiyor.md)'te |
+| 1.1 | Bit-shifts | 4 | 🔒 | sıradaki |
+| 1.2 | Advanced Arithmetics + Floating Point | 12 | 🔒 | Bit-shifts'i ister |
+| 1.3 | Multitasking CPU | 11 | 🔒 | oyunda önizleme (`preview`) olarak işaretli |
+| 1.4 | Assembler | 3 | 🔒 | ilk program yazılan bölüm |
+| 1.4\|1 | Display | 1 | 🔒 | |
+| 1.4\|1.1 | Network | 1 | 🔒 | Display'i ister |
+| 1.4\|2 | Robotics | 1 | 🔒 | |
+| 1.5 | Stack Machine | 19 | 🔒 | |
+| 1.5\|1 | Hardware drivers | 3 | 🔒 | |
+| 1.6 | Native Functions | 9 | 🔒 | |
+| 1.7 | High-level language | 3 | 🔒 | |
+| 1\|1 | Functional completeness | 2 | 🔒 | Logic Gates'in yan konusu |
+| -1 | Transistor level | 3 | 🔒 | |
 
 → **[Buradan başla](./nandgame/konu_anlatimlari/salterden_bilgisayara/00_buradan_basla.md)** · [Bütün dersler](./nandgame/konu_anlatimlari/KONU_ANLATIMLARI.md)
+
+---
+
+## 🧭 Derslerin Dışında
+
+Bir NandGame seviyesine karşılık gelmeyen ama derslerle birlikte büyüyen şeyler:
 
 > 👾 **Derslerde karşına çıkan zayıflıklar:** [CWE Haritası](./nandgame/konu_anlatimlari/cwe/README.md) — 28 zayıflık, her biri doğduğu derse bağlı.
 
 > 🧰 **Derslerdeki iddiaların sınamaları:** [araclar/](./nandgame/araclar/) — hangi dosyanın hangi dersin hangi cümlesini sınadığıyla birlikte.
+
+> 🧪 **Laboratuvar:** [sitede](https://waitasec137.github.io/nand2shell/laboratuvar.html) — okunmak için değil, kurcalanmak için yazılan sayfalar.
+
+NandGame'in ötesine geçen konular, örneğin gerçek bir işlemcinin assembly'si, derslerin
+içine karışmaz; zamanı gelince burada kendi başlıklarıyla yer alır.
 
 ---
 

@@ -4,9 +4,9 @@
 
 ---
 
-## 🔌 From Switches to a Computer (NAND to CPU)
+## 🔌 Part 1 · From Switches to a Computer (NAND to CPU)
 
-> 🚧 **This course is still being written** — it grew out of the NandGame journey; the **arithmetic, routing, ALU and Memory units are complete, and the Processor unit has begun** (29 files: 00–24, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF), data routing (the multiplexer), the calculation core (ALU) and memory (latch, flip-flop, register, counter, RAM). The rest (the processor and the control unit) will be added as the journey continues.
+> ✅ **Part 1 is complete** — NandGame's "Computer" box, 30 levels, 33 files (00–27, interludes included): from switch/relay up to the adder, the subtractor, the flags (ZF/SF), data routing (the multiplexer), the calculation core (ALU), memory (latch, flip-flop, register, counter, RAM) and the processor (control unit, computer, input and output). The next part is **1.1 Bit-shifts**; the map of all the parts is in [27.5](./salterden_bilgisayara/27.5_bu_makine_neyi_yapamiyor.md).
 >
 > 🧭 **New to this?** → [00_buradan_basla.md](./salterden_bilgisayara/00_buradan_basla.md) — for people who want to learn the processor not by asking "what is it?" but by **building it from its parts**. Here you build the worker from transistors: the circuit underneath every order written in assembly.
 
