@@ -427,6 +427,6 @@ counter:        st ← control unit'in j'si
 ---
 
 **Önceki konu:** [25_control_unit.md](./25_control_unit.md)
-**Sonraki konu:** *(yolda — Processor ünitesinin altıncı seviyesi)*
+**Sonraki konu:** [27_input_and_output.md](./27_input_and_output.md)
 
 *Bu ders, "Şalterden Bilgisayara" serisinin bir parçasıdır. Seri, [nandgame.com](https://nandgame.com) eşliğinde ilerler.*

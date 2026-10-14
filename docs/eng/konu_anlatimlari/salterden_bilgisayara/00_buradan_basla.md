@@ -209,6 +209,7 @@ Read the files in this order. Each lesson leans on the previous one.
 | 24 | [24_control_selector](./24_control_selector.md) | One lever passes one of two packages as a whole; a wire doesn't hear `s`; the width of the wire sets the size of the selector | Control Selector |
 | 25 | [25_control_unit](./25_control_unit.md) | Bit 15 tells the instruction's type; the number is in the wire, not in a leg; describe the wire you need first; a passing game test doesn't make the circuit right | Control Unit |
 | 26 | [26_computer](./26_computer.md) | The computer has no inputs, it has a program; rom is read only, the PC holds the line number; j → st, X ← A (not *A); the game tests with a program, run it step by step | Computer |
+| 27 | [27_input_and_output](./27_input_and_output.md) | The lamp goes out, the button comes in, no wire between them; "both are 1" is an and, not a selector; X = 1 sets bit 0; the processor touches the outside world through an address | Input and Output |
 
 > 💡 Files whose number ends in `.5` are short **interludes**: on the side of the main road,
 > lighter, with no game level to go with them. But don't skip any of them — `03.5` carries

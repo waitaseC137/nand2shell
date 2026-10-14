@@ -46,7 +46,8 @@ window.KONULAR = {
         { f: "salterden_bilgisayara/23_alu_instruction.md",     n: "23",   t: "ALU Instruction",         h: "A command spreads onto wires · a bit's number is a contract · a passing test is not proof" },
         { f: "salterden_bilgisayara/24_control_selector.md",    n: "24",   t: "Control Selector",        h: "One lever, two packages · a wire doesn't hear s · wire width sets the selector size" },
         { f: "salterden_bilgisayara/25_control_unit.md",        n: "25",   t: "Control Unit",            h: "One bit, two kinds of instruction · the number is in the wire, not a leg · describe the wire you need · the bug the game missed" },
-        { f: "salterden_bilgisayara/26_computer.md",            n: "26",   t: "Computer",                h: "No inputs, a program · two memories · j → st, X ← A · A or *A · run the program step by step" }
+        { f: "salterden_bilgisayara/26_computer.md",            n: "26",   t: "Computer",                h: "No inputs, a program · two memories · j → st, X ← A · A or *A · run the program step by step" },
+        { f: "salterden_bilgisayara/27_input_and_output.md",    n: "27",   t: "Input and Output",        h: "Lamp goes out, button comes in · splitter opens, bundler gathers · \"both are 1\" is an and · X = 1 turns it off · a lamp that looks like an address" }
       ]
     },
     {

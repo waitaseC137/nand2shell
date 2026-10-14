@@ -451,6 +451,6 @@ counter:        st ← control unit's j
 ---
 
 **Previous topic:** [25_control_unit.md](./25_control_unit.md)
-**Next topic:** *(on the way — the sixth level of the Processor unit)*
+**Next topic:** [27_input_and_output.md](./27_input_and_output.md)
 
 *This lesson is part of the "From Switches to a Computer" series. The series moves along together with [nandgame.com](https://nandgame.com).*

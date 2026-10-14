@@ -203,6 +203,7 @@ Dosyaları bu sırayla oku. Her ders bir öncekine yaslanır.
 | 24 | [24_control_selector](./24_control_selector.md) | Tek kol iki paketten birini bütün olarak geçirir; tel `s`'yi duymaz; telin genişliği seçicinin boyunu belirler | Control Selector |
 | 25 | [25_control_unit](./25_control_unit.md) | Bit 15 komutun türünü söyler; sayı teldedir, bacakta değil; aranan teli önce tarif et; oyunun testi geçti diye devre doğru değildir | Control Unit |
 | 26 | [26_computer](./26_computer.md) | Bilgisayarın girişi yok, programı var; rom yalnızca okunur, PC satır numarasını tutar; j → st, X ← A (*A değil); oyun bir programla sınar, adım adım çalıştır | Computer |
+| 27 | [27_input_and_output](./27_input_and_output.md) | Lamba dışarı, düğme içeri, aralarında tel yok; "ikisi de 1" bir and'dir, seçici değil; X = 1 bit 0'ı yakar; işlemci dış dünyaya bir adres üzerinden dokunur | Input and Output |
 
 > 💡 Numarası `.5` ile biten dosyalar kısa birer **ara ders**tir: ana yolun kıyısında,
 > daha hafif, karşılığında bir oyun seviyesi yok. Ama hiçbirini atlama — `03.5`
