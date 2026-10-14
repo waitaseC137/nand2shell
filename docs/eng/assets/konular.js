@@ -12,6 +12,27 @@
   // Dosyanın repodaki yolu: TR'de base ile aynı, EN dosyaları docs/eng altında (DATA.repoPath)
   const REPO_PATH = DATA.repoPath || BASE;
 
+  // marked, bağlantılardaki Türkçe harfleri yüzde-kodluyor (ı → %C4%B1); başlık id'leri ise kodsuz
+  function cozCapa(c) { try { return decodeURIComponent(c); } catch (e) { return c; } }
+  // hash = okunan dosyanın yolu, ardından isteğe bağlı "#çapa"; bu, çapasız yolu verir
+  function suankiYol() {
+    const h = cozCapa((location.hash || '').replace(/^#/, ''));
+    const i = h.indexOf('#');
+    return i >= 0 ? h.slice(0, i) : h;
+  }
+  // Görseller "lazy": hedef başlığın üstündekiler geç inince sayfa uzar ve başlık ekrandan kaçar.
+  // Önce onları indir (en fazla 4 sn bekle), sonra kaydır.
+  async function capayaIn(t, behavior) {
+    const ustteki = [...document.querySelectorAll('.md img')].filter(i => i.compareDocumentPosition(t) & Node.DOCUMENT_POSITION_FOLLOWING);
+    ustteki.forEach(i => i.setAttribute('loading', 'eager'));
+    const inis = ustteki.filter(i => !i.complete).map(i => new Promise(r => {
+      i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true });
+    }));
+    await Promise.race([Promise.all(inis), new Promise(r => setTimeout(r, 4000))]);
+    if (!t.isConnected) return;  // beklerken başka derse geçildiyse kaydırma
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 70, behavior: behavior || 'auto' });
+  }
+
   // dil — <html lang="en"> ise İngilizce arayüz metinleri
   const EN = document.documentElement.lang === 'en';
   const T = EN ? {
@@ -118,7 +139,7 @@
   }
 
   /* ---------- DOC RENDER ---------- */
-  async function loadDoc(rel) {
+  async function loadDoc(rel, capa) {
     const meta = FLAT.find(x => x.f === rel);
     const cat = meta ? meta.cat : null;
     setActive(rel);
@@ -164,6 +185,11 @@
       '<div class="reader">' + crumb + '<article class="md">' + html + '</article>' + navHtml + '</div>';
 
     enhance(elContent);
+    // "dosya.md#çapa" ile gelindiyse o başlığa in
+    if (capa) {
+      const t = document.getElementById(capa);
+      if (t) await capayaIn(t);
+    }
     if (window.__readUpd) window.__readUpd();
     if (window.SFX && window.SFX.open) window.SFX.open();
   }
@@ -205,23 +231,30 @@
       if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; return; }
       if (href.startsWith('#')) {
         a.addEventListener('click', (e) => {
-          const id = href.slice(1);
+          // hash okuyucunun rotası: sayfa içi çapa onu değiştirmemeli, yoksa okur karşılama sayfasına düşer
+          e.preventDefault();
+          const id = cozCapa(href.slice(1));
           const t = scope.querySelector('#' + CSS.escape(id)) || document.getElementById(id);
-          if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' }); }
+          if (t) capayaIn(t, 'smooth');
         });
         return;
       }
-      if (href.endsWith('.md')) {
+      // "dosya.md" ya da "dosya.md#çapa": dosya kısmı okuyucu rotasına çevrilir, çapa rotanın sonuna eklenir
+      const kesik = href.indexOf('#');
+      const yol = kesik >= 0 ? href.slice(0, kesik) : href;
+      const capa = kesik >= 0 ? cozCapa(href.slice(kesik + 1)) : '';
+      if (yol.endsWith('.md')) {
         // mevcut dosyaya göre çöz
-        const cur = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+        const cur = suankiYol();
         const curDir = cur.includes('/') ? cur.slice(0, cur.lastIndexOf('/') + 1) : '';
-        let target = href.replace(/^\.\//, '');
+        let target = yol.replace(/^\.\//, '');
         // ../ çöz
         let basePath = curDir;
         while (target.startsWith('../')) { target = target.slice(3); basePath = basePath.replace(/[^/]+\/$/, ''); }
         const rel = (basePath + target).replace(/^\//, '');
-        a.setAttribute('href', '#' + rel);
-        a.addEventListener('click', (e) => { e.preventDefault(); location.hash = '#' + rel; });
+        const hedef = '#' + rel + (capa ? '#' + capa : '');
+        a.setAttribute('href', hedef);
+        a.addEventListener('click', (e) => { e.preventDefault(); location.hash = hedef; });
       }
     });
 
@@ -229,7 +262,7 @@
     scope.querySelectorAll('.md img[src]').forEach(img => {
       const src = img.getAttribute('src');
       if (/^(https?:|data:)/.test(src)) return;
-      const cur = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+      const cur = suankiYol();
       let basePath = cur.includes('/') ? cur.slice(0, cur.lastIndexOf('/') + 1) : '';
       let target = src.replace(/^\.\//, '');
       while (target.startsWith('../')) { target = target.slice(3); basePath = basePath.replace(/[^/]+\/$/, ''); }
@@ -259,8 +292,12 @@
   function route() {
     let rel = (location.hash || '').replace(/^#/, '').trim();
     try { rel = decodeURIComponent(rel); } catch (e) {}
+    // "dosya.md#çapa": ilk # dosya yolunu başlık çapasından ayırır
+    let capa = '';
+    const kesik = rel.indexOf('#');
+    if (kesik >= 0) { capa = rel.slice(kesik + 1); rel = rel.slice(0, kesik); }
     if (rel && FLAT.find(x => x.f === rel)) {
-      loadDoc(rel);
+      loadDoc(rel, capa);
     } else {
       // kategori id ile gelindiyse o kategorinin ilk dosyasına yönlendir
       const cat = DATA.categories.find(c => c.id === rel);
