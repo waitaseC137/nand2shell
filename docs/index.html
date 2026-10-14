@@ -72,19 +72,72 @@
 <!-- ============ KONU ANLATIMLARI ============ -->
 <section class="band band-alt" id="konular">
   <div class="wrap reveal">
-    <div class="sec-head"><span class="sig">$</span> <span class="cmd">tree</span> <span class="arg">konu_anlatimlari/</span></div>
+    <div class="sec-head"><span class="sig">$</span> <span class="cmd">tree</span> <span class="arg">nandgame/</span></div>
     <p class="sec-sub">
-      NandGame'i seviye seviye çözerek yazılan dersler ve derslerde karşına çıkan zayıflıklar —
-      <b style="color:var(--fg)">tamamı site içinde okunuyor.</b> Bir kategoriye tıkla,
-      okuyucu açılsın.
+      NandGame'in ağacı, bölüm bölüm: her bölüm oyunda bir kutu. <b style="color:var(--fg)">1.x</b> yukarı,
+      yazılıma doğru · <b style="color:var(--fg)">-x</b> aşağı, nand'ın içine · <b style="color:var(--fg)">x|y</b> yan dal.
+      Açık bölümler site içinde okunuyor; 🔒 olanlar henüz yazılmadı.
     </p>
 
     <div class="tree-grid">
       <div class="tree">
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.7 · High-level language</div><div class="ds">üst seviye programlamanın temeli: derleyici</div></div></div>
+          <span class="cnt">3 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.6 · Native Functions</div><div class="ds">üst seviye dillerin kullandığı temel fonksiyonlar: aritmetik, mantık, karşılaştırma</div></div></div>
+          <span class="cnt">9 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.5 · Stack Machine</div><div class="ds">fonksiyon desteği olan bir yığın makinesi</div></div></div>
+          <span class="cnt">19 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.5|1 · Hardware drivers</div><div class="ds">donanım cihazlarını süren fonksiyonlar</div></div></div>
+          <span class="cnt">3 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4 · Assembler</div><div class="ds">ilk ve en temel programlama dili</div></div></div>
+          <span class="cnt">3 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4|1 · Display</div><div class="ds">ekran</div></div></div>
+          <span class="cnt">1 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4|1.1 · Network</div><div class="ds">ağ iletişimi; Display'den sonra açılır</div></div></div>
+          <span class="cnt">1 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4|2 · Robotics</div><div class="ds">Mars'ta bir labirentten kaçan robotu programlamak</div></div></div>
+          <span class="cnt">1 seviye · 🔒</span>
+        </div>
+        <div class="tree-sep">┄┄ yukarısı program yazmak · aşağısı devre kurmak ┄┄</div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.3 · Multitasking CPU</div><div class="ds">birden çok programı çalıştıran, belleği koruyan gelişmiş işlemci</div></div></div>
+          <span class="cnt">11 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.2 · Advanced Arithmetics + FP</div><div class="ds">ileri aritmetik ve kayan noktalı sayılar</div></div></div>
+          <span class="cnt">12 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.1 · Bit-shifts</div><div class="ds">ileri aritmetiğin ihtiyaç duyduğu bit kaydırma işlemleri · sıradaki</div></div></div>
+          <span class="cnt">4 seviye · 🔒</span>
+        </div>
         <a class="tree-row" href="konular.html#salterden_bilgisayara/00_buradan_basla.md">
-          <div class="nm"><span class="fold">▸</span><div><div class="lbl">salterden_bilgisayara/ 🚧</div><div class="ds">şalter → NAND → kapılar → toplayıcı → çıkarıcı → bayraklar → multiplexer → ALU → condition → latch; işlemciyi parçalarından kur</div></div></div>
-          <span class="cnt">25 modül · yazılıyor</span>
+          <div class="nm"><span class="fold">▸</span><div><div class="lbl">1 · Şalterden Bilgisayara ✅</div><div class="ds">şalter → NAND → kapılar → toplayıcı → ALU → hafıza → işlemci → bilgisayar; işlemciyi parçalarından kur</div></div></div>
+          <span class="cnt">33 ders · ✅</span>
         </a>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1|1 · Functional completeness</div><div class="ds">işlevsel tamlık: Logic Gates'in yan konusu</div></div></div>
+          <span class="cnt">2 seviye · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">-1 · Transistor level</div><div class="ds">mantık kapılarını transistör düzeyinde anlamak</div></div></div>
+          <span class="cnt">3 seviye · 🔒</span>
+        </div>
         <a class="tree-row" href="konular.html#cwe/README.md">
           <div class="nm"><span class="fold">▸</span><div><div class="lbl">cwe/ 👾</div><div class="ds">meraklısına: CWE ile CVE farkı, zincirler ve derslerde karşına çıkan zayıflıkların kendi sayfaları</div></div></div>
           <span class="cnt">28 zayıflık</span>

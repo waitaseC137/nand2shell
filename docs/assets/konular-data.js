@@ -8,10 +8,10 @@ window.KONULAR = {
   categories: [
     {
       id: "salterden_bilgisayara",
-      label: "Şalterden Bilgisayara (NAND'dan CPU'ya)",
+      label: "Bölüm 1 · Şalterden Bilgisayara",
       accent: "var(--d-low)",
-      tag: "29 ders · Processor ünitesi başladı",
-      blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10), yönlendirme (11), ALU (12–15) ve Memory (16–21) üniteleri tamamlandı. Sırada işlemci.",
+      tag: "33 ders · tamamlandı",
+      blurb: "NandGame yolculuğundan doğan kurs — şalter/röleden NAND'a, NAND'dan mantık kapılarına, kapılardan toplayıcıya (half/full adder). İşlemciyi 'nedir' diye değil, parçalarından kendin kurarak öğren. Aritmetik (00–10), yönlendirme (11), ALU (12–15), Memory (16–21) ve Processor (22–27) üniteleri tamamlandı: Bölüm 1 bitti, sırada Bölüm 1.1 (Bit-shifts). Bölümlerin haritası 27.5'te.",
       files: [
         { f: "salterden_bilgisayara/00_buradan_basla.md",        n: "→",    t: "Buradan Başla",        h: "Kurs haritası; şalterden CPU'ya (🚧 yazılıyor)" },
         { f: "salterden_bilgisayara/01_akim_salter_role.md",     n: "01",   t: "Akım · Şalter · Röle", h: "Elektrik → şalter → röle = ilk mantık" },

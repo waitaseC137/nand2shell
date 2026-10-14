@@ -72,19 +72,72 @@
 <!-- ============ TOPIC GUIDES ============ -->
 <section class="band band-alt" id="konular">
   <div class="wrap reveal">
-    <div class="sec-head"><span class="sig">$</span> <span class="cmd">tree</span> <span class="arg">topic_guides/</span></div>
+    <div class="sec-head"><span class="sig">$</span> <span class="cmd">tree</span> <span class="arg">nandgame/</span></div>
     <p class="sec-sub">
-      The lessons written by solving NandGame level by level, and the weaknesses you meet in
-      them — <b style="color:var(--fg)">all readable inside the site.</b> Click a category
-      to open the reader.
+      NandGame's tree, part by part: every part is a box in the game. <b style="color:var(--fg)">1.x</b> up,
+      toward software · <b style="color:var(--fg)">-x</b> down, into the nand · <b style="color:var(--fg)">x|y</b> a side branch.
+      The open parts are readable inside the site; the ones with 🔒 aren't written yet.
     </p>
 
     <div class="tree-grid">
       <div class="tree">
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.7 · High-level language</div><div class="ds">the foundation for higher-level programming: the compiler</div></div></div>
+          <span class="cnt">3 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.6 · Native Functions</div><div class="ds">the core functions higher-level languages use: arithmetic, logic, comparisons</div></div></div>
+          <span class="cnt">9 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.5 · Stack Machine</div><div class="ds">a stack machine with support for functions</div></div></div>
+          <span class="cnt">19 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.5|1 · Hardware drivers</div><div class="ds">the functions that drive hardware devices</div></div></div>
+          <span class="cnt">3 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4 · Assembler</div><div class="ds">the first and most basic programming language</div></div></div>
+          <span class="cnt">3 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4|1 · Display</div><div class="ds">a screen</div></div></div>
+          <span class="cnt">1 level · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4|1.1 · Network</div><div class="ds">network communication; opens after Display</div></div></div>
+          <span class="cnt">1 level · 🔒</span>
+        </div>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.4|2 · Robotics</div><div class="ds">programming a robot to escape a labyrinth on Mars</div></div></div>
+          <span class="cnt">1 level · 🔒</span>
+        </div>
+        <div class="tree-sep">┄┄ above: writing programs · below: building circuits ┄┄</div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.3 · Multitasking CPU</div><div class="ds">an advanced processor that runs several programs and protects memory</div></div></div>
+          <span class="cnt">11 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.2 · Advanced Arithmetics + FP</div><div class="ds">advanced arithmetic and floating-point numbers</div></div></div>
+          <span class="cnt">12 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1.1 · Bit-shifts</div><div class="ds">the bit-shifting operations advanced arithmetic needs · next</div></div></div>
+          <span class="cnt">4 levels · 🔒</span>
+        </div>
         <a class="tree-row" href="konular.html#salterden_bilgisayara/00_buradan_basla.md">
-          <div class="nm"><span class="fold">▸</span><div><div class="lbl">switches_to_computer/ 🚧</div><div class="ds">switch → NAND → gates → adder → subtractor → flags → multiplexer → ALU → condition → latch; build the processor from its parts</div></div></div>
-          <span class="cnt">25 modules · in progress</span>
+          <div class="nm"><span class="fold">▸</span><div><div class="lbl">1 · From Switches to a Computer ✅</div><div class="ds">switch → NAND → gates → adder → ALU → memory → processor → computer; build the processor from its parts</div></div></div>
+          <span class="cnt">33 lessons · ✅</span>
         </a>
+        <div class="tree-row locked yan" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">1|1 · Functional completeness</div><div class="ds">functional completeness: a side topic of Logic Gates</div></div></div>
+          <span class="cnt">2 levels · 🔒</span>
+        </div>
+        <div class="tree-row locked" aria-disabled="true">
+          <div class="nm"><span class="fold">·</span><div><div class="lbl">-1 · Transistor level</div><div class="ds">understanding logic gates at the transistor level</div></div></div>
+          <span class="cnt">3 levels · 🔒</span>
+        </div>
         <a class="tree-row" href="konular.html#cwe/README.md">
           <div class="nm"><span class="fold">▸</span><div><div class="lbl">cwe/ 👾</div><div class="ds">for the curious: the difference between CWE and CVE, the chains, and a page for each weakness you meet in the lessons</div></div></div>
           <span class="cnt">28 weaknesses</span>

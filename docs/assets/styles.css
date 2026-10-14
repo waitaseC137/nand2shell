@@ -613,6 +613,21 @@ body { animation: pageIn .45s ease both; }
 .tree-row:hover .fold { color: var(--bg); }
 .tree-row:hover .cnt { color: var(--bg); border-color: transparent; background: rgba(0,0,0,.18); }
 
+/* bölüm haritası: kilitli satır (henüz yazılmamış bölüm, bağlantı değil) ve yan dal */
+.tree-row.locked { opacity: .45; cursor: default; }
+.tree-row.locked:hover { background: transparent; }
+.tree-row.locked:hover::before { transform: scale(0); }
+.tree-row.locked:hover .lbl { color: var(--fg); }
+.tree-row.locked:hover .ds  { color: var(--fg-mute); }
+.tree-row.locked:hover .fold { color: var(--yellow); }
+.tree-row.locked:hover .cnt { color: var(--fg-dim); border-color: var(--line-2); background: var(--bg); }
+.tree-row.yan { padding-left: 48px; }
+.tree-sep {
+  padding: 8px 14px; text-align: center;
+  font-size: 11px; color: var(--fg-mute);
+  border-top: 1px solid var(--line);
+}
+
 /* framed paneller: NieR köşe çentikleri */
 .term, .tree, .wg, .res, .tree-side, .wg-card {
   position: relative;

@@ -75,7 +75,7 @@
   window.SFX = SFX;
 
   /* ---------- olay delegasyonu ---------- */
-  const HOVER_SEL = '.nav-links a, .nav-gh, .nav-lang, .theme-btn, .feat, .file-link, .tree-row, .chip, .wcard, .cat-head, .btn, .wg, .wg-link, .res a, .doc-nav a, .copy-btn, .code-copy, .gh-view, .side-toggle';
+  const HOVER_SEL = '.nav-links a, .nav-gh, .nav-lang, .theme-btn, .feat, .file-link, .tree-row:not(.locked), .chip, .wcard, .cat-head, .btn, .wg, .wg-link, .res a, .doc-nav a, .copy-btn, .code-copy, .gh-view, .side-toggle';
   // tık seçimi: doc açan öğeler hariç (onlar 'open' sesini çalar)
   const SKIP_CLICK = '.file-link, .doc-nav a, .wcard';
 
